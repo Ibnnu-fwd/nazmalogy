@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DetailCourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/detail-course', [DetailCourseController::class, 'index'])->name('detail-course.index');
+
 
 require __DIR__.'/auth.php';
