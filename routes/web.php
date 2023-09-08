@@ -16,7 +16,7 @@ use App\Http\Controllers\DetailCourseController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.home');
 });
 
 Route::get('/dashboard', function () {
