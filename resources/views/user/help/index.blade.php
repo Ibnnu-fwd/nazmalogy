@@ -89,9 +89,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="text-center">
-
+        <div class="text-center my-24">
             <h1
                 class="font-bold text-2xl mt-20 md:text-3xl xl:text-4xl tracking-tighter leading-snug max-w-md mx-auto ">
                 Masih Ada Pertanyaan?
