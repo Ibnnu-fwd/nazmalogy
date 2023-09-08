@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DetailCourseController;
-
+use App\Http\Controllers\HelpController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/detail-course', [DetailCourseController::class, 'index'])->name('detail-course.index');
-
+Route::get('/detail-course', [DetailCourseController::class, 'index'])->name('user.course.detail');
+Route::get('/help', [HelpController::class, 'index'])->name('user.help.index');
 
 require __DIR__.'/auth.php';

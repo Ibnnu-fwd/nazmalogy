@@ -80,20 +80,40 @@
                 <p class="font-bold text-xl mt-9">Daftar Materi</p>
                 {{-- Faq --}}
                 <section>
-                    <div id="accordion-arrow-icon" data-accordion="open" class="mt-8 mx-4 md:mx-0">
+                    <div id="accordion-arrow-icon" data-accordion="open" class="mt-3 mx-4 md:mx-0">
                         <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up" data-aos-duration="1000">
                             <button type="button"
                                 class="flex items-center justify-between w-full p-5 text-left rounded-lg text-black font-medium focus:ring-4 focus:ring-gray-300"
-                                data-accordion-target="#accordion-arrow-icon-body" aria-expanded="false" aria-controls="accordion-arrow-icon-body">
+                                data-accordion-target="#accordion-arrow-icon-body-1" aria-expanded="false" aria-controls="accordion-arrow-icon-body">
                                 <div class="flex items-center space-x-2">
                                     <ion-icon name="chevron-down-outline"></ion-icon>
                                     <span class="text-sm">Dasar-dasar Project Network Planning</span>
                                 </div>
-                                <ion-icon name="chevron-down-circle-outline" data-accordion-icon class="shrink-0 -mr-0.5 w-6 h-6"></ion-icon>
+                                <ion-icon name="lock-closed-outline" data-accordion-icon class="shrink-0 -mr-0.5 w-5 h-5"></ion-icon>
                             </button>
                         </h2>
-                        <div id="accordion-arrow-icon-body" class="hidden mb-4"
-                            aria-labelledby="accordion-arrow-icon-heading">
+                        <div id="accordion-arrow-icon-body-1" class="hidden mb-4" aria-labelledby="accordion-arrow-icon-heading">
+                            <div class="p-5 bg-white rounded-lg">
+                                <p class="text-black text-xs 2xl:text-sm">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo sed eligendi veniam autem accusamus eos mollitia possimus obcaecati quia? Unde ad laborum, est rem aliquam natus facilis maxime laboriosam?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="accordion-arrow-icon" data-accordion="open" class="mt-3 mx-4 md:mx-0">
+                        <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up" data-aos-duration="1000">
+                            <button type="button"
+                                class="flex items-center justify-between w-full p-5 text-left rounded-lg text-black font-medium focus:ring-4 focus:ring-gray-300"
+                                data-accordion-target="#accordion-arrow-icon-body-2" aria-expanded="false" aria-controls="accordion-arrow-icon-body">
+                                <div class="flex items-center space-x-2">
+                                    <ion-icon name="chevron-down-outline"></ion-icon>
+                                    <span class="text-sm">Dasar-dasar Project Network Planning</span>
+                                </div>
+                                <ion-icon name="lock-closed-outline" data-accordion-icon class="shrink-0 -mr-0.5 w-5 h-5"></ion-icon>
+                            </button>
+                        </h2>
+                        <div id="accordion-arrow-icon-body-2" class="hidden mb-4" aria-labelledby="accordion-arrow-icon-heading">
                             <div class="p-5 bg-white rounded-lg">
                                 <p class="text-black text-xs 2xl:text-sm">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo sed eligendi veniam autem accusamus eos mollitia possimus obcaecati quia? Unde ad laborum, est rem aliquam natus facilis maxime laboriosam?
@@ -105,45 +125,21 @@
                         <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up" data-aos-duration="1000">
                             <button type="button"
                                 class="flex items-center justify-between w-full p-5 text-left rounded-lg text-black font-medium focus:ring-4 focus:ring-gray-300"
-                                data-accordion-target="#accordion-arrow-icon-body" aria-expanded="false" aria-controls="accordion-arrow-icon-body">
-                                <div class="flex items-center space-x-2">
-                                    <ion-icon name="chevron-down-outline"></ion-icon>
-                                    <span class="text-sm ">Dasar-dasar Project Network Planning</span>
-                                </div>
-                                <ion-icon name="chevron-down-circle-outline" data-accordion-icon class="shrink-0 -mr-0.5 w-6 h-6"></ion-icon>
-                            </button>
-                        </h2>
-                        <div id="accordion-arrow-icon-body" class="hidden mb-4"
-                            aria-labelledby="accordion-arrow-icon-heading">
-                            <div class="p-5 bg-white rounded-lg">
-                                <p class="text-black text-xs 2xl:text-sm">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo sed eligendi veniam autem accusamus eos mollitia possimus obcaecati quia? Unde ad laborum, est rem aliquam natus facilis maxime laboriosam?
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div id="accordion-arrow-icon" data-accordion="open" class="mt-3 mx-4 md:mx-0">
-                        <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up" data-aos-duration="1000">
-                            <button type="button"
-                                class="flex items-center justify-between w-full p-5 text-left rounded-lg text-black font-medium focus:ring-4 focus:ring-gray-300"
-                                data-accordion-target="#accordion-arrow-icon-body" aria-expanded="false" aria-controls="accordion-arrow-icon-body">
+                                data-accordion-target="#accordion-arrow-icon-body-3" aria-expanded="false" aria-controls="accordion-arrow-icon-body">
                                 <div class="flex items-center space-x-2">
                                     <ion-icon name="chevron-down-outline"></ion-icon>
                                     <span class="text-sm">Dasar-dasar Project Network Planning</span>
                                 </div>
-                                <ion-icon name="chevron-down-circle-outline" data-accordion-icon class="shrink-0 -mr-0.5 w-6 h-6"></ion-icon>
+                                <ion-icon name="lock-closed-outline" data-accordion-icon class="shrink-0 -mr-0.5 w-5 h-5"></ion-icon>
                             </button>
                         </h2>
-                        <div id="accordion-arrow-icon-body" class="hidden mb-4"
-                            aria-labelledby="accordion-arrow-icon-heading">
+                        <div id="accordion-arrow-icon-body-3" class="hidden mb-4" aria-labelledby="accordion-arrow-icon-heading">
                             <div class="p-5 bg-white rounded-lg">
                                 <p class="text-black text-xs 2xl:text-sm">
                                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores nemo sed eligendi veniam autem accusamus eos mollitia possimus obcaecati quia? Unde ad laborum, est rem aliquam natus facilis maxime laboriosam?
                                 </p>
                             </div>
                         </div>
-
                     </div>
 
                 </section>
