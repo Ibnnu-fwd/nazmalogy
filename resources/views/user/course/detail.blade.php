@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="grid grid-cols-1 lg:grid-cols-3 max-w-7xl mx-auto py-24 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-3 xl:grid-cols-3 max-w-7xl mx-auto py-24 gap-8">
         {{-- Kiri --}}
         <div class="col-span-2">
             {{-- Title --}}
@@ -59,6 +59,7 @@
                     height="430"
                     src="https://www.youtube.com/embed/QQgIHQE5psA"
                     frameborder="0"
+                    
                     allowfullscreen
                 ></iframe>
             </div>
@@ -150,44 +151,43 @@
             </div>
         </div>
         {{-- Benefit Course --}}
-        <div id="detail-course"
-            class="w-full max-w-md h-fit mt-72 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
+        <div id="detail-course" class="w-full max-w-md h-fit mt-8 sm:mt-72 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:shadow-md lg:shadow-lg">
 
             <ul role="list" class="space-y-5">
                 <li class="flex space-x-3">
                     <ion-icon name="flag-outline" class="text-[#2B3176]"></ion-icon>
-                    <span class="text-sm font-normal leading-tight text-black dark:text-gray-400">Indonesia</span>
+                    <span class="text-sm md:text-sm xl:text-sm font-normal leading-tight text-black dark:text-gray-400">Indonesia</span>
                 </li>
                 <li class="flex space-x-3">
                     <ion-icon name="bar-chart-outline" class="text-[#2B3176]"></ion-icon>
-                    <span class="text-sm font-normal leading-tight text-black dark:text-gray-400">Pemula dan
-                        Menengah</span>
+                    <span class="text-sm md:text-sm xl:text-sm  font-normal leading-tight text-black dark:text-gray-400">Pemula dan Menengah</span>
                 </li>
                 <li class="flex space-x-3 decoration-black">
                     <ion-icon name="phone-portrait-outline" class="text-[#2B3176]"></ion-icon>
-                    <span class="text-sm font-normal leading-tight text-black">Akses di Perangkat Apapun</span>
+                    <span class="text-sm md:text-sm  xl:text-sm font-normal leading-tight text-black">Akses di Perangkat Apapun</span>
                 </li>
                 <li class="flex space-x-3 decoration-black">
                     <ion-icon name="layers-outline" class="text-[#2B3176]"></ion-icon>
-                    <span class="text-sm font-normal leading-tight text-black">Soal latihan dan kuis</span>
+                    <span class="text-sm md:text-sm  xl:text-sm font-normal leading-tight text-black">Soal latihan dan kuis</span>
                 </li>
                 <li class="flex space-x-3 decoration-black">
                     <ion-icon name="flash-outline" class="text-[#2B3176]"></ion-icon>
-                    <span class="text-sm font-normal leading-tight text-black">Akses Selamanya</span>
+                    <span class="text-sm md:text-sm  xl:text-sm font-normal leading-tight text-black">Akses Selamanya</span>
                 </li>
                 <li class="flex space-x-3 decoration-black">
                     <ion-icon name="ribbon-outline" class="text-[#2B3176]"></ion-icon>
-                    <span class="text-sm font-normal leading-tight text-black">Sertifikat Lulus</span>
+                    <span class="text-sm md:text-sm  xl:text-sm  font-normal leading-tight text-black">Sertifikat Lulus</span>
                 </li>
             </ul>
-            <p class="text-lg text-danger animate-pulse line-through mt-12">
+            <p class="text-base md:text-lg text-danger animate-pulse line-through mt-6 md:mt-12">
                 Rp.1.500.000</p>
-            <p class="text-black text-2xl font-bold">
+            <p class="text-black text-xl md:text-2xl font-bold">
                 Rp.750.000</p>
             <button type="button"
-                class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-2.5 inline-flex justify-center w-full text-center">Daftar Sekarang </button>
+                class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm md:text-base px-5 mt-4 md:mt-6 py-2.5 inline-flex justify-center w-full text-center">Daftar Sekarang</button>
         </div>
     </div>
+        
     {{-- Testimonial --}}
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
