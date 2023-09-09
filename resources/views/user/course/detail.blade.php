@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="max-w-7xl mx-auto px-4 lg:px-0 py-24 gap-8">
+    <div class="max-w-7xl mx-auto px-4 lg:px-0 py-12 gap-8">
 
         <div class="max-w-2xl">
             {{-- Title --}}
@@ -52,8 +52,8 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 mt-8 md:mt-12">
-            {{-- Video Player --}}
             <div class="rounded-lg w-full col-span-2">
+                {{-- Video Player --}}
                 <iframe width="100%" height="430" src="https://www.youtube.com/embed/QQgIHQE5psA" frameborder="0"
                     allowfullscreen class="rounded-2xl"></iframe>
 
@@ -69,7 +69,7 @@
                     </p>
                 </div>
 
-                <div>
+                <div class="xl:max-w-xl">
                     <p class="font-bold text-xl mt-9">Daftar Materi</p>
                     <section>
                         @for ($i = 1; $i <= 3; $i++)
