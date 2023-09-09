@@ -177,9 +177,9 @@
                 <div class="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
 
                     @for ($i = 1; $i <= 8; $i++)
-                        <div class="max-w-sm bg-white rounded-lg border border-gray-100">
+                        <div class="max-w-sm bg-white rounded-xl border border-gray-100">
                             <a>
-                                <img class="rounded-t-lg h-52 object-center object-cover w-full"
+                                <img class="rounded-t-xl h-52 object-center object-cover w-full"
                                     src="{{ asset('assets/noimage.svg') }}" alt="" />
                             </a>
                             <div class="p-5">

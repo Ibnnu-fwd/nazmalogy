@@ -1,6 +1,6 @@
 <footer class="bg-white" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
-    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-16">
+    <div class="px-4 py-12 mx-auto max-w-7xl sm:px-4">
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
             <div class="text-white xl:col-span-1">
                 <a href="/"
