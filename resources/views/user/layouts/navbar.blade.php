@@ -5,7 +5,7 @@
             <img src="{{ asset('assets/logo.svg') }}" class="h-10 mr-3" alt="Flowbite Logo" />
         </a>
         <div class="flex md:order-2 space-x-6">
-            <a href="#"
+            <a href="{{ route('login') }}"
                 class="inline-flex items-center justify-center text-xs 2xl:text-sm text-black hover:text-gray-700">
                 Masuk
             </a>
