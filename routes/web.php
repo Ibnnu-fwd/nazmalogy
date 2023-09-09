@@ -32,5 +32,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/help', [HelpController::class, 'index'])->name('user.help.index');
 Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show');
+Route::get('course-player', [CourseController::class, 'player'])->name('course.player');
+
 
 require __DIR__ . '/auth.php';

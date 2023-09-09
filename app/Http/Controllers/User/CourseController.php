@@ -11,4 +11,10 @@ class CourseController extends Controller
     {
         return view('user.course.detail');
     }
+
+    public function player()
+    {
+        return view('user.course.player');
+    }
+
 }
