@@ -2,7 +2,7 @@
 
 
     {{-- Question --}}
-    <section>
+    <section class="pt-12 pb-24">
         <div class="flex flex-col justify-center flex-1 px-4 mx-auto mt-28 lg:flex-none max-w-7x">
             <div class="text-center">
 
@@ -19,10 +19,10 @@
             <div class="">
                 <div id="accordion-arrow-icon" data-accordion="open" class="mx-4 md:mx-0">
 
-                    <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up"
+                    <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
                         data-aos-duration="1000">
                         <button type="button"
-                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-lg text-black focus:ring-4 focus:ring-gray-200"
+                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
                             data-accordion-target="#accordion-arrow-icon-body-1" aria-expanded="false"
                             aria-controls="accordion-arrow-icon-body">
                             <span>Apa Itu NaZMalogy?</span>
@@ -32,8 +32,8 @@
                     </h2>
                     <div id="accordion-arrow-icon-body-1" class="hidden mb-4"
                         aria-labelledby="accordion-arrow-icon-heading">
-                        <div class="p-5 bg-white rounded-lg">
-                            <p class="text-[#464646] text-xs 2xl:text-md line">
+                        <div class="p-5 bg-white rounded-full">
+                            <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
                                 NaZMaLogy adalah Learning Management System (LMS) yang dibangun oleh NaZMa Office yang
                                 memudahkan pengguna dalam pembelajaran jarak jauh. Dengan platform media pembelajaran
                                 berbasis website yang menyediakan video yang inovatif dan interaktif diharapkan
@@ -42,10 +42,10 @@
                         </div>
                     </div>
 
-                    <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up"
+                    <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
                         data-aos-duration="1000">
                         <button type="button"
-                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-lg text-black focus:ring-4 focus:ring-gray-200"
+                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
                             data-accordion-target="#accordion-arrow-icon-body-2" aria-expanded="false"
                             aria-controls="accordion-arrow-icon-body-2">
                             <span>Apa yang saya dapatkan dari NaZMaLogy?</span>
@@ -55,8 +55,8 @@
                     </h2>
                     <div id="accordion-arrow-icon-body-2" class="hidden mb-4"
                         aria-labelledby="accordion-arrow-icon-heading">
-                        <div class="p-5 bg-white rounded-lg">
-                            <p class="text-[#464646] text-xs 2xl:text-md line">
+                        <div class="p-5 bg-white rounded-full">
+                            <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
                                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. A molestias quasi iusto
                                 voluptas, repellat voluptates at quaerat ea error doloribus libero hic earum eum ullam
                                 harum unde architecto accusantium explicabo!
@@ -64,10 +64,10 @@
                         </div>
                     </div>
 
-                    <h2 id="accordion-arrow-icon-heading" class="rounded-lg mb-3 bg-white" data-aos="fade-up"
+                    <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
                         data-aos-duration="1000">
                         <button type="button"
-                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-lg text-black focus:ring-4 focus:ring-gray-200"
+                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
                             data-accordion-target="#accordion-arrow-icon-body-3" aria-expanded="false"
                             aria-controls="accordion-arrow-icon-body">
                             <span>Bagaimana cara mengakses kursus berbayar?</span>
@@ -77,8 +77,8 @@
                     </h2>
                     <div id="accordion-arrow-icon-body-3" class="hidden mb-4"
                         aria-labelledby="accordion-arrow-icon-heading">
-                        <div class="p-5 bg-white rounded-lg">
-                            <p class="text-[#464646] text-xs 2xl:text-md line">
+                        <div class="p-5 bg-white rounded-full">
+                            <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam quaerat commodi
                                 consequatur nesciunt ut vel officia quidem laboriosam eius odit, earum voluptatibus quo
                                 tenetur dicta, architecto aut, ab voluptas a.
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="text-center my-24">
+        {{-- <div class="text-center my-24">
             <h1
                 class="font-bold text-2xl mt-20 md:text-3xl xl:text-4xl tracking-tighter leading-snug max-w-md mx-auto ">
                 Masih Ada Pertanyaan?
@@ -98,7 +98,7 @@
                 class="text-white bg-[#ED7F22] hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium w-48 rounded-full text-sm 2xl:text-sm px-4 py-3 text-center mt-4 mr-3 md:mr-0">Kontak
                 Kami
             </button>
-        </div>
+        </div> --}}
 
 
 
