@@ -1,7 +1,7 @@
 <x-guest-layout>
-    <div class="grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-3 xl:grid-cols-3 max-w-7xl mx-auto py-24 gap-8">
-        {{-- Kiri --}}
-        <div class="col-span-2">
+    <div class="max-w-7xl mx-auto px-4 lg:px-0 py-12 gap-8">
+
+        <div class="max-w-2xl">
             {{-- Title --}}
             <p class="text-xs 2xl:text-sm font-medium text-orange-500  mb-2">
                 Detail Kursus
@@ -10,66 +10,64 @@
                 Mengenal Project Network
                 Planning
             </h1>
+        </div>
 
-            {{-- Author --}}
-            <figcaption class="relative flex items-center gap-x-3 mt-5">
-                <img alt=""
-                    src="https://images.unsplash.com/photo-1577202214328-c04b77cefb5d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2073&amp;q=80"
-                    decoding="async" data-nimg="future" class="object-cover h-14 w-14 rounded-full" loading="lazy"
-                    style="color: transparent" />
-                <div>
-                    <div class="text-xs 2xl:text-sm font-semibold text-black">
-                        Jordan Pettersson
-                    </div>
-                    <div class="text-xs 2xl:text-sm text-gray-500">
-                        Mahasiswa
-                    </div>
+        {{-- Author --}}
+        <figcaption class="relative flex items-center gap-x-3 mt-5">
+            <img alt=""
+                src="https://images.unsplash.com/photo-1577202214328-c04b77cefb5d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2073&amp;q=80"
+                decoding="async" data-nimg="future" class="object-cover h-14 w-14 rounded-full" loading="lazy"
+                style="color: transparent" />
+            <div>
+                <div class="text-xs 2xl:text-sm font-semibold text-black">
+                    Jordan Pettersson
                 </div>
-            </figcaption>
-
-            {{-- Detail --}}
-            <div class="mr-auto place-self-center lg:col-span-7 flex items-center mt-5">
-
-                <div class="flex items-end space-x-2 mt-2 mr-4">
-                    <ion-icon name="star" class="text-[#F9AE13] w-6 h-6"></ion-icon>
-                    <p class="text-md font-bold text-black">5.0</p>
-                    <p class="text-gray-500 text-xs 2xl:text-sm">(1.220 Reviews)</p>
-                </div>
-                <div>
-                    <div class="flex items-center space-x-2 mt-2 ml-5 mr-4">
-                        <ion-icon name="book-outline" class="text-gray-500"></ion-icon>
-                        <p class="text-sm text-black">12 Materi</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-2 mt-2 ml-5 mr-4">
-                    <ion-icon name="document-text-outline" class="text-gray-500"></ion-icon>
-                    <p class="text-sm text-black">4 Kuis</p>
-                </div>
-                <div class="flex items-center space-x-2 mt-2 ml-5 mr-4">
-                    <ion-icon name="time-outline" class="text-gray-500"></ion-icon>
-                    <p class="text-sm text-black">12 Jam 30 Menit</p>
+                <div class="text-xs 2xl:text-sm text-gray-500">
+                    Mahasiswa
                 </div>
             </div>
+        </figcaption>
 
+        {{-- Detail --}}
+        <div class="mr-auto place-self-center grid grid-cols-2 md:flex items-center mt-5">
+            <div class="flex items-center md:items-end space-x-2 mt-2 mr-4">
+                <ion-icon name="star" class="text-[#F9AE13] md:w-6 md:h-6"></ion-icon>
+                <p class="text-md font-bold text-black">5.0</p>
+                <p class="text-gray-500 text-xs 2xl:text-sm">(1.220 Reviews)</p>
+            </div>
+            <div>
+                <div class="flex items-center space-x-2 mt-2 ml-5 mr-4">
+                    <ion-icon name="book-outline" class="text-gray-500"></ion-icon>
+                    <p class="text-sm text-black">12 Materi</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 mt-2 md:ml-5 mr-4">
+                <ion-icon name="document-text-outline" class="text-gray-500"></ion-icon>
+                <p class="text-sm text-black">4 Kuis</p>
+            </div>
+            <div class="flex items-center space-x-2 mt-2 ml-5 mr-4">
+                <ion-icon name="time-outline" class="text-gray-500"></ion-icon>
+                <p class="text-sm text-black">12 Jam 30 Menit</p>
+            </div>
+        </div>
 
-            {{-- Video Player --}}
-            <div class="rounded-lg mt-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-6 mt-8 md:mt-12">
+            <div class="rounded-lg w-full col-span-2">
+                {{-- Video Player --}}
                 <iframe width="100%" height="430" src="https://www.youtube.com/embed/QQgIHQE5psA" frameborder="0"
                     allowfullscreen class="rounded-2xl"></iframe>
-            </div>
 
-
-
-            {{-- Course Detail --}}
-            <div>
-                <p class="font-bold text-xl mt-9">Tentang Kursus Ini</p>
-                <p class="font-normal text-sm 2xl:text-sm max-w-3xl mt-5 line-clamp-3 hover:line-clamp-none leading-7">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat ab rerum dolore, neque aliquam
-                    alias, esse dignissimos odio impedit illo nobis. Assumenda minima ab porro reiciendis blanditiis
-                    deleniti maiores itaque veniam consequuntur quis cumque nisi ipsum fuga veritatis fugiat nihil,
-                    ullam iure rem possimus rerum omnis cupiditate amet. Modi, cumque!
-                </p>
-            </div>
+                {{-- Course Detail --}}
+                <div>
+                    <p class="font-bold text-xl mt-9">Tentang Kursus Ini</p>
+                    <p
+                        class="font-normal text-sm 2xl:text-sm max-w-3xl mt-5 line-clamp-3 hover:line-clamp-none leading-7">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat ab rerum dolore, neque aliquam
+                        alias, esse dignissimos odio impedit illo nobis. Assumenda minima ab porro reiciendis blanditiis
+                        deleniti maiores itaque veniam consequuntur quis cumque nisi ipsum fuga veritatis fugiat nihil,
+                        ullam iure rem possimus rerum omnis cupiditate amet. Modi, cumque!
+                    </p>
+                </div>
 
 
             <div>
@@ -108,7 +106,7 @@
         </div>
         {{-- Detail Course --}}
         <div id="detail-course"
-            class="w-full max-w-md h-fit mt-60 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
+            class="w-full max-w-md h-fit mt-72 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
 
             <ul role="list" class="space-y-5">
                 <li class="flex space-x-3">
@@ -151,12 +149,11 @@
                 class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-2.5 inline-flex justify-center w-full text-center">Daftar
                 Sekarang </button>
         </div>
-        
     </div>
 
     {{-- Testimonial --}}
     <section>
-        <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
+        <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-12 lg:flex-none max-w-7xl">
             <div class="text-center">
                 <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
                     Testimoni
@@ -204,4 +201,7 @@
             </ul>
         </div>
     </section>
+
+    @push('js-internal')
+    @endpush
 </x-guest-layout>

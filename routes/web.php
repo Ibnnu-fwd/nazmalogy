@@ -20,17 +20,8 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::get('/help', [HelpController::class, 'index'])->name('user.help.index');
+Route::get('help', [HelpController::class, 'index'])->name('user.help.index');
+Route::get('course', [CourseController::class, 'index'])->name('course.index');
 Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show');
 Route::get('course-player', [CourseController::class, 'player'])->name('course.player');
 

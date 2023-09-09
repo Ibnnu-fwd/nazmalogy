@@ -27,17 +27,21 @@
             <ul
                 class="flex flex-col font-normal text-xs 2xl:text-sm p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-12 md:mt-0 md:border-0">
                 <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white nav-active bg-primary rounded md:bg-transparent md:text-primary md:p-0"
+                    <a href="/"
+                        class="block py-2 pl-3 pr-4 text-white bg-primary rounded md:bg-transparent md:p-0 {{ request()->is('/') ? 'md:text-primary' : 'md:text-gray-900' }}"
                         aria-current="page">Beranda</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:dark:hover:text-purple-500  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Kursus</a>
+                    <a href="{{ route('course.index') }}"
+                        class="block py-2 pl-3 pr-4 text-white bg-primary rounded md:bg-transparent md:p-0 {{ request()->routeIs('course.index') || request()->routeIs('course.show')
+                            ? 'md:text-primary'
+                            : 'md:text-gray-900' }}">Kursus</a>
                 </li>
                 <li>
                     <a href="{{ route('user.help.index') }}"
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 md:dark:hover:text-purple-500  dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Bantuan</a>
+                        class="block py-2 pl-3 pr-4 text-white bg-primary rounded md:bg-transparent md:p-0 {{ request()->routeIs('user.help.index') ? 'md:text-primary' : 'md:text-gray-900' }}">
+                        Bantuan
+                    </a>
                 </li>
 
             </ul>

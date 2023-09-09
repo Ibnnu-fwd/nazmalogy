@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function index()
+    {
+        return view('user.course.index');
+    }
+
     public function show($id)
     {
         return view('user.course.detail');
