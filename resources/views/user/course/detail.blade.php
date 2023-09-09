@@ -106,7 +106,7 @@
         </div>
         {{-- Detail Course --}}
         <div id="detail-course"
-            class="w-full max-w-md h-fit mt-72 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
+            class="w-full max-w-md h-fit bg-white border border-gray-200 rounded-lg shadow sm:p-6">
 
             <ul role="list" class="space-y-5">
                 <li class="flex space-x-3">
