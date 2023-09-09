@@ -4,7 +4,7 @@
         <section class="">
             <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
                 <div class="mr-auto place-self-center lg:col-span-7">
-                    <p class="text-md text-orange-500 font-medium mb-2">
+                    <p class="text-md text-primary font-medium mb-2">
                         Pelajari Skill Baru
                     </p>
                     <h1 class="max-w-2xl mb-4 text-4xl font-bold tracking-tighter leading-snug md:text-5xl xl:text-6xl ">
@@ -15,7 +15,7 @@
                         Membantu Anda belajar lebih mudah dengan efektif
                     </p>
                     <a href="#"
-                        class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300">
+                        class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                         Ayo Mulai
                     </a>
                     <a href="#"
@@ -63,7 +63,7 @@
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
                             <div class="flex items-center justify-center h-8 w-8 rounded-full text-black bg-orange-50">
-                                <ion-icon name="infinite-outline" class="text-orange-500 w-7 h-7"></ion-icon>
+                                <ion-icon name="infinite-outline" class="text-primary w-7 h-7"></ion-icon>
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -97,7 +97,7 @@
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
             <div class="text-center">
-                <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
+                <p class="text-primary font-medium text-xs 2xl:text-sm">
                     Kembangkan skill yang anda inginkan
                 </p>
                 <p
@@ -111,7 +111,7 @@
                     <div class="flex flex-col text-sm gap-14 lg:flex-row lg:gap-6">
                         <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
                             <div class="flex items-center gap-2">
-                                <ion-icon name="flag-outline" class="text-orange-500 w-7 h-7 mr-2"></ion-icon>
+                                <ion-icon name="flag-outline" class="text-primary w-7 h-7 mr-2"></ion-icon>
                                 <p class="text-xs 2xl:text-sm font-medium text-black">
                                     Bisnis
                                 </p>
@@ -165,7 +165,7 @@
             </div>
             <div>
                 <a href="#"
-                    class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300">
+                    class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                     Lihat Semua
                 </a>
             </div>
@@ -185,7 +185,7 @@
                             <div class="p-5">
                                 <div class="flex items-center justify-between mb-3">
                                     <div class="flex items-center gap-x-2">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-orange-400"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
                                         <span class="text-xs 2xl:text-sm font-medium">
                                             E-Bussiness
                                         </span>
@@ -226,7 +226,7 @@
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
             <div class="text-center">
-                <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
+                <p class="text-primary font-medium text-xs 2xl:text-sm">
                     Testimoni
                 </p>
                 <p
@@ -295,7 +295,7 @@
                                     class="block w-full px-4 py-2 text-xs 2xl:text-sm font-medium text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-full font-spline focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/50 disabled:opacity-50"
                                     placeholder="Alamat email" required="" autocomplete="off">
                                 <button type="button"
-                                    class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-orange-500 font-medium rounded-full nline-flex hover:bg-orange-600 focus:outline-none lg:w-auto focus-visible:outline-orange-500 text-xs 2xl:text-sm">
+                                    class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-600 focus:outline-none lg:w-auto focus-visible:outline-primary text-xs 2xl:text-sm">
                                     <div style="position: relative"></div>
                                     Berlangganan
                                 </button>
