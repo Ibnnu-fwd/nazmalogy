@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ use App\Http\Controllers\User\HelpController;
 Route::get('/', function () {
     return view('user.home');
 });
+
+Route::get('/login', [AuthenticatedSessionController::class, 'login'])->name('auth.login');
 
 Route::get('help', [HelpController::class, 'index'])->name('user.help.index');
 Route::get('course', [CourseController::class, 'index'])->name('course.index');
