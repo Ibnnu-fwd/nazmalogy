@@ -2,9 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <div class="grid grid-cols-3 px-4">
-        <div class="col-span-2 mx-auto max-w-md">
-            <h1 class="font-bold text-4xl text-black text-center mt-24 ">Daftar Akun</h1>
+    <div class="grid grid-cols-1 md:grid-cols-12">
+        <!-- Kolom form registrasi di tengah pada breakpoint md -->
+        <div class="md:col-span-7 mx-auto max-w-md sm:px-0 px-5 md:mx-auto">
+            <h1 class="font-bold text-4xl text-black text-center mt-24">Daftar Akun</h1>
             <input type="email" name="" id=""
                 class="rounded-3xl w-full bg-white border-none shadow-sm mt-16 h-14" placeholder="Username">
             <input type="email" name="" id=""
@@ -16,9 +17,10 @@
             <p class="font-medium text-sm text-black text-center mt-7">Sudah Punya Akun? <span
                     class="font-bold text-sm text-[#ED7F22]"><a href="#">Masuk Sekarang</a></span></p>
         </div>
-        <div class="">
-            <img class="w-auto h-screen" src="{{ asset('assets/images/bg_side.png') }}" alt="sadas">
+
+        <!-- Kolom gambar di samping pada breakpoint md -->
+        <div class="col-span-5 invisible lg:visible">
+            <img class="w-full h-screen" src="{{ asset('assets/images/bg_side.png') }}" alt="side">
         </div>
     </div>
-
 </x-auth-layout>
