@@ -5,6 +5,7 @@ use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\User\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::get('help', [HelpController::class, 'index'])->name('user.help.index');
 Route::get('course', [CourseController::class, 'index'])->name('course.index');
 Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show');
 Route::get('course-player', [CourseController::class, 'player'])->name('course.player');
+
+Route::get('course/{id}/quiz', [QuizController::class, 'index'])->name('quiz.index');
 
 
 require __DIR__ . '/auth.php';
