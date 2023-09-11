@@ -31,6 +31,7 @@ Route::get('course-player', [CourseController::class, 'player'])->name('course.p
 
 Route::get('course/{id}/quiz', [QuizController::class, 'index'])->name('quiz.index');
 Route::get('course/{id}/quiz/question', [QuizController::class, 'question'])->name('quiz.index.question');
+Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('quiz.result');
 
 
 require __DIR__ . '/auth.php';
