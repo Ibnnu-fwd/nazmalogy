@@ -20,7 +20,7 @@
         </div>
 
         {{-- Side image --}}
-        <div class="col-span-5 invisible md:visible">
+        <div class="col-span-5 hidden md:block">
             <img class="w-full h-screen object-cover object-left" src="{{ asset('assets/images/bg_side.png') }}" alt="side">
         </div>
     </div>

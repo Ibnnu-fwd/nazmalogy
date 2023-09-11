@@ -19,7 +19,7 @@
         </div>
 
         <!-- Kolom gambar di samping pada breakpoint md -->
-        <div class="col-span-5 invisible lg:visible">
+        <div class="col-span-5 hidden lg:block">
             <img class="w-full h-screen" src="{{ asset('assets/images/bg_side.png') }}" alt="side">
         </div>
     </div>
