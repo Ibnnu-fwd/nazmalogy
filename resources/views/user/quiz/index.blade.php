@@ -9,11 +9,13 @@
                 </div>
                 <div class="text-sm mt-9 text-black">
                     @for ($i = 1; $i <= 7; $i++)
-                        <p class="my-5">{{$i}}. Dasar-dasar Project Network Planning
-                            <span class="float-right">12:00
+                        <div class="grid grid-flow-col my-5 justify-between">
+                            <p class="col-span-4">{{$i}}. Dasar-dasar Project Network Planning
+                            </p>
+                            <p class="items-center justify-end">12:00
                                 <ion-icon name="lock-closed-outline" class="text-[#757575]"></ion-icon>
-                            </span>
-                        </p>
+                            </p>
+                        </div>
                     @endfor
                 </div>
             </div>
@@ -60,11 +62,13 @@
                 </div>
                 <div class="text-sm mt-9 text-black">
                     @for ($i = 1; $i <= 7; $i++)
-                        <p class="my-5">{{$i}}. Dasar-dasar Project Network Planning
-                            <span class="float-right">12:00
+                        <div class="grid grid-flow-col my-5 justify-between">
+                            <p class="col-span-4">{{$i}}. Dasar-dasar Project Network Planning
+                            </p>
+                            <p class="items-center justify-end">12:00
                                 <ion-icon name="lock-closed-outline" class="text-[#757575]"></ion-icon>
-                            </span>
-                        </p>
+                            </p>
+                        </div>
                     @endfor
                 </div>
             </div>
