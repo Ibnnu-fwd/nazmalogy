@@ -12,4 +12,9 @@ class QuizController extends Controller
         return view('user.quiz.index');
     }
 
+    public function question()
+    {
+        return view('user.quiz.question');
+    }
+
 }

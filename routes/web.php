@@ -30,6 +30,7 @@ Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show'
 Route::get('course-player', [CourseController::class, 'player'])->name('course.player');
 
 Route::get('course/{id}/quiz', [QuizController::class, 'index'])->name('quiz.index');
+Route::get('course/{id}/quiz/question', [QuizController::class, 'question'])->name('quiz.index.question');
 
 
 require __DIR__ . '/auth.php';

@@ -30,23 +30,23 @@
 
             {{-- Rules --}}
             <div class="">
-                <p class="mt-4 text-sm">
+                <p class="mt-6 text-sm">
                     Berikut adalah aturan pengerjaan kuis: 
                 </p>
-                <ul class="mt-4 mx-8 text-sm list-disc"> 
+                <ul class="mt-6 mx-8 text-sm  list-disc"> 
                     <li> Skor minimal lulus: 80% </li>
                 </ul>
-                <p class="mt-4 text-sm">
+                <p class="mt-6 text-sm">
                     Apabila anda tidak memenuhi syarat kelulusan, maka anda harus melakukan pengerjaan kuis kembali. 
                 </p>
-                <p class="mt-4 text-sm">
+                <p class="mt-6 text-sm">
                     Selamat mengerjakan!
                 </p>
             </div>
 
             {{-- Start Quiz --}}
             <button type="button"
-                class="mt-8 text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm 2xl:text-sm px-14 py-3 text-center mr-3 md:mr-0">
+                class="mt-16  text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm 2xl:text-sm px-14 py-3 text-center mr-3 md:mr-0">
             Mulai
             </button>
         </div>
