@@ -9,17 +9,19 @@
                 </div>
                 <div class="text-sm mt-9 text-black">
                     @for ($i = 1; $i <= 7; $i++)
-                        <p class="my-5">{{ $i }}. Dasar-dasar Project Network Planning
-                            <span class="float-right">12:00
+                        <div class="grid grid-flow-col my-5 justify-between">
+                            <p class="col-span-4">{{$i}}. Dasar-dasar Project Network Planning
+                            </p>
+                            <p class="items-center justify-end">12:00
                                 <ion-icon name="lock-closed-outline" class="text-[#757575]"></ion-icon>
-                            </span>
-                        </p>
+                            </p>
+                        </div>
                     @endfor
                 </div>
             </div>
         </div>
 
-        <div class="col-span-2 lg:col-span-2 bg-white border border-gray-200 rounded-lg shadow p-6">
+        <div class="col-span-2 lg:col-span-2 bg-white border border-gray-200 rounded-lg shadow p-6 h-fit">
             {{-- About Quiz --}}
             <div class="">
                 <p class="font-bold text-2xl">Knowledge Check: Meningkatkan Kemampuan Analisis</p>
@@ -45,7 +47,7 @@
                     <div class="w-8 h-8 border border-gray-400 rounded-lg flex items-center justify-center mr-4  peer-checked:bg-blue-900 peer-checked:text-white">
                         <span>B</span>
                     </div>
-                    <span>Perubahan atau penambahan tugas, fitur, atau persyaratan proyek yang tidak terkendali.</span>
+                    <span>Peningkatan biaya proyek yang disetujui.</span>
                 </label>
 
                 <label for="C" class="flex items-center cursor-pointer mt-3">
@@ -70,7 +72,7 @@
 
             {{-- Start Quiz --}}
             <button type="button"
-                class="mt-14 text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm 2xl:text-sm px-14 py-3 text-center mr-3 md:mr-0">
+                class="mt-14  text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm 2xl:text-sm px-14 py-3 text-center mr-3 md:mr-0">
                 Selanjutnya
             </button>
         </div>
