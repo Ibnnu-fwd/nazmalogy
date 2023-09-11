@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'fullname',
         'email',
         'password',
+        'gender',
+        'phone',
+        'birth',
+        'avatar',
+        'role'
     ];
 
     /**
@@ -40,6 +45,36 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
     ];
+
+    public function generalTestimonials()
+    {
+        return $this->hasMany(GeneralTestimonial::class, 'user_id');
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'author_id');
+    }
+
+    public function courseChapterReviews()
+    {
+        return $this->hasMany(CourseChapterReview::class, 'user_id');
+    }
+
+    public function userCourseChapterLogs()
+    {
+        return $this->hasMany(UserCourseChapterLog::class, 'user_id');
+    }
+
+    public function userQuizLogs()
+    {
+        return $this->hasMany(UserQuizLog::class, 'user_id');
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'user_id');
+    }
 }
