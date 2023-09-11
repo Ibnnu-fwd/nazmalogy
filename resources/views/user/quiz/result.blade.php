@@ -21,12 +21,12 @@
             </div>
         </div>
 
-        <div class="col-span-2 lg:col-span-2 bg-white border border-gray-200 rounded-lg shadow py-6">
+        <div class="col-span-2 lg:col-span-2 bg-white border border-gray-200 rounded-lg shadow py-6 h-fit">
             <div class="text-center">
                 <p class="font-bold text-2xl">Hasil Kuis</p>
 
                 {{-- Quiz Result --}}
-                <div class="grid grid-cols-1 md:grid-cols-3 mt-7">
+                <div class="grid grid-cols-1 md:grid-cols-3 mt-7 gap-4">
                     <div class="mt-4">
                         <h1 class="font-semibold text-2xl">8/10</h1>
                         <p class="text-sm">Jawaban Benar</p>
