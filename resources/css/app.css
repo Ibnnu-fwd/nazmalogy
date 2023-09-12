@@ -6,3 +6,21 @@
 {
     @apply font-medium;
 }
+
+.sidebar li{
+    font-size: 13px !important;
+}
+
+.mini-text {
+    font-size: 13px !important;
+}
+
+.swal2-title
+{
+    font-size: 16px !important;
+}
+
+.swal2-html-container
+{
+    font-size: 14px !important;
+}

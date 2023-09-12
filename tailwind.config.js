@@ -17,6 +17,7 @@ export default {
             },
             fontSize: {
                 xs: '.65rem',
+                tiny: '13px',
                 sm: '.875rem',
                 md: '1rem', 
                 lg: '1.125rem',
@@ -42,8 +43,8 @@ export default {
                 'danger': '#EF4444',
                 'success': '#10B981',
                 'warning': '#F59E0B',
-                'info': '#3B82F6',
                 'dark': '#111827',
+                'info': '#3B82F6',
                 'light': '#F9FAFB',
                 'white': '#FFFFFF',
                 'black': '#000000',
