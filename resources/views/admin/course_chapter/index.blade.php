@@ -1,10 +1,11 @@
 <x-app-layout>
 
-    @php
-        $dashboard = route('admin.dashboard.index');
-    @endphp
-
-    <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Kategori Kursus', 'link' => null]]" />
+    <x-breadcrumb :items="[
+        ['text' => 'Dashboard', 'link' => null],
+        ['text' => 'Kursus', 'link' => null],
+        ['text' => $playlist->title, 'link' => route('admin.playlist.index', $playlist->course_id)],
+        ['text' => 'Materi', 'link' => null],
+    ]" />
     <x-card>
         <!-- Start coding here -->
         <div class="bg-white relative sm:rounded-lg overflow-hidden">
@@ -23,52 +24,59 @@
                 </div>
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <x-button text="Tambah Kategori" icon="add" backgroundColor="primary" hoverColor="primary"
-                        fontSize="text-tiny" id="add-category-course-button" onclick="add()"
-                        modalTarget="create-category-course" />
+                    <x-button text="Tambah Materi" icon="add" backgroundColor="primary" hoverColor="primary"
+                        fontSize="text-tiny" id="add-course-chapter-button" onclick="add()"
+                        modalTarget="create-course-chapter" />
                 </div>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500 ">
                     <thead class="text-xs 2xl:text-tiny text-gray-700 uppercase bg-gray-50 ">
                         <tr>
+                            <th scope="col" class="px-4 py-3">Thumbnail</th>
                             <th scope="col" class="px-4 py-3">Judul</th>
-                            <th scope="col" class="px-4 py-3">Ikon</th>
-                            <th scope="col" class="px-4 py-3">Warna</th>
+                            <th scope="col" class="px-4 py-3">Tautan</th>
+                            <th scope="col" class="px-4 py-3">Durasi</th>
                             <th scope="col" class="px-4 py-3">
-                                <span class="sr-only">Status</span>
+                                <span class="sr-only">Aksi</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($courseCategories as $data)
+                        @foreach ($courseChapters as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
+                                <td class="px-4 py-3">
+                                    <?php
+                                    $videoUrl = $data->video_url;
+                                    $videoId = explode('=', parse_url($videoUrl, PHP_URL_QUERY))[1];
+                                    $videoId = explode('&', $videoId)[0];
+                                    $thumbnailUrl = "https://i3.ytimg.com/vi/{$videoId}/hqdefault.jpg";
+                                    ?>
+
+                                    <img src="<?php echo $thumbnailUrl; ?>"
+                                        class="w-20 h-20 rounded-lg object-cover object-center">
+
+                                </td>
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->name }}
+                                    {{ $data->title }}
                                 </th>
                                 <td class="px-4
-                                py-3 text-xl">
-                                    {!! $data->icon !!}
+                                py-3">
+                                    <a href="https://www.youtube.com/watch?v={{ $data->video_url }}" target="_blank"
+                                        class="text-blue-500 hover:text-blue-600">
+                                        Lihat
+                                    </a>
                                 </td>
-                                <td class="px-4 py-3">
-                                    <div class="h-3 w-3 rounded-full" style="background-color: {{ $data->icon_color }}">
-                                    </div>
+                                <td class="px-4
+                                py-3">
+                                    {{ \Carbon\CarbonInterval::seconds($data->duration)->cascade()->locale('id')->forHumans() }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
-                                        @if ($data->is_active)
-                                            <x-button-edit id="edit-category-course-button-{{ $data->id }}"
-                                                modalTarget="create-category-course"
-                                                onclick="edit({{ $data->id }})" />
-                                            <x-button-delete id="delete-category-course-button-{{ $data->id }}"
-                                                modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
-                                        @else
-                                            <form action="{{ route('admin.course-category.restore', $data->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                <x-button-restore type="submit" />
-                                            </form>
-                                        @endif
+                                        <x-button-edit id="edit-course-chapter-button-{{ $data->id }}"
+                                            modalTarget="create-course-chapter" onclick="edit({{ $data->id }})" />
+                                        <x-button-delete id="delete-course-chapter-button-{{ $data->id }}"
+                                            modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
                                     </div>
                                 </td>
                             </tr>
@@ -80,7 +88,7 @@
     </x-card>
 
     <!-- Main modal -->
-    <div id="create-category-course" tabindex="-1" aria-hidden="true"
+    <div id="create-course-chapter" tabindex="-1" aria-hidden="true"
         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
             <!-- Modal content -->
@@ -92,7 +100,7 @@
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-tiny w-8 h-8 ml-auto inline-flex justify-center items-center"
-                        data-modal-hide="create-category-course">
+                        data-modal-hide="create-course-chapter">
                         <ion-icon name="close-outline" class="text-gray-600 w-4 h-4"></ion-icon>
                         <span class="sr-only">Close modal</span>
                     </button>
@@ -101,16 +109,16 @@
                 <form action="" method="POST">
                     @csrf
                     <div class="p-6 space-y-6 text-tiny">
-                        <x-input label="Judul" id="name" name="name" type="text" required value="" />
+                        <x-input label="Tautan" id="video_url" name="video_url" type="text" required
+                            value="" />
+                        <x-input label="Judul" id="title" name="title" type="text" required value="" />
                         <x-textarea label="Deskripsi" id="description" name="description" required value="" />
-                        <x-input label="Ikon" id="icon" name="icon" type="text" required value="" />
-                        <x-input label="Warna" id="icon_color" name="icon_color" type="text" required value=""
-                            placeholder="#xxxxx" />
+                        <x-input label="Durasi" id="duration" name="duration" type="text" required value="" />
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b">
                         <x-button text="Simpan" type="submit" />
-                        <button data-modal-hide="create-category-course" type="button"
+                        <button data-modal-hide="create-course-chapter" type="button"
                             class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg border border-gray-200 text-tiny font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Decline</button>
                     </div>
                 </form>
@@ -162,31 +170,32 @@
     @push('js-internal')
         <script>
             function add() {
-                $('#create-category-course form').trigger('reset');
-                let url = "{{ route('admin.course-category.store') }}";
-                $('#create-category-course form').attr('action', url);
+                $('#create-course-chapter form').trigger('reset');
+                let url = "{{ route('admin.course-chapter.store', ':playlist_id') }}";
+                url = url.replace(':playlist_id', "{{ $playlist->id }}");
+                $('#create-course-chapter form').attr('action', url);
             }
 
             function edit(id) {
-                $('#create-category-course form').trigger('reset');
-                let url = "{{ route('admin.course-category.update', ':id') }}";
+                $('#create-course-chapter form').trigger('reset');
+                let url = "{{ route('admin.course-chapter.update', ':id') }}";
                 url = url.replace(':id', id);
-                $('#create-category-course form').attr('action', url);
-                $('#create-category-course form').append('<input type="hidden" name="_method" value="PUT">');
+                $('#create-course-chapter form').attr('action', url);
+                $('#create-course-chapter form').append('<input type="hidden" name="_method" value="PUT">');
                 $.ajax({
-                    url: "{{ route('admin.course-category.show', ':id') }}".replace(':id', id),
+                    url: "{{ route('admin.course-chapter.show', ':id') }}".replace(':id', id),
                     method: 'GET',
                     success: function(result) {
-                        $('#create-category-course #name').val(result.name);
-                        $('#create-category-course #description').val(result.description);
-                        $('#create-category-course #icon').val(result.icon);
-                        $('#create-category-course #icon_color').val(result.icon_color);
+                        $('#create-course-chapter #title').val(result.title);
+                        $('#create-course-chapter #description').val(result.description);
+                        $('#create-course-chapter #video_url').val(result.video_url);
+                        $('#create-course-chapter #duration').val(result.duration);
                     }
                 });
             }
 
             function destroy(id) {
-                $('#delete-modal form').attr('action', "{{ route('admin.course-category.destroy', ':id') }}".replace(':id',
+                $('#delete-modal form').attr('action', "{{ route('admin.course-chapter.destroy', ':id') }}".replace(':id',
                     id));
             }
 
@@ -195,6 +204,57 @@
                 $('tbody tr').filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
+            });
+
+            function parseDuration(duration) {
+                var matches = duration.match(/[0-9]+[HMS]/g);
+                var hours = 0,
+                    minutes = 0,
+                    seconds = 0;
+
+                if (matches) {
+                    for (var i = 0; i < matches.length; i++) {
+                        var match = matches[i];
+                        var value = parseInt(match, 10);
+                        if (match.indexOf('H') !== -1) {
+                            hours = value;
+                        } else if (match.indexOf('M') !== -1) {
+                            minutes = value;
+                        } else if (match.indexOf('S') !== -1) {
+                            seconds = value;
+                        }
+                    }
+                }
+
+                return (hours > 0 ? hours + ':' : '') +
+                    (minutes < 10 && hours > 0 ? '0' + minutes : minutes) + ':' +
+                    (seconds < 10 ? '0' + seconds : seconds);
+            }
+
+            $('#video_url').on('input', function() {
+                var apiKey = 'AIzaSyA9GY2fJCrkiRfvPoQuNlTmYnAfVZuBmJE';
+                var videoId = $(this).val().split('v=')[1];
+
+                $.ajax({
+                    url: "https://www.googleapis.com/youtube/v3/videos?id=" + videoId +
+                        "&key=" + apiKey + "&part=snippet,contentDetails,statistics,status",
+                    method: 'GET',
+                    success: function(result) {
+                        if (result['items'][0] == undefined && $('#video_url').val() != '') {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: 'Video tidak ditemukan',
+                            });
+                            return;
+                        }
+
+                        $('#title').val(result.items[0].snippet.title);
+                        $('#description').val(result.items[0].snippet.description);
+                        $('#duration').val(parseDuration(result.items[0].contentDetails.duration));
+                    }
+                });
+
             });
 
             @if (Session::has('success'))

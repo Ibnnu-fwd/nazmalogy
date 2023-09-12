@@ -26,4 +26,9 @@ class Playlist extends Model
     {
         return $this->hasMany(CourseChapter::class, 'playlist_id');
     }
+
+    public function quiz()
+    {
+        return $this->hasOne(Quiz::class, 'playlist_id');
+    }
 }

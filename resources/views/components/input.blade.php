@@ -1,9 +1,10 @@
-@props(['id', 'name', 'label', 'type' => 'text', 'placeholder' => '', 'required' => false, 'value' => ''])
+@props(['id', 'name', 'label', 'type' => 'text', 'placeholder' => '', 'required' => false, 'value' => '', 'readonly' => false])
 
 <div>
     <label for="{{ $id }}"
         class="block mb-2 text-tiny font-medium text-gray-900 dark:text-white">{{ $label }}</label>
     <input type="{{ $type }}" id="{{ $id }}" name="{{ $name }}"
+        @if ($readonly) readonly @endif
         class="bg-gray-50 border border-gray-300 text-gray-900 text-tiny rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
         placeholder="{{ $placeholder }}" @if ($required) required @endif value="{{ $value }}">
 

@@ -10,6 +10,8 @@
 
     <!-- Fonts -->
     <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
+    {{-- <link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet"> --}}
+
 
     {{-- Sweetalert --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">

@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\Admin\CourseChapterController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PlaylistController;
+use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
@@ -47,6 +51,42 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     // Course Category
     Route::post('course-category/{id}/restore', [CourseCategoryController::class, 'restore'])->name('admin.course-category.restore');
     Route::resource('course-category', CourseCategoryController::class, ['as' => 'admin']);
+
+    // Playlist
+    Route::group(['prefix' => 'playlist', 'as' => 'admin.playlist.'], function () {
+        Route::get('{course_id}', [PlaylistController::class, 'index'])->name('index');
+        Route::get('{id}/show', [PlaylistController::class, 'show'])->name('show');
+        Route::post('{course_id}', [PlaylistController::class, 'store'])->name('store');
+        Route::put('{id}', [PlaylistController::class, 'update'])->name('update');
+        Route::delete('{id}', [PlaylistController::class, 'destroy'])->name('destroy');
+    });
+
+    // Quiz
+    Route::group(['prefix' => 'quiz', 'as' => 'admin.quiz.'], function () {
+        Route::get('{playlist_id}', [AdminQuizController::class, 'index'])->name('index');
+        Route::get('{id}/show', [AdminQuizController::class, 'show'])->name('show');
+        Route::post('{playlist_id}', [AdminQuizController::class, 'store'])->name('store');
+        Route::put('{id}', [AdminQuizController::class, 'update'])->name('update');
+        Route::delete('{id}', [AdminQuizController::class, 'destroy'])->name('destroy');
+    });
+
+    // Question
+    Route::group(['prefix' => 'question', 'as' => 'admin.question.'], function () {
+        Route::get('{quiz_id}', [QuestionController::class, 'index'])->name('index');
+        Route::get('{id}/show', [QuestionController::class, 'show'])->name('show');
+        Route::post('{quiz_id}', [QuestionController::class, 'store'])->name('store');
+        Route::put('{id}', [QuestionController::class, 'update'])->name('update');
+        Route::delete('{id}', [QuestionController::class, 'destroy'])->name('destroy');
+    });
+
+    // Course Chapter
+    Route::group(['prefix' => 'course-chapter', 'as' => 'admin.course-chapter.'], function () {
+        Route::get('{playlist_id}', [CourseChapterController::class, 'index'])->name('index');
+        Route::get('{id}/show', [CourseChapterController::class, 'show'])->name('show');
+        Route::post('{playlist_id}', [CourseChapterController::class, 'store'])->name('store');
+        Route::put('{id}', [CourseChapterController::class, 'update'])->name('update');
+        Route::delete('{id}', [CourseChapterController::class, 'destroy'])->name('destroy');
+    });
 });
 
 

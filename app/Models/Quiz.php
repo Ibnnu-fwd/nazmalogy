@@ -12,15 +12,15 @@ class Quiz extends Model
     public $table = 'quizzes';
 
     protected $fillable = [
-        'course_chapter_id',
+        'playlist_id',
         'title',
         'is_active',
         'description',
     ];
 
-    public function courseChapter()
+    public function playlist()
     {
-        return $this->belongsTo(CourseChapter::class, 'course_chapter_id');
+        return $this->belongsTo(Playlist::class, 'playlist_id');
     }
 
     public function questions()

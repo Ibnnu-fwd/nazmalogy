@@ -13,11 +13,11 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Poppins','Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins'],
             },
             fontSize: {
                 xs: '.65rem',
-                tiny: '13px',
+                tiny: '0.813rem',
                 sm: '.875rem',
                 md: '1rem', 
                 lg: '1.125rem',

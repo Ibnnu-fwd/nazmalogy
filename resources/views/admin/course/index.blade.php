@@ -31,6 +31,7 @@
                 <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500">
                     <thead class="text-xs 2xl:text-tiny text-gray-700 uppercase bg-gray-50 ">
                         <tr>
+                            <th scope="col" class="px-4 py-3">Thumbnail</th>
                             <th scope="col" class="px-4 py-3">Judul</th>
                             <th scope="col" class="px-4 py-3">Level</th>
                             <th scope="col" class="px-4 py-3">Bahasa</th>
@@ -48,18 +49,19 @@
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     <img class="w-10 h-10 rounded-lg"
                                         src="{{ $data->thumbnail ? asset('storage/courses/' . $data->thumbnail) : asset('assets/noimage.svg') }}"
-                                        alt="Jese image">
+                                        alt="$data->thumbnail">
                                     <div class="pl-3">
-                                        <div class="text-tiny font-semibold">
-                                            {{ $data->name }}
-                                        </div>
-                                        <div class="font-normal text-gray-500">
-                                            {{ $data->courseCategory->name }}
-                                        </div>
-                                    </div>
                                 </th>
                                 <td class="px-4 py-3">
-                                    {{ $data->level }}
+                                    <div class="text-xs 2xl:text-tiny font-semibold text-black">
+                                        {{ $data->name }}
+                                    </div>
+                                    <div class="font-normal text-gray-500 text-xs 2xl:text-tiny">
+                                        {{ $data->courseCategory->name }}
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    {{ ucwords($data->level) }}
                                 </td>
                                 <td class="px-4 py-3">
                                     {{ $data->language }}
@@ -77,6 +79,8 @@
                                                 modalTarget="create-course" onclick="edit({{ $data->id }})" />
                                             <x-button-delete id="delete-course-button-{{ $data->id }}"
                                                 modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
+                                            <x-button text="Playlist"
+                                                onclick="window.location.href='{{ route('admin.playlist.index', $data->id) }}'" />
                                         @else
                                             <form action="{{ route('admin.course.recover', $data->id) }}"
                                                 method="POST">
@@ -106,7 +110,7 @@
                         Tambah Kursus
                     </h3>
                     <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-tiny w-8 h-8 ml-auto inline-flex justify-center items-center"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xs 2xl:text-tiny w-8 h-8 ml-auto inline-flex justify-center items-center"
                         data-modal-hide="create-course">
                         <ion-icon name="close-outline" class="text-gray-600 w-4 h-4"></ion-icon>
                         <span class="sr-only">Close modal</span>
@@ -126,7 +130,8 @@
                         </x-select>
                         <x-file-upload label="Thumbnail" id="file_input" name="thumbnail" type="file"
                             help="PNG, JPG (MAX. 1MB)" />
-                        <x-input label="Harga" id="price" name="price" type="number" required value="" />
+                        <x-input label="Harga" id="price" name="price" type="number" required
+                            value="" />
                         <x-textarea label="Deskripsi" id="description" name="description" row="4"
                             placeholder="" required />
                         <x-input label="Bahasa" id="language" name="language" type="text" required
@@ -138,8 +143,8 @@
                         </x-select>
                         <x-input label="No. Telepon" id="phone" name="phone" type="text" required
                             value="" placeholder="contoh: 6285xxx" />
-                        <x-input label="Diskon" id="discount" name="discount" type="number" value=""
-                            placeholder="contoh: 10000" />
+                        <x-input label="Diskon (nominal setelah diskon)" id="discount" name="discount"
+                            type="number" value="" placeholder="contoh: 10000" />
 
                     </div>
                     <!-- Modal footer -->
@@ -239,6 +244,13 @@
                 url = url.replace(':id', id);
                 $('#delete-modal form').attr('action', url);
             }
+
+            $('#search').on('keyup', function() {
+                let value = $(this).val().toLowerCase();
+                $('tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
 
             @if (Session::has('success'))
                 Swal.fire({
