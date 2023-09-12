@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="max-w-7xl mx-auto px-4 lg:px-0 py-12 gap-8">
+    <div class="max-w-7xl mx-auto px-4 xl:px-0 py-12 gap-8">
 
         <div class="max-w-2xl">
             {{-- Title --}}

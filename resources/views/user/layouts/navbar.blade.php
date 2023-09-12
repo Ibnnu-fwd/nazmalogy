@@ -9,9 +9,9 @@
                 class="inline-flex items-center justify-center text-xs 2xl:text-sm text-black hover:text-gray-700">
                 Masuk
             </a>
-            <button type="button"
+            <a href="{{ route('register') }}"
                 class="text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-xs 2xl:text-sm px-4 py-3 text-center mr-3 md:mr-0">Daftar
-                Sekarang</button>
+                Sekarang</a>
             <button data-collapse-toggle="navbar-cta" type="button"
                 class="inline-flex items-center p-2 w-10 h-10 justify-center text-xs 2xl:text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 aria-controls="navbar-cta" aria-expanded="false">

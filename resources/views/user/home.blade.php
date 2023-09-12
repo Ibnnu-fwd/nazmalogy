@@ -107,54 +107,53 @@
                 </p>
             </div>
             <div class="mx-auto mt-12 text-left">
-                <div>
-                    <div class="flex flex-col text-sm gap-14 lg:flex-row lg:gap-6">
-                        <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
-                            <div class="flex items-center gap-2">
-                                <ion-icon name="flag-outline" class="text-primary w-7 h-7 mr-2"></ion-icon>
-                                <p class="text-xs 2xl:text-sm font-medium text-black">
-                                    Bisnis
-                                </p>
-                            </div>
-                        </div>
-                        <div class="rounded-lg bg-white py-3 px-4  hover:ring-purple-800 hover:ring-2">
-                            <div class="flex items-center gap-2">
-                                <ion-icon name="wallet-outline" class="text-green-600 w-7 h-7 mr-2"></ion-icon>
-                                <p class="text-xs 2xl:text-sm font-medium text-black">
-                                    E-Business
-                                </p>
-                            </div>
-                        </div>
-                        <div class="rounded-lg bg-white py-3 px-4  hover:ring-purple-800 hover:ring-2">
-                            <div class="flex items-center gap-2">
-                                <ion-icon name="archive-outline" class="text-orange-600 w-8 h-8 mr-2"></ion-icon>
-                                <p class="text-xs 2xl:text-sm font-medium text-black">
-                                    Manajemen Proyek
-                                </p>
-                            </div>
-                        </div>
-                        <div class="rounded-lg bg-white py-3 px-4  hover:ring-purple-800 hover:ring-2">
-                            <div class="flex items-center gap-2">
-                                <ion-icon name="basket-outline" class="text-purple-800 w-8 h-8 mr-2"></ion-icon>
-                                <p class="text-xs 2xl:text-sm font-medium text-black">
-                                    Enterpreneurship
-                                </p>
-                            </div>
-                        </div>
-                        <div class="rounded-lg bg-white py-3 px-4  hover:ring-purple-800 hover:ring-2">
-                            <div class="flex items-center gap-2">
-                                <ion-icon name="bag-outline" class="text-red-600 w-7 h-7 mr-2"></ion-icon>
-                                <p class="text-xs 2xl:text-sm font-medium text-black">
-                                    Marketing
-                                </p>
-                            </div>
+                <div class="grid grid-cols-3 gap-6  lg:flex lg:flex-wrap">
+                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
+                        <div class="flex items-center gap-2">
+                            <ion-icon name="flag-outline" class="text-primary w-7 h-7 mr-2"></ion-icon>
+                            <p class="text-xs 2xl:text-sm font-medium text-black">
+                                Bisnis
+                            </p>
                         </div>
                     </div>
-
+                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
+                        <div class="flex items-center gap-2">
+                            <ion-icon name="wallet-outline" class="text-green-600 w-7 h-7 mr-2"></ion-icon>
+                            <p class="text-xs 2xl:text-sm font-medium text-black">
+                                E-Business
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
+                        <div class="flex items-center gap-2">
+                            <ion-icon name="archive-outline" class="text-orange-600 w-8 h-8 mr-2"></ion-icon>
+                            <p class="text-xs 2xl:text-sm font-medium text-black">
+                                Manajemen Proyek
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
+                        <div class="flex items-center gap-2">
+                            <ion-icon name="basket-outline" class="text-purple-800 w-8 h-8 mr-2"></ion-icon>
+                            <p class="text-xs 2xl:text-sm font-medium text-black">
+                                Enterpreneurship
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
+                        <div class="flex items-center gap-2">
+                            <ion-icon name="bag-outline" class="text-red-600 w-7 h-7 mr-2"></ion-icon>
+                            <p class="text-xs 2xl:text-sm font-medium text-black">
+                                Marketing
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    
+    
 
     {{-- Course --}}
     <section class="">

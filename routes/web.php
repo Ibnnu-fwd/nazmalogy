@@ -31,6 +31,7 @@ Route::get('course-player', [CourseController::class, 'player'])->name('course.p
 
 Route::get('course/{id}/quiz', [QuizController::class, 'index'])->name('quiz.index');
 Route::get('course/{id}/quiz/question', [QuizController::class, 'question'])->name('quiz.index.question');
+Route::get('course/{id}/quiz/last-question', [QuizController::class, 'lastQuestion'])->name('quiz.index.last-question');
 Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('quiz.result');
 
 

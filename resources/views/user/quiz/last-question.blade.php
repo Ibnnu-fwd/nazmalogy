@@ -47,7 +47,7 @@
                     <div class="w-8 h-8 border border-gray-400 rounded-lg flex items-center justify-center mr-4  peer-checked:bg-blue-900 peer-checked:text-white">
                         <span>B</span>
                     </div>
-                    <div class="flex-1">Peningkatan biaya proyek yang disetujui.Peningkatan biaya proyek yang disetujui</div>
+                    <div class="flex-1">Peningkatan biaya proyek yang disetujui.</div>
                 </label>
 
                 <label for="C" class="flex items-center cursor-pointer mt-3">
@@ -56,7 +56,7 @@
                     <div class="w-8 h-8 border border-gray-400 rounded-lg flex items-center justify-center mr-4  peer-checked:bg-blue-900 peer-checked:text-white">
                         <span>C</span>
                     </div>
-                    <div class="flex-1">Perubahan atau penambahan tugas, fitur, atau persyaratan proyek yang tidak terkendali..</div>
+                    <div class="flex-1">Perubahan atau penambahan tugas, fitur, atau persyaratan proyek yang tidak terkendali.</div>
                 </label>
 
                 <label for="D" class="flex items-center cursor-pointer mt-3">
@@ -73,7 +73,7 @@
             {{-- Start Quiz --}}
             <button type="button"
                 class="mt-14  text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm 2xl:text-sm px-14 py-3 text-center mr-3 md:mr-0">
-                Selanjutnya
+                Selesai
             </button>
         </div>
 

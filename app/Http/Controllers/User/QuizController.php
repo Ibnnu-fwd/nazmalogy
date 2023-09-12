@@ -22,4 +22,10 @@ class QuizController extends Controller
         return view('user.quiz.result');
     }
 
+    public function lastQuestion()
+    {
+        return view('user.quiz.last-question');
+    }
+
+
 }
