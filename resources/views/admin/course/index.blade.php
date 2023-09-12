@@ -70,18 +70,21 @@
                                 <td class="px-4 py-3">
                                     {{ number_format($data->discount, 0, ',', '.') }}
                                 </td>
-                                <td class="px-4 py-3 flex items-center justify-end space-x-2">
-                                    @if ($data->is_active)
-                                        <x-button-edit id="edit-course-button-{{ $data->id }}"
-                                            modalTarget="create-course" onclick="edit({{ $data->id }})" />
-                                        <x-button-delete id="delete-course-button-{{ $data->id }}"
-                                            modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
-                                    @else
-                                        <form action="{{ route('admin.course.recover', $data->id) }}" method="POST">
-                                            @csrf
-                                            <x-button-restore type="submit" />
-                                        </form>
-                                    @endif
+                                <td scope="row" class="px-4 py-3">
+                                    <div class="flex items-center justify-end space-x-2">
+                                        @if ($data->is_active)
+                                            <x-button-edit id="edit-course-button-{{ $data->id }}"
+                                                modalTarget="create-course" onclick="edit({{ $data->id }})" />
+                                            <x-button-delete id="delete-course-button-{{ $data->id }}"
+                                                modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
+                                        @else
+                                            <form action="{{ route('admin.course.recover', $data->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <x-button-restore type="submit" />
+                                            </form>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

@@ -54,19 +54,22 @@
                                     <div class="h-3 w-3 rounded-full" style="background-color: {{ $data->icon_color }}">
                                     </div>
                                 </td>
-                                <td class="px-4 py-3 flex space-x-2 items-center justify-end">
-                                    @if ($data->is_active)
-                                        <x-button-edit id="edit-category-course-button-{{ $data->id }}"
-                                            modalTarget="create-category-course" onclick="edit({{ $data->id }})" />
-                                        <x-button-delete id="delete-category-course-button-{{ $data->id }}"
-                                            modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
-                                    @else
-                                        <form action="{{ route('admin.course-category.restore', $data->id) }}"
-                                            method="POST">
-                                            @csrf
-                                            <x-button-restore type="submit" />
-                                        </form>
-                                    @endif
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center justify-end space-x-2">
+                                        @if ($data->is_active)
+                                            <x-button-edit id="edit-category-course-button-{{ $data->id }}"
+                                                modalTarget="create-category-course"
+                                                onclick="edit({{ $data->id }})" />
+                                            <x-button-delete id="delete-category-course-button-{{ $data->id }}"
+                                                modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
+                                        @else
+                                            <form action="{{ route('admin.course-category.restore', $data->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <x-button-restore type="submit" />
+                                            </form>
+                                        @endif
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
