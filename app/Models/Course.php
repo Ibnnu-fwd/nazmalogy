@@ -22,6 +22,7 @@ class Course extends Model
         'phone',
         'is_active',
         'publish_status',
+        'discount',
         'author_id',
     ];
 

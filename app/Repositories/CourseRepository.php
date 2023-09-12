@@ -33,7 +33,7 @@ class CourseRepository implements CourseInterface
                 $data['thumbnail']->storeAs('public/courses', $thumbnailFileName);
                 $data['thumbnail'] = $thumbnailFileName;
 
-                // chmod(storage_path('app/public/courses/' . $thumbnailFileName), 0755);
+                chmod(storage_path('app/public/courses/' . $thumbnailFileName), 0755);
             }
 
             $data['author_id'] = auth()->user()->id;

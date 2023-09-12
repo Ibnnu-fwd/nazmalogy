@@ -41,6 +41,7 @@ class CourseController extends Controller
             'language'           => ['required'],
             'level'              => ['required'],
             'phone'              => ['required'],
+            'discount'           => ['nullable'],
         ]);
 
         try {
@@ -71,6 +72,7 @@ class CourseController extends Controller
             'language'    => ['required'],
             'level'       => ['required'],
             'phone'       => ['required'],
+            'discount'    => ['nullable'],
         ]);
 
         try {
@@ -85,9 +87,9 @@ class CourseController extends Controller
     {
         try {
             $this->course->destroy($id);
-            return response()->json(['message' => 'Kursus berhasil dihapus']);
+            return redirect()->back()->with('success', 'Kursus berhasil dihapus');
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Kursus gagal dihapus']);
+            return redirect()->back()->with('error', $th->getMessage());
         }
     }
 
@@ -95,9 +97,9 @@ class CourseController extends Controller
     {
         try {
             $this->course->recover($id);
-            return response()->json(['message' => 'Kursus berhasil dipulihkan']);
+            return redirect()->route('admin.course.index')->with('success', 'Kursus berhasil dipulihkan');
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Kursus gagal dipulihkan']);
+            return redirect()->route('admin.course.index')->with('error', $th->getMessage());
         }
     }
 }

@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500 ">
+                <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500">
                     <thead class="text-xs 2xl:text-tiny text-gray-700 uppercase bg-gray-50 ">
                         <tr>
                             <th scope="col" class="px-4 py-3">Judul</th>
@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                         @foreach ($courses as $data)
-                            <tr class="border-b">
+                            <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
                                 <th scope="row"
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                                     <img class="w-10 h-10 rounded-lg"
@@ -77,8 +77,7 @@
                                         <x-button-delete id="delete-course-button-{{ $data->id }}"
                                             modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
                                     @else
-                                        <form action="{{ route('admin.course-category.restore', $data->id) }}"
-                                            method="POST">
+                                        <form action="{{ route('admin.course.recover', $data->id) }}" method="POST">
                                             @csrf
                                             <x-button-restore type="submit" />
                                         </form>
@@ -136,6 +135,8 @@
                         </x-select>
                         <x-input label="No. Telepon" id="phone" name="phone" type="text" required
                             value="" placeholder="contoh: 6285xxx" />
+                        <x-input label="Diskon" id="discount" name="discount" type="number" value=""
+                            placeholder="contoh: 10000" />
 
                     </div>
                     <!-- Modal footer -->
@@ -225,9 +226,32 @@
                         $('#create-course #phone').val(data.phone);
                         $('#create-course #file_input').val('');
                         $('#create-course #file_input').attr('required', false);
+                        $('#create-course #discount').val(data.discount);
                     }
                 });
             };
+
+            function destroy(id) {
+                let url = '{{ route('admin.course.destroy', ':id') }}';
+                url = url.replace(':id', id);
+                $('#delete-modal form').attr('action', url);
+            }
+
+            @if (Session::has('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ Session::get('success') }}',
+                });
+            @endif
+
+            @if (Session::has('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: '{{ Session::get('error') }}',
+                });
+            @endif
         </script>
     @endpush
 
