@@ -6,6 +6,8 @@
             <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('admin.dashboard.index') }}" />
             <x-sidebar-link label="Kursus" icon="albums" route="{{ route('admin.course.index') }}" />
             <x-sidebar-link label="Kategori Kursus" icon="folder" route="{{ route('admin.course-category.index') }}" />
+            <x-sidebar-link label="Tipe Poin" icon="podium" route="{{ route('admin.point-type.index') }}" />
+            <x-sidebar-link label="Poin" icon="podium" route="{{ route('admin.point.index') }}" />
         </ul>
     </div>
 </aside>

@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\CourseChapterController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PlaylistController;
+use App\Http\Controllers\Admin\PointController;
+use App\Http\Controllers\Admin\PointTypeController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\User\CourseController;
@@ -86,6 +88,24 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('{playlist_id}', [CourseChapterController::class, 'store'])->name('store');
         Route::put('{id}', [CourseChapterController::class, 'update'])->name('update');
         Route::delete('{id}', [CourseChapterController::class, 'destroy'])->name('destroy');
+    });
+
+    // Point Type
+    Route::group(['prefix' => 'point-type', 'as' => 'admin.point-type.'], function () {
+        Route::get('/', [PointTypeController::class, 'index'])->name('index');
+        Route::get('{id}/show', [PointTypeController::class, 'show'])->name('show');
+        Route::post('/', [PointTypeController::class, 'store'])->name('store');
+        Route::put('{id}', [PointTypeController::class, 'update'])->name('update');
+        Route::delete('{id}', [PointTypeController::class, 'destroy'])->name('destroy');
+    });
+
+    // Point
+    Route::group(['prefix' => 'point', 'as' => 'admin.point.'], function () {
+        Route::get('/', [PointController::class, 'index'])->name('index');
+        Route::get('{id}/show', [PointController::class, 'show'])->name('show');
+        Route::post('/', [PointController::class, 'store'])->name('store');
+        Route::put('{id}', [PointController::class, 'update'])->name('update');
+        Route::delete('{id}', [PointController::class, 'destroy'])->name('destroy');
     });
 });
 
