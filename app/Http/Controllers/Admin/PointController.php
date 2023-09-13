@@ -15,11 +15,10 @@ class PointController extends Controller
         $this->point = $point;
     }
 
-    public function index($users_id)
+    public function index()
     {
         return view('admin.point.index', [
-            'user_id'  => $users_id,
-            'point' => $this->point->getByUserId($users_id),
+            'point' => $this->point->getAll(),
         ]);
     }
 
