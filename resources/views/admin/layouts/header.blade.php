@@ -31,34 +31,27 @@
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="text-xs 2xl:text-sm text-gray-900 dark:text-white" role="none">
-                                Neil Sims
+                            <p class="text-xs 2xl:text-tiny text-gray-900 dark:text-white" role="none">
+                                {{ auth()->user()->fullname }}
                             </p>
-                            <p class="text-xs 2xl:text-sm font-medium text-gray-900 truncate dark:text-gray-300"
+                            <p class="text-xs 2xl:text-tiny font-medium text-gray-900 truncate dark:text-gray-300"
                                 role="none">
-                                neil.sims@flowbite.com
+                                {{ auth()->user()->role }}
                             </p>
                         </div>
                         <ul class="py-1 text-xs 2xl:text-sm sidebar" role="none">
                             <li>
-                                <a href="#"
+                                <a href="{{ route('admin.dashboard.index') }}"
                                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Earnings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Sign out</a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                        class="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        role="menuitem">Keluar</button>
+                                </form>
                             </li>
                         </ul>
                     </div>

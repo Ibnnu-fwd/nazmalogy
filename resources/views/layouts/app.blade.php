@@ -9,8 +9,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
+    {{-- <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet"> --}}
     {{-- <link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet"> --}}
+    <link href="https://fonts.cdnfonts.com/css/lexend-deca" rel="stylesheet">
 
 
     {{-- Sweetalert --}}

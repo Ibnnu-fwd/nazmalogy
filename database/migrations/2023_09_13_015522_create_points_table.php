@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('points', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('point_type_id')->constrained('point_types')->onDelete('cascade');
+            $table->integer('amount');
             $table->timestamps();
         });
     }

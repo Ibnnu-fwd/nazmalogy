@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Poppins'],
+                sans: ['Poppins', 'Lexend Deca'],
             },
             fontSize: {
                 xs: '.65rem',
