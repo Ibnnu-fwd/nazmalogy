@@ -5,23 +5,72 @@
             <img src="{{ asset('assets/logo.svg') }}" class="h-10 mr-3" alt="Flowbite Logo" />
         </a>
         <div class="flex md:order-2 space-x-6">
-            <a href="{{ route('login') }}"
-                class="inline-flex items-center justify-center text-xs 2xl:text-sm text-black hover:text-gray-700">
-                Masuk
-            </a>
-            <a href="{{ route('register') }}"
-                class="text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-xs 2xl:text-sm px-4 py-3 text-center mr-3 md:mr-0">Daftar
-                Sekarang</a>
-            <button data-collapse-toggle="navbar-cta" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-xs 2xl:text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-cta" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 1h15M1 7h15M1 13h15" />
-                </svg>
-            </button>
+            @auth
+                <button type="button" class="flex mr-3 text-xs 2xl:text-sm rounded-full md:mr-0 " id="user-menu-button"
+                    aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-14 h-14 rounded-full"
+                        src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('assets/noimage.svg') }}"
+                        alt="user photo">
+                </button>
+                <!-- Dropdown menu -->
+                <div class="z-50 hidden my-4 text-xs 2xl:text-sm list-none bg-white divide-y divide-gray-100 rounded-lg shadow "
+                    id="user-dropdown">
+                    <div class="px-4 py-3">
+                        <span class="block text-xs 2xl:text-sm text-gray-900 dark:text-white">
+                            {{ auth()->user()->fullname }}
+                        </span>
+                        <span class="block text-xs 2xl:text-sm text-gray-500 truncate dark:text-gray-400">
+                            {{ auth()->user()->email }}
+                        </span>
+                    </div>
+                    <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a href="{{ route('user.profile.index') }}"
+                                class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil</a>
+                        </li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="block w-full px-4 py-2 text-xs 2xl:text-sm text-left text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <button data-collapse-toggle="navbar-user" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-xs 2xl:text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-user" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            @endauth
+
+            @guest
+                <a href="{{ route('login') }}"
+                    class="inline-flex items-center justify-center text-xs 2xl:text-sm text-black hover:text-gray-700">
+                    Masuk
+                </a>
+                <a href="{{ route('register') }}"
+                    class="text-white bg-primary hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-xs 2xl:text-sm px-4 py-3 text-center mr-3 md:mr-0">Daftar
+                    Sekarang</a>
+                <button data-collapse-toggle="navbar-cta" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-xs 2xl:text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-cta" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            @endguest
         </div>
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
             <ul

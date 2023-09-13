@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Interfaces\QuestionInterface::class, \App\Repositories\QuestionRepository::class);
         $this->app->bind(\App\Interfaces\PointTypeInterface::class, \App\Repositories\PointTypeRepository::class);
         $this->app->bind(\App\Interfaces\PointInterface::class, \App\Repositories\PointRepository::class);
+        $this->app->bind(\App\Interfaces\GeneralTestimonialInterface::class, \App\Repositories\GeneralTestimonialRepository::class);
+        $this->app->bind(\App\Interfaces\TransactionInterface::class, \App\Repositories\TransactionRepository::class);
     }
 
     /**

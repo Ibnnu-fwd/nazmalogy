@@ -24,3 +24,11 @@
 {
     font-size: 14px !important;
 }
+
+.swal2-default-outline {
+    font-size: 13px !important;
+}
+
+th {
+    @apply font-medium;
+}

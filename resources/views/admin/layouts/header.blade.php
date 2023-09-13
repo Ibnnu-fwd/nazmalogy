@@ -13,19 +13,19 @@
                         </path>
                     </svg>
                 </button>
-                <a class="flex ml-2 md:mr-24">
+                <a href="/" class="flex ml-2 md:mr-24">
                     <img src="{{ asset('assets/logo.svg') }}" class="h-8 mr-3" alt="NaZMalogy Logo" />
                 </a>
             </div>
             <div class="flex items-center">
                 <div class="flex items-center ml-3">
                     <div>
-                        <button type="button"
-                            class="flex bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button type="button" class="flex rounded-full" aria-expanded="false"
+                            data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full"
-                                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                            <img class="w-12 h-12 rounded-full"
+                                src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('assets/noimage.svg') }}"
+                                alt="user photo">
                         </button>
                     </div>
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
@@ -41,7 +41,7 @@
                         </div>
                         <ul class="py-1 text-xs 2xl:text-sm sidebar" role="none">
                             <li>
-                                <a href="{{ route('admin.dashboard.index') }}"
+                                <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard.index') : route('user.dashboard.index') }}"
                                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
                             </li>
@@ -49,7 +49,7 @@
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="block w-full px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                        class="flex w-full px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300"
                                         role="menuitem">Keluar</button>
                                 </form>
                             </li>

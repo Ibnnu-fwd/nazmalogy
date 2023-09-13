@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_PAID    = 'paid';
+    const STATUS_SUCCESS = 'success';
+    const STATUS_FAILED  = 'failed';
+
     use HasFactory;
 
     public $table = 'transactions';

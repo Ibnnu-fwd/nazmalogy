@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\CourseInterface;
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class CourseRepository implements CourseInterface
@@ -22,8 +23,48 @@ class CourseRepository implements CourseInterface
 
     public function getById($id)
     {
-        return $this->course->with('courseCategory')->findOrFail($id);
+        $course = $this->course
+            ->with(['courseCategory', 'playlists.chapters.reviews', 'playlists.quiz'])
+            ->findOrFail($id);
+
+        $course->lesson_count = $this->calculateLessonCount($course->playlists);
+        $course->review_count = $this->calculateReviewCount($course->playlists);
+        $course->quiz_count   = $this->calculateQuizCount($course->playlists);
+        $course->duration     = $this->calculateTotalDuration($course->playlists);
+        $course->reviews      = $this->getSortedReviews($course->playlists);
+        $course->total_rating = $course->reviews->avg('rating');
+
+        return $course;
     }
+
+    private function calculateLessonCount($playlists)
+    {
+        return $playlists->flatMap(fn ($playlist) => $playlist->chapters)->count();
+    }
+
+    private function calculateReviewCount($playlists)
+    {
+        return $playlists->flatMap(fn ($playlist) => $playlist->chapters->flatMap(fn ($chapter) => $chapter->reviews))->count();
+    }
+
+    private function calculateQuizCount($playlists)
+    {
+        return $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count();
+    }
+
+    private function calculateTotalDuration($playlists)
+    {
+        $totalDurationMinutes = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->sum('duration');
+        return Carbon::parse($totalDurationMinutes)->locale('id')->isoFormat('H [Jam] m [Menit]');
+    }
+
+    private function getSortedReviews($playlists)
+    {
+        return $playlists->flatMap(fn ($playlist) => $playlist->chapters)
+            ->flatMap(fn ($chapter) => $chapter->reviews)
+            ->sortByDesc('created_at');
+    }
+
 
     public function store($data)
     {

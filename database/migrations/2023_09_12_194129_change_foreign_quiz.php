@@ -27,6 +27,7 @@ return new class extends Migration
         Schema::table('quizzes', function (Blueprint $table) {
             $table->dropForeign(['playlist_id']);
             $table->dropColumn('playlist_id');
+            $table->unsignedBigInteger('course_chapter_id')->nullable();
             $table->foreign('course_chapter_id')->references('id')->on('course_chapters')->onDelete('cascade');
         });
     }

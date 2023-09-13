@@ -8,7 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
+    {{-- <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet"> --}}
+    <link href="https://fonts.cdnfonts.com/css/lexend-deca" rel="stylesheet">
+
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

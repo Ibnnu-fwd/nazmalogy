@@ -47,7 +47,7 @@
                                     {{ $data->name }}
                                 </th>
                                 <td class="px-4
-                                py-3 text-xl">
+                                py-3">
                                     {!! $data->icon !!}
                                 </td>
                                 <td class="px-4 py-3">
@@ -165,6 +165,8 @@
                 $('#create-category-course form').trigger('reset');
                 let url = "{{ route('admin.course-category.store') }}";
                 $('#create-category-course form').attr('action', url);
+                // remove method put
+                $('#create-category-course form input[name="_method"]').remove();
             }
 
             function edit(id) {

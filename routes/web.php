@@ -9,11 +9,16 @@ use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\PointTypeController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\QuizController;
+use App\Http\Controllers\User\TransactionController;
 use App\Models\CourseCategory;
 
 /*
@@ -27,9 +32,7 @@ use App\Models\CourseCategory;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/login', [AuthenticatedSessionController::class, 'login'])->name('auth.login');
 
@@ -43,6 +46,7 @@ Route::get('course/{id}/quiz/question', [QuizController::class, 'question'])->na
 Route::get('course/{id}/quiz/last-question', [QuizController::class, 'lastQuestion'])->name('quiz.index.last-question');
 Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('quiz.result');
 
+// Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
@@ -106,6 +110,34 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('/', [PointController::class, 'store'])->name('store');
         Route::put('{id}', [PointController::class, 'update'])->name('update');
         Route::delete('{id}', [PointController::class, 'destroy'])->name('destroy');
+    });
+
+    // Transaction
+    Route::group(['prefix' => 'transaction', 'as' => 'admin.transaction.'], function () {
+        Route::get('/', [AdminTransactionController::class, 'index'])->name('index');
+    });
+});
+
+// User
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::get('/', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
+
+    Route::group(['prefix' => 'transaction', 'as' => 'user.transaction.'], function () {
+        Route::get('/', [TransactionController::class, 'index'])->name('index');
+        Route::get('{id}/show', [TransactionController::class, 'show'])->name('show');
+        Route::post('store', [TransactionController::class, 'store'])->name('store');
+        Route::post('upload-proof/{id}', [TransactionController::class, 'uploadProof'])->name('upload-proof');
+    });
+
+    Route::group(['prefix' => 'course', 'as' => 'user.course.'], function () {
+        Route::get('/', [CourseController::class, 'index'])->name('index');
+        Route::get('{id}/show', [CourseController::class, 'show'])->name('show');
+        Route::get('{id}/player', [CourseController::class, 'player'])->name('player');
+    });
+
+    Route::group(['prefix' => 'profile', 'as' => 'user.profile.'], function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::put('{id}', [ProfileController::class, 'update'])->name('update');
     });
 });
 

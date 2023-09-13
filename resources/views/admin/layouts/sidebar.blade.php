@@ -3,11 +3,21 @@
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-3 sidebar">
-            <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('admin.dashboard.index') }}" />
-            <x-sidebar-link label="Kursus" icon="albums" route="{{ route('admin.course.index') }}" />
-            <x-sidebar-link label="Kategori Kursus" icon="folder" route="{{ route('admin.course-category.index') }}" />
-            <x-sidebar-link label="Tipe Poin" icon="podium" route="{{ route('admin.point-type.index') }}" />
-            <x-sidebar-link label="Poin" icon="podium" route="{{ route('admin.point.index') }}" />
+            @if (auth()->user()->role == 'admin')
+                <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('admin.dashboard.index') }}" />
+                <x-sidebar-link label="Kursus" icon="albums" route="{{ route('admin.course.index') }}" />
+                <x-sidebar-link label="Kategori Kursus" icon="folder"
+                    route="{{ route('admin.course-category.index') }}" />
+                <x-sidebar-link label="Tipe Poin" icon="podium" route="{{ route('admin.point-type.index') }}" />
+                <x-sidebar-link label="Poin" icon="podium" route="{{ route('admin.point.index') }}" />
+                <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('admin.transaction.index') }}" />
+            @endif
+
+            @if (auth()->user()->role == 'user')
+                <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('user.dashboard.index') }}" />
+                <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('user.transaction.index') }}" />
+                <x-sidebar-link label="Profil" icon="person-circle" route="{{ route('user.profile.index') }}" />
+            @endif
         </ul>
     </div>
 </aside>

@@ -14,11 +14,11 @@
                     <p class="max-w-2xl mb-6 font-normal text-gray-500 lg:mb-8 text-xs 2xl:text-sm">
                         Membantu Anda belajar lebih mudah dengan efektif
                     </p>
-                    <a href="#"
+                    <a href="#course"
                         class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                         Ayo Mulai
                     </a>
-                    <a href="#"
+                    <a href="{{ route('register') }}"
                         class="inline-flex items-center justify-center px-8 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-gray-500 rounded-full bg-slate-100 hover:bg-slate-200 focus:ring-4 focus:ring-slate-300">
                         Daftar Sekarang
                     </a>
@@ -108,62 +108,31 @@
             </div>
             <div class="mx-auto mt-12 text-left">
                 <div class="grid grid-cols-3 gap-6  lg:flex lg:flex-wrap">
-                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
-                        <div class="flex items-center gap-2">
-                            <ion-icon name="flag-outline" class="text-primary w-7 h-7 mr-2"></ion-icon>
-                            <p class="text-xs 2xl:text-sm font-medium text-black">
-                                Bisnis
-                            </p>
+                    @foreach ($courseCategories as $courseCategory)
+                        <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
+                            <div class="flex items-center gap-2">
+                                <ion-icon name="{{ $courseCategory->icon }}" class=" w-7 h-7 mr-2"
+                                    style="color: {{ $courseCategory->icon_color }}"></ion-icon>
+                                <p class="text-xs 2xl:text-sm font-medium text-black">
+                                    {{ $courseCategory->name }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
-                        <div class="flex items-center gap-2">
-                            <ion-icon name="wallet-outline" class="text-green-600 w-7 h-7 mr-2"></ion-icon>
-                            <p class="text-xs 2xl:text-sm font-medium text-black">
-                                E-Business
-                            </p>
-                        </div>
-                    </div>
-                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
-                        <div class="flex items-center gap-2">
-                            <ion-icon name="archive-outline" class="text-orange-600 w-8 h-8 mr-2"></ion-icon>
-                            <p class="text-xs 2xl:text-sm font-medium text-black">
-                                Manajemen Proyek
-                            </p>
-                        </div>
-                    </div>
-                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
-                        <div class="flex items-center gap-2">
-                            <ion-icon name="basket-outline" class="text-purple-800 w-8 h-8 mr-2"></ion-icon>
-                            <p class="text-xs 2xl:text-sm font-medium text-black">
-                                Enterpreneurship
-                            </p>
-                        </div>
-                    </div>
-                    <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
-                        <div class="flex items-center gap-2">
-                            <ion-icon name="bag-outline" class="text-red-600 w-7 h-7 mr-2"></ion-icon>
-                            <p class="text-xs 2xl:text-sm font-medium text-black">
-                                Marketing
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
-    
-    
 
     {{-- Course --}}
-    <section class="">
+    <section class="" id="course">
         <div class="flex justify-between mx-auto items-end px-4 py-8 lg:py-12 max-w-7xl">
             <div class="font-bold text-2xl md:text-3xl xl:text-4xl tracking-tighter leading-snug mt-3">
                 Cari Kelas <br>
                 Favorit Anda
             </div>
             <div>
-                <a href="#"
+                <a href="{{ route('course.index') }}"
                     class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                     Lihat Semua
                 </a>
@@ -175,46 +144,58 @@
             <div class="relative items-center w-full px-4 mx-auto max-w-7xl">
                 <div class="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
 
-                    @for ($i = 1; $i <= 8; $i++)
+                    @foreach ($courses as $course)
                         <div class="max-w-sm bg-white rounded-xl border border-gray-100">
-                            <a>
+                            <a href="{{ route('course.show', $course->id) }}">
                                 <img class="rounded-t-xl h-52 object-center object-cover w-full"
-                                    src="{{ asset('assets/noimage.svg') }}" alt="" />
+                                    src="{{ $course->thumbnail ? asset('storage/courses/' . $course->thumbnail) : asset('assets/noimage.svg') }}"
+                                    alt="" />
                             </a>
                             <div class="p-5">
                                 <div class="flex items-center justify-between mb-3">
                                     <div class="flex items-center gap-x-2">
                                         <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
                                         <span class="text-xs 2xl:text-sm font-medium">
-                                            E-Bussiness
+                                            {{ $course->courseCategory->name }}
                                         </span>
                                     </div>
                                     <div class="flex items-center">
                                         <ion-icon name="star"
                                             class="text-[#F3AB1D] rounded mr-1 w-[12] h-[12]"></ion-icon>
                                         <span class="text-xs 2xl:text-sm font-medium">
+                                            <!-- ini belum dihitung -->
                                             (5.0)
                                         </span>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="{{ route('course.show', $course->id) }}">
                                     <h5
-                                        class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 dark:text-white line-clamp-2 hover:line-clamp-none">
-                                        Mengenal Project Network Planning
+                                        class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
+                                        {{ ucwords($course->name) }}
                                     </h5>
                                 </a>
                                 <div class="flex items-end justify-between mt-4">
                                     <div>
-                                        <p class="text-xs 2xl:text-sm line-through text-danger">Rp. 500.000</p>
-                                        <p class="text-xs 2xl:text-md font-semibold">Rp. 75.000</p>
+                                        @if ($course->discount)
+                                            <p class="text-xs 2xl:text-sm line-through text-danger animate-pulse">
+                                                {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
+                                            </p>
+                                            <p class="text-xs 2xl:text-md font-semibold">
+                                                {{ 'Rp. ' . number_format($course->discount, 0, ',', '.') }}
+                                            </p>
+                                        @else
+                                            <p class="text-xs 2xl:text-md font-semibold">
+                                                {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
+                                            </p>
+                                        @endif
                                     </div>
-                                    <p class="text-gray-400 text-xs 2xl:text-sm">
-                                        125 peserta
+                                    <p class="text-gray-400 text-xs 2xl:text-tiny">
+                                        {{ $course->transactions->count() }} peserta
                                     </p>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
                 </div>
             </div>
@@ -236,7 +217,7 @@
             </div>
             <ul role="list"
                 class="grid max-w-2xl grid-cols-1 gap-6 mx-auto sm:gap-8 lg:max-w-none lg:grid-cols-3 mt-14">
-                @for ($j = 1; $j <= 6; $j++)
+                @foreach ($generalTestimonials as $generalTestimonial)
                     <li>
                         <figure class="relative h-full p-6 bg-white rounded-3xl">
                             <figcaption class="relative flex items-center gap-x-3 mb-6">
@@ -267,7 +248,7 @@
                             </div>
                         </figure>
                     </li>
-                @endfor
+                @endforeach
             </ul>
         </div>
     </section>

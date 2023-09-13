@@ -11,7 +11,11 @@
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
-    <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
+    {{-- <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet"> --}}
+    <link href="https://fonts.cdnfonts.com/css/lexend-deca" rel="stylesheet">
+
+    {{-- Sweetalert --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,6 +34,12 @@
     {{-- IonIcon --}}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    {{-- Sweetalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
     @stack('js-internal')
 </body>
