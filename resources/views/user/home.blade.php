@@ -108,7 +108,7 @@
             </div>
             <div class="mx-auto mt-12 text-left">
                 <div class="grid grid-cols-3 gap-6  lg:flex lg:flex-wrap">
-                    @foreach ($courseCategories as $courseCategory)
+                    @forelse ($courseCategories as $courseCategory)
                         <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
                             <div class="flex items-center gap-2">
                                 <ion-icon name="{{ $courseCategory->icon }}" class=" w-7 h-7 mr-2"
@@ -118,7 +118,8 @@
                                 </p>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>

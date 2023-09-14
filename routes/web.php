@@ -4,12 +4,14 @@ use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseChapterController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FacilitatorController;
 use App\Http\Controllers\Admin\PlaylistController;
 use App\Http\Controllers\Admin\PointController;
 use App\Http\Controllers\Admin\PointTypeController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
@@ -119,6 +121,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::get('{id}/show', [AdminTransactionController::class, 'show'])->name('show');
         Route::post('{id}/change-status', [AdminTransactionController::class, 'changeStatus'])->name('change-status');
     })->middleware('check-role:admin');
+
+    // Facilitator
+    Route::group(['prefix' => 'facilitator', 'as' => 'admin.facilitator.'], function () {
+        Route::get('/', [FacilitatorController::class, 'index'])->name('index');
+        Route::get('{id}/show', [FacilitatorController::class, 'show'])->name('show');
+        Route::post('/', [FacilitatorController::class, 'store'])->name('store');
+        Route::put('{id}', [FacilitatorController::class, 'update'])->name('update');
+        Route::delete('{id}', [FacilitatorController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/restore', [FacilitatorController::class, 'restore'])->name('restore');
+    });
 });
 
 // User
