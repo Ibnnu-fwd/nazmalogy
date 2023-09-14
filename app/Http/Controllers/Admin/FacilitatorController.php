@@ -22,7 +22,7 @@ class FacilitatorController extends Controller
         ]);
     }
 
-    public function getById($id)
+    public function show($id)
     {
         return response()->json($this->facilitator->getById($id));
     }

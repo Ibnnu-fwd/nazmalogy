@@ -34,7 +34,11 @@ class CourseChapterRepository implements CourseChapterInterface
     public function update($id, $request)
     {
         $duration = explode(':', $request['duration']);
-        $request['duration'] = $duration[0] * 60 + $duration[1];
+        if ($duration[0] != 0)
+            $request['duration'] = $duration[0] * 60 + $duration[1];
+        else
+            $request['duration'] = $duration[1];
+
         return $this->courseChapter->find($id)->update($request);
     }
 

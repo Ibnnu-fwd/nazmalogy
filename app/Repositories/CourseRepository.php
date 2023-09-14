@@ -6,6 +6,7 @@ use App\Interfaces\CourseInterface;
 use App\Interfaces\TransactionInterface;
 use App\Models\Course;
 use App\Models\UserCourseChapterLog;
+use App\Models\UserQuizLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,12 +15,14 @@ class CourseRepository implements CourseInterface
     private $course;
     private $userCourseChapterLog;
     private $transaction;
+    private $userQuizLog;
 
-    public function __construct(Course $course, UserCourseChapterLog $userCourseChapterLog, TransactionInterface $transaction)
+    public function __construct(Course $course, UserCourseChapterLog $userCourseChapterLog, TransactionInterface $transaction, UserQuizLog $userQuizLog)
     {
         $this->course = $course;
         $this->userCourseChapterLog = $userCourseChapterLog;
         $this->transaction = $transaction;
+        $this->userQuizLog = $userQuizLog;
     }
 
     public function getAll()
@@ -70,7 +73,6 @@ class CourseRepository implements CourseInterface
             ->flatMap(fn ($chapter) => $chapter->reviews)
             ->sortByDesc('created_at');
     }
-
 
     public function store($data)
     {
@@ -139,7 +141,7 @@ class CourseRepository implements CourseInterface
 
     public function getAllProgress($userId)
     {
-        $transaction = $this->transaction->getByUserId($userId);
+        $transaction = $this->transaction->getByUserId($userId)->where('status', 'confirm');
         $courses = $transaction->map(function ($item) {
             return $item->course;
         });
@@ -152,6 +154,14 @@ class CourseRepository implements CourseInterface
                         ->where('course_chapter_id', $chapter->id)
                         ->exists();
                 });
+
+                // quiz
+                if ($playlist->quiz !== null) {
+                    $playlist->quiz->is_finished = $this->userQuizLog
+                        ->where('user_id', $userId)
+                        ->where('quiz_id', $playlist->quiz->id)
+                        ->exists();
+                }
 
                 $course->progressPercentage = $this->calculateProgressPercentage($playlist->chapters);
             }

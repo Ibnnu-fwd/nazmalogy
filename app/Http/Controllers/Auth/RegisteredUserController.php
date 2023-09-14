@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Point;
+use App\Models\PointType;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -41,6 +43,12 @@ class RegisteredUserController extends Controller
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => 'user',
+        ]);
+
+        Point::create([
+            'user_id'       => $user->id,
+            'point_type_id' => PointType::where('name', 'register')->first()->id,
+            'amount'        => 10,
         ]);
 
         event(new Registered($user));

@@ -26,6 +26,9 @@
 
                 <div class="text-tiny mt-2 text-gray-600">
                     @foreach ($course->playlists as $playlist)
+                        <p class="font-semibold mb-2 mt-3">
+                            {{ $playlist->title }}
+                        </p>
                         @foreach ($playlist->chapters as $chapter)
                             <div class="flex items-center justify-between text-tiny">
                                 <span>
@@ -38,16 +41,27 @@
                                 @endif
                             </div>
                         @endforeach
+
+                        @if ($playlist->quiz != null)
+                            <div class="flex items-center justify-between text-tiny">
+                                <span>
+                                    {{ $playlist->quiz->title }} ({{ $playlist->quiz->questions->count() }} Soal )
+                                </span>
+                                @if ($playlist->quiz->is_finished)
+                                    <ion-icon name="checkmark-circle" class="text-green-500"></ion-icon>
+                                @else
+                                    <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
+                                @endif
+                            </div>
+                        @endif
                     @endforeach
                 </div>
 
-                @if ($course->progressPercentage != 100)
-                    <div
-                        class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
-                        Lanjutkan
-                        <ion-icon name="arrow-forward-circle" class="text-purple-500 text-xl ml-2"></ion-icon>
-                    </div>
-                @endif
+                <a href="{{ route('user.learn.chapter', $course->playlists->first()->chapters->first()->id) }}"
+                    class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
+                    {{ $course->progressPercentage == 0 ? 'Mulai Belajar' : ($course->progressPercentage == 100 ? 'Selesai' : 'Lanjutkan') }}
+                    <ion-icon name="arrow-forward-circle" class="text-purple-500 text-xl ml-2"></ion-icon>
+                </a>
             </div>
         @endforeach
     </div>

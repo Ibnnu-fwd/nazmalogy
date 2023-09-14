@@ -62,6 +62,7 @@ class CourseChapterController extends Controller
             $this->courseChapter->update($id, $request->all());
             return redirect()->back()->with('success', 'Chapter berhasil diupdate');
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return redirect()->back()->with('error', 'Chapter gagal diupdate');
         }
     }

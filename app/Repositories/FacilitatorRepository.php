@@ -40,11 +40,11 @@ class FacilitatorRepository implements FacilitatorInterface
 
     public function destroy($id)
     {
-        return $this->user->find($id)->update(['is_active', false]);
+        return $this->user->where('role', 'facilitator')->findOrFail($id)->update(['is_active' => false]);
     }
 
     public function restore($id)
     {
-        return $this->user->find($id)->update(['is_active', true]);
+        return $this->user->where('role', 'facilitator')->findOrFail($id)->update(['is_active' => true]);
     }
 }

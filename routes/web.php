@@ -20,6 +20,7 @@ use App\Http\Controllers\User\HelpController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\User\LearningController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\TransactionController;
@@ -136,7 +137,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::get('{id}/show', [FacilitatorController::class, 'show'])->name('show');
         Route::post('/', [FacilitatorController::class, 'store'])->name('store');
         Route::put('{id}', [FacilitatorController::class, 'update'])->name('update');
-        Route::delete('{id}', [FacilitatorController::class, 'destroy'])->name('destroy');
+        Route::post('{id}', [FacilitatorController::class, 'destroy'])->name('destroy');
         Route::post('{id}/restore', [FacilitatorController::class, 'restore'])->name('restore');
     });
 
@@ -155,6 +156,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::get('/', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
 
+    // Learning
+    Route::group(['prefix' => 'learn', 'as' => 'user.learn'], function () {
+        Route::get('{course_id}', [LearningController::class, 'start'])->name('.start');
+        Route::get('chapter/{chapter_id}', [LearningController::class, 'chapter'])->name('.chapter');
+    });
+
+    // Transaction
     Route::group(['prefix' => 'transaction', 'as' => 'user.transaction.'], function () {
         Route::get('/', [TransactionController::class, 'index'])->name('index');
         Route::get('{id}/show', [TransactionController::class, 'show'])->name('show');
@@ -162,12 +170,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::post('upload-proof/{id}', [TransactionController::class, 'uploadProof'])->name('upload-proof');
     });
 
+    // Course
     Route::group(['prefix' => 'course', 'as' => 'user.course.'], function () {
         Route::get('/', [CourseController::class, 'index'])->name('index');
         Route::get('{id}/show', [CourseController::class, 'show'])->name('show');
         Route::get('{id}/player', [CourseController::class, 'player'])->name('player');
     });
 
+    // Profile
     Route::group(['prefix' => 'profile', 'as' => 'user.profile.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::put('{id}', [ProfileController::class, 'update'])->name('update');

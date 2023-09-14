@@ -1,86 +1,125 @@
 <x-guest-layout>
-    <div class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-4 max-w-7xl mx-auto py-6 sm:py-12 lg:py-24 px-7 sm:px-6 lg:px-8">
-            {{-- Course Material --}}
-            
-            <div class="col-span-1 hidden xl:block">
-                <div id="course-material" class="w-100 h-fit bg-white border border-gray-200 rounded-lg shadow p-6">
-                    <div class="text-base my-5 text-black text-left font-normal">
-                        <p class="font-bold text-base">Dasar-dasar Project Network Planning</p>
-                        <p class="font-normal text-sm text-[#757575]">10 Materi Siap Dipelajari</p>
-                    </div>
-                    <div class="text-sm mt-9 text-black">
-                        @for ($i = 1; $i <= 7; $i++)
-                            <p class="my-5">{{$i}}. Dasar-dasar Project Network Planning
-                                <span class="float-right">12:00
-                                    <ion-icon name="lock-closed-outline" class="text-[#757575]"></ion-icon>
-                                </span>
-                            </p>
-                        @endfor
+    <div
+        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-full mx-auto py-6 sm:py-12 lg:py-24 px-7 sm:px-6 lg:px-8">
+        {{-- Course Material --}}
+        <div class="col-span-1 hidden xl:block">
+            <div id="course-material" class="w-100 h-fit bg-white  rounded-lg p-6">
+                <div class="text-base my-5 text-black text-left font-normal">
+                    <p class="font-bold text-base">Dasar-dasar Project Network Planning</p>
+                    <p class="font-normal text-sm text-[#757575]">{{ $course->lesson_count }} Materi Siap Dipelajari</p>
+                </div>
+                <div class="text-sm mt-9 text-black">
+                    <div id="accordion-collapse" data-accordion="collapse">
+                        @foreach ($course->playlists as $key => $playlist)
+                            <h2 id="accordion-collapse-heading-{{ $key + 1 }}">
+                                <button type="button"
+                                    class="flex items-center justify-between w-full py-3 px-5 font-medium text-left border border-b-1 border-gray-200 focus:ring-4 focus:ring-gray-200 focus:text-black rounded-lg mb-4"
+                                    data-accordion-target="#accordion-collapse-body-{{ $key + 1 }}"
+                                    aria-expanded="false" aria-controls="accordion-collapse-body-{{ $key + 1 }}">
+                                    <span>{{ $playlist->title }}</span>
+                                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M9 5 5 1 1 5" />
+                                    </svg>
+                                </button>
+                            </h2>
+                            <div id="accordion-collapse-body-{{ $key + 1 }}" class="hidden"
+                                aria-labelledby="accordion-collapse-heading-{{ $key + 1 }}">
+                                <div class="p-2 border border-b-1 border-gray-200 rounded-lg mb-4">
+                                    {{-- Isi accordion disini --}}
+                                    @foreach ($playlist->chapters as $chapter)
+                                        <div
+                                            class="flex items-center justify-between text-xs 2xl:text-sm gap-x-3 py-2 px-4">
+                                            <span>{{ $chapter->title }}</span>
+                                            @if ($chapter->is_finished)
+                                                <ion-icon name="checkmark-circle"
+                                                    class="w-5 h-5 text-green-500"></ion-icon>
+                                            @else
+                                                <ion-icon name="radio-button-off"
+                                                    class="w-5 h-5 text-gray-400"></ion-icon>
+                                            @endif
+                                        </div>
+                                    @endforeach
+
+                                    @if ($playlist->quiz != null)
+                                        <div
+                                            class="flex items-center justify-between text-xs 2xl:text-sm gap-x-3 py-2 px-4">
+                                            <span>{{ $playlist->quiz->title }}
+                                                ({{ $playlist->quiz->questions->count() }} Soal )</span>
+                                            @if ($playlist->quiz->is_finished)
+                                                <ion-icon name="checkmark-circle"
+                                                    class="w-5 h-5 text-green-500"></ion-icon>
+                                            @else
+                                                <ion-icon name="radio-button-off"
+                                                    class="w-5 h-5 text-gray-400"></ion-icon>
+                                            @endif
+                                        </div>
+                                    @endif
+                                    {{-- Akhir dari isi accordion --}}
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
+        </div>
 
-            {{-- Video Player --}}
-            <div class="col-span-2 lg:col-span-2">
-                <div class="rounded-lg">
-                    <iframe width="100%" height="443" src="https://www.youtube.com/embed/QQgIHQE5psA" frameborder="0"
-                        allowfullscreen class="rounded-2xl"></iframe>
-                </div>
-                {{-- Course Material When Below XL--}}
-                <div class="col-span-1 md:col-span-1 mt-8 xl:hidden">
-                    <div id="course-material" class="w-100 h-fit bg-white border border-gray-200 rounded-lg shadow p-6">
-                        <div class="text-base my-5 text-black text-left font-normal">
-                            <p class="font-bold text-base">Dasar-dasar Project Network Planning</p>
-                            <p class="font-normal text-sm text-[#757575]">10 Materi Siap Dipelajari</p>
-                        </div>
-                        <div class="text-sm mt-9 text-black">
-                            @for ($i = 1; $i <= 7; $i++)
-                                <p class="my-5">{{$i}}. Dasar-dasar Project Network Planning
-                                    <span class="float-right">12:00
-                                        <ion-icon name="lock-closed-outline" class="text-[#757575]"></ion-icon>
-                                    </span>
-                                </p>
-                            @endfor
-                        </div>
-                    </div>
-                </div>
-                {{-- About Course --}}
-                <div class="mt-6">
-                    <p class="font-bold text-2xl lg:mt-8">Tentang Kursus Ini</p>
-                    <p class="font-normal mt-4 text-sm max-w-xl leading-7">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat ab rerum dolore, neque aliquam
-                        alias, esse dignissimos odio impedit illo nobis.
-                    </p>
-                </div>
+        {{-- Video Player --}}
+        <div class="col-span-2 lg:col-span-2">
+            <div class="rounded-lg">
+                @php
+                    $video_url = $course->playlists->first()->chapters->first()->video_url;
+                    $videoId = preg_replace('/^.*\/(\w{11})$/', '$1', $video_url);
+                    $video_url = 'https://www.youtube.com/embed/' . $videoId;
+                @endphp
 
-                <textarea type="text" name="comment" id="comment" rows="3"
-                class="w-full mt-4 py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-[#757575]"
+                <iframe width="100%" height="430" src="{{ $video_url }}" frameborder="0" allowfullscreen
+                    class="rounded-2xl"></iframe>
+            </div>
+
+            {{-- About Course --}}
+            <div class="mt-6">
+                <p class="font-bold text-lg lg:mt-8">Tentang Kursus Ini</p>
+                <p class="font-normal mt-4 text-sm max-w-xl leading-7">
+                    {{ $chapter->description }}
+                </p>
+            </div>
+
+            <textarea type="text" name="comment" id="comment" rows="3"
+                class="w-full mt-4 py-2 px-4 border text-xs 2xl:text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-[#757575]"
                 placeholder="Jadilah yang pertama berkomentar"></textarea>
 
 
-                {{-- Testimonial Comment --}}
-                <div class="mt-6 bg-white border border-gray-200 rounded-lg shadow p-6">
-                    <figcaption class="relative flex items-center gap-x-3 mt-5">
-                        <img alt=""
-                            src="https://images.unsplash.com/photo-1577202214328-c04b77cefb5d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2073&amp;q=80"
-                            decoding="async" data-nimg="future" class="object-cover h-14 w-14 rounded-full" loading="lazy"
-                            style="color: transparent" />
-                        <div>
-                            <div class="text-xs font-semibold text-black">
-                                Jordan Pettersson
+            {{-- Testimonial Comment --}}
+            <div class="bg-white mt-6 rounded-lg p-6">
+                @forelse ($chapter->reviews as $review)
+                    <div>
+                        <figcaption class="relative flex items-center gap-x-3 mt-5">
+                            <img alt=""
+                                src="{{ $review->user->avatar ? asset('storage/avatar/' . $review->user->avatar) : asset('assets/noimage.svg') }}"
+                                decoding="async" data-nimg="future" class="object-cover h-14 w-14 rounded-full"
+                                loading="lazy" style="color: transparent" />
+                            <div>
+                                <div class="text-xs 2xl:text-sm font-semibold text-black">
+                                    {{ $review->user->fullname }}
+                                </div>
+                                <div class="text-xs 2xl:text-sm text-gray-500">
+                                    {{ \Carbon::parse($review->created_at)->locale('id')->diffForHumans() }}
+                                </div>
                             </div>
-                            <div class="text-xs text-gray-500">
-                                Mahasiswa
-                            </div>
-                        </div>
-                    </figcaption>
-                    <p class="font-normal text-sm text-black mt-4">
-                        NaZMaLogy adalah Learning Management System (LMS) yang dibangun oleh NaZMa Office yang memudahkan pengguna dalam pembelajaran jarak jauh. Dengan platform media pembelajaran berbasis website
-                    </p>
-                    @for ($i = 1; $i <= 5; $i++)
-                        <ion-icon name="star" class="w-7 h-7 mt-4 text-yellow-500"></ion-icon>
-                    @endfor
-                </div>
+                        </figcaption>
+                        <p class="font-normal text-sm text-black mt-4">
+                            {{ $review->content }}
+                        </p>
+                        @for ($i = 1; $i <= $review->rating; $i++)
+                            <ion-icon name="star" class="w-7 h-7 mt-4 text-yellow-500"></ion-icon>
+                        @endfor
+                    </div>
+                @empty
+                    <p class="text-sm text-center">Belum ada komentar</p>
+                @endforelse
             </div>
+        </div>
     </div>
 </x-guest-layout>
