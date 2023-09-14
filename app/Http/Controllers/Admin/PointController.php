@@ -18,12 +18,19 @@ class PointController extends Controller
     public function index()
     {
         return view('admin.point.index', [
-            'point' => $this->point->getAll(),
+            'points' => $this->point->getAll(),
         ]);
     }
 
     public function show($id)
     {
         return response()->json($this->point->getById($id));
+    }
+
+    public function history($id)
+    {
+        return view('admin.point.history', [
+            'points' => $this->point->getByUserId($id),
+        ]);
     }
 }

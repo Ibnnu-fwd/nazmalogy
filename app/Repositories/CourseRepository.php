@@ -3,17 +3,23 @@
 namespace App\Repositories;
 
 use App\Interfaces\CourseInterface;
+use App\Interfaces\TransactionInterface;
 use App\Models\Course;
+use App\Models\UserCourseChapterLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class CourseRepository implements CourseInterface
 {
     private $course;
+    private $userCourseChapterLog;
+    private $transaction;
 
-    public function __construct(Course $course)
+    public function __construct(Course $course, UserCourseChapterLog $userCourseChapterLog, TransactionInterface $transaction)
     {
         $this->course = $course;
+        $this->userCourseChapterLog = $userCourseChapterLog;
+        $this->transaction = $transaction;
     }
 
     public function getAll()
@@ -114,5 +120,51 @@ class CourseRepository implements CourseInterface
     public function recover($id)
     {
         return $this->course->where('id', $id)->update(['is_active' => true]);
+    }
+
+    public function getUserProgress($courseId, $userId)
+    {
+        $course = $this->course->findOrFail($courseId);
+        foreach ($course->playlists as $playlist) {
+            $playlist->chapters->map(function ($chapter) use ($userId) {
+                $chapter->is_finished = $this->userCourseChapterLog
+                    ->where('user_id', $userId)
+                    ->where('course_chapter_id', $chapter->id)
+                    ->exists();
+            });
+        }
+
+        return $course;
+    }
+
+    public function getAllProgress($userId)
+    {
+        $transaction = $this->transaction->getByUserId($userId);
+        $courses = $transaction->map(function ($item) {
+            return $item->course;
+        });
+
+        foreach ($courses as $course) {
+            foreach ($course->playlists as $playlist) {
+                $playlist->chapters->map(function ($chapter) use ($userId) {
+                    $chapter->is_finished = $this->userCourseChapterLog
+                        ->where('user_id', $userId)
+                        ->where('course_chapter_id', $chapter->id)
+                        ->exists();
+                });
+
+                $course->progressPercentage = $this->calculateProgressPercentage($playlist->chapters);
+            }
+        }
+
+        return $courses;
+    }
+
+    private function calculateProgressPercentage($chapters)
+    {
+        $totalChapter = $chapters->count();
+        $finishedChapter = $chapters->filter(fn ($chapter) => $chapter->is_finished)->count();
+
+        return $totalChapter > 0 ? round($finishedChapter / $totalChapter * 100) : 0;
     }
 }

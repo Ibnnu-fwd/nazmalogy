@@ -4,12 +4,17 @@
         $dashboard = route('admin.dashboard.index');
     @endphp
 
-    <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Poin', 'link' => null]]" />
+    <x-breadcrumb :items="[
+        ['text' => 'Dashboard', 'link' => $dashboard],
+        ['text' => 'Poin', 'link' => route('admin.point.index')],
+        ['text' => $points->first()->user->fullname, 'link' => null],
+        ['text' => 'Riwayat', 'link' => null],
+    ]" />
     <x-card>
         <!-- Start coding here -->
         <div class="bg-white relative sm:rounded-lg overflow-hidden">
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 mb-4">
-                <div class="w-full md:w-1/2">
+                <div class="w-full md:w-1/3">
                     <form class="flex items-center">
                         <div class="relative w-full">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -23,31 +28,41 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500 ">
-                    <thead class="text-xs 2xl:text-tiny text-gray-700 uppercase bg-gray-50 ">
+                <table class="w-full text-xs 2xl:text-tiny text-left ">
+                    <thead class="text-xs 2xl:text-tiny uppercase bg-gray-50 ">
                         <tr>
-                            <th scope="col" class="px-4 py-3">Pengguna</th>
-                            <th scope="col" class="px-4 py-3">Jumlah</th>
-                            <th scope="col" class="px-4 py-3">
-                                <span class="sr-only">Aksi</span>
-                            </th>
+                            <th scope="col" class="px-4 py-3">#</th>
+                            <th scope="col" class="px-4 py-3">Jenis</th>
+                            <th scope="col" class="px-4 py-3">Poin Terakhir</th>
+                            <th scope="col" class="px-4 py-3">Poin Saat Ini</th>
+                            <th scope="col" class="px-4 py-3">Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($points as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data['name'] }}
+                                <th scope="row" class="px-4 py-3 font-medium whitespace-nowrap">
+                                    {{ $loop->iteration }}
                                 </th>
                                 <td class="px-4 py-3">
-                                    {{ $data['points'] }}
+                                    {{ $data->pointType->name }}
                                 </td>
                                 <td class="px-4 py-3">
+                                    {{ $data->last_point }}
+                                </td>
+                                <td class="px-4 py-3">
+                                    (+)
+                                    {{ $data->total_point }}
+                                </td>
+                                <td class="px-4 py-3">
+                                    {{ $data->created_at->format('d/m/Y H:i') }}
+                                </td>
+                                {{-- <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
                                         <x-button text="Riwayat"
                                             onclick="window.location.href = '{{ route('admin.point.history', $data['id']) }}'" />
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

@@ -1,11 +1,11 @@
-@props(['label' => '', 'icon' => '', 'route' => '#'])
+@props(['label' => '', 'icon' => '', 'route' => '#', 'onclick' => ''])
 
 @php
     $isActive = url()->current() == $route;
 @endphp
 
 <li class="group hover:text-primary {{ $isActive ? 'text-primary' : '' }}">
-    <a href="{{ $route }}"
+    <a href="{{ $route }}" onclick="{{ $onclick }}"
         class="flex items-center p-2 {{ $isActive ? 'text-primary' : 'text-gray-900' }} rounded-lg group">
         @if ($icon)
             <ion-icon name="{{ $icon }}"

@@ -11,6 +11,14 @@
                 <x-sidebar-link label="Tipe Poin" icon="podium" route="{{ route('admin.point-type.index') }}" />
                 <x-sidebar-link label="Poin" icon="podium" route="{{ route('admin.point.index') }}" />
                 <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('admin.transaction.index') }}" />
+
+                {{-- logout --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-sidebar-link label="Logout" icon="log-out"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();" />
+                </form>
             @endif
 
             @if (auth()->user()->role == 'user')

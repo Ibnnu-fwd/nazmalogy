@@ -85,6 +85,6 @@ class TransactionRepository implements TransactionInterface
 
     public function changeStatus($id, $status)
     {
-        return $this->transaction->where('id', $id)->update(['status' => $status]);
+        return $this->transaction->find($id)->update(['status' => $status]);
     }
 }

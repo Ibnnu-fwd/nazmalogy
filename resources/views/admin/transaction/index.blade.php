@@ -26,6 +26,7 @@
                 <table class="w-full text-xs 2xl:text-tiny text-left ">
                     <thead class="text-xs 2xl:text-tiny uppercase bg-gray-50">
                         <tr>
+                            <th scope="col" class="px-4 py-3">Member</th>
                             <th scope="col" class="px-4 py-3">Nama</th>
                             <th scope="col" class="px-4 py-3">Kategori</th>
                             <th scope="col" class="px-4 py-3">Tipe Kelas</th>
@@ -41,8 +42,11 @@
                         @foreach ($transactions as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->course->name }}
+                                    {{ $data->user->fullname }}
                                 </th>
+                                <td class="px-4 py-3">
+                                    {{ $data->course->name }}
+                                </td>
                                 <td class="px-4 py-3">
                                     {{ $data->price == 0 ? 'Gratis' : 'Premium' }}
                                 </td>
@@ -61,16 +65,12 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
                                         @if ($data->status == 'pending')
-                                            <form action="{{ route('user.transaction.upload-proof', $data->id) }}"
-                                                method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <input type="file" name="payment_proof_file" class="hidden">
-                                                <x-button text="Unggah Bukti Pembayaran" color="green"
-                                                    icon="cloud-upload-outline" id="uploadPayment" />
-                                            </form>
+                                            <span>
+                                                Menunggu Pembayaran
+                                            </span>
                                         @elseif ($data->status == 'paid')
-                                            <x-button text="Invoice" icon="document-outline"
-                                                onclick="window.open('{{ route('user.transaction.show', $data->id) }}')" />
+                                            <x-button text="Ubah Status" icon="pencil-outline"
+                                                onclick="window.location.href = '{{ route('admin.transaction.show', $data->id) }}'" />
                                         @endif
                                     </div>
                                 </td>

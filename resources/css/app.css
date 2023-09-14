@@ -25,10 +25,10 @@
     font-size: 14px !important;
 }
 
-.swal2-default-outline {
+.swal2-default-outline, .swal2-styled {
     font-size: 13px !important;
 }
 
 th {
-    @apply font-medium;
+    @apply font-semibold;
 }

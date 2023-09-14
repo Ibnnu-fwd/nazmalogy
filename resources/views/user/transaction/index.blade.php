@@ -69,6 +69,10 @@
                                                     icon="cloud-upload-outline" id="uploadPayment" />
                                             </form>
                                         @elseif ($data->status == 'paid')
+                                            <span>
+                                                Menunggu Konfirmasi
+                                            </span>
+                                        @elseif ($data->status == 'confirm')
                                             <x-button text="Invoice" icon="document-outline"
                                                 onclick="window.open('{{ route('user.transaction.show', $data->id) }}')" />
                                         @endif

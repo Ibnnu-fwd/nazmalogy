@@ -14,7 +14,7 @@
                     </svg>
                 </button>
                 <a href="/" class="flex ml-2 md:mr-24">
-                    <img src="{{ asset('assets/logo.svg') }}" class="h-8 mr-3" alt="NaZMalogy Logo" />
+                    <img src="{{ asset('assets/logo.svg') }}" class="h-6 mr-3" alt="NaZMalogy Logo" />
                 </a>
             </div>
             <div class="flex items-center">
@@ -23,7 +23,7 @@
                         <button type="button" class="flex rounded-full" aria-expanded="false"
                             data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-12 h-12 rounded-full"
+                            <img class="w-10 h-10 rounded-full"
                                 src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('assets/noimage.svg') }}"
                                 alt="user photo">
                         </button>

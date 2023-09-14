@@ -10,8 +10,8 @@ class Transaction extends Model
 
     const STATUS_PENDING = 'pending';
     const STATUS_PAID    = 'paid';
-    const STATUS_SUCCESS = 'success';
-    const STATUS_FAILED  = 'failed';
+    const STATUS_CONFIRM = 'confirm';
+    const STATUS_CANCEL  = 'cancel';
 
     use HasFactory;
 

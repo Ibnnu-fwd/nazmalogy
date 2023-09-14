@@ -48,15 +48,15 @@ Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('
 
 // Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index')->middleware('check-role:admin');
 
     // Course
-    Route::post('course/{id}/recover', [AdminCourseController::class, 'recover'])->name('admin.course.recover');
-    Route::resource('course', AdminCourseController::class, ['as' => 'admin']);
+    Route::post('course/{id}/recover', [AdminCourseController::class, 'recover'])->name('admin.course.recover')->middleware('check-role:admin');
+    Route::resource('course', AdminCourseController::class, ['as' => 'admin'])->middleware('check-role:admin');
 
     // Course Category
-    Route::post('course-category/{id}/restore', [CourseCategoryController::class, 'restore'])->name('admin.course-category.restore');
-    Route::resource('course-category', CourseCategoryController::class, ['as' => 'admin']);
+    Route::post('course-category/{id}/restore', [CourseCategoryController::class, 'restore'])->name('admin.course-category.restore')->middleware('check-role:admin');
+    Route::resource('course-category', CourseCategoryController::class, ['as' => 'admin'])->middleware('check-role:admin');
 
     // Playlist
     Route::group(['prefix' => 'playlist', 'as' => 'admin.playlist.'], function () {
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('{course_id}', [PlaylistController::class, 'store'])->name('store');
         Route::put('{id}', [PlaylistController::class, 'update'])->name('update');
         Route::delete('{id}', [PlaylistController::class, 'destroy'])->name('destroy');
-    });
+    })->middleware('check-role:admin');
 
     // Quiz
     Route::group(['prefix' => 'quiz', 'as' => 'admin.quiz.'], function () {
@@ -74,7 +74,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('{playlist_id}', [AdminQuizController::class, 'store'])->name('store');
         Route::put('{id}', [AdminQuizController::class, 'update'])->name('update');
         Route::delete('{id}', [AdminQuizController::class, 'destroy'])->name('destroy');
-    });
+    })->middleware('check-role:admin');
 
     // Question
     Route::group(['prefix' => 'question', 'as' => 'admin.question.'], function () {
@@ -83,7 +83,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('{quiz_id}', [QuestionController::class, 'store'])->name('store');
         Route::put('{id}', [QuestionController::class, 'update'])->name('update');
         Route::delete('{id}', [QuestionController::class, 'destroy'])->name('destroy');
-    });
+    })->middleware('check-role:admin');
 
     // Course Chapter
     Route::group(['prefix' => 'course-chapter', 'as' => 'admin.course-chapter.'], function () {
@@ -92,7 +92,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('{playlist_id}', [CourseChapterController::class, 'store'])->name('store');
         Route::put('{id}', [CourseChapterController::class, 'update'])->name('update');
         Route::delete('{id}', [CourseChapterController::class, 'destroy'])->name('destroy');
-    });
+    })->middleware('check-role:admin');
 
     // Point Type
     Route::group(['prefix' => 'point-type', 'as' => 'admin.point-type.'], function () {
@@ -101,7 +101,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('/', [PointTypeController::class, 'store'])->name('store');
         Route::put('{id}', [PointTypeController::class, 'update'])->name('update');
         Route::delete('{id}', [PointTypeController::class, 'destroy'])->name('destroy');
-    });
+    })->middleware('check-role:admin');
 
     // Point
     Route::group(['prefix' => 'point', 'as' => 'admin.point.'], function () {
@@ -110,12 +110,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('/', [PointController::class, 'store'])->name('store');
         Route::put('{id}', [PointController::class, 'update'])->name('update');
         Route::delete('{id}', [PointController::class, 'destroy'])->name('destroy');
-    });
+        Route::get('{id}/history', [PointController::class, 'history'])->name('history');
+    })->middleware('check-role:admin');
 
     // Transaction
     Route::group(['prefix' => 'transaction', 'as' => 'admin.transaction.'], function () {
         Route::get('/', [AdminTransactionController::class, 'index'])->name('index');
-    });
+        Route::get('{id}/show', [AdminTransactionController::class, 'show'])->name('show');
+        Route::post('{id}/change-status', [AdminTransactionController::class, 'changeStatus'])->name('change-status');
+    })->middleware('check-role:admin');
 });
 
 // User

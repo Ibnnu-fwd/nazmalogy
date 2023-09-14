@@ -6,5 +6,5 @@ interface PointInterface
 {
     public function getAll();
     public function getById($id);
-    public function getByUserId($users_id);
+    public function getByUserId($user_id);
 }

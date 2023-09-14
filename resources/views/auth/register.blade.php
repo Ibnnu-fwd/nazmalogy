@@ -18,8 +18,6 @@
                 <input type="password" name="password"
                     class="w-full mt-5 bg-white border-none text-xs 2xl:text-sm shadow-sm rounded-3xl h-14 p-4"
                     placeholder="Kata Sandi">
-                <a href="{{ route('password.request') }}"
-                    class="text-[#8E8E8E] font-normal text-sm float-right mt-4">Lupa Sandi?</a>
                 <button class="w-full h-14 bg-[#2C2F75] text-white rounded-3xl mt-9">Daftar Sekarang</button>
                 <p class="font-medium text-sm text-black text-center mt-7">
                     Sudah Punya Akun?
