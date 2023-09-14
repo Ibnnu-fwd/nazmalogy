@@ -18,4 +18,14 @@ class CourseChapterReviewRepository implements CourseChapterReviewInterface
     {
         return $this->courseChapterReview->all();
     }
+
+    public function getById($id)
+    {
+        return $this->courseChapterReview->findOrFail($id);
+    }
+
+    public function getByCourseChapterId($course_chapter_id)
+    {
+        return $this->courseChapterReview->where('course_chapter_id', $course_chapter_id)->get();
+    }
 }

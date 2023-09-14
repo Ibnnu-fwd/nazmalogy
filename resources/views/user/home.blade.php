@@ -228,7 +228,7 @@
                                     loading="lazy" style="color: transparent" />
                                 <div>
                                     <div class="text-xs 2xl:text-sm font-semibold text-black">
-                                        Jordan Pettersson
+                                       Nama
                                     </div>
                                     <div class="text-xs 2xl:text-sm text-gray-500">
                                         Mahasiswa
@@ -237,13 +237,11 @@
                             </figcaption>
                             <blockquote class="relative">
                                 <p class="text-xs 2xl:text-sm text-black">
-                                    Fitur2 yang diajarkan di kelas ini senilai 2.5 juta/lebih, dibuka dengan harga 175
-                                    ribu
-                                    (promo) aja
+                                    {{$generalTestimonial->content}}
                                 </p>
                             </blockquote>
                             <div class="mt-3 flex items-center gap-x-0">
-                                @for ($i = 1; $i <= 5; $i++)
+                                @for ($i = 1; $i <= $generalTestimonial->rating; $i++)
                                     <ion-icon name="star" class="w-4 h-4 text-yellow-500"></ion-icon>
                                 @endfor
                             </div>

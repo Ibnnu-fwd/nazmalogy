@@ -8,9 +8,11 @@
                 <x-sidebar-link label="Kursus" icon="albums" route="{{ route('admin.course.index') }}" />
                 <x-sidebar-link label="Kategori Kursus" icon="folder"
                     route="{{ route('admin.course-category.index') }}" />
+                {{-- <x-sidebar-link label="Review Chapter Kursus" icon="albums" route="{{ route('admin.course-chapter-review.index') }}" /> --}}
                 <x-sidebar-link label="Tipe Poin" icon="podium" route="{{ route('admin.point-type.index') }}" />
                 <x-sidebar-link label="Poin" icon="podium" route="{{ route('admin.point.index') }}" />
                 <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('admin.transaction.index') }}" />
+                <x-sidebar-link label="Testimoni" icon="people" route="{{ route('admin.testimonial.index') }}" />
 
                 {{-- logout --}}
                 <form method="POST" action="{{ route('logout') }}">

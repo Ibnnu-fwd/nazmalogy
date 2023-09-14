@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseChapterController;
+use App\Http\Controllers\Admin\CourseChapterReviewController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FacilitatorController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\GeneralTestimonialController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
@@ -50,7 +52,7 @@ Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('
 
 // Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index')->middleware('check-role:admin');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
 
     // Course
     Route::post('course/{id}/recover', [AdminCourseController::class, 'recover'])->name('admin.course.recover')->middleware('check-role:admin');
@@ -96,6 +98,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::delete('{id}', [CourseChapterController::class, 'destroy'])->name('destroy');
     })->middleware('check-role:admin');
 
+      // Course Chapter Review
+      Route::group(['prefix' => 'course-chapter-review', 'as' => 'admin.course-chapter-review.'], function () {
+        Route::get('{course_chapter_id}', [CourseChapterReviewController::class, 'index'])->name('index');
+        Route::get('{id}/show', [CourseChapterReviewController::class, 'show'])->name('show');
+    })->middleware('check-role:admin');
+
     // Point Type
     Route::group(['prefix' => 'point-type', 'as' => 'admin.point-type.'], function () {
         Route::get('/', [PointTypeController::class, 'index'])->name('index');
@@ -131,6 +139,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::delete('{id}', [FacilitatorController::class, 'destroy'])->name('destroy');
         Route::post('{id}/restore', [FacilitatorController::class, 'restore'])->name('restore');
     });
+
+    //General Testimonial
+    Route::group(['prefix' => 'testimonial', 'as' => 'admin.testimonial.'], function () {
+        Route::get('/', [GeneralTestimonialController::class, 'index'])->name('index');
+        Route::get('{id}/show', [GeneralTestimonialController::class, 'show'])->name('show');
+        Route::post('/', [GeneralTestimonialController::class, 'store'])->name('store');
+        Route::put('{id}', [GeneralTestimonialController::class, 'update'])->name('update');
+        Route::delete('{id}', [GeneralTestimonialController::class, 'destroy'])->name('destroy');
+    });
+
 });
 
 // User

@@ -37,6 +37,7 @@
                             <th scope="col" class="px-4 py-3">Judul</th>
                             <th scope="col" class="px-4 py-3">Tautan</th>
                             <th scope="col" class="px-4 py-3">Durasi</th>
+                            <th scope="col" class="px-4 py-3">Review</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Aksi</span>
                             </th>
@@ -67,9 +68,13 @@
                                         Lihat
                                     </a>
                                 </td>
-                                <td class="px-4
-                                py-3">
+                                <td class="px-4">
                                     {{ \Carbon\CarbonInterval::seconds($data->duration)->cascade()->locale('id')->forHumans() }}
+                                </td>
+                                <td class="px-4">
+                                    <x-button
+                                        onclick="window.location.href='{{ route('admin.course-chapter-review.index', $data->id) }}'"
+                                        text="Lihat Review"/>
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
