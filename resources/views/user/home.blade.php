@@ -228,10 +228,10 @@
                                     loading="lazy" style="color: transparent" />
                                 <div>
                                     <div class="text-xs 2xl:text-sm font-semibold text-black">
-                                       Nama
+                                       {{$generalTestimonial->user->fullname}}
                                     </div>
                                     <div class="text-xs 2xl:text-sm text-gray-500">
-                                        Mahasiswa
+                                        {{$generalTestimonial->user->email}}
                                     </div>
                                 </div>
                             </figcaption>
