@@ -82,13 +82,13 @@
                     if (count($matches) > 1) {
                         $videoId = $matches[1];
                         // Hasilnya adalah ID video YouTube
-                        $video_url = 'https://www.youtube.com/embed/'.$videoId;
+                        $video_url = 'https://www.youtube-nocookie.com/embed/'.$videoId;
                     } else {
                         echo "Tautan YouTube tidak valid.";
                     }
                 @endphp
 
-                <div id="player" class="w-full h-[480px] rounded-xl"></div>
+                <div id="player" class="w-full h-[480px] rounded-xl "></div>
             </div>
 
             {{-- About Course --}}
@@ -151,7 +151,14 @@
                     videoId: '{{ $videoId }}',
                     playerVars: {
                         'mute': 1,
-                        'autoplay': 1
+                        'autoplay': 1,
+                        'controls':0,
+                        'disablekb':1,
+                        'modestbranding': 1,
+                        'rel': 0,
+                        'showinfo': 0,
+                        'fs': 1,
+                        'enablejsapi': 1,
                     },
                     events: {
                         'onStateChange': onPlayerStateChange
