@@ -15,7 +15,8 @@
                                 <button type="button"
                                     class="flex items-center justify-between w-full py-3 px-5 font-medium text-left border border-b-1 border-gray-200 focus:ring-4 focus:ring-gray-200 focus:text-black rounded-lg mb-4"
                                     data-accordion-target="#accordion-collapse-body-{{ $key + 1 }}"
-                                    aria-expanded="false" aria-controls="accordion-collapse-body-{{ $key + 1 }}">
+                                    aria-expanded="{{ $playlist->id == $playlist_id ? 'true' : 'false' }}"
+                                    aria-controls="accordion-collapse-body-{{ $key + 1 }}">
                                     <span>{{ $playlist->title }}</span>
                                     <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -24,13 +25,14 @@
                                     </svg>
                                 </button>
                             </h2>
-                            <div id="accordion-collapse-body-{{ $key + 1 }}" class="hidden"
+                            <div id="accordion-collapse-body-{{ $key + 1 }}"
+                                class="{{ $playlist->id == $playlist_id ? 'block' : 'hidden' }}"
                                 aria-labelledby="accordion-collapse-heading-{{ $key + 1 }}">
                                 <div class="p-2 border border-b-1 border-gray-200 rounded-lg mb-4">
                                     {{-- Isi accordion disini --}}
                                     @foreach ($playlist->chapters as $chapter)
                                         <div
-                                            class="flex items-center justify-between text-xs 2xl:text-sm gap-x-3 py-2 px-4">
+                                            class="flex rounded-lg items-center {{ $chapter->id == $chapter_id ? 'bg-gray-100' : 'bg-white' }} justify-between text-xs 2xl:text-sm gap-x-3 py-2 px-4">
                                             <span>{{ $chapter->title }}</span>
                                             @if ($chapter->is_finished)
                                                 <ion-icon name="checkmark-circle"
@@ -60,6 +62,7 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
@@ -69,20 +72,23 @@
         <div class="col-span-2 lg:col-span-2">
             <div class="rounded-lg">
                 @php
-                    $video_url = $course->playlists->first()->chapters->first()->video_url;
+                    $video_url = $course->playlists
+                        ->where('id', $playlist_id)
+                        ->first()
+                        ->chapters->where('id', $chapter_id)
+                        ->first()->video_url;
                     $videoId = preg_replace('/^.*\/(\w{11})$/', '$1', $video_url);
                     $video_url = 'https://www.youtube.com/embed/' . $videoId;
                 @endphp
 
-                <iframe width="100%" height="430" src="{{ $video_url }}" frameborder="0" allowfullscreen
-                    class="rounded-2xl"></iframe>
+                <div id="player" class="w-full h-[480px] rounded-xl"></div>
             </div>
 
             {{-- About Course --}}
             <div class="mt-6">
                 <p class="font-bold text-lg lg:mt-8">Tentang Kursus Ini</p>
                 <p class="font-normal mt-4 text-sm max-w-xl leading-7">
-                    {{ $chapter->description }}
+                    {{ $course->playlists->where('id', $playlist_id)->first()->chapters->where('id', $chapter_id)->first()->description }}
                 </p>
             </div>
 
@@ -122,4 +128,37 @@
             </div>
         </div>
     </div>
+
+    @push('js-internal')
+        <script>
+            let tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+
+            let firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            let player;
+
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    videoId: '{{ $videoId }}',
+                    playerVars: {
+                        'mute': 1,
+                        'autoplay': 1
+                    },
+                    events: {
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    // set autoplay to false
+                    player.stopVideo();
+                    window.location.href = 'https://www.google.com'; // Ubah URL ke "https://www.google.com"
+                }
+            }
+        </script>
+    @endpush
 </x-guest-layout>

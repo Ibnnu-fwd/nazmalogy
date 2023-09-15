@@ -57,7 +57,10 @@
                     @endforeach
                 </div>
 
-                <a href="{{ route('user.learn.chapter', $course->playlists->first()->chapters->first()->id) }}"
+                <a href="{{ route('user.learn.chapter', [
+                    $course->playlists->first()->id,
+                    $course->playlists->first()->chapters->first()->id,
+                ]) }}"
                     class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
                     {{ $course->progressPercentage == 0 ? 'Mulai Belajar' : ($course->progressPercentage == 100 ? 'Selesai' : 'Lanjutkan') }}
                     <ion-icon name="arrow-forward-circle" class="text-purple-500 text-xl ml-2"></ion-icon>

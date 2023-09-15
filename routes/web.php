@@ -99,8 +99,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::delete('{id}', [CourseChapterController::class, 'destroy'])->name('destroy');
     })->middleware('check-role:admin');
 
-      // Course Chapter Review
-      Route::group(['prefix' => 'course-chapter-review', 'as' => 'admin.course-chapter-review.'], function () {
+    // Course Chapter Review
+    Route::group(['prefix' => 'course-chapter-review', 'as' => 'admin.course-chapter-review.'], function () {
         Route::get('{course_chapter_id}', [CourseChapterReviewController::class, 'index'])->name('index');
         Route::get('{id}/show', [CourseChapterReviewController::class, 'show'])->name('show');
     })->middleware('check-role:admin');
@@ -149,7 +149,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::put('{id}', [GeneralTestimonialController::class, 'update'])->name('update');
         Route::delete('{id}', [GeneralTestimonialController::class, 'destroy'])->name('destroy');
     });
-
 });
 
 // User
@@ -158,8 +157,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 
     // Learning
     Route::group(['prefix' => 'learn', 'as' => 'user.learn'], function () {
-        Route::get('{course_id}', [LearningController::class, 'start'])->name('.start');
-        Route::get('chapter/{chapter_id}', [LearningController::class, 'chapter'])->name('.chapter');
+        Route::get('{playlist_id}/chapter/{chapter_id}', [LearningController::class, 'chapter'])->name('.chapter');
     });
 
     // Transaction

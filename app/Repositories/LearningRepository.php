@@ -8,7 +8,6 @@ use App\Models\CourseChapter;
 use App\Models\Transaction;
 use App\Models\UserCourseChapterLog;
 use App\Models\UserQuizLog;
-use Carbon\Carbon;
 
 class LearningRepository implements LearningInterface
 {
@@ -70,8 +69,11 @@ class LearningRepository implements LearningInterface
 
     public function getByChapterId($chapter_id)
     {
-        $chapter = $this->courseChapter->where('id', $chapter_id)->first();
-        $course  = $chapter->playlist->course->load('playlists.chapters', 'playlists.quiz');
+        $course  = $this->course->whereHas('playlists.chapters', function ($query) use ($chapter_id) {
+            $query->where('id', $chapter_id);
+        })->first();
+
+        $chapter = $this->courseChapter->find($chapter_id);
 
         return [
             'course'  => $course,
