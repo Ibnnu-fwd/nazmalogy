@@ -81,8 +81,6 @@
                     preg_match($pattern, $video_url, $matches);
                     if (count($matches) > 1) {
                         $videoId = $matches[1];
-                        // Hasilnya adalah ID video YouTube
-                        $video_url = 'https://www.youtube-nocookie.com/embed/'.$videoId;
                     } else {
                         echo "Tautan YouTube tidak valid.";
                     }
@@ -149,6 +147,7 @@
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('player', {
                     videoId: '{{ $videoId }}',
+                    host: 'https://www.youtube-nocookie.com',
                     playerVars: {
                         'mute': 1,
                         'autoplay': 1,
