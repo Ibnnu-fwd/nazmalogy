@@ -60,8 +60,15 @@
                 {{-- Video Player --}}
                 @php
                     $video_url = $course->playlists->first()->chapters->first()->video_url;
-                    $videoId = preg_replace('/^.*\/(\w{11})$/', '$1', $video_url);
-                    $video_url = 'https://www.youtube.com/embed/' . $videoId;
+                    $pattern = '/\?v=([a-zA-Z0-9_-]+)/';
+                    preg_match($pattern, $video_url, $matches);
+                    if (count($matches) > 1) {
+                        $videoId = $matches[1];
+                        // Hasilnya adalah ID video YouTube
+                        $video_url = 'https://www.youtube.com/embed/'.$videoId;
+                    } else {
+                        echo "Tautan YouTube tidak valid.";
+                    }
                 @endphp
 
                 <iframe width="100%" height="430" src="{{ $video_url }}" frameborder="0" allowfullscreen
