@@ -11,7 +11,7 @@
                     <div class="bg-purple-500 h-1.5 rounded-full" style="width: {{ $course->progressPercentage }}%"></div>
                 </div>
 
-                <p class="text-gray-500 text-xs mt-2">
+                <p class="text-gray-500 text-xs 2xl:text-tiny mt-2">
                     {{ $course->progressPercentage }}% Complete
                 </p>
 
@@ -24,7 +24,7 @@
                     </p>
                 </div>
 
-                <div class="text-tiny mt-2 text-gray-600">
+                <div class="text-xs 2xl:text-tiny mt-2 text-gray-600">
                     @foreach ($course->playlists as $playlist)
                         <p class="font-semibold mb-2 mt-3">
                             {{ $playlist->title }}
@@ -63,7 +63,9 @@
                 ]) }}"
                     class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
                     {{ $course->progressPercentage == 0 ? 'Mulai Belajar' : ($course->progressPercentage == 100 ? 'Selesai' : 'Lanjutkan') }}
-                    <ion-icon name="arrow-forward-circle" class="text-purple-500 text-xl ml-2"></ion-icon>
+                    <ion-icon
+                        name="{{ $course->progressPercentage == 100 ? 'checkmark-circle' : 'arrow-forward-circle' }}"
+                        class="text-purple-500 text-xl ml-2"></ion-icon>
                 </a>
 
                 <a href="{{ route('generatePDF')}}"
@@ -73,4 +75,16 @@
             </div>
         @endforeach
     </div>
+
+    @push('js-internal')
+        <script>
+            @if (Session::has('finish'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Selamat!',
+                    text: '{{ Session::get('finish') }}',
+                });
+            @endif
+        </script>
+    @endpush
 </x-app-layout>

@@ -65,15 +65,15 @@
                     if (count($matches) > 1) {
                         $videoId = $matches[1];
                         // Hasilnya adalah ID video YouTube
-                        $video_url = 'https://www.youtube-nocookie.com/embed/'.$videoId;
+                        $video_url = 'https://www.youtube.com/embed/' . $videoId;
                     } else {
-                        echo "Tautan YouTube tidak valid.";
+                        echo 'Tautan YouTube tidak valid.';
                     }
                 @endphp
 
-                <iframe width="100%" height="430" src="{{ $video_url}}?controls=0&rel=0&showinfo=0" frameborder="0" allowfullscreen
-                    class="rounded-2xl"></iframe>
-            
+                <iframe width="100%" height="430" src="{{ $video_url }}?controls=0&rel=0&showinfo=0"
+                    frameborder="0" allowfullscreen class="rounded-2xl"></iframe>
+
 
                 {{-- Course Detail --}}
                 <div>
@@ -186,10 +186,21 @@
                         Rp.{{ number_format($course->price, 0, ',', '.') }}
                     </p>
                 @endif
-                <button type="button" onclick="checkLogin()"
-                    class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
-                    Daftar Sekarang
-                </button>
+                @guest
+                    <button type="button" onclick="checkLogin()"
+                        class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
+                        Daftar Sekarang
+                    </button>
+                @endguest
+
+                @auth
+                    @if ($isBought)
+                        <a href="{{ route('user.dashboard.index') }}"
+                            class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
+                            Mulai Kursus
+                        </a>
+                    @endif
+                @endauth
             </div>
         </div>
 

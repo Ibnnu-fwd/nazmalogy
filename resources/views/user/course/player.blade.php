@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div
-        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-full mx-auto py-6 sm:py-12 lg:py-24 px-7 sm:px-6 lg:px-8">
+        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-7xl mx-auto py-6 sm:py-12 lg:py-24 px-7 sm:px-6 lg:px-8">
         {{-- Course Material --}}
         <div class="col-span-1 hidden xl:block">
             <div id="course-material" class="w-100 h-fit bg-white  rounded-lg p-6">
@@ -32,30 +32,34 @@
                                     {{-- Isi accordion disini --}}
                                     @foreach ($playlist->chapters as $chapter)
                                         <div
-                                            class="flex rounded-lg items-center {{ $chapter->id == $chapter_id ? 'bg-gray-100' : 'bg-white' }} justify-between text-xs 2xl:text-sm gap-x-3 py-2 px-4">
-                                            <span>{{ $chapter->title }}</span>
+                                            class="flex rounded-lg items-center {{ $chapter->id == $chapter_id ? 'bg-gray-100' : 'bg-white' }} justify-start text-xs 2xl:text-sm gap-x-3 py-2 px-4">
                                             @if ($chapter->is_finished)
                                                 <ion-icon name="checkmark-circle"
-                                                    class="w-5 h-5 text-green-500"></ion-icon>
+                                                    class="w-5 h-5 text-primary"></ion-icon>
                                             @else
                                                 <ion-icon name="radio-button-off"
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
+                                            <a
+                                                @if ($chapter->is_finished) href="{{ route('user.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}</a>
                                         </div>
                                     @endforeach
 
                                     @if ($playlist->quiz != null)
                                         <div
-                                            class="flex items-center justify-between text-xs 2xl:text-sm gap-x-3 py-2 px-4">
-                                            <span>{{ $playlist->quiz->title }}
-                                                ({{ $playlist->quiz->questions->count() }} Soal )</span>
+                                            class="flex items-center justify-start text-xs 2xl:text-sm gap-x-3 py-2 px-4">
                                             @if ($playlist->quiz->is_finished)
                                                 <ion-icon name="checkmark-circle"
-                                                    class="w-5 h-5 text-green-500"></ion-icon>
+                                                    class="w-5 h-5 text-primary"></ion-icon>
                                             @else
                                                 <ion-icon name="radio-button-off"
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
+                                            <a
+                                                @if ($playlist->quiz->is_finished) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
+                                                {{ $playlist->quiz->title }}
+                                                ({{ $playlist->quiz->questions->count() }} Soal )
+                                            </a>
                                         </div>
                                     @endif
                                     {{-- Akhir dari isi accordion --}}
@@ -67,10 +71,10 @@
                 </div>
 
             </div>
-            <a href="{{ route('generatePDF')}}"
-                        class="inline-flex items-center justify-center py-2 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
-                        Cetak Sertifikat
-                </a>
+            <a href="{{ route('generatePDF') }}"
+                class="inline-flex items-center justify-center py-2 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
+                Cetak Sertifikat
+            </a>
         </div>
 
         {{-- Video Player --}}
@@ -82,12 +86,14 @@
                         ->first()
                         ->chapters->where('id', $chapter_id)
                         ->first()->video_url;
-                        $pattern = '/\?v=([a-zA-Z0-9_-]+)/';
+                    $pattern = '/\?v=([a-zA-Z0-9_-]+)/';
                     preg_match($pattern, $video_url, $matches);
                     if (count($matches) > 1) {
                         $videoId = $matches[1];
+                        // Hasilnya adalah ID video YouTube
+                        $video_url = 'https://www.youtube.com/embed/' . $videoId;
                     } else {
-                        echo "Tautan YouTube tidak valid.";
+                        echo 'Tautan YouTube tidak valid.';
                     }
                 @endphp
 
@@ -156,8 +162,8 @@
                     playerVars: {
                         'mute': 1,
                         'autoplay': 1,
-                        'controls':0,
-                        'disablekb':1,
+                        'controls': 0,
+                        'disablekb': 1,
                         'modestbranding': 1,
                         'rel': 0,
                         'showinfo': 0,
@@ -174,7 +180,7 @@
                 if (event.data == YT.PlayerState.ENDED) {
                     // set autoplay to false
                     player.stopVideo();
-                    window.location.href = 'https://www.google.com'; // Ubah URL ke "https://www.google.com"
+                    window.location.href = '{{ route('user.learn.complete', [$playlist_id, $chapter_id]) }}';
                 }
             }
         </script>
