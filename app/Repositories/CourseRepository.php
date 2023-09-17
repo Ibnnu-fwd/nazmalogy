@@ -162,19 +162,24 @@ class CourseRepository implements CourseInterface
                         ->where('quiz_id', $playlist->quiz->id)
                         ->exists();
                 }
-
-                $course->progressPercentage = $this->calculateProgressPercentage($playlist->chapters);
             }
+
+            $course->progressPercentage = $this->calculateProgressPercentage($course->playlists);
         }
 
         return $courses;
     }
 
-    private function calculateProgressPercentage($chapters)
+    private function calculateProgressPercentage($playlists)
     {
-        $totalChapter = $chapters->count();
-        $finishedChapter = $chapters->filter(fn ($chapter) => $chapter->is_finished)->count();
+        $totalChapter = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->count();
+        $totalFinishedChapter = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->filter(fn ($chapter) => $chapter->is_finished)->count();
+        $totalQuiz = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count();
+        $totalFinishedQuiz = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->filter(fn ($playlist) => $playlist->quiz->is_finished)->count();
 
-        return $totalChapter > 0 ? round($finishedChapter / $totalChapter * 100) : 0;
+        $totalFinished = $totalFinishedChapter + $totalFinishedQuiz;
+        $total = $totalChapter + $totalQuiz;
+
+        return $totalFinished / $total * 100;
     }
 }
