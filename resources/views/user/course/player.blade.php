@@ -98,6 +98,10 @@
                 @endphp
 
                 <div id="player" class="w-full h-[480px] rounded-xl "></div>
+
+                <div class="player-control">
+
+                </div>
             </div>
 
             {{-- About Course --}}
@@ -169,16 +173,16 @@
                         'showinfo': 0,
                         'fs': 1,
                         'enablejsapi': 1,
+                        'ecver': 2,
                     },
                     events: {
-                        'onStateChange': onPlayerStateChange
+                        'onStateChange': onPlayerStateChange,
                     }
-                });
+                });;
             }
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
-                    // set autoplay to false
                     player.stopVideo();
                     window.location.href = '{{ route('user.learn.complete', [$playlist_id, $chapter_id]) }}';
                 }

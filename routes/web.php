@@ -52,7 +52,7 @@ Route::get('course/{id}/quiz/question', [QuizController::class, 'question'])->na
 Route::get('course/{id}/quiz/last-question', [QuizController::class, 'lastQuestion'])->name('quiz.index.last-question');
 Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('quiz.result');
 
-Route::get('/generatePDF',[FillPDFController::class, 'process'])->name('generatePDF');
+Route::get('/generatePDF', [FillPDFController::class, 'process'])->name('generatePDF');
 
 // Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
