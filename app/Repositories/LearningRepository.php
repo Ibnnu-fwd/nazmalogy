@@ -104,8 +104,7 @@ class LearningRepository implements LearningInterface
             $course->lesson_count       = $this->calculateLessonCount($course->playlists);
         }
 
-        $chapter = $this->courseChapter->find($chapter_id);
-
+        $chapter = $this->courseChapter->find($chapter_id)->load('reviews');
 
         return [
             'course'  => $course,

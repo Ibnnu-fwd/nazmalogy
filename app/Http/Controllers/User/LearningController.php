@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\CourseChapterReviewInterface;
 use App\Interfaces\LearningInterface;
 use App\Interfaces\UserCourseChapterLogInterface;
 use Illuminate\Http\Request;
@@ -11,11 +12,13 @@ class LearningController extends Controller
 {
     private $learning;
     private $userCourseChapterLog;
+    private $courseChapterReview;
 
-    public function __construct(LearningInterface $learning, UserCourseChapterLogInterface $userCourseChapterLog)
+    public function __construct(LearningInterface $learning, UserCourseChapterLogInterface $userCourseChapterLog, CourseChapterReviewInterface $courseChapterReview)
     {
         $this->learning             = $learning;
         $this->userCourseChapterLog = $userCourseChapterLog;
+        $this->courseChapterReview  = $courseChapterReview;
     }
 
     /* 
@@ -27,6 +30,7 @@ class LearningController extends Controller
         return view('user.course.player', [
             'course'      => $result['course'],
             'chapter'     => $result['chapter'],
+            'reviews'    => $result['chapter']['reviews'],
             'chapter_id'  => $chapter_id,
             'playlist_id' => $playlist_id,
         ]);
@@ -35,10 +39,11 @@ class LearningController extends Controller
     /* 
         Kode dibawah untuk menandai jika user telah menyelesaikan course
     */
-    public function complete($playlist_id, $chapter_id)
+    public function complete($playlist_id, $chapter_id, $finish_time)
     {
+        // dd($finish_time);
         $user_id = auth()->user()->id;
-        $this->userCourseChapterLog->store($user_id, $chapter_id);
+        $this->userCourseChapterLog->store($user_id, $chapter_id, $finish_time);
 
         $result                 = $this->learning->getByChapterId($chapter_id);
         $result['next_chapter'] = $this->learning->getNextChapter($playlist_id, $chapter_id);
@@ -109,6 +114,17 @@ class LearningController extends Controller
             'resultQuiz'   => $resultQuiz,
             'nextPlaylist' => $nextPlaylist['type'] == 'chapter' ? $nextPlaylist['playlist_id'] : null,
             'nextChapter'  => $nextPlaylist['type'] == 'chapter' ? $nextPlaylist['chapter_id'] : null,
+        ]);
+    }
+
+    public function comment($playlist_id, $chapter_id, Request $request)
+    {
+        $user_id = auth()->user()->id;
+        $this->courseChapterReview->store($chapter_id, $user_id, $request->rating, $request->comment);
+
+        return response()->json([
+            'status'  => true,
+            'message' => 'Berhasil memberikan komentar',
         ]);
     }
 }

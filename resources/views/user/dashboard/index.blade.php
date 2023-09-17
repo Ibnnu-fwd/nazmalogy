@@ -4,11 +4,11 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         @foreach ($courses as $course)
             <div class="w-96 rounded-xl shadow-md p-5 border border-gray-50 bg-white">
-                <p class="text-gray-700 text-tiny font-semibold">
+                <p class="text-gray-700 text-xs 2xl:text-sm font-bold">
                     {{ $course->name }}
                 </p>
                 <div class="w-full bg-gray-200 rounded-full h-1.5 mt-4">
-                    <div class="bg-purple-500 h-1.5 rounded-full" style="width: {{ $course->progressPercentage }}%"></div>
+                    <div class="bg-primary h-1.5 rounded-full" style="width: {{ $course->progressPercentage }}%"></div>
                 </div>
 
                 <p class="text-gray-500 text-xs 2xl:text-tiny mt-2">
@@ -25,35 +25,42 @@
                 </div>
 
                 <div class="text-xs 2xl:text-tiny mt-2 text-gray-600">
-                    @foreach ($course->playlists as $playlist)
-                        <p class="font-semibold mb-2 mt-3">
-                            {{ $playlist->title }}
-                        </p>
-                        @foreach ($playlist->chapters as $chapter)
-                            <div class="flex items-center justify-between text-tiny">
-                                <span>
-                                    {{ $chapter->title }}
-                                </span>
-                                @if ($chapter->is_finished)
-                                    <ion-icon name="checkmark-circle" class="text-green-500"></ion-icon>
-                                @else
-                                    <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
-                                @endif
-                            </div>
-                        @endforeach
+                    @foreach ($course->playlists as $index => $playlist)
+                        <div class="mb-2">
+                            <div class="border rounded-lg">
+                                <button
+                                    class="w-full text-left px-4 py-2 font-semibold hover:bg-gray-50 focus:outline-none"
+                                    onclick="toggleAccordion('{{ $playlist->id }}')">
+                                    {{ $playlist->title }}
+                                </button>
+                                <div id="{{ $playlist->id }}" class="hidden px-4 py-2"
+                                    style="display: {{ $loop->iteration === 1 ? 'block' : '' }}">
+                                    @foreach ($playlist->chapters as $chapter)
+                                        <div class="flex items-center justify-between text-tiny">
+                                            <span>{{ $chapter->title }}</span>
+                                            @if ($chapter->is_finished)
+                                                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                                            @else
+                                                <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
+                                            @endif
+                                        </div>
+                                    @endforeach
 
-                        @if ($playlist->quiz != null)
-                            <div class="flex items-center justify-between text-tiny">
-                                <span>
-                                    {{ $playlist->quiz->title }} ({{ $playlist->quiz->questions->count() }} Soal )
-                                </span>
-                                @if ($playlist->quiz->is_finished)
-                                    <ion-icon name="checkmark-circle" class="text-green-500"></ion-icon>
-                                @else
-                                    <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
-                                @endif
+                                    @if ($playlist->quiz != null)
+                                        <div class="flex items-center justify-between text-tiny">
+                                            <span>{{ $playlist->quiz->title }}
+                                                ({{ $playlist->quiz->questions->count() }} Soal)
+                                            </span>
+                                            @if ($playlist->quiz->is_finished)
+                                                <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                                            @else
+                                                <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                        @endif
+                        </div>
                     @endforeach
                 </div>
 
@@ -65,19 +72,38 @@
                     {{ $course->progressPercentage == 0 ? 'Mulai Belajar' : ($course->progressPercentage == 100 ? 'Selesai' : 'Lanjutkan') }}
                     <ion-icon
                         name="{{ $course->progressPercentage == 100 ? 'checkmark-circle' : 'arrow-forward-circle' }}"
-                        class="text-purple-500 text-xl ml-2"></ion-icon>
+                        class="text-primary text-lg ml-2"></ion-icon>
                 </a>
 
-                <a href="{{ route('generatePDF')}}"
-                        class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
+                @if ($course->progressPercentage == 100)
+                    <a href="{{ route('generatePDF') }}"
+                        class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-tiny font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                         Cetak Sertifikat
-                </a>
+                    </a>
+                @endif
             </div>
         @endforeach
     </div>
 
     @push('js-internal')
         <script>
+            function toggleAccordion(playlistId) {
+                const accordion = document.getElementById(playlistId);
+
+                // Get all accordions with class 'hidden' and hide them
+                const hiddenAccordions = document.querySelectorAll(".hidden");
+                hiddenAccordions.forEach((acc) => {
+                    acc.style.display = "none";
+                });
+
+                // Toggle the current accordion
+                if (accordion.style.display === "block") {
+                    accordion.style.display = "none";
+                } else {
+                    accordion.style.display = "block";
+                }
+            }
+
             @if (Session::has('finish'))
                 Swal.fire({
                     icon: 'success',

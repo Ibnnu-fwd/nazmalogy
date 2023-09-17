@@ -14,7 +14,7 @@ class UserCourseChapterLogRepository implements UserCourseChapterLogInterface
         $this->userCourseChapterLog = $userCourseChapterLog;
     }
 
-    public function store($user_id, $chapter_id)
+    public function store($user_id, $chapter_id, $finish_time)
     {
         $userCourseChapterLog = $this->userCourseChapterLog
             ->where('user_id', $user_id)
@@ -26,10 +26,12 @@ class UserCourseChapterLogRepository implements UserCourseChapterLogInterface
                 'user_id'           => $user_id,
                 'course_chapter_id' => $chapter_id,
                 'finished_at'       => now(),
+                'finish_time'       => date('H:i:s', $finish_time),
             ]);
         } else {
             return $userCourseChapterLog->update([
                 'finished_at' => now(),
+                'finish_time' => date('H:i:s', $finish_time),
             ]);
         }
     }

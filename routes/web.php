@@ -161,7 +161,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     // Learning
     Route::group(['prefix' => 'learn', 'as' => 'user.learn'], function () {
         Route::get('{playlist_id}/chapter/{chapter_id}', [LearningController::class, 'chapter'])->name('.chapter');
-        Route::get('{playlist_id}/chapter/{chapter_id}/complete', [LearningController::class, 'complete'])->name('.complete');
+        Route::post('{playlist_id}/chapter/{chapter_id}/comment', [LearningController::class, 'comment'])->name('.comment');
+        Route::get('{playlist_id}/chapter/{chapter_id}/{finish_time}/complete', [LearningController::class, 'complete'])->name('.complete');
         Route::get('{playlist_id}/{quiz_id}/quiz', [LearningController::class, 'quiz'])->name('.quiz');
         Route::get('{playlist_id}/{quiz_id}/quiz/question', [LearningController::class, 'question'])->name('.question');
         Route::post('{playlist_id}/{quiz_id}/quiz/answer', [LearningController::class, 'answer'])->name('.answer');

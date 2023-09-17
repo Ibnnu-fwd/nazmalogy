@@ -2,7 +2,7 @@
 <nav class="">
     <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-8">
         <a href="/" class="flex items-center">
-            <img src="{{ asset('assets/logo.svg') }}" class="h-10 mr-3" alt="Flowbite Logo" />
+            <img src="{{ asset('assets/logo.svg') }}" class="h-8 mr-3" alt="Flowbite Logo" />
         </a>
         <div class="flex md:order-2 space-x-6">
             @auth

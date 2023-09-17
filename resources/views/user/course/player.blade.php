@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div
-        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-7xl mx-auto py-6 sm:py-12 lg:py-24 px-7 sm:px-6 lg:px-8">
+        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-7xl mx-auto py-6 sm:py-12 lg:py-12 px-7 sm:px-6 lg:px-8">
         {{-- Course Material --}}
         <div class="col-span-1 hidden xl:block">
             <div id="course-material" class="w-100 h-fit bg-white  rounded-lg p-6">
@@ -69,12 +69,7 @@
 
                     </div>
                 </div>
-
             </div>
-            <a href="{{ route('generatePDF') }}"
-                class="inline-flex items-center justify-center py-2 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
-                Cetak Sertifikat
-            </a>
         </div>
 
         {{-- Video Player --}}
@@ -98,10 +93,6 @@
                 @endphp
 
                 <div id="player" class="w-full h-[480px] rounded-xl "></div>
-
-                <div class="player-control">
-
-                </div>
             </div>
 
             {{-- About Course --}}
@@ -112,14 +103,32 @@
                 </p>
             </div>
 
-            <textarea type="text" name="comment" id="comment" rows="3"
-                class="w-full mt-4 py-2 px-4 border text-xs 2xl:text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-[#757575]"
-                placeholder="Jadilah yang pertama berkomentar"></textarea>
+            <div class="mt-12">
+                <h3 class="mb-3">
+                    <span class="font-bold text-lg">Komentar</span>
+                    <span class="text-sm text-gray-500">({{ $reviews->count() }})</span>
+                </h3>
+                @if (!$reviews->where('user_id', auth()->user()->id)->first())
+                    <x-select label="Rating" name="rating" id="rating" class="w-1/2 mt-4">
+                        <option value="1">(1) ⭐</option>
+                        <option value="2">(2) ⭐⭐</option>
+                        <option value="3">(3) ⭐⭐⭐</option>
+                        <option value="4">(4) ⭐⭐⭐⭐</option>
+                        <option value="5">(5) ⭐⭐⭐⭐⭐</option>
+                    </x-select>
+                    <textarea type="text" name="comment" id="comment" rows="3"
+                        class="w-full mt-4 py-2 px-4 border text-xs 2xl:text-sm border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder-[#757575]"
+                        placeholder="Jadilah yang pertama berkomentar"></textarea>
+                    <div class="mt-4">
+                        <x-button text="Kirim" id="submit-comment" />
+                    </div>
+                @endif
+            </div>
 
 
             {{-- Testimonial Comment --}}
-            <div class="bg-white mt-6 rounded-lg p-6">
-                @forelse ($chapter->reviews as $review)
+            @forelse ($reviews->take(10) as $review)
+                <div class="bg-white mt-6 rounded-lg py-2 px-6 h-fit">
                     <div>
                         <figcaption class="relative flex items-center gap-x-3 mt-5">
                             <img alt=""
@@ -131,7 +140,7 @@
                                     {{ $review->user->fullname }}
                                 </div>
                                 <div class="text-xs 2xl:text-sm text-gray-500">
-                                    {{ \Carbon::parse($review->created_at)->locale('id')->diffForHumans() }}
+                                    {{ $review->created_at->locale('id')->diffForHumans() }}
                                 </div>
                             </div>
                         </figcaption>
@@ -139,13 +148,15 @@
                             {{ $review->content }}
                         </p>
                         @for ($i = 1; $i <= $review->rating; $i++)
-                            <ion-icon name="star" class="w-7 h-7 mt-4 text-yellow-500"></ion-icon>
+                            <ion-icon name="star" class="w-4 h-4 mt-4 text-yellow-500"></ion-icon>
                         @endfor
                     </div>
-                @empty
-                    <p class="text-sm text-center">Belum ada komentar</p>
-                @endforelse
-            </div>
+                </div>
+            @empty
+                <div class="bg-white mt-6 rounded-lg py-2 px-6 h-fit">
+                    <p class="text-sm text-gray-500">Belum ada komentar</p>
+                </div>
+            @endforelse
         </div>
     </div>
 
@@ -158,35 +169,96 @@
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             let player;
+            let playTime = 0;
 
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('player', {
                     videoId: '{{ $videoId }}',
                     host: 'https://www.youtube-nocookie.com',
                     playerVars: {
-                        'mute': 1,
-                        'autoplay': 1,
-                        'controls': 0,
-                        'disablekb': 1,
-                        'modestbranding': 1,
-                        'rel': 0,
-                        'showinfo': 0,
-                        'fs': 1,
-                        'enablejsapi': 1,
-                        'ecver': 2,
+                        controls: 0, // Hide all controls
+                        showinfo: 0, // Hide video title and player actions (deprecated but still works)
+                        modestbranding: 1, // Show a smaller YouTube logo without the YouTube text
+                        loop: 0, // Don't loop when complete
+                        fs: 1, // Enable fullscreen button
+                        iv_load_policy: 3, // Do not show video annotations
+                        cc_load_policy: 0, // Do not show closed captions by default
+                        autohide: 1, // Autohide video controls when not in use
+                        rel: 0, // Do not show related videos at the end
+                        enablejsapi: 1, // Enable the JavaScript API
+                        disablekb: 1 // Disable keyboard controls
                     },
                     events: {
                         'onStateChange': onPlayerStateChange,
                     }
-                });;
+                });
+
+                // count play time
+                setInterval(() => {
+                    if (player.getPlayerState() == 1) {
+                        playTime++;
+                    }
+                }, 1000);
             }
 
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
                     player.stopVideo();
-                    window.location.href = '{{ route('user.learn.complete', [$playlist_id, $chapter_id]) }}';
+                    let url = '{{ route('user.learn.complete', [':playlist_id', ':chapter_id', ':play_time']) }}';
+                    url = url.replace(':playlist_id', '{{ $playlist_id }}');
+                    url = url.replace(':chapter_id', '{{ $chapter_id }}');
+                    url = url.replace(':play_time', JSON.stringify(playTime));
+
+                    window.location.href = url;
                 }
             }
+
+            // submit comment
+            $('#submit-comment').click(function() {
+                let url = '{{ route('user.learn.comment', [':playlist_id', ':chapter_id']) }}';
+                url = url.replace(':playlist_id', '{{ $playlist_id }}');
+                url = url.replace(':chapter_id', '{{ $chapter_id }}');
+
+                let rating = $('#rating').val();
+                let comment = $('#comment').val();
+
+                // check rating and comment is not empty
+                if (rating == '' || comment == '') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Rating dan komentar tidak boleh kosong!',
+                    });
+
+                    return;
+                }
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        rating: rating,
+                        comment: comment
+                    },
+                    success: function(response) {
+                        if (response.status) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: response.message,
+                            });
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: response.message,
+                            });
+                        }
+                    }
+                });
+            });
         </script>
     @endpush
 </x-guest-layout>
