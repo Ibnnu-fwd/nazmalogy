@@ -191,18 +191,21 @@ class LearningRepository implements LearningInterface
 
         $userQuizLog = $this->userQuizLog->where('user_id', auth()->user()->id)->where('quiz_id', $quiz_id)->first();
 
-        if ($userQuizLog) {
-            $userQuizLog->update([
-                'correct_answers' => $correctAnswer,
-                'finished_at'     => now(),
-            ]);
-        } else {
-            $this->userQuizLog->create([
-                'user_id'         => auth()->user()->id,
-                'quiz_id'         => $quiz_id,
-                'correct_answers' => $correctAnswer,
-                'finished_at'     => now(),
-            ]);
+        // check if all answer is correct
+        if ($correctAnswer == count($data)) {
+            if ($userQuizLog) {
+                $userQuizLog->update([
+                    'correct_answers' => $correctAnswer,
+                    'finished_at'     => now(),
+                ]);
+            } else {
+                $this->userQuizLog->create([
+                    'user_id'         => auth()->user()->id,
+                    'quiz_id'         => $quiz_id,
+                    'correct_answers' => $correctAnswer,
+                    'finished_at'     => now(),
+                ]);
+            }
         }
 
         return [
@@ -232,5 +235,20 @@ class LearningRepository implements LearningInterface
         }
 
         return null;
+    }
+
+    public function getUserQuizLog($user_id, $quiz_id)
+    {
+        $result = $this->userQuizLog->with('quiz')->where('user_id', $user_id)->where('quiz_id', $quiz_id)->first();
+        if ($result == null) {
+            return null;
+        }
+
+        return [
+            'correct_answer'   => $result ? $result->correct_answers : 0,
+            'incorrect_answer' => $result ? $result->quiz->questions->count() - $result->correct_answers : 0,
+            'total_question'    => $result ? $result->quiz->questions->count() : 0,
+            'is_passed'         => true
+        ];
     }
 }

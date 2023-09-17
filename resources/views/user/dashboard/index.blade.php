@@ -64,23 +64,7 @@
                     @endforeach
                 </div>
 
-                <a href="{{ route('user.learn.chapter', [
-                    $course->playlists->first()->id,
-                    $course->playlists->first()->chapters->first()->id,
-                ]) }}"
-                    class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
-                    {{ $course->progressPercentage == 0 ? 'Mulai Belajar' : ($course->progressPercentage == 100 ? 'Selesai' : 'Lanjutkan') }}
-                    <ion-icon
-                        name="{{ $course->progressPercentage == 100 ? 'checkmark-circle' : 'arrow-forward-circle' }}"
-                        class="text-primary text-lg ml-2"></ion-icon>
-                </a>
 
-                @if ($course->progressPercentage == 100)
-                    <a href="{{ route('generatePDF') }}"
-                        class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-tiny font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
-                        Cetak Sertifikat
-                    </a>
-                @endif
             </div>
         @endforeach
     </div>

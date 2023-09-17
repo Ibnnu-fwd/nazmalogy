@@ -76,19 +76,19 @@
         <div class="col-span-2 bg-white rounded-xl p-8 h-fit">
             <div class="">
                 <p class="text-lg font-semibold text-center">Hasil Quiz</p>
-                <div class="grid grid-cols-1 lg:grid-cols-3 max-w-lg mx-auto mt-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 max-w-xs mx-auto mt-12">
                     <div class="text-center">
                         <h3 class="font-bold text-2xl mb-2">
                             {{ $resultQuiz['correct_answer'] }}/{{ $resultQuiz['total_question'] }}
                         </h3>
                         <p class="text-sm">Jawaban Benar</p>
                     </div>
-                    <div class="text-center">
+                    {{-- <div class="text-center">
                         <h3 class="font-bold text-2xl mb-2">
                             05.00 <span class="text-sm font-normal">Menit</span>
                         </h3>
                         <p class="text-sm">Waktu Pengerjaan</p>
-                    </div>
+                    </div> --}}
                     <div class="text-center">
                         <h3 class="font-bold text-2xl mb-2">
                             @if ($resultQuiz['is_passed'])
@@ -102,13 +102,22 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex justify-center mt-8">
-                    @if ($resultQuiz['is_passed'])
-                        <x-button text="Selanjutnya"
-                            onclick="window.location.href = '{{ route('user.learn.chapter', [$nextPlaylist, $nextChapter]) }}'" />
-                    @else
+                <div class="flex justify-center mt-8 space-x-2">
+                    @if (isset($isLast))
                         <x-button text="Ulang Quiz"
-                            onclick="window.location.href = '{{ route('user.learn.quiz', [$playlist_id, $quiz_id]) }}'" />
+                            onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
+                        <x-button text="Selesai"
+                            onclick="window.location.href = '{{ route('user.dashboard.index') }}'" />
+                    @else
+                        @if ($resultQuiz['is_passed'])
+                            <x-button text="Ulang Quiz"
+                                onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
+                            <x-button text="Selanjutnya"
+                                onclick="window.location.href = '{{ route('user.learn.chapter', [$nextPlaylist, $nextChapter]) }}'" />
+                        @else
+                            <x-button text="Ulang Quiz"
+                                onclick="window.location.href = '{{ route('user.learn.quiz', [$playlist_id, $quiz_id]) }}'" />
+                        @endif
                     @endif
                 </div>
                 <p class="text-xs 2xl:text-sm text-center mt-6 text-gray-500">
@@ -117,4 +126,22 @@
             </div>
         </div>
     </div>
+
+    @push('js-internal')
+        <script>
+            @if (isset($isLast))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Selamat, kamu telah menyelesaikan semua materi pada kelas: {{ $course->title }}',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Kembali ke dashboard',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '{{ route('user.dashboard.index') }}'
+                    }
+                })
+            @endif
+        </script>
+    @endpush
 </x-guest-layout>

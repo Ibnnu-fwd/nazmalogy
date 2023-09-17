@@ -66,6 +66,13 @@ class LearningController extends Controller
         $user_id = auth()->user()->id;
         $result  = $this->learning->getByQuizId($playlist_id, $quiz_id);
 
+        // check if user already answer the quiz
+        $userQuizLog = $this->learning->getUserQuizLog($user_id, $quiz_id);
+
+        if ($userQuizLog) {
+            return redirect()->route('user.learn.result', [$playlist_id, $quiz_id]);
+        }
+
         return view('user.course.quiz', [
             'course'      => $result['course'],
             'quiz'        => $result['quiz'],
@@ -103,7 +110,61 @@ class LearningController extends Controller
         $nextPlaylist = $this->learning->getNextPlaylist($playlist_id);
 
         if ($nextPlaylist == null) {
-            return redirect()->route('user.dashboard.index')->with('finish', 'Anda telah menyelesaikan course ini');
+            return view('user.course.answer', [
+                'course'       => $result['course'],
+                'quiz'         => $result['quiz'],
+                'playlist_id'  => $playlist_id,
+                'quiz_id'      => $quiz_id,
+                'resultQuiz'   => $resultQuiz,
+                'isLast'       => true,
+                'nextPlaylist' => null,
+                'nextChapter'  => null,
+            ]);
+        }
+
+        return view('user.course.answer', [
+            'course'       => $result['course'],
+            'quiz'         => $result['quiz'],
+            'playlist_id'  => $playlist_id,
+            'quiz_id'      => $quiz_id,
+            'resultQuiz'   => $resultQuiz,
+            'nextPlaylist' => $nextPlaylist['type'] == 'chapter' ? $nextPlaylist['playlist_id'] : null,
+            'nextChapter'  => $nextPlaylist['type'] == 'chapter' ? $nextPlaylist['chapter_id'] : null,
+        ]);
+    }
+
+    public function replay($playlist_id, $quiz_id)
+    {
+        $user_id = auth()->user()->id;
+        $result  = $this->learning->getByQuizId($playlist_id, $quiz_id);
+
+        return view('user.course.quiz', [
+            'course'      => $result['course'],
+            'quiz'        => $result['quiz'],
+            'playlist_id' => $playlist_id,
+            'quiz_id'     => $result['quiz']['id'],
+        ]);
+    }
+
+    public function result($playlist_id, $quiz_id)
+    {
+        $resultQuiz = $this->learning->getUserQuizLog(auth()->user()->id, $quiz_id);
+        // dd($resultQuiz);
+
+        $result       = $this->learning->getByQuizId($playlist_id, $quiz_id);
+        $nextPlaylist = $this->learning->getNextPlaylist($playlist_id);
+
+        if ($nextPlaylist == null) {
+            return view('user.course.answer', [
+                'course'       => $result['course'],
+                'quiz'         => $result['quiz'],
+                'playlist_id'  => $playlist_id,
+                'quiz_id'      => $quiz_id,
+                'resultQuiz'   => $resultQuiz,
+                'isLast'       => true,
+                'nextPlaylist' => null,
+                'nextChapter'  => null,
+            ]);
         }
 
         return view('user.course.answer', [

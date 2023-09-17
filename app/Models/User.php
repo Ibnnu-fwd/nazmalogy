@@ -84,4 +84,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Point::class, 'user_id');
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'user_id');
+    }
 }

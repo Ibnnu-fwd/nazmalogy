@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseChapterController;
 use App\Http\Controllers\Admin\CourseChapterReviewController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
+use App\Http\Controllers\Admin\CourseLastTaskController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FacilitatorController;
 use App\Http\Controllers\Admin\PlaylistController;
@@ -61,6 +62,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     // Course
     Route::post('course/{id}/recover', [AdminCourseController::class, 'recover'])->name('admin.course.recover')->middleware('check-role:admin');
     Route::resource('course', AdminCourseController::class, ['as' => 'admin'])->middleware('check-role:admin');
+
+    // Course Last Task
+    Route::group(['prefix' => 'course-last-task', 'as' => 'admin.course-last-task.'], function () {
+        Route::get('{course_id}', [CourseLastTaskController::class, 'index'])->name('index');
+        Route::get('{id}/show', [CourseLastTaskController::class, 'show'])->name('show');
+        Route::post('{course_id}', [CourseLastTaskController::class, 'store'])->name('store');
+        Route::put('{id}', [CourseLastTaskController::class, 'update'])->name('update');
+        Route::delete('{id}', [CourseLastTaskController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/restore', [CourseLastTaskController::class, 'restore'])->name('restore');
+    })->middleware('check-role:admin');
 
     // Course Category
     Route::post('course-category/{id}/restore', [CourseCategoryController::class, 'restore'])->name('admin.course-category.restore')->middleware('check-role:admin');
@@ -164,8 +175,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::post('{playlist_id}/chapter/{chapter_id}/comment', [LearningController::class, 'comment'])->name('.comment');
         Route::get('{playlist_id}/chapter/{chapter_id}/{finish_time}/complete', [LearningController::class, 'complete'])->name('.complete');
         Route::get('{playlist_id}/{quiz_id}/quiz', [LearningController::class, 'quiz'])->name('.quiz');
+        Route::get('{playlist_id}/{quiz_id}/quiz/replay', [LearningController::class, 'replay'])->name('.replay');
         Route::get('{playlist_id}/{quiz_id}/quiz/question', [LearningController::class, 'question'])->name('.question');
         Route::post('{playlist_id}/{quiz_id}/quiz/answer', [LearningController::class, 'answer'])->name('.answer');
+        Route::get('{playlist}/{quiz_id}/quiz/result', [LearningController::class, 'result'])->name('.result');
     });
 
     // Transaction

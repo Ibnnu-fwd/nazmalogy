@@ -56,7 +56,10 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($playlist->quiz->is_finished) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
+                                                @if (
+                                                    $playlist->quiz->is_finished ||
+                                                        // check if all chapter in playlist is finished
+                                                        $playlist->chapters->where('is_finished', false)->count() == 0) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
                                                 {{ $playlist->quiz->title }}
                                                 ({{ $playlist->quiz->questions->count() }} Soal )
                                             </a>

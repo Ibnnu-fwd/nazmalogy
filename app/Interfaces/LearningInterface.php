@@ -10,4 +10,5 @@ interface LearningInterface
     public function getByQuizId($playlist_id, $quiz_id);
     public function answerQuiz($quiz_id, $data);
     public function getNextPlaylist($playlist_id);
+    public function getUserQuizLog($user_id, $quiz_id);
 }

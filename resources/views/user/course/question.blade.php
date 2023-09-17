@@ -87,7 +87,7 @@
                         @foreach ($errors->all() as $error => $value)
                             {{-- show index --}}
                             <li>
-                                {{ $value }}
+                                {{ $loop->index + 1 }}
                             </li>
                         @endforeach
                     </ul>
