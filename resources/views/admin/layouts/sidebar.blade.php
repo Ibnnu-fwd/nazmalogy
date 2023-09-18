@@ -25,6 +25,7 @@
 
             @if (auth()->user()->role == 'facilitator')
                 <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('facilitator.index') }}" />
+                <x-sidebar-link label="Kursus" icon="albums" route="{{ route('facilitator.course.index') }}" />
             @endif
 
             {{-- logout --}}

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Facilitator\DashboardController as FacilitatorDashboardController;
+use App\Http\Controllers\Facilitator\CourseController as FacilitatorCourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -63,7 +64,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
 
     // Course
     Route::post('course/{id}/recover', [AdminCourseController::class, 'recover'])->name('admin.course.recover')->middleware('check-role:admin');
-    Route::resource('course', AdminCourseController::class, ['as' => 'admin'])->middleware('check-role:admin,facilitator');
+    Route::resource('course', AdminCourseController::class, ['as' => 'admin'])->middleware('check-role:admin');
 
     // Course Last Task
     Route::group(['prefix' => 'course-last-task', 'as' => 'admin.course-last-task.'], function () {
@@ -214,6 +215,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 // Facilitator
 Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () {
     Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.index');
+
+    // Course
+    Route::resource('course', FacilitatorCourseController::class, ['as' => 'facilitator'])->middleware('check-role:facilitator');
+
 });
 
 
