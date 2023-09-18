@@ -251,6 +251,17 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::delete('{id}', [FacilitatorPointController::class, 'destroy'])->name('destroy');
         Route::get('{id}/history', [FacilitatorPointController::class, 'history'])->name('history');
     })->middleware('check-role:facilitator');
+    
+
+    //Transaction
+    Route::group(['prefix' => 'transaction', 'as' => 'facilitator.transaction.'], function () {
+        Route::get('/', [FacilitatorTransactionController::class, 'index'])->name('index');
+        Route::get('{id}/show', [FacilitatorTransactionController::class, 'show'])->name('show');
+        Route::post('store', [FacilitatorTransactionController::class, 'store'])->name('store');
+        Route::post('upload-proof/{id}', [FacilitatorTransactionController::class, 'uploadProof'])->name('upload-proof');
+    })->middleware('check-role:facilitator');;
+
+    
 });
 
 
