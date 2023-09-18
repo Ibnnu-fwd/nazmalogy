@@ -21,6 +21,7 @@ use App\Http\Controllers\User\HelpController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Facilitator\DashboardController as FacilitatorDashboardController;
 use App\Http\Controllers\Facilitator\CourseController as FacilitatorCourseController;
+use App\Http\Controllers\Facilitator\PointController as FacilitatorPointController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -214,11 +215,21 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 
 // Facilitator
 Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () {
-    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.index');
+    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.index')->middleware('check-role:facilitator');
 
     // Course
     Route::resource('course', FacilitatorCourseController::class, ['as' => 'facilitator'])->middleware('check-role:facilitator');
 
+
+    //Poin
+    Route::group(['prefix' => 'point', 'as' => 'facilitator.point.'], function () {
+        Route::get('/', [FacilitatorPointController::class, 'index'])->name('index');
+        Route::get('{id}/show', [FacilitatorPointController::class, 'show'])->name('show');
+        Route::post('/', [FacilitatorPointController::class, 'store'])->name('store');
+        Route::put('{id}', [FacilitatorPointController::class, 'update'])->name('update');
+        Route::delete('{id}', [FacilitatorPointController::class, 'destroy'])->name('destroy');
+        Route::get('{id}/history', [FacilitatorPointController::class, 'history'])->name('history');
+    })->middleware('check-role:facilitator');
 });
 
 
