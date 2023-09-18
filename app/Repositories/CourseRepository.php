@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Interfaces\CourseInterface;
 use App\Interfaces\TransactionInterface;
 use App\Models\Course;
+use App\Models\CourseLastTask;
+use App\Models\Submission;
 use App\Models\UserCourseChapterLog;
 use App\Models\UserQuizLog;
 use Carbon\Carbon;
@@ -16,13 +18,17 @@ class CourseRepository implements CourseInterface
     private $userCourseChapterLog;
     private $transaction;
     private $userQuizLog;
+    private $courseLastTask;
+    private $submission;
 
-    public function __construct(Course $course, UserCourseChapterLog $userCourseChapterLog, TransactionInterface $transaction, UserQuizLog $userQuizLog)
+    public function __construct(Course $course, UserCourseChapterLog $userCourseChapterLog, TransactionInterface $transaction, UserQuizLog $userQuizLog, CourseLastTask $courseLastTask, Submission $submission)
     {
         $this->course = $course;
         $this->userCourseChapterLog = $userCourseChapterLog;
         $this->transaction = $transaction;
         $this->userQuizLog = $userQuizLog;
+        $this->courseLastTask = $courseLastTask;
+        $this->submission = $submission;
     }
 
     public function getAll()
@@ -135,6 +141,11 @@ class CourseRepository implements CourseInterface
                     ->exists();
             });
         }
+        // last task
+        $playlist->last_task = $this->userCourseChapterLog
+            ->where('user_id', $userId)
+            ->where('course_chapter_id', $playlist->chapters->last()->id)
+            ->first();
 
         return $course;
     }
@@ -162,19 +173,36 @@ class CourseRepository implements CourseInterface
                         ->where('quiz_id', $playlist->quiz->id)
                         ->exists();
                 }
-
-                $course->progressPercentage = $this->calculateProgressPercentage($playlist->chapters);
             }
+
+            $course->progressPercentage = $this->calculateProgressPercentage($course->playlists);
+            $course->last_tasks = $this->courseLastTask->where('course_id', $course->id)->get();
+
+            // last task
+            foreach ($course->last_tasks as $last_task) {
+                $last_task->is_finished = $this->submission
+                    ->where('user_id', $userId)
+                    ->where('course_id', $course->id)
+                    ->where('status', Submission::APPROVED_STATUS)
+                    ->exists();
+            }
+
+            // dd($course->last_tasks);
         }
 
         return $courses;
     }
 
-    private function calculateProgressPercentage($chapters)
+    private function calculateProgressPercentage($playlists)
     {
-        $totalChapter = $chapters->count();
-        $finishedChapter = $chapters->filter(fn ($chapter) => $chapter->is_finished)->count();
+        $totalChapter = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->count();
+        $totalFinishedChapter = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->filter(fn ($chapter) => $chapter->is_finished)->count();
+        $totalQuiz = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count();
+        $totalFinishedQuiz = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->filter(fn ($playlist) => $playlist->quiz->is_finished)->count();
 
-        return $totalChapter > 0 ? round($finishedChapter / $totalChapter * 100) : 0;
+        $totalFinished = $totalFinishedChapter + $totalFinishedQuiz;
+        $total = $totalChapter + $totalQuiz;
+
+        return $totalFinished / $total * 100;
     }
 }

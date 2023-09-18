@@ -4,8 +4,11 @@
         $dashboard = route('admin.dashboard.index');
     @endphp
 
-    <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Kategori Kursus', 'link' => null]]" />
-
+    <x-breadcrumb :items="[
+        ['text' => 'Dashboard', 'link' => $dashboard],
+        ['text' => 'Kursus', 'link' => route('admin.course.index')],
+        ['text' => 'Tugas Akhir', 'link' => null],
+    ]" />
     <x-card>
         <!-- Start coding here -->
         <div class="bg-white relative sm:rounded-lg overflow-hidden">
@@ -24,9 +27,9 @@
                 </div>
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <x-button text="Tambah Kategori" icon="add" backgroundColor="primary" hoverColor="primary"
-                        fontSize="text-tiny" id="add-category-course-button" onclick="add()"
-                        modalTarget="create-category-course" />
+                    <x-button text="Tambah Tugas" icon="add" backgroundColor="primary" hoverColor="primary"
+                        fontSize="text-tiny" id="add-course-last-task-button" onclick="add()"
+                        modalTarget="create-course-last-task" />
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -34,37 +37,27 @@
                     <thead class="text-xs 2xl:text-tiny text-gray-700 uppercase bg-gray-50 ">
                         <tr>
                             <th scope="col" class="px-4 py-3">Judul</th>
-                            <th scope="col" class="px-4 py-3">Ikon</th>
-                            <th scope="col" class="px-4 py-3">Warna</th>
                             <th scope="col" class="px-4 py-3">
-                                <span class="sr-only">Status</span>
+                                <span class="sr-only">Aksi</span>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($courseCategories as $data)
+                        @foreach ($courseLastTasks as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->name }}
+                                    {{ Str::limit($data->title, 50) }}
                                 </th>
-                                <td class="px-4
-                                py-3">
-                                    {!! $data->icon !!}
-                                </td>
-                                <td class="px-4 py-3">
-                                    <div class="h-3 w-3 rounded-full" style="background-color: {{ $data->icon_color }}">
-                                    </div>
-                                </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
                                         @if ($data->is_active)
-                                            <x-button-edit id="edit-category-course-button-{{ $data->id }}"
-                                                modalTarget="create-category-course"
+                                            <x-button-edit id="edit-course-last-task-button-{{ $data->id }}"
+                                                modalTarget="create-course-last-task"
                                                 onclick="edit({{ $data->id }})" />
-                                            <x-button-delete id="delete-category-course-button-{{ $data->id }}"
+                                            <x-button-delete id="delete-course-last-task-button-{{ $data->id }}"
                                                 modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
                                         @else
-                                            <form action="{{ route('admin.course-category.restore', $data->id) }}"
+                                            <form action="{{ route('admin.course-last-task.restore', $data->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 <x-button-restore type="submit" />
@@ -81,7 +74,7 @@
     </x-card>
 
     <!-- Main modal -->
-    <div id="create-category-course" tabindex="-1" aria-hidden="true"
+    <div id="create-course-last-task" tabindex="-1" aria-hidden="true"
         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
             <!-- Modal content -->
@@ -93,7 +86,7 @@
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-tiny w-8 h-8 ml-auto inline-flex justify-center items-center"
-                        data-modal-hide="create-category-course">
+                        data-modal-hide="create-course-last-task">
                         <ion-icon name="close-outline" class="text-gray-600 w-4 h-4"></ion-icon>
                         <span class="sr-only">Close modal</span>
                     </button>
@@ -102,17 +95,14 @@
                 <form action="" method="POST">
                     @csrf
                     <div class="p-6 space-y-6 text-tiny">
-                        <x-input label="Judul" id="name" name="name" type="text" required value="" />
+                        <x-input label="Judul" id="title" name="title" type="text" required value="" />
                         <x-textarea label="Deskripsi" id="description" name="description" required value="" />
-                        <x-input label="Ikon" id="icon" name="icon" type="text" required value="" />
-                        <x-input label="Warna" id="icon_color" name="icon_color" type="text" required value=""
-                            placeholder="#xxxxx" />
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b">
                         <x-button text="Simpan" type="submit" />
-                        <button data-modal-hide="create-category-course" type="button"
-                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg border border-gray-200 text-tiny font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Decline</button>
+                        <button data-modal-hide="create-course-last-task" type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg border border-gray-200 text-tiny font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Batal</button>
                     </div>
                 </form>
             </div>
@@ -161,35 +151,37 @@
     </div>
 
     @push('js-internal')
+        {{-- ckeditor4 --}}
+        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
         <script>
+            CKEDITOR.replace('description');
+
             function add() {
-                $('#create-category-course form').trigger('reset');
-                let url = "{{ route('admin.course-category.store') }}";
-                $('#create-category-course form').attr('action', url);
+                $('#create-course-last-task form').trigger('reset');
+                let url = "{{ route('admin.course-last-task.store', $course_id) }}";
+                $('#create-course-last-task form').attr('action', url);
                 // remove method put
-                $('#create-category-course form input[name="_method"]').remove();
+                $('#create-course-last-task form input[name="_method"]').remove();
             }
 
             function edit(id) {
-                $('#create-category-course form').trigger('reset');
-                let url = "{{ route('admin.course-category.update', ':id') }}";
+                $('#create-course-last-task form').trigger('reset');
+                let url = "{{ route('admin.course-last-task.update', ':id') }}";
                 url = url.replace(':id', id);
-                $('#create-category-course form').attr('action', url);
-                $('#create-category-course form').append('<input type="hidden" name="_method" value="PUT">');
+                $('#create-course-last-task form').attr('action', url);
+                $('#create-course-last-task form').append('<input type="hidden" name="_method" value="PUT">');
                 $.ajax({
-                    url: "{{ route('admin.course-category.show', ':id') }}".replace(':id', id),
+                    url: "{{ route('admin.course-last-task.show', ':id') }}".replace(':id', id),
                     method: 'GET',
                     success: function(result) {
-                        $('#create-category-course #name').val(result.name);
-                        $('#create-category-course #description').val(result.description);
-                        $('#create-category-course #icon').val(result.icon);
-                        $('#create-category-course #icon_color').val(result.icon_color);
+                        $('#create-course-last-task #title').val(result.title);
+                        CKEDITOR.instances['description'].setData(result.description);
                     }
                 });
             }
 
             function destroy(id) {
-                $('#delete-modal form').attr('action', "{{ route('admin.course-category.destroy', ':id') }}".replace(':id',
+                $('#delete-modal form').attr('action', "{{ route('admin.course-last-task.destroy', ':id') }}".replace(':id',
                     id));
             }
 

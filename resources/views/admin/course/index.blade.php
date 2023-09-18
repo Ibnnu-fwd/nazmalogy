@@ -81,6 +81,8 @@
                                                 modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
                                             <x-button text="Playlist"
                                                 onclick="window.location.href='{{ route('admin.playlist.index', $data->id) }}'" />
+                                            <x-button text="Tugas Akhir"
+                                                onclick="window.location.href='{{ route('admin.course-last-task.index', $data->id) }}'" />
                                         @else
                                             <form action="{{ route('admin.course.recover', $data->id) }}"
                                                 method="POST">

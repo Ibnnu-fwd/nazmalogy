@@ -2,14 +2,14 @@
 <nav class="">
     <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-8">
         <a href="/" class="flex items-center">
-            <img src="{{ asset('assets/logo.svg') }}" class="h-10 mr-3" alt="Flowbite Logo" />
+            <img src="{{ asset('assets/logo.svg') }}" class="h-8 mr-3" alt="Flowbite Logo" />
         </a>
         <div class="flex md:order-2 space-x-6">
             @auth
                 <button type="button" class="flex mr-3 text-xs 2xl:text-sm rounded-full md:mr-0 " id="user-menu-button"
                     aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-14 h-14 rounded-full"
+                    <img class="w-12 h-12 rounded-full"
                         src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('assets/noimage.svg') }}"
                         alt="user photo">
                 </button>
@@ -25,6 +25,10 @@
                         </span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                            <a href="{{ route('user.dashboard.index') }}"
+                                class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                        </li>
                         <li>
                             <a href="{{ route('user.profile.index') }}"
                                 class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil</a>

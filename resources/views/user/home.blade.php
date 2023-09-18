@@ -2,8 +2,8 @@
     {{-- Hero --}}
     <section id="hero">
         <section class="">
-            <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-                <div class="mr-auto place-self-center lg:col-span-7">
+            <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-12">
+                <div class="mr-auto place-self-center lg:col-span-6">
                     <p class="text-md text-primary font-medium mb-2">
                         Pelajari Skill Baru
                     </p>
@@ -23,8 +23,8 @@
                         Daftar Sekarang
                     </a>
                 </div>
-                <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                    <img src="{{ asset('assets/hero.svg') }}" alt="mockup" class="w-full">
+                <div class="hidden lg:mt-0 lg:col-span-6 lg:flex">
+                    <img src="{{ asset('assets/images/HERO-01.png') }}" alt="mockup" class="w-[700px] h-min">
                 </div>
             </div>
         </section>
@@ -78,7 +78,7 @@
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
                             <div class="flex items-center justify-center h-8 w-8 rounded-full text-black bg-green-50">
-                                <ion-icon name="person-circle-outline" class="text-green-500 w-7 h-7"></ion-icon>
+                                <ion-icon name="person-circle-outline" class="text-green-800 w-7 h-7"></ion-icon>
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -228,16 +228,16 @@
                                     loading="lazy" style="color: transparent" />
                                 <div>
                                     <div class="text-xs 2xl:text-sm font-semibold text-black">
-                                       {{$generalTestimonial->user->fullname}}
+                                        {{ $generalTestimonial->user->fullname }}
                                     </div>
                                     <div class="text-xs 2xl:text-sm text-gray-500">
-                                        {{$generalTestimonial->user->email}}
+                                        {{ $generalTestimonial->user->email }}
                                     </div>
                                 </div>
                             </figcaption>
                             <blockquote class="relative">
                                 <p class="text-xs 2xl:text-sm text-black">
-                                    {{$generalTestimonial->content}}
+                                    {{ $generalTestimonial->content }}
                                 </p>
                             </blockquote>
                             <div class="mt-3 flex items-center gap-x-0">

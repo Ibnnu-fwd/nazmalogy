@@ -15,6 +15,7 @@ class UserCourseChapterLog extends Model
         'user_id',
         'course_chapter_id',
         'finished_at',
+        'finish_time'
     ];
 
     public function user()

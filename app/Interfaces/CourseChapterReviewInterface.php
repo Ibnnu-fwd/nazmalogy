@@ -6,4 +6,5 @@ interface CourseChapterReviewInterface
 {
     public function getAll();
     public function getByCourseChapterId($course_chapter_id);
+    public function store($course_chapter_id, $user_id, $rating, $content);
 }

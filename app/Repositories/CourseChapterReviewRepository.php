@@ -28,4 +28,22 @@ class CourseChapterReviewRepository implements CourseChapterReviewInterface
     {
         return $this->courseChapterReview->where('course_chapter_id', $course_chapter_id)->get();
     }
+
+    public function store($course_chapter_id, $user_id, $rating, $content)
+    {
+        $data = $this->courseChapterReview->where('course_chapter_id', $course_chapter_id)->where('user_id', $user_id)->first();
+        if ($data) {
+            return $data->update([
+                'rating'  => $rating,
+                'content' => $content,
+            ]);
+        }
+
+        return $this->courseChapterReview->create([
+            'course_chapter_id' => $course_chapter_id,
+            'user_id'           => $user_id,
+            'rating'            => $rating,
+            'content'           => $content,
+        ]);
+    }
 }
