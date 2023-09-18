@@ -1,6 +1,6 @@
 <x-app-layout>
     @php
-        $dashboard = route('user.dashboard.index');
+        $dashboard = route('facilitator.index');
     @endphp
 
     <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Transaksi', 'link' => null]]" />
@@ -33,9 +33,6 @@
                             <th scope="col" class="px-4 py-3">Harga</th>
                             <th scope="col" class="px-4 py-3">Tanggal</th>
                             <th scope="col" class="px-4 py-3">Status</th>
-                            <th scope="col" class="px-4 py-3">
-                                <span class="sr-only"></span>
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,18 +59,6 @@
                                 <td class="px-4 py-3 uppercase">
                                     {{ $data->status }}
                                 </td>
-                                <td class="px-4 py-3">
-                                    <div class="flex items-center justify-end space-x-2">
-                                        @if ($data->status == 'pending')
-                                            <span>
-                                                Menunggu Pembayaran
-                                            </span>
-                                        @elseif ($data->status == 'paid')
-                                            <x-button text="Ubah Status" icon="pencil-outline"
-                                                onclick="window.location.href = '{{ route('admin.transaction.show', $data->id) }}'" />
-                                        @endif
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -81,57 +66,4 @@
             </div>
         </div>
     </x-card>
-
-    @push('js-internal')
-        <script>
-            $(function() {
-                $('#uploadPayment').click(function(e) {
-                    e.preventDefault();
-                    $('input[name="payment_proof_file"]').click();
-
-                    // check if input file has value and extention is image
-                    $('input[name="payment_proof_file"]').change(function() {
-                        if ($(this).val() != '') {
-                            var ext = $(this).val().split('.').pop().toLowerCase();
-                            if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'File yang diunggah harus berupa gambar!',
-                                });
-                                $(this).val('');
-                                return false;
-                            }
-
-                            // submit form
-                            $(this).parent().submit();
-                        }
-                    });
-                });
-
-                $('#search').on('keyup', function() {
-                    var value = $(this).val().toLowerCase();
-                    $('tbody tr').filter(function() {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-
-            @if (Session::has('success'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: '{{ Session::get('success') }}',
-                });
-            @endif
-
-            @if (Session::has('error'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal',
-                    text: '{{ Session::get('error') }}',
-                });
-            @endif
-        </script>
-    @endpush
 </x-app-layout>

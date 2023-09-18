@@ -235,10 +235,7 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     // Transaction
     Route::group(['prefix' => 'transaction', 'as' => 'facilitator.transaction.'], function () {
         Route::get('/', [FacilitatorTransactionController::class, 'index'])->name('index');
-        Route::get('{id}/show', [FacilitatorTransactionController::class, 'show'])->name('show');
-        Route::post('store', [FacilitatorTransactionController::class, 'store'])->name('store');
-        Route::post('upload-proof/{id}', [FacilitatorTransactionController::class, 'uploadProof'])->name('upload-proof');
-    });
+    })->middleware('check-role:facilitator');
 });
 
 
