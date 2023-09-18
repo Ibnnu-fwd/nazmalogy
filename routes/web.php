@@ -59,11 +59,11 @@ Route::get('/generatePDF', [FillPDFController::class, 'process'])->name('generat
 
 // Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard.index')->middleware('check-role:admin');
 
     // Course
     Route::post('course/{id}/recover', [AdminCourseController::class, 'recover'])->name('admin.course.recover')->middleware('check-role:admin');
-    Route::resource('course', AdminCourseController::class, ['as' => 'admin'])->middleware('check-role:admin');
+    Route::resource('course', AdminCourseController::class, ['as' => 'admin'])->middleware('check-role:admin,facilitator');
 
     // Course Last Task
     Route::group(['prefix' => 'course-last-task', 'as' => 'admin.course-last-task.'], function () {
@@ -212,8 +212,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 });
 
 // Facilitator
-Route::group(['prefix' => 'dashboard-facilitator', 'middleware' => ['auth']], function () {
-    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.dashboard.index')->middleware('check-role:facilitator');
+Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () {
+    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.index');
 });
 
 

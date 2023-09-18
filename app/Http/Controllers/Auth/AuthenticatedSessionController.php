@@ -50,7 +50,7 @@ class AuthenticatedSessionController extends Controller
 
             return redirect('/');
         } elseif ($role === 'facilitator') {
-            return redirect()->intended(RouteServiceProvider::FACILITATOR);
+            return redirect()->route('facilitator.index');
         }
 
         // Handle other roles or scenarios here if needed

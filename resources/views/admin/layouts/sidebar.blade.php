@@ -23,6 +23,10 @@
                 <x-sidebar-link label="Profil" icon="person-circle" route="{{ route('user.profile.index') }}" />
             @endif
 
+            @if (auth()->user()->role == 'facilitator')
+                <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('facilitator.index') }}" />
+            @endif
+
             {{-- logout --}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
