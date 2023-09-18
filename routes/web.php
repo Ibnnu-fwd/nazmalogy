@@ -22,6 +22,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Facilitator\DashboardController as FacilitatorDashboardController;
 use App\Http\Controllers\Facilitator\CourseController as FacilitatorCourseController;
 use App\Http\Controllers\Facilitator\PointController as FacilitatorPointController;
+use App\Http\Controllers\Facilitator\TransactionController as FacilitatorTransactionController;
 use App\Http\Controllers\Facilitator\PlaylistController as FacilitatorPlaylistController;
 use App\Http\Controllers\Facilitator\CourseLastTaskController as FacilitatorCourseLastTaskController;
 use App\Http\Controllers\HomeController;
@@ -250,8 +251,6 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::delete('{id}', [FacilitatorPointController::class, 'destroy'])->name('destroy');
         Route::get('{id}/history', [FacilitatorPointController::class, 'history'])->name('history');
     })->middleware('check-role:facilitator');
-
-    
 });
 
 

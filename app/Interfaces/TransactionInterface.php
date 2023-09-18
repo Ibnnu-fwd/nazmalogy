@@ -13,4 +13,6 @@ interface TransactionInterface
     public function getByUserId($userId);
     public function uploadProof($id, $data);
     public function changeStatus($id, $status);
+
+    public function getByAuthorId($authorId);
 }

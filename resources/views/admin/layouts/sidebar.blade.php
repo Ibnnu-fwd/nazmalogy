@@ -27,6 +27,7 @@
                 <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('facilitator.index') }}" />
                 <x-sidebar-link label="Kursus" icon="albums" route="{{ route('facilitator.course.index') }}" />
                 <x-sidebar-link label="Poin" icon="podium" route="{{ route('facilitator.point.index') }}" />
+                <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('facilitator.transaction.index') }}" />
             @endif
 
             {{-- logout --}}
