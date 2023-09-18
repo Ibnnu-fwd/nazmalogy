@@ -10,4 +10,7 @@ interface CourseLastTaskInterface
     public function update($id, $data);
     public function destroy($id);
     public function restore($id);
+    public function getSubmissionByLastTaskId($id);
+
+    public function attempt($id, $data);
 }

@@ -5,6 +5,7 @@
     @endphp
 
     <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Kategori Kursus', 'link' => null]]" />
+
     <x-card>
         <!-- Start coding here -->
         <div class="bg-white relative sm:rounded-lg overflow-hidden">

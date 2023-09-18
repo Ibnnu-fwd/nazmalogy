@@ -46,7 +46,7 @@
                         @foreach ($courseLastTasks as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $data->title }}
+                                    {{ Str::limit($data->title, 50) }}
                                 </th>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
@@ -151,7 +151,11 @@
     </div>
 
     @push('js-internal')
+        {{-- ckeditor4 --}}
+        <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
         <script>
+            CKEDITOR.replace('description');
+
             function add() {
                 $('#create-course-last-task form').trigger('reset');
                 let url = "{{ route('admin.course-last-task.store', $course_id) }}";
@@ -171,7 +175,7 @@
                     method: 'GET',
                     success: function(result) {
                         $('#create-course-last-task #title').val(result.title);
-                        $('#create-course-last-task #description').val(result.description);
+                        CKEDITOR.instances['description'].setData(result.description);
                     }
                 });
             }

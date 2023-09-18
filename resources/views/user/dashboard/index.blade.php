@@ -64,7 +64,32 @@
                     @endforeach
                 </div>
 
+                <div class="flex items-center justify-between text-tiny mt-3 text-gray-500">
+                    <p>
+                        Tugas Akhir
+                    </p>
+                    <p>
+                        Status
+                    </p>
+                </div>
 
+                <div class="text-xs 2xl:text-tiny mt-2 text-black">
+                    @foreach ($course->last_tasks as $last_task)
+                        <div class="mb-2 cursor-pointer"
+                            onclick="window.location.href='{{ route('user.last-task.index', $last_task->id) }}'">
+                            <div class="border rounded-lg">
+                                <div class="flex items-center justify-between text-tiny px-4 py-2">
+                                    <span>Tugas {{ $loop->iteration }}</span>
+                                    @if ($last_task->is_finished)
+                                        <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                                    @else
+                                        <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         @endforeach
     </div>

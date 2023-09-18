@@ -22,4 +22,9 @@ class CourseLastTask extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'course_last_task_id');
+    }
 }

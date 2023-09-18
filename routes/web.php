@@ -26,6 +26,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\TransactionController;
 use App\Http\Controllers\FillPDFController;
+use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
 use App\Models\CourseCategory;
 
 /*
@@ -194,6 +195,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::get('/', [CourseController::class, 'index'])->name('index');
         Route::get('{id}/show', [CourseController::class, 'show'])->name('show');
         Route::get('{id}/player', [CourseController::class, 'player'])->name('player');
+    });
+
+    // Last Task
+    Route::group(['prefix' => 'last-task', 'as' => 'user.last-task.'], function () {
+        Route::get('{id}', [UserCourseLastTaskController::class, 'index'])->name('index');
+        Route::post('{id}/attempt', [UserCourseLastTaskController::class, 'attempt'])->name('attempt');
     });
 
     // Profile

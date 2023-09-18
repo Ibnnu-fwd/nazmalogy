@@ -4,14 +4,18 @@ namespace App\Repositories;
 
 use App\Interfaces\CourseLastTaskInterface;
 use App\Models\CourseLastTask;
+use App\Models\Submission;
+use Illuminate\Support\Facades\Storage;
 
 class CourseLastTaskRepository implements CourseLastTaskInterface
 {
     private $courseLastTask;
+    private $submission;
 
-    public function __construct(CourseLastTask $courseLastTask)
+    public function __construct(CourseLastTask $courseLastTask, Submission $submission)
     {
         $this->courseLastTask = $courseLastTask;
+        $this->submission     = $submission;
     }
 
     public function getAll($courseId)
@@ -42,5 +46,31 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
     public function restore($id)
     {
         return $this->courseLastTask->find($id)->update(['is_active' => true]);
+    }
+
+    public function getSubmissionByLastTaskId($id)
+    {
+        return $this->submission->where('course_last_task_id', $id)->first();
+    }
+
+    public function attempt($id, $data)
+    {
+        $filename = uniqid() . '.' . $data['file']->extension();
+        $data['file']->storeAs('public/submissions', $filename);
+        $data['file'] = $filename;
+
+        try {
+            return $this->submission->create([
+                'course_last_task_id' => $id,
+                'user_id'             => auth()->user()->id,
+                'course_id'           => $this->courseLastTask->find($id)->course_id,
+                'attachment'          => $data['file'],
+                'description'         => $data['description'],
+                'status'              => Submission::PENDING_STATUS,
+            ]);
+        } catch (\Throwable $th) {
+            Storage::delete('public/submissions/' . $filename);
+            throw $th;
+        }
     }
 }
