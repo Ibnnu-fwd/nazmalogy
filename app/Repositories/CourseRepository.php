@@ -205,4 +205,10 @@ class CourseRepository implements CourseInterface
 
         return $totalFinished / $total * 100;
     }
+
+    public function getCourseByAuthorId($authorId)
+    {
+        return $this->course->where('author_id', $authorId)->get();
+    }
+
 }

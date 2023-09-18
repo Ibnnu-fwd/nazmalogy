@@ -22,6 +22,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Facilitator\DashboardController as FacilitatorDashboardController;
 use App\Http\Controllers\Facilitator\CourseController as FacilitatorCourseController;
 use App\Http\Controllers\Facilitator\PointController as FacilitatorPointController;
+use App\Http\Controllers\Facilitator\PlaylistController as FacilitatorPlaylistController;
+use App\Http\Controllers\Facilitator\CourseLastTaskController as FacilitatorCourseLastTaskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -171,7 +173,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
 
 // User
 Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
-    Route::get('/', [UserDashboardController::class, 'index'])->name('user.dashboard.index');
+    Route::get('/', [UserDashboardController::class, 'index'])->name('user.dashboard.index')->middleware('check-role:user');
 
     // Learning
     Route::group(['prefix' => 'learn', 'as' => 'user.learn'], function () {
@@ -220,6 +222,24 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     // Course
     Route::resource('course', FacilitatorCourseController::class, ['as' => 'facilitator'])->middleware('check-role:facilitator');
 
+    // Playlist
+    Route::group(['prefix' => 'playlist', 'as' => 'facilitator.playlist.'], function () {
+        Route::get('{course_id}', [FacilitatorPlaylistController::class, 'index'])->name('index');
+        Route::get('{id}/show', [FacilitatorPlaylistController::class, 'show'])->name('show');
+        Route::post('{course_id}', [FacilitatorPlaylistController::class, 'store'])->name('store');
+        Route::put('{id}', [FacilitatorPlaylistController::class, 'update'])->name('update');
+        Route::delete('{id}', [FacilitatorPlaylistController::class, 'destroy'])->name('destroy');
+    })->middleware('check-role:facilitator');
+
+    // Course Last Task
+    Route::group(['prefix' => 'course-last-task', 'as' => 'facilitator.course-last-task.'], function () {
+        Route::get('{course_id}', [FacilitatorCourseLastTaskController::class, 'index'])->name('index');
+        Route::get('{id}/show', [FacilitatorCourseLastTaskController::class, 'show'])->name('show');
+        Route::post('{course_id}', [FacilitatorFacilitatorCourseLastTaskController::class, 'store'])->name('store');
+        Route::put('{id}', [FacilitatorCourseLastTaskController::class, 'update'])->name('update');
+        Route::delete('{id}', [FacilitatorCourseLastTaskController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/restore', [FacilitatorCourseLastTaskController::class, 'restore'])->name('restore');
+    })->middleware('check-role:facilitator');
 
     //Poin
     Route::group(['prefix' => 'point', 'as' => 'facilitator.point.'], function () {
@@ -230,6 +250,8 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::delete('{id}', [FacilitatorPointController::class, 'destroy'])->name('destroy');
         Route::get('{id}/history', [FacilitatorPointController::class, 'history'])->name('history');
     })->middleware('check-role:facilitator');
+
+    
 });
 
 

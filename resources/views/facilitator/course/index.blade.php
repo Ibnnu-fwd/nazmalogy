@@ -1,7 +1,7 @@
 <x-app-layout>
 
     @php
-        $dashboard = route('admin.dashboard.index');
+        $dashboard = route('facilitator.index');
     @endphp
 
     <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Kursus', 'link' => null]]" />
@@ -80,11 +80,11 @@
                                             <x-button-delete id="delete-course-button-{{ $data->id }}"
                                                 modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
                                             <x-button text="Playlist"
-                                                onclick="window.location.href='{{ route('admin.playlist.index', $data->id) }}'" />
+                                                onclick="window.location.href='{{ route('facilitator.playlist.index', $data->id) }}'" />
                                             <x-button text="Tugas Akhir"
-                                                onclick="window.location.href='{{ route('admin.course-last-task.index', $data->id) }}'" />
+                                                onclick="window.location.href='{{ route('facilitator.course-last-task.index', $data->id) }}'" />
                                         @else
-                                            <form action="{{ route('admin.course.recover', $data->id) }}"
+                                            <form action="{{ route('facilitator.course.recover', $data->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 <x-button-restore type="submit" />
@@ -211,18 +211,18 @@
         <script>
             function add() {
                 $('#create-course form').trigger('reset');
-                let url = '{{ route('admin.course.store') }}';
+                let url = '{{ route('facilitator.course.store') }}';
                 $('#create-course form').attr('action', url);
                 $('#create-course #file_input').attr('required', true);
                 $('#create-course form').find('input[name="_method"]').remove();
             }
 
             function edit(id) {
-                let url = '{{ route('admin.course.update', ':id') }}';
+                let url = '{{ route('facilitator.course.update', ':id') }}';
                 url = url.replace(':id', id);
                 $('#create-course form').append('<input type="hidden" name="_method" value="PUT">');
                 $.ajax({
-                    url: '{{ route('admin.course.show', ':id') }}'.replace(':id', id),
+                    url: '{{ route('facilitator.course.show', ':id') }}'.replace(':id', id),
                     type: 'GET',
                     dataType: 'JSON',
                     success: function(data) {
@@ -242,7 +242,7 @@
             };
 
             function destroy(id) {
-                let url = '{{ route('admin.course.destroy', ':id') }}';
+                let url = '{{ route('facilitator.course.destroy', ':id') }}';
                 url = url.replace(':id', id);
                 $('#delete-modal form').attr('action', url);
             }

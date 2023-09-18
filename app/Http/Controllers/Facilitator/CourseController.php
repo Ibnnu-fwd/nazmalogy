@@ -20,7 +20,7 @@ class CourseController extends Controller
     public function index()
     {
         return view('facilitator.course.index', [
-            'courses'          => $this->course->getAll(),
+            'courses'          => $this->course->getCourseByAuthorId(auth()->user()->id),
             'courseCategories' => $this->courseCategory->getAll()->where('is_active', 1),
         ]);
     }

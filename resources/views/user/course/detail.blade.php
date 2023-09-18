@@ -199,6 +199,11 @@
                             class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
                             Mulai Kursus
                         </a>
+                    @else
+                    <button type="button" onclick="checkLogin()"
+                        class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
+                        Daftar Sekarang
+                    </button>
                     @endif
                 @endauth
             </div>

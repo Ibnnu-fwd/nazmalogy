@@ -13,4 +13,6 @@ interface CourseInterface
 
     public function getUserProgress($courseId, $userId);
     public function getAllProgress($userId);
+
+    public function getCourseByAuthorId($authorId);
 }

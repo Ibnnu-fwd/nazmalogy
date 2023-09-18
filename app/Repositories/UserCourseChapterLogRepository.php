@@ -35,4 +35,12 @@ class UserCourseChapterLogRepository implements UserCourseChapterLogInterface
             ]);
         }
     }
+
+    public function getUserChapterLogByUserId($user_id)
+    {
+        return $this->userCourseChapterLog
+            ->where('user_id', $user_id)
+            ->with('courseChapter')
+            ->get();
+    }
 }
