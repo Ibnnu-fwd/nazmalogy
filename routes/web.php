@@ -19,6 +19,7 @@ use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Facilitator\DashboardController as FacilitatorDashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -208,6 +209,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::put('{id}', [ProfileController::class, 'update'])->name('update');
     });
+});
+
+// Facilitator
+Route::group(['prefix' => 'dashboard-facilitator', 'middleware' => ['auth']], function () {
+    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.dashboard.index')->middleware('check-role:facilitator');
 });
 
 
