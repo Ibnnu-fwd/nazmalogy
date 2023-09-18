@@ -5,6 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Interfaces\CourseChapterReviewInterface;
 use App\Interfaces\LearningInterface;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Point;
+use App\Models\PointType;
+use Illuminate\Support\Facades\Auth;
 use App\Interfaces\UserCourseChapterLogInterface;
 use Illuminate\Http\Request;
 
@@ -53,6 +57,17 @@ class LearningController extends Controller
             $quiz_id     = $result['next_chapter']['quiz_id'];
             return redirect()->route('user.learn.quiz', [$playlist_id, $quiz_id]);
         };
+
+        $user = Auth::user();
+
+        $pointType = PointType::where('name', 'finished_course')->first();
+        $point     = Point::where('user_id', $user->id)->latest()->first();
+        Point::create([
+                    'user_id'       => $user->id,
+                    'point_type_id' => $pointType->id,
+                    'amount'        => $pointType->amount,
+                ]);
+            
 
         return redirect()->route('user.learn.chapter', [$playlist_id, $result['next_chapter']['id']]);
     }

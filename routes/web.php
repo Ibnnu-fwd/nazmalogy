@@ -222,6 +222,7 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
 
     // Course
     Route::resource('course', FacilitatorCourseController::class, ['as' => 'facilitator'])->middleware('check-role:facilitator');
+    Route::post('course/{id}/recover', [FacilitatorCourseController::class, 'recover'])->name('facilitator.course.recover')->middleware('check-role:facilitator');
 
     // Playlist
     Route::group(['prefix' => 'playlist', 'as' => 'facilitator.playlist.'], function () {
