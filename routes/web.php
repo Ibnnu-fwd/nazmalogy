@@ -22,6 +22,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Facilitator\DashboardController as FacilitatorDashboardController;
 use App\Http\Controllers\Facilitator\CourseController as FacilitatorCourseController;
 use App\Http\Controllers\Facilitator\PointController as FacilitatorPointController;
+use App\Http\Controllers\Facilitator\TransactionController as FacilitatorTransactionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -230,6 +231,14 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::delete('{id}', [FacilitatorPointController::class, 'destroy'])->name('destroy');
         Route::get('{id}/history', [FacilitatorPointController::class, 'history'])->name('history');
     })->middleware('check-role:facilitator');
+
+    // Transaction
+    Route::group(['prefix' => 'transaction', 'as' => 'facilitator.transaction.'], function () {
+        Route::get('/', [FacilitatorTransactionController::class, 'index'])->name('index');
+        Route::get('{id}/show', [FacilitatorTransactionController::class, 'show'])->name('show');
+        Route::post('store', [FacilitatorTransactionController::class, 'store'])->name('store');
+        Route::post('upload-proof/{id}', [FacilitatorTransactionController::class, 'uploadProof'])->name('upload-proof');
+    });
 });
 
 

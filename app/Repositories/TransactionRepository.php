@@ -87,4 +87,11 @@ class TransactionRepository implements TransactionInterface
     {
         return $this->transaction->find($id)->update(['status' => $status]);
     }
+
+    public function getbyAuthorId($authorId)
+    {
+        return $this->transaction->with('user', 'course')->whereHas('course', function ($query) use ($authorId) {
+            $query->where('author_id', $authorId);
+        })->get();
+    }
 }
