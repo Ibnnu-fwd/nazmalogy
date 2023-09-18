@@ -66,4 +66,31 @@
             </div>
         </div>
     </x-card>
+
+    @push('js-internal')
+        <script>
+            $('#search').on('keyup', function() {
+                let value = $(this).val().toLowerCase();
+                $('tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            @if (Session::has('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ Session::get('success') }}',
+                });
+            @endif
+
+            @if (Session::has('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: '{{ Session::get('error') }}',
+                });
+            @endif
+        </script>
+    @endpush
 </x-app-layout>
