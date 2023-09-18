@@ -66,10 +66,13 @@
                     <ion-icon name="arrow-forward-circle" class="text-purple-500 text-xl ml-2"></ion-icon>
                 </a>
 
-                <a href="{{ route('generatePDF')}}"
-                        class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
-                        Cetak Sertifikat
-                </a>
+                @php
+                    
+                    <a href="{{ route('generatePDF')}}"
+                            class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
+                            Cetak Sertifikat
+                    </a>
+                @endphp
             </div>
         @endforeach
     </div>

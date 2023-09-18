@@ -28,8 +28,9 @@ class FillPDFController extends Controller
         $name = $nama;
         $fpdi->SetFont('Helvetica','B','17');
         $fpdi->SetTextColor(25,25,25);
-        $fpdi->Text($right, $top, $name);
-        
+        // $fpdi->Cell($right, $top, $name);
+        $fpdi->Cell(280, 160, $name, 1, 1, 'C');
+
         return $fpdi->Output($outputfile, 'F');
     }
 }
