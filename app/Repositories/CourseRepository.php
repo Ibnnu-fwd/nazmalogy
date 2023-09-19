@@ -7,6 +7,7 @@ use App\Interfaces\TransactionInterface;
 use App\Models\Course;
 use App\Models\CourseLastTask;
 use App\Models\Submission;
+use App\Models\Transaction;
 use App\Models\UserCourseChapterLog;
 use App\Models\UserQuizLog;
 use Carbon\Carbon;
@@ -23,17 +24,29 @@ class CourseRepository implements CourseInterface
 
     public function __construct(Course $course, UserCourseChapterLog $userCourseChapterLog, TransactionInterface $transaction, UserQuizLog $userQuizLog, CourseLastTask $courseLastTask, Submission $submission)
     {
-        $this->course = $course;
+        $this->course               = $course;
         $this->userCourseChapterLog = $userCourseChapterLog;
-        $this->transaction = $transaction;
-        $this->userQuizLog = $userQuizLog;
-        $this->courseLastTask = $courseLastTask;
-        $this->submission = $submission;
+        $this->transaction          = $transaction;
+        $this->userQuizLog          = $userQuizLog;
+        $this->courseLastTask       = $courseLastTask;
+        $this->submission           = $submission;
     }
 
     public function getAll()
     {
-        return $this->course->with('courseCategory')->get();
+        $courses = $this->course->with('courseCategory')->get();
+        // check if user has bought the course
+        if (auth()->check()) {
+            $courses->map(function ($course) {
+                $course->is_bought = Transaction::query()
+                    ->where('user_id', auth()->user()->id)
+                    ->where('course_id', $course->id)
+                    ->where('status', Transaction::STATUS_CONFIRM)
+                    ->exists();
+            });
+        }
+
+        return $courses;
     }
 
     public function getById($id)
@@ -153,7 +166,7 @@ class CourseRepository implements CourseInterface
     public function getAllProgress($userId)
     {
         $transaction = $this->transaction->getByUserId($userId)->where('status', 'confirm');
-        $courses = $transaction->map(function ($item) {
+        $courses     = $transaction->map(function ($item) {
             return $item->course;
         });
 
@@ -176,18 +189,25 @@ class CourseRepository implements CourseInterface
             }
 
             $course->progressPercentage = $this->calculateProgressPercentage($course->playlists);
-            $course->last_tasks = $this->courseLastTask->where('course_id', $course->id)->get();
+            $course->last_tasks         = $this->courseLastTask->where('course_id', $course->id)->get();
 
             // last task
+            $course->all_last_task_finished = false;
             foreach ($course->last_tasks as $last_task) {
                 $last_task->is_finished = $this->submission
                     ->where('user_id', $userId)
                     ->where('course_id', $course->id)
                     ->where('status', Submission::APPROVED_STATUS)
+                    ->where('course_last_task_id', $last_task->id)
                     ->exists();
-            }
 
-            // dd($course->last_tasks);
+                if ($last_task->is_finished == false) {
+                    $course->all_last_task_finished = false;
+                    break;
+                } else {
+                    $course->all_last_task_finished = true;
+                }
+            }
         }
 
         return $courses;
@@ -195,13 +215,13 @@ class CourseRepository implements CourseInterface
 
     private function calculateProgressPercentage($playlists)
     {
-        $totalChapter = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->count();
+        $totalChapter         = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->count();
         $totalFinishedChapter = $playlists->flatMap(fn ($playlist) => $playlist->chapters)->filter(fn ($chapter) => $chapter->is_finished)->count();
-        $totalQuiz = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count();
-        $totalFinishedQuiz = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->filter(fn ($playlist) => $playlist->quiz->is_finished)->count();
+        $totalQuiz            = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count();
+        $totalFinishedQuiz    = $playlists->filter(fn ($playlist) => $playlist->quiz !== null)->filter(fn ($playlist) => $playlist->quiz->is_finished)->count();
 
         $totalFinished = $totalFinishedChapter + $totalFinishedQuiz;
-        $total = $totalChapter + $totalQuiz;
+        $total         = $totalChapter + $totalQuiz;
 
         return $totalFinished / $total * 100;
     }
@@ -210,5 +230,4 @@ class CourseRepository implements CourseInterface
     {
         return $this->course->where('author_id', $authorId)->get();
     }
-
 }

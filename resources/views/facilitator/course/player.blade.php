@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div
-        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-6xl mx-auto py-6 sm:py-12 lg:py-12 px-7 sm:px-6 lg:px-8">
+        class="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-8 max-w-7xl mx-auto py-6 sm:py-12 lg:py-12 px-7 sm:px-6 lg:px-8">
         {{-- Course Material --}}
         <div class="col-span-1 hidden xl:block">
             <div id="course-material" class="w-100 h-fit bg-white  rounded-lg p-6">
@@ -41,7 +41,7 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($chapter->is_finished) href="{{ route('user.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}</a>
+                                                @if ($chapter->is_finished) href="{{ route('facilitator.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}</a>
                                         </div>
                                     @endforeach
 
@@ -59,7 +59,7 @@
                                                 @if (
                                                     $playlist->quiz->is_finished ||
                                                         // check if all chapter in playlist is finished
-                                                        $playlist->chapters->where('is_finished', false)->count() == 0) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
+                                                        $playlist->chapters->where('is_finished', false)->count() == 0) href="{{ route('facilitator.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
                                                 {{ $playlist->quiz->title }}
                                                 ({{ $playlist->quiz->questions->count() }} Soal )
                                             </a>
@@ -207,7 +207,7 @@
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.ENDED) {
                     player.stopVideo();
-                    let url = '{{ route('user.learn.complete', [':playlist_id', ':chapter_id', ':play_time']) }}';
+                    let url = '{{ route('facilitator.learn.complete', [':playlist_id', ':chapter_id', ':play_time']) }}';
                     url = url.replace(':playlist_id', '{{ $playlist_id }}');
                     url = url.replace(':chapter_id', '{{ $chapter_id }}');
                     url = url.replace(':play_time', JSON.stringify(playTime));
@@ -218,7 +218,7 @@
 
             // submit comment
             $('#submit-comment').click(function() {
-                let url = '{{ route('user.learn.comment', [':playlist_id', ':chapter_id']) }}';
+                let url = '{{ route('facilitator.learn.comment', [':playlist_id', ':chapter_id']) }}';
                 url = url.replace(':playlist_id', '{{ $playlist_id }}');
                 url = url.replace(':chapter_id', '{{ $chapter_id }}');
 

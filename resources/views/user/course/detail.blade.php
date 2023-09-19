@@ -182,7 +182,7 @@
                         Rp.{{ number_format($course->discount, 0, ',', '.') }}
                     </p>
                 @else
-                    <p class="text-black text-xl md:text-2xl font-bold">
+                    <p class="text-black text-xl md:text-2xl font-bold mt-12">
                         Rp.{{ number_format($course->price, 0, ',', '.') }}
                     </p>
                 @endif
@@ -200,10 +200,10 @@
                             Mulai Kursus
                         </a>
                     @else
-                    <button type="button" onclick="checkLogin()"
-                        class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
-                        Daftar Sekarang
-                    </button>
+                        <button type="button" onclick="checkLogin()"
+                            class="text-white bg-[#2B3176] focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 mt-6 py-4 inline-flex justify-center w-full text-center">
+                            Daftar Sekarang
+                        </button>
                     @endif
                 @endauth
             </div>
@@ -274,10 +274,18 @@
                         confirmButtonText: 'Ya, daftar',
                         cancelButtonText: 'Batal'
                     }).then((result) => {
-                        if (result.isConfirmed) {
+                            if (result.isConfirmed) {
+                                let url = '';
+                                @auth
+                                @if (auth()->user()->role == 'user')
+                                    url = '{{ route('user.transaction.store') }}';
+                                @elseif (auth()->user()->role == 'facilitator')
+                                    url = '{{ route('facilitator.transaction-member.store') }}';
+                                @endif
+                            @endauth
                             $.ajax({
                                 type: "POST",
-                                url: "{{ route('user.transaction.store') }}",
+                                url: "",
                                 data: {
                                     _token: "{{ csrf_token() }}",
                                     course_id: "{{ $course->id }}",

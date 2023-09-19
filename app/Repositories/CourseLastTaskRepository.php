@@ -55,22 +55,38 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
 
     public function attempt($id, $data)
     {
-        $filename = uniqid() . '.' . $data['file']->extension();
-        $data['file']->storeAs('public/submissions', $filename);
-        $data['file'] = $filename;
+        $submission = $this->submission->find($id);
 
-        try {
-            return $this->submission->create([
-                'course_last_task_id' => $id,
-                'user_id'             => auth()->user()->id,
-                'course_id'           => $this->courseLastTask->find($id)->course_id,
-                'attachment'          => $data['file'],
-                'description'         => $data['description'],
-                'status'              => Submission::PENDING_STATUS,
+        if ($submission) {
+            if ($submission->attachment) {
+                Storage::delete('public/submissions/' . $submission->attachment);
+                $filename = uniqid() . '.' . $data['file']->extension();
+                $data['file']->storeAs('public/submissions', $filename);
+                $data['file'] = $filename;
+            }
+
+            return $submission->update([
+                'attachment'  => $data['file'],
+                'description' => $data['description'],
+                'status'      => Submission::PENDING_STATUS,
             ]);
-        } catch (\Throwable $th) {
-            Storage::delete('public/submissions/' . $filename);
-            throw $th;
+        } else {
+            $filename = uniqid() . '.' . $data['file']->extension();
+            $data['file']->storeAs('public/submissions', $filename);
+            $data['file'] = $filename;
+
+            try {
+                return $this->submission->create([
+                    'course_last_task_id' => $id,
+                    'user_id'             => auth()->user()->id,
+                    'course_id'           => $this->courseLastTask->find($id)->course_id,
+                    'attachment'          => $data['file'],
+                    'description'         => $data['description'],
+                    'status'              => Submission::PENDING_STATUS,
+                ]);
+            } catch (\Throwable $th) {
+                throw $th;
+            }
         }
     }
 }

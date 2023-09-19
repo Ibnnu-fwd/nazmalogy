@@ -25,6 +25,6 @@ class CourseLastTask extends Model
 
     public function submissions()
     {
-        return $this->hasMany(Submission::class, 'course_last_task_id');
+        return $this->hasOne(Submission::class, 'course_last_task_id');
     }
 }

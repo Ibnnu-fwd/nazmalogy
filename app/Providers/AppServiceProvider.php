@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Interfaces\LearningInterface::class, \App\Repositories\LearningRepository::class);
         $this->app->bind(\App\Interfaces\UserCourseChapterLogInterface::class, \App\Repositories\UserCourseChapterLogRepository::class);
         $this->app->bind(\App\Interfaces\CourseLastTaskInterface::class, \App\Repositories\CourseLastTaskRepository::class);
+        $this->app->bind(\App\Interfaces\SubmissionInterface::class, \App\Repositories\SubmissionRepository::class);
     }
 
     /**

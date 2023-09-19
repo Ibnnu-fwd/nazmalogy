@@ -13,7 +13,6 @@ use App\Http\Controllers\Admin\PointTypeController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GeneralTestimonialController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +24,10 @@ use App\Http\Controllers\Facilitator\PointController as FacilitatorPointControll
 use App\Http\Controllers\Facilitator\TransactionController as FacilitatorTransactionController;
 use App\Http\Controllers\Facilitator\PlaylistController as FacilitatorPlaylistController;
 use App\Http\Controllers\Facilitator\CourseLastTaskController as FacilitatorCourseLastTaskController;
+use App\Http\Controllers\Facilitator\EnrollPaymentController;
+use App\Http\Controllers\Facilitator\LearningController as FacilitatorLearningController;
+use App\Http\Controllers\Facilitator\SubmissionController;
+use App\Http\Controllers\Facilitator\UserCourseLastTaskController as FacilitatorUserCourseLastTaskController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -60,7 +63,7 @@ Route::get('course/{id}/quiz/question', [QuizController::class, 'question'])->na
 Route::get('course/{id}/quiz/last-question', [QuizController::class, 'lastQuestion'])->name('quiz.index.last-question');
 Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('quiz.result');
 
-Route::get('/generatePDF', [FillPDFController::class, 'process'])->name('generatePDF');
+Route::get('/generatePDF/{course_id}/{user_id}', [FillPDFController::class, 'process'])->name('generatePDF');
 
 // Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
@@ -224,6 +227,11 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     Route::resource('course', FacilitatorCourseController::class, ['as' => 'facilitator'])->middleware('check-role:facilitator');
     Route::post('course/{id}/recover', [FacilitatorCourseController::class, 'recover'])->name('facilitator.course.recover')->middleware('check-role:facilitator');
 
+    //Submission
+    Route::get('submission', [SubmissionController::class, 'index'])->name('facilitator.submission.index');
+    Route::get('submission/{id}/show', [SubmissionController::class, 'show'])->name('facilitator.submission.show');
+    Route::post('submission/{id}/change-status', [SubmissionController::class, 'changeStatus'])->name('facilitator.submission.change-status');
+
     // Playlist
     Route::group(['prefix' => 'playlist', 'as' => 'facilitator.playlist.'], function () {
         Route::get('{course_id}', [FacilitatorPlaylistController::class, 'index'])->name('index');
@@ -252,17 +260,41 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::delete('{id}', [FacilitatorPointController::class, 'destroy'])->name('destroy');
         Route::get('{id}/history', [FacilitatorPointController::class, 'history'])->name('history');
     })->middleware('check-role:facilitator');
-    
 
-    //Transaction
+
+    // Transaction Member
     Route::group(['prefix' => 'transaction', 'as' => 'facilitator.transaction.'], function () {
         Route::get('/', [FacilitatorTransactionController::class, 'index'])->name('index');
         Route::get('{id}/show', [FacilitatorTransactionController::class, 'show'])->name('show');
         Route::post('store', [FacilitatorTransactionController::class, 'store'])->name('store');
         Route::post('upload-proof/{id}', [FacilitatorTransactionController::class, 'uploadProof'])->name('upload-proof');
-    })->middleware('check-role:facilitator');;
+    })->middleware('check-role:facilitator');
 
-    
+    // Enroll Payment
+    Route::group(['prefix' => 'transaction-member', 'as' => 'facilitator.transaction-member.'], function () {
+        Route::get('/', [EnrollPaymentController::class, 'index'])->name('index');
+        Route::get('{id}/show', [EnrollPaymentController::class, 'show'])->name('show');
+        Route::post('store', [EnrollPaymentController::class, 'store'])->name('store');
+        Route::post('upload-proof/{id}', [EnrollPaymentController::class, 'uploadProof'])->name('upload-proof');
+    });
+
+    // Learning
+    Route::group(['prefix' => 'learn', 'as' => 'facilitator.learn'], function () {
+        Route::get('{playlist_id}/chapter/{chapter_id}', [FacilitatorLearningController::class, 'chapter'])->name('.chapter');
+        Route::post('{playlist_id}/chapter/{chapter_id}/comment', [FacilitatorLearningController::class, 'comment'])->name('.comment');
+        Route::get('{playlist_id}/chapter/{chapter_id}/{finish_time}/complete', [FacilitatorLearningController::class, 'complete'])->name('.complete');
+        Route::get('{playlist_id}/{quiz_id}/quiz', [FacilitatorLearningController::class, 'quiz'])->name('.quiz');
+        Route::get('{playlist_id}/{quiz_id}/quiz/replay', [FacilitatorLearningController::class, 'replay'])->name('.replay');
+        Route::get('{playlist_id}/{quiz_id}/quiz/question', [FacilitatorLearningController::class, 'question'])->name('.question');
+        Route::post('{playlist_id}/{quiz_id}/quiz/answer', [FacilitatorLearningController::class, 'answer'])->name('.answer');
+        Route::get('{playlist}/{quiz_id}/quiz/result', [FacilitatorLearningController::class, 'result'])->name('.result');
+    });
+
+    // Last Task
+    Route::group(['prefix' => 'last-task', 'as' => 'facilitator.last-task.'], function () {
+        Route::get('{id}', [FacilitatorUserCourseLastTaskController::class, 'index'])->name('index');
+        Route::post('{id}/attempt', [UserCourseLastTaskController::class, 'attempt'])->name('attempt');
+    });
 });
 
 

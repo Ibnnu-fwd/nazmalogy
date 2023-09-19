@@ -1,6 +1,6 @@
 +<x-app-layout>
     @php
-        $dashboard = route('user.dashboard.index');
+        $dashboard = route('facilitator.index');
     @endphp
 
     <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => $courseLastTask->title, 'link' => null]]" />
@@ -59,8 +59,8 @@
                             <span>:</span>
                         </div>
                         <div class="col-span-2">
-                            <form action="{{ route('user.last-task.attempt', $courseLastTask->id) }}" method="POST"
-                                enctype="multipart/form-data" class="space-y-4">
+                            <form action="{{ route('facilitator.last-task.attempt', $courseLastTask->id) }}"
+                                method="POST" enctype="multipart/form-data" class="space-y-4">
                                 @csrf
                                 <x-file-upload label="" name="file" id="file"
                                     help="(Image, Dokumen, max.1MB)" />
@@ -142,7 +142,7 @@
                                 <span>:</span>
                             </div>
                             <div class="col-span-2">
-                                <form action="{{ route('user.last-task.attempt', $courseLastTask->id) }}"
+                                <form action="{{ route('facilitator.last-task.attempt', $courseLastTask->id) }}"
                                     method="POST" enctype="multipart/form-data" class="space-y-4">
                                     @csrf
                                     <x-file-upload label="" name="file" id="file"
@@ -157,7 +157,7 @@
                     @elseif ($submission->status == 'approved')
                         <div class="mt-12">
                             <x-button text="Kembali" backgroundColor="black" hoverColor="black"
-                                onclick="window.location.href='{{ route('user.dashboard.index') }}'" />
+                                onclick="window.location.href='{{ route('facilitator.index') }}'" />
                         </div>
                     @endif
                 @endif

@@ -41,7 +41,7 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($chapter->is_finished) href="{{ route('user.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}
+                                                @if ($chapter->is_finished) href="{{ route('facilitator.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}
                                             </a>
                                         </div>
                                     @endforeach
@@ -56,11 +56,10 @@
                                                 <ion-icon name="radio-button-off"
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
-                                            <a
-                                                @if ($playlist->quiz->is_finished) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
+                                            <span>
                                                 {{ $playlist->quiz->title }}
                                                 ({{ $playlist->quiz->questions->count() }} Soal )
-                                            </a>
+                                            </span>
                                         </div>
                                     @endif
                                     {{-- Akhir dari isi accordion --}}
@@ -72,76 +71,83 @@
             </div>
         </div>
 
-        {{-- Answer --}}
-        <div class="col-span-2 bg-white rounded-xl p-8 h-fit">
-            <div class="">
-                <p class="text-lg font-semibold text-center">Hasil Quiz</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 max-w-xs mx-auto mt-12">
-                    <div class="text-center">
-                        <h3 class="font-bold text-2xl mb-2">
-                            {{ $resultQuiz['correct_answer'] }}/{{ $resultQuiz['total_question'] }}
-                        </h3>
-                        <p class="text-sm">Jawaban Benar</p>
-                    </div>
-                    {{-- <div class="text-center">
-                        <h3 class="font-bold text-2xl mb-2">
-                            05.00 <span class="text-sm font-normal">Menit</span>
-                        </h3>
-                        <p class="text-sm">Waktu Pengerjaan</p>
-                    </div> --}}
-                    <div class="text-center">
-                        <h3 class="font-bold text-2xl mb-2">
-                            @if ($resultQuiz['is_passed'])
-                                <span>👌 Lulus</span>
-                            @else
-                                <span>👎 Tidak Lulus</span>
-                            @endif
-                        </h3>
-                        <p class="text-sm">
-                            Status
-                        </p>
-                    </div>
+        {{-- Question --}}
+        <div class="col-span-2 bg-white rounded-xl p-6 h-fit">
+            @if (session()->get('errors'))
+                <div class="bg-red-100 text-xs 2xl:text-sm border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+                    role="alert">
+                    <strong class="font-bold">
+                        Jawaban Anda Salah!
+                    </strong>
+                    <p>
+                        Perhatikan kembali jawaban Anda. Berikut adalah jawaban yang salah:
+                    </p>
+                    {{-- list all incorect answer --}}
+                    <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                        @foreach ($errors->all() as $error => $value)
+                            {{-- show index --}}
+                            <li>
+                                {{ $loop->index + 1 }}
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
-                <div class="flex justify-center mt-8 space-x-2">
-                    @if (isset($isLast))
-                        <x-button text="Ulang Quiz"
-                            onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
-                        <x-button text="Selesai"
-                            onclick="window.location.href = '{{ route('user.dashboard.index') }}'" />
-                    @else
-                        @if ($resultQuiz['is_passed'])
-                            <x-button text="Ulang Quiz"
-                                onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
-                            <x-button text="Selanjutnya"
-                                onclick="window.location.href = '{{ route('user.learn.chapter', [$nextPlaylist, $nextChapter]) }}'" />
-                        @else
-                            <x-button text="Ulang Quiz"
-                                onclick="window.location.href = '{{ route('user.learn.quiz', [$playlist_id, $quiz_id]) }}'" />
-                        @endif
-                    @endif
-                </div>
-                <p class="text-xs 2xl:text-sm text-center mt-6 text-gray-500">
-                    Knowledge check: {{ $quiz->title }}
+            @endif
+            <h3 class="font-semibold text-lg">
+                Selamat Mengerjakan!
+            </h3>
+            <div class="text-xs 2xl:text-sm mt-4 text-gray-500">
+                <p>
+                    {{ $quiz->title }}
+                </p>
+                <p>
+                    {{ $quiz->description }}
                 </p>
             </div>
+            <form action="{{ route('facilitator.learn.answer', [$playlist_id, $quiz_id]) }}" method="POST">
+                @csrf
+                @foreach ($questions as $question)
+                    <div class="mb-6">
+                        <div class="text-black text-xs 2xl:text-sm mt-5" id="question-{{ $question->id }}">
+                            <p class="font-normal text-sm text-black">
+                                {{ $question->description }}
+                            </p>
+                            <div class="mt-7 text-black text-sm">
+                                @foreach (['A', 'B', 'C', 'D'] as $option)
+                                    <label for="{{ $question->id }}_{{ $option }}"
+                                        class="flex items-center cursor-pointer mt-3">
+                                        <input type="radio" id="{{ $question->id }}_{{ $option }}"
+                                            name="question_{{ $question->id }}" value="{{ $option }}"
+                                            class="hidden peer" required>
+                                        <div
+                                            class="w-8 h-8 border border-gray-400 rounded-lg flex items-center justify-center mr-4 peer-checked:bg-blue-900 peer-checked:text-white">
+                                            <span>{{ $option }}</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            @if ($option === 'A')
+                                                {{ $question->option_1 }}
+                                            @elseif ($option === 'B')
+                                                {{ $question->option_2 }}
+                                            @elseif ($option === 'C')
+                                                {{ $question->option_3 }}
+                                            @else
+                                                {{ $question->option_4 }}
+                                            @endif
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="mt-8">
+                    <x-button type="submit" text="Kirim Jawaban" />
+                </div>
+            </form>
         </div>
     </div>
 
     @push('js-internal')
-        <script>
-            @if (isset($isLast))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Selamat, kamu telah menyelesaikan semua materi pada kelas ini',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Kembali ke dashboard',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '{{ route('user.dashboard.index') }}'
-                    }
-                })
-            @endif
-        </script>
+        <script></script>
     @endpush
 </x-guest-layout>

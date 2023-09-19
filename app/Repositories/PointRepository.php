@@ -24,8 +24,8 @@ class PointRepository implements PointInterface
             ->get()
             ->map(function ($point) {
                 return [
-                    'id' => $point->user_id,
-                    'name' => $point->user->fullname ?? 'Unknown', // Default to 'Unknown' if no user name is found
+                    'id'     => $point->user_id,
+                    'name'   => $point->user->fullname ?? 'Unknown',   // Default to 'Unknown' if no user name is found
                     'points' => $point->points,
                 ];
             });
@@ -49,11 +49,20 @@ class PointRepository implements PointInterface
         $lastPoint = 0;
 
         foreach ($points as $point) {
-            $point->last_point = $lastPoint;
+            $point->last_point  = $lastPoint;
             $point->total_point = $point->last_point + $point->amount;
-            $lastPoint = $point->total_point;
+            $lastPoint          = $point->total_point;
         }
 
         return $points;
+    }
+
+    public function store($user_id, $data)
+    {
+        return $this->point->create([
+            'user_id'       => auth()->user()->id,
+            'point_type_id' => $data['point_type_id'],
+            'amount'        => $data['amount'],
+        ]);
     }
 }

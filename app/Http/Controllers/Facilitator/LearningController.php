@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Facilitator;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\CourseChapterReviewInterface;
 use App\Interfaces\LearningInterface;
-use App\Models\Point;
-use Illuminate\Support\Facades\Auth;
 use App\Interfaces\PointInterface;
 use App\Interfaces\UserCourseChapterLogInterface;
+use App\Models\Point;
 use App\Models\PointType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LearningController extends Controller
 {
@@ -33,7 +33,7 @@ class LearningController extends Controller
     public function chapter($playlist_id, $chapter_id)
     {
         $result = $this->learning->getByChapterId($chapter_id);
-        return view('user.course.player', [
+        return view('facilitator.course.player', [
             'course'      => $result['course'],
             'chapter'     => $result['chapter'],
             'reviews'     => $result['chapter']['reviews'],
@@ -63,7 +63,7 @@ class LearningController extends Controller
         if ($result['next_chapter']['type'] == 'quiz') {
             $playlist_id = $result['next_chapter']['playlist_id'];
             $quiz_id     = $result['next_chapter']['quiz_id'];
-            return redirect()->route('user.learn.quiz', [$playlist_id, $quiz_id]);
+            return redirect()->route('facilitator.learn.quiz', [$playlist_id, $quiz_id]);
         };
 
         $user = Auth::user();
@@ -77,7 +77,7 @@ class LearningController extends Controller
         ]);
 
 
-        return redirect()->route('user.learn.chapter', [$playlist_id, $result['next_chapter']['id']]);
+        return redirect()->route('facilitator.learn.chapter', [$playlist_id, $result['next_chapter']['id']]);
     }
 
     /* 
@@ -93,10 +93,10 @@ class LearningController extends Controller
         $userQuizLog = $this->learning->getUserQuizLog($user_id, $quiz_id);
 
         if ($userQuizLog) {
-            return redirect()->route('user.learn.result', [$playlist_id, $quiz_id]);
+            return redirect()->route('facilitator.learn.result', [$playlist_id, $quiz_id]);
         }
 
-        return view('user.course.quiz', [
+        return view('facilitator.course.quiz', [
             'course'      => $result['course'],
             'quiz'        => $result['quiz'],
             'playlist_id' => $playlist_id,
@@ -110,7 +110,7 @@ class LearningController extends Controller
         $result    = $this->learning->getByQuizId($playlist_id, $quiz_id);
         $questions = $result['quiz']['questions'];
 
-        return view('user.course.question', [
+        return view('facilitator.course.question', [
             'questions'   => $questions,
             'course'      => $result['course'],
             'quiz'        => $result['quiz'],
@@ -124,7 +124,7 @@ class LearningController extends Controller
         $resultQuiz = $this->learning->answerQuiz($quiz_id, $request->except('_token'));
 
         if ($resultQuiz['is_passed'] == false) {
-            return redirect()->route('user.learn.question', [$playlist_id, $quiz_id])->withInput()->withErrors([
+            return redirect()->route('facilitator.learn.question', [$playlist_id, $quiz_id])->withInput()->withErrors([
                 'incorrect_answer' => $resultQuiz['incorrect_answer'],
             ]);
         }
@@ -133,7 +133,7 @@ class LearningController extends Controller
         $nextPlaylist = $this->learning->getNextPlaylist($playlist_id);
 
         if ($nextPlaylist == null) {
-            return view('user.course.answer', [
+            return view('facilitator.course.answer', [
                 'course'       => $result['course'],
                 'quiz'         => $result['quiz'],
                 'playlist_id'  => $playlist_id,
@@ -145,7 +145,7 @@ class LearningController extends Controller
             ]);
         }
 
-        return view('user.course.answer', [
+        return view('facilitator.course.answer', [
             'course'       => $result['course'],
             'quiz'         => $result['quiz'],
             'playlist_id'  => $playlist_id,
@@ -161,7 +161,7 @@ class LearningController extends Controller
         $user_id = auth()->user()->id;
         $result  = $this->learning->getByQuizId($playlist_id, $quiz_id);
 
-        return view('user.course.quiz', [
+        return view('facilitator.course.quiz', [
             'course'      => $result['course'],
             'quiz'        => $result['quiz'],
             'playlist_id' => $playlist_id,
@@ -176,10 +176,9 @@ class LearningController extends Controller
 
         $result       = $this->learning->getByQuizId($playlist_id, $quiz_id);
         $nextPlaylist = $this->learning->getNextPlaylist($playlist_id);
-        // dd($nextPlaylist);
 
         if ($nextPlaylist == null) {
-            return view('user.course.answer', [
+            return view('facilitator.course.answer', [
                 'course'       => $result['course'],
                 'quiz'         => $result['quiz'],
                 'playlist_id'  => $playlist_id,
@@ -191,7 +190,7 @@ class LearningController extends Controller
             ]);
         }
 
-        return view('user.course.answer', [
+        return view('facilitator.course.answer', [
             'course'       => $result['course'],
             'quiz'         => $result['quiz'],
             'playlist_id'  => $playlist_id,

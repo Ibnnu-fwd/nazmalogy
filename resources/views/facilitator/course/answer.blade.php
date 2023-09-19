@@ -41,7 +41,7 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($chapter->is_finished) href="{{ route('user.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}
+                                                @if ($chapter->is_finished) href="{{ route('facilitator.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}
                                             </a>
                                         </div>
                                     @endforeach
@@ -57,7 +57,7 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($playlist->quiz->is_finished) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
+                                                @if ($playlist->quiz->is_finished) href="{{ route('facilitator.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
                                                 {{ $playlist->quiz->title }}
                                                 ({{ $playlist->quiz->questions->count() }} Soal )
                                             </a>
@@ -105,18 +105,18 @@
                 <div class="flex justify-center mt-8 space-x-2">
                     @if (isset($isLast))
                         <x-button text="Ulang Quiz"
-                            onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
+                            onclick="window.location.href = '{{ route('facilitator.learn.replay', [$playlist_id, $quiz_id]) }}'" />
                         <x-button text="Selesai"
                             onclick="window.location.href = '{{ route('user.dashboard.index') }}'" />
                     @else
                         @if ($resultQuiz['is_passed'])
                             <x-button text="Ulang Quiz"
-                                onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
+                                onclick="window.location.href = '{{ route('facilitator.learn.replay', [$playlist_id, $quiz_id]) }}'" />
                             <x-button text="Selanjutnya"
-                                onclick="window.location.href = '{{ route('user.learn.chapter', [$nextPlaylist, $nextChapter]) }}'" />
+                                onclick="window.location.href = '{{ route('facilitator.learn.chapter', [$nextPlaylist, $nextChapter]) }}'" />
                         @else
                             <x-button text="Ulang Quiz"
-                                onclick="window.location.href = '{{ route('user.learn.quiz', [$playlist_id, $quiz_id]) }}'" />
+                                onclick="window.location.href = '{{ route('facilitator.learn.quiz', [$playlist_id, $quiz_id]) }}'" />
                         @endif
                     @endif
                 </div>
@@ -133,12 +133,12 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil',
-                    text: 'Selamat, kamu telah menyelesaikan semua materi pada kelas ini',
+                    text: 'Selamat, kamu telah menyelesaikan semua materi pada kelas: {{ $course->title }}',
                     showConfirmButton: true,
                     confirmButtonText: 'Kembali ke dashboard',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '{{ route('user.dashboard.index') }}'
+                        window.location.href = '{{ route('facilitator.index') }}'
                     }
                 })
             @endif

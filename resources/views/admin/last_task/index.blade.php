@@ -33,21 +33,25 @@
                 </div>
             </div>
             <div class="overflow-x-auto">
-                <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500 ">
+                <table class="w-full text-xs 2xl:text-tiny text-left text-gray-500">
                     <thead class="text-xs 2xl:text-tiny text-gray-700 uppercase bg-gray-50 ">
                         <tr>
                             <th scope="col" class="px-4 py-3">Judul</th>
+                            <th scope="col" class="px-4 py-3">Deksripsi</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Aksi</span>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="align-middle">
                         @foreach ($courseLastTasks as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ Str::limit($data->title, 50) }}
+                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 w-1/3">
+                                    {{ $data->title }}
                                 </th>
+                                <td class="px-4 py-3 w-2/3">
+                                    {!! $data->description !!}
+                                </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
                                         @if ($data->is_active)
@@ -162,6 +166,8 @@
                 $('#create-course-last-task form').attr('action', url);
                 // remove method put
                 $('#create-course-last-task form input[name="_method"]').remove();
+
+                CKEDITOR.instances['description'].setData('');
             }
 
             function edit(id) {

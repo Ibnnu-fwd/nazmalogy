@@ -146,7 +146,7 @@
                 <div class="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
 
                     @foreach ($courses as $course)
-                        <div class="max-w-sm bg-white rounded-xl border border-gray-100">
+                        <div class="max-w-sm bg-white rounded-xl border border-gray-100 h-fit">
                             <a href="{{ route('course.show', $course->id) }}">
                                 <img class="rounded-t-xl h-52 object-center object-cover w-full"
                                     src="{{ $course->thumbnail ? asset('storage/courses/' . $course->thumbnail) : asset('assets/noimage.svg') }}"
@@ -194,6 +194,16 @@
                                         {{ $course->transactions->count() }} peserta
                                     </p>
                                 </div>
+                                @auth
+                                    @if ($course->is_bought)
+                                        <a
+                                            class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
+                                            Dibeli
+                                            <ion-icon name="checkmark-circle"
+                                                class="text-purple-500 text-xl ml-2"></ion-icon>
+                                        </a>
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                     @endforeach

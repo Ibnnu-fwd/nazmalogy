@@ -3,7 +3,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         @foreach ($courses as $course)
-            <div class="w-96 rounded-xl shadow-md p-5 border border-gray-50 bg-white">
+            <div class="w-96 rounded-xl shadow-md p-5 border border-gray-50 bg-white h-fit">
                 <p class="text-gray-700 text-xs 2xl:text-sm font-bold">
                     {{ $course->name }}
                 </p>
@@ -64,6 +64,33 @@
                     @endforeach
                 </div>
 
+                <div class="flex items-center justify-between text-tiny mt-3 text-gray-500">
+                    <p>
+                        Tugas Akhir
+                    </p>
+                    <p>
+                        Status
+                    </p>
+                </div>
+
+                <div class="text-xs 2xl:text-tiny mt-2 text-black">
+                    @foreach ($course->last_tasks as $last_task)
+                        <div class="mb-2 {{ $course->progressPercentage == 100 ? 'cursor-pointer' : 'cursor-not-allowed' }}"
+                            @if ($course->progressPercentage == 100) onclick="window.location.href='{{ route('user.last-task.index', $last_task->id) }}'" @endif>
+                            <div class="border rounded-lg">
+                                <div class="flex items-center justify-between text-tiny px-4 py-2">
+                                    <span>Tugas {{ $loop->iteration }}</span>
+                                    @if ($last_task->is_finished == true)
+                                        <ion-icon name="checkmark-circle" class="text-primary"></ion-icon>
+                                    @else
+                                        <ion-icon name="radio-button-off" class="text-gray-400"></ion-icon>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
                 <a href="{{ route('user.learn.chapter', [
                     $course->playlists->first()->id,
                     $course->playlists->first()->chapters->first()->id,
@@ -73,10 +100,12 @@
                     <ion-icon name="arrow-forward-circle" class="text-purple-500 text-xl ml-2"></ion-icon>
                 </a>
 
-                <a href="{{ route('generatePDF')}}"
-                        class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
+                @if ($course->progressPercentage == 100 && $course->all_last_task_finished == true)
+                    <a href="{{ route('generatePDF', [$course->id, auth()->user()->id]) }}"
+                        class="inline-flex items-center justify-center py-1.5 mt-5 mr-2  w-full text-xs 2xl:text-tiny font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                         Cetak Sertifikat
-                </a>
+                    </a>
+                @endif
             </div>
         @endforeach
     </div>

@@ -34,6 +34,7 @@
                             <th scope="col" class="px-4 py-3">#</th>
                             <th scope="col" class="px-4 py-3">Jenis</th>
                             <th scope="col" class="px-4 py-3">Poin Terakhir</th>
+                            <th scope="col" class="px-4 py-3">Tambahan</th>
                             <th scope="col" class="px-4 py-3">Poin Saat Ini</th>
                             <th scope="col" class="px-4 py-3">Waktu</th>
                         </tr>
@@ -52,6 +53,9 @@
                                 </td>
                                 <td class="px-4 py-3">
                                     (+)
+                                    {{ $data->amount }}
+                                </td>
+                                <td class="px-4 py-3">
                                     {{ $data->total_point }}
                                 </td>
                                 <td class="px-4 py-3">

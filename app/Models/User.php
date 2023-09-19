@@ -89,4 +89,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Submission::class, 'user_id');
     }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class, 'user_id');
+    }
 }

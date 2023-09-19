@@ -27,6 +27,10 @@ class TransactionRepository implements TransactionInterface
 
     public function store($data)
     {
+        if ($data['total_payment'] == 0) {
+            $data['status'] = Transaction::STATUS_CONFIRM;
+        }
+
         return $this->transaction->create($data);
     }
 

@@ -41,7 +41,7 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($chapter->is_finished) href="{{ route('user.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}
+                                                @if ($chapter->is_finished) href="{{ route('facilitator.learn.chapter', [$playlist->id, $chapter->id]) }}" @endif>{{ $chapter->title }}
                                             </a>
                                         </div>
                                     @endforeach
@@ -57,7 +57,7 @@
                                                     class="w-5 h-5 text-gray-400"></ion-icon>
                                             @endif
                                             <a
-                                                @if ($playlist->quiz->is_finished) href="{{ route('user.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
+                                                @if ($playlist->quiz->is_finished) href="{{ route('facilitator.learn.quiz', [$playlist->id, $playlist->quiz->id]) }}" @endif>
                                                 {{ $playlist->quiz->title }}
                                                 ({{ $playlist->quiz->questions->count() }} Soal )
                                             </a>
@@ -72,76 +72,32 @@
             </div>
         </div>
 
-        {{-- Answer --}}
-        <div class="col-span-2 bg-white rounded-xl p-8 h-fit">
-            <div class="">
-                <p class="text-lg font-semibold text-center">Hasil Quiz</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 max-w-xs mx-auto mt-12">
-                    <div class="text-center">
-                        <h3 class="font-bold text-2xl mb-2">
-                            {{ $resultQuiz['correct_answer'] }}/{{ $resultQuiz['total_question'] }}
-                        </h3>
-                        <p class="text-sm">Jawaban Benar</p>
-                    </div>
-                    {{-- <div class="text-center">
-                        <h3 class="font-bold text-2xl mb-2">
-                            05.00 <span class="text-sm font-normal">Menit</span>
-                        </h3>
-                        <p class="text-sm">Waktu Pengerjaan</p>
-                    </div> --}}
-                    <div class="text-center">
-                        <h3 class="font-bold text-2xl mb-2">
-                            @if ($resultQuiz['is_passed'])
-                                <span>👌 Lulus</span>
-                            @else
-                                <span>👎 Tidak Lulus</span>
-                            @endif
-                        </h3>
-                        <p class="text-sm">
-                            Status
-                        </p>
-                    </div>
-                </div>
-                <div class="flex justify-center mt-8 space-x-2">
-                    @if (isset($isLast))
-                        <x-button text="Ulang Quiz"
-                            onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
-                        <x-button text="Selesai"
-                            onclick="window.location.href = '{{ route('user.dashboard.index') }}'" />
-                    @else
-                        @if ($resultQuiz['is_passed'])
-                            <x-button text="Ulang Quiz"
-                                onclick="window.location.href = '{{ route('user.learn.replay', [$playlist_id, $quiz_id]) }}'" />
-                            <x-button text="Selanjutnya"
-                                onclick="window.location.href = '{{ route('user.learn.chapter', [$nextPlaylist, $nextChapter]) }}'" />
-                        @else
-                            <x-button text="Ulang Quiz"
-                                onclick="window.location.href = '{{ route('user.learn.quiz', [$playlist_id, $quiz_id]) }}'" />
-                        @endif
-                    @endif
-                </div>
-                <p class="text-xs 2xl:text-sm text-center mt-6 text-gray-500">
-                    Knowledge check: {{ $quiz->title }}
+        {{-- Announcment --}}
+        <div class="col-span-2 bg-white rounded-xl p-6 h-fit">
+            <h3 class="font-semibold text-md">
+                Knowledge Check
+            </h3>
+
+            <div class="text-gray-500 text-xs 2xl:text-sm mt-5">
+                <p class="">
+                    Ini adalah modul terakhir dari materi Kemampuan analisis. Terdapat {{ $quiz->questions->count() }}
+                    pertanyaan untuk menguji
+                    wawasan anda. Silahkan kerjakan dengan hati - hati.
                 </p>
+
+                <p class="mt-4">
+                    Apabila anda tidak memenuhi syarat kelulusan, maka anda harus melakukan pengerjaan kuis kembali.
+                </p>
+
+                <p>
+                    Selamat mengerjakan!
+                </p>
+
+                <br> <br>
+
+                <x-button text="Mulai Pengerjaan" id="start"
+                    onclick="window.location.href = '{{ route('facilitator.learn.question', [$playlist_id, $quiz_id]) }}'" />
             </div>
         </div>
     </div>
-
-    @push('js-internal')
-        <script>
-            @if (isset($isLast))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Selamat, kamu telah menyelesaikan semua materi pada kelas ini',
-                    showConfirmButton: true,
-                    confirmButtonText: 'Kembali ke dashboard',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '{{ route('user.dashboard.index') }}'
-                    }
-                })
-            @endif
-        </script>
-    @endpush
 </x-guest-layout>

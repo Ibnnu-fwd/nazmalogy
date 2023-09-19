@@ -51,8 +51,13 @@ class Course extends Model
         return $this->hasMany(Submission::class, 'course_id');
     }
 
-    public function courseLastTask()
+    public function courseLastTasks()
     {
-        return $this->hasOne(CourseLastTask::class, 'course_id');
+        return $this->hasMany(CourseLastTask::class, 'course_id');
+    }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class, 'course_id');
     }
 }

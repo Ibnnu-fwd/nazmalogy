@@ -218,7 +218,10 @@ class LearningRepository implements LearningInterface
 
     public function getNextPlaylist($playlist_id)
     {
-        $nextPlaylist = $this->playlist->where('id', '>', $playlist_id)->first();
+        $nextPlaylist = $this->playlist->where([
+            ['id', '>', $playlist_id],
+            ['course_id', $this->playlist->find($playlist_id)->course_id]
+        ])->first();
 
         if ($nextPlaylist == null) {
             return null;

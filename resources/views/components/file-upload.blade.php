@@ -1,5 +1,5 @@
 <div>
-    @if ($label == '')
+    @if ($label !== '')
         <label class="block mb-2 text-tiny font-medium text-gray-900"
             for="{{ $id }}">{{ $label }}</label>
     @endif
