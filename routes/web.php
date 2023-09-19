@@ -26,6 +26,8 @@ use App\Http\Controllers\Facilitator\PlaylistController as FacilitatorPlaylistCo
 use App\Http\Controllers\Facilitator\CourseLastTaskController as FacilitatorCourseLastTaskController;
 use App\Http\Controllers\Facilitator\EnrollPaymentController;
 use App\Http\Controllers\Facilitator\LearningController as FacilitatorLearningController;
+use App\Http\Controllers\Facilitator\ProfileController as FacilitatorProfileController;
+use App\Http\Controllers\Facilitator\ReferalController;
 use App\Http\Controllers\Facilitator\SubmissionController;
 use App\Http\Controllers\Facilitator\UserCourseLastTaskController as FacilitatorUserCourseLastTaskController;
 use App\Http\Controllers\HomeController;
@@ -294,6 +296,22 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     Route::group(['prefix' => 'last-task', 'as' => 'facilitator.last-task.'], function () {
         Route::get('{id}', [FacilitatorUserCourseLastTaskController::class, 'index'])->name('index');
         Route::post('{id}/attempt', [UserCourseLastTaskController::class, 'attempt'])->name('attempt');
+    });
+
+    // Referal
+    Route::group(['prefix' => 'referal', 'as' => 'facilitator.referal.'], function () {
+        Route::get('/', [ReferalController::class, 'index'])->name('index');
+        Route::get('{id}/show', [ReferalController::class, 'show'])->name('show');
+        Route::post('/', [ReferalController::class, 'store'])->name('store');
+        Route::put('{id}', [ReferalController::class, 'update'])->name('update');
+        Route::delete('{id}', [ReferalController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/restore', [ReferalController::class, 'restore'])->name('restore');
+    })->middleware('check-role:facilitator');
+
+    // Profile
+    Route::group(['prefix' => 'profile', 'as' => 'facilitator.profile.'], function () {
+        Route::get('/', [FacilitatorProfileController::class, 'index'])->name('index');
+        Route::put('{id}', [FacilitatorProfileController::class, 'update'])->name('update');
     });
 });
 

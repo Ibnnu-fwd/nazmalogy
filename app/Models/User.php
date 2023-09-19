@@ -94,4 +94,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certificate::class, 'user_id');
     }
+
+    public function referals()
+    {
+        return $this->hasMany(Referal::class, 'user_id');
+    }
 }
