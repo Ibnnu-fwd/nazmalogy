@@ -269,8 +269,6 @@
                         text: "Anda akan mendaftar kursus ini",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonColor: '#2B3176',
-                        cancelButtonColor: '#d33',
                         confirmButtonText: 'Ya, daftar',
                         cancelButtonText: 'Batal'
                     }).then((result) => {
@@ -285,7 +283,7 @@
                             @endauth
                             $.ajax({
                                 type: "POST",
-                                url: "",
+                                url: url,
                                 data: {
                                     _token: "{{ csrf_token() }}",
                                     course_id: "{{ $course->id }}",

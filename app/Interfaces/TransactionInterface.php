@@ -15,4 +15,5 @@ interface TransactionInterface
     public function changeStatus($id, $status);
 
     public function getByAuthorId($authorId);
+    public function attemptReferral($transactionId, $refCode);
 }

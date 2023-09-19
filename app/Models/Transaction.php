@@ -20,6 +20,7 @@ class Transaction extends Model
     protected $fillable = [
         'course_id',
         'user_id',
+        'ref_code',
         'price',
         'sub_total',
         'total_payment',
@@ -35,5 +36,10 @@ class Transaction extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function attemptReferal()
+    {
+        return $this->hasOne(AttemptReferal::class);
     }
 }

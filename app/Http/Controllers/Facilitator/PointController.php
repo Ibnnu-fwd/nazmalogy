@@ -11,8 +11,10 @@ use Illuminate\Http\Request;
 class PointController extends Controller
 {
     private $point;
+    private $course;
+    private $userChapterLog;
 
-    public function __construct(PointInterface $point,CourseInterface $course,UserCourseChapterLogInterface $userChapterLog)
+    public function __construct(PointInterface $point, CourseInterface $course, UserCourseChapterLogInterface $userChapterLog)
     {
         $this->point = $point;
         $this->course = $course;
@@ -24,7 +26,7 @@ class PointController extends Controller
         return view('facilitator.point.index', [
             'points' => $this->point->getByUserId(auth()->user()->id),
             'courses' => $this->course->getAllProgress(auth()->user()->id),
-            'userChapterLogs' => $this->userChapterLog->getUserChapterLogByUserId(auth()->user()->id),
+            // 'userChapterLogs' => $this->userChapterLog->getUserChapterLogByUserId(auth()->user()->id),
         ]);
     }
 

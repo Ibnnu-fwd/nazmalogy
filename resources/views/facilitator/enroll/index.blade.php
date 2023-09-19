@@ -71,7 +71,7 @@
                                                 @csrf
                                                 <input type="file" name="payment_proof_file" class="hidden">
                                                 <x-button text="Unggah Bukti Pembayaran" color="green"
-                                                    icon="cloud-upload-outline" id="uploadPayment" />
+                                                    id="uploadPayment" />
                                             </form>
                                         @elseif ($data->status == 'paid')
                                             <span>

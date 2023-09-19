@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class CourseChapterReviewController extends Controller
 {
-   private $courseChapterReview;
+    private $courseChapterReview;
 
     public function __construct(CourseChapterReviewInterface $courseChapterReview)
     {
@@ -28,6 +28,4 @@ class CourseChapterReviewController extends Controller
     {
         return response()->json($this->courseChapterReview->getById($id));
     }
-
-    
 }

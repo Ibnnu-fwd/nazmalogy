@@ -9,7 +9,7 @@
                 <button type="button" class="flex mr-3 text-xs 2xl:text-sm rounded-full md:mr-0 " id="user-menu-button"
                     aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                     <span class="sr-only">Open user menu</span>
-                    <img class="w-12 h-12 rounded-full"
+                    <img class="w-12 h-12 rounded-full object-cover"
                         src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('assets/noimage.svg') }}"
                         alt="user photo">
                 </button>

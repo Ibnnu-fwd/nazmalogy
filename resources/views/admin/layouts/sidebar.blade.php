@@ -19,6 +19,7 @@
 
             @if (auth()->user()->role == 'user')
                 <x-sidebar-link label="Dashboard" icon="grid" route="{{ route('user.dashboard.index') }}" />
+                <x-sidebar-link label="Poin" icon="podium" route="{{ route('user.point.index') }}" />
                 <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('user.transaction.index') }}" />
                 <x-sidebar-link label="Profil" icon="person-circle" route="{{ route('user.profile.index') }}" />
             @endif

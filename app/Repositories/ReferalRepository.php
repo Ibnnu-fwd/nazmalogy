@@ -3,20 +3,29 @@
 namespace App\Repositories;
 
 use App\Interfaces\ReferalInterface;
+use App\Models\Course;
 use App\Models\Referal;
+use App\Models\Transaction;
 
 class ReferalRepository implements ReferalInterface
 {
     private $referal;
+    private $transaction;
+    private $course;
 
-    public function __construct(Referal $referal)
+    public function __construct(Referal $referal, Transaction $transaction, Course $course)
     {
-        $this->referal = $referal;
+        $this->referal     = $referal;
+        $this->transaction = $transaction;
+        $this->course      = $course;
     }
 
     public function getByFacilitatorId($userId)
     {
-        return $this->referal->where('user_id', $userId)->get();
+        return $this->referal
+            ->where('user_id', $userId)
+            ->where('expire_at', '>=', date('Y-m-d'))
+            ->get();
     }
 
     public function getById($id)
@@ -52,5 +61,23 @@ class ReferalRepository implements ReferalInterface
         return $this->referal->find($id)->update([
             'is_active' => '1'
         ]);
+    }
+
+    public function getByUserEnrolledCourse($userId)
+    {
+        return $this->transaction
+            ->where('user_id', $userId)
+            ->where('status', Transaction::STATUS_PENDING)
+            ->get()
+            ->map(function ($transaction) {
+                $course = $this->course
+                    ->find($transaction->course_id);
+                if ($course) {
+                    $course->referral = $this->referal
+                        ->where('user_id', $course->author_id)
+                        ->first();
+                    return $course;
+                }
+            })->filter()->values();
     }
 }

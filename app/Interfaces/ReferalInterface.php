@@ -10,4 +10,5 @@ interface ReferalInterface
     public function update($id, $data);
     public function destroy($id);
     public function restore($id);
+    public function getByUserEnrolledCourse($userId);
 }

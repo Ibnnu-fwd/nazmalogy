@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Point extends Model
+class AttemptReferal extends Model
 {
     use HasFactory;
 
-    public $table = 'points';
-
     protected $fillable = [
         'user_id',
-        'point_type_id',
-        'amount',
-        'description',
+        'transaction_id',
+        'ref_code',
+        'is_success',
     ];
 
     public function user()
@@ -23,8 +21,8 @@ class Point extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function pointType()
+    public function transaction()
     {
-        return $this->belongsTo(PointType::class);
+        return $this->belongsTo(Transaction::class);
     }
 }

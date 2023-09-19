@@ -38,6 +38,7 @@ use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\TransactionController;
 use App\Http\Controllers\FillPDFController;
 use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
+use App\Http\Controllers\User\PointController as UserPointController;
 use App\Models\CourseCategory;
 
 /*
@@ -199,6 +200,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::get('{id}/show', [TransactionController::class, 'show'])->name('show');
         Route::post('store', [TransactionController::class, 'store'])->name('store');
         Route::post('upload-proof/{id}', [TransactionController::class, 'uploadProof'])->name('upload-proof');
+        Route::get('{id}/detail', [TransactionController::class, 'detail'])->name('detail');
+        Route::post('{id}/attempt-referral', [TransactionController::class, 'attemptReferral'])->name('attempt-referral');
     });
 
     // Course
@@ -219,6 +222,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::put('{id}', [ProfileController::class, 'update'])->name('update');
     });
+
+    //Poin
+    Route::group(['prefix' => 'point', 'as' => 'user.point.'], function () {
+        Route::get('/', [UserPointController::class, 'index'])->name('index');
+    })->middleware('check-role:user');
 });
 
 // Facilitator

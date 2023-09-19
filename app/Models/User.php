@@ -99,4 +99,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Referal::class, 'user_id');
     }
+
+    public function attemptReferals()
+    {
+        return $this->hasMany(AttemptReferal::class, 'user_id');
+    }
 }
