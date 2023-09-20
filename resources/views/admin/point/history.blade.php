@@ -46,7 +46,7 @@
                                     {{ $loop->iteration }}
                                 </th>
                                 <td class="px-4 py-3">
-                                    {{ $data->pointType->name }}
+                                    {{ $data->description }}
                                 </td>
                                 <td class="px-4 py-3">
                                     {{ $data->last_point }}

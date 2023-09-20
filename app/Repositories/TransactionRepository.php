@@ -99,6 +99,11 @@ class TransactionRepository implements TransactionInterface
 
     public function changeStatus($id, $status)
     {
+        if ($status == Transaction::STATUS_CONFIRM) {
+            $transaction = $this->transaction->find($id);
+            $pointType = $this->pointType->where('name', 'enroll_course')->first();
+            $this->createPointRecord($transaction->user->id, $pointType->id, $pointType->amount, 'Membeli kursus ' . $transaction->course->name);
+        }
         return $this->transaction->find($id)->update(['status' => $status]);
     }
 
