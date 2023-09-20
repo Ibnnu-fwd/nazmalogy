@@ -9,6 +9,7 @@ use App\Models\Point;
 use Illuminate\Support\Facades\Auth;
 use App\Interfaces\PointInterface;
 use App\Interfaces\UserCourseChapterLogInterface;
+use App\Models\CourseChapter;
 use App\Models\PointType;
 use Illuminate\Http\Request;
 
@@ -51,11 +52,13 @@ class LearningController extends Controller
         $user_id = auth()->user()->id;
         $this->userCourseChapterLog->store($user_id, $chapter_id, $finish_time);
 
+        $chapter   = CourseChapter::where('id', $chapter_id)->first()->title;
         $pointType = PointType::where('name', 'watch_course')->first();
-        $this->point->store($user_id, [
-            'amount'        => $pointType['amount'],
-            'point_type_id' => $pointType['id'],
-            'description'   => 'watch chapter: ' . $chapter_id,
+        Point::create([
+            'user_id'       => auth()->user()->id,
+            'amount'        => $pointType->amount,
+            'point_type_id' => $pointType->id,
+            'description'   => 'watch course: ' . $chapter,
         ]);
 
         $result                 = $this->learning->getByChapterId($chapter_id);
@@ -67,16 +70,16 @@ class LearningController extends Controller
             return redirect()->route('user.learn.quiz', [$playlist_id, $quiz_id]);
         };
 
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $pointType = PointType::where('name', 'finished_course')->first();
-        $point     = Point::where('user_id', $user->id)->latest()->first();
-        Point::create([
-            'user_id'       => $user->id,
-            'point_type_id' => $pointType->id,
-            'amount'        => $pointType->amount,
-            'description'   => 'finished course: ' . $result['course']['names'],
-        ]);
+        // $pointType = PointType::where('name', 'finished_course')->first();
+        // $point     = Point::where('user_id', $user->id)->latest()->first();
+        // Point::create([
+        //     'user_id'       => $user->id,
+        //     'point_type_id' => $pointType->id,
+        //     'amount'        => $pointType->amount,
+        //     'description'   => 'finished course: ' . $result['course']['names'],
+        // ]);
 
 
         return redirect()->route('user.learn.chapter', [$playlist_id, $result['next_chapter']['id']]);

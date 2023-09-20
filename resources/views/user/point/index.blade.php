@@ -32,7 +32,7 @@
                     <thead class="text-xs 2xl:text-tiny uppercase bg-gray-50 ">
                         <tr>
                             <th scope="col" class="px-4 py-3">#</th>
-                            <th scope="col" class="px-4 py-3">Jenis</th>
+                            <th scope="col" class="px-4 py-3">Judul</th>
                             <th scope="col" class="px-4 py-3">Poin Terakhir</th>
                             <th scope="col" class="px-4 py-3">Tambahan</th>
                             <th scope="col" class="px-4 py-3">Poin Saat Ini</th>
@@ -46,7 +46,7 @@
                                     {{ $loop->iteration }}
                                 </th>
                                 <td class="px-4 py-3">
-                                    {{ $data->pointType->name }}
+                                    {{ $data->description ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3">
                                     {{ $data->last_point }}
