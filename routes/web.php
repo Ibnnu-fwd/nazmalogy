@@ -327,6 +327,16 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::get('/', [FacilitatorProfileController::class, 'index'])->name('index');
         Route::put('{id}', [FacilitatorProfileController::class, 'update'])->name('update');
     });
+
+    //Facil Learning History
+    Route::group(['prefix' => 'history', 'as' => 'facilitator.history.'], function () {
+        Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
+    })->middleware('check-role:facilitator');
+
+    //Member Learning History
+    Route::group(['prefix' => 'history-member', 'as' => 'facilitator.history.'], function () {
+        Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
+    })->middleware('check-role:facilitator');
 });
 
 
