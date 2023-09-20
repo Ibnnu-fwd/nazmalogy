@@ -30,6 +30,7 @@ use App\Http\Controllers\Facilitator\ProfileController as FacilitatorProfileCont
 use App\Http\Controllers\Facilitator\ReferalController;
 use App\Http\Controllers\Facilitator\SubmissionController;
 use App\Http\Controllers\Facilitator\UserCourseLastTaskController as FacilitatorUserCourseLastTaskController;
+use App\Http\Controllers\Facilitator\LearningHistoryController as FacilitatorLearningHistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\LearningController;
@@ -330,12 +331,13 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
 
     //Facil Learning History
     Route::group(['prefix' => 'history', 'as' => 'facilitator.history.'], function () {
-        Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
+        Route::get('/', [FacilitatorLearningHistoryController::class, 'index'])->name('index');
     })->middleware('check-role:facilitator');
 
     //Member Learning History
     Route::group(['prefix' => 'history-member', 'as' => 'facilitator.history-member.'], function () {
-        Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
+        Route::get('/', [FacilitatorLearningHistoryController::class, 'member'])->name('member');
+        Route::get('{id}/detail', [FacilitatorLearningHistoryController::class, 'detail'])->name('detail'); 
     })->middleware('check-role:facilitator');
 });
 
