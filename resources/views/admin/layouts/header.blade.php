@@ -31,10 +31,10 @@
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="text-xs 2xl:text-tiny text-gray-900 dark:text-white" role="none">
+                            <p class="text-xs 2xl:text-tiny text-gray-900 dark:text-white" role="none " >
                                 {{ auth()->user()->fullname }}
                             </p>
-                            <p class="text-xs 2xl:text-tiny font-medium text-gray-900 truncate dark:text-gray-300"
+                            <p class="text-xs 2xl:text-tiny font-bold text-gray-900 truncate dark:text-gray-300"
                                 role="none">
                                 {{ auth()->user()->role }}
                             </p>
