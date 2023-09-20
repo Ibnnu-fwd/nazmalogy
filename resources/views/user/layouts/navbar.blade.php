@@ -25,10 +25,24 @@
                         </span>
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
+                        @if (auth()->user()->role == 'user')
                         <li>
                             <a href="{{ route('user.dashboard.index') }}"
                                 class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                         </li>
+                        @endif
+                        @if (auth()->user()->role == 'facilitator')
+                        <li>
+                            <a href="{{ route('facilitator.index') }}"
+                                class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                        </li>
+                        @endif
+                        @if (auth()->user()->role == 'admin')
+                        <li>
+                            <a href="{{ route('admin.dashboard.index') }}"
+                                class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                        </li>
+                        @endif
                         <li>
                             <a href="{{ route('user.profile.index') }}"
                                 class="block px-4 py-2 text-xs 2xl:text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil</a>

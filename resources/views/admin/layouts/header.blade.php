@@ -41,7 +41,10 @@
                         </div>
                         <ul class="py-1 text-xs 2xl:text-sm sidebar" role="none">
                             <li>
-                                <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard.index') : route('user.dashboard.index') }}"
+                                <a href="{{ 
+                                    auth()->user()->role == 'admin' ? route('admin.dashboard.index') : 
+                                    (auth()->user()->role == 'facilitator' ? route('facilitator.index') : 
+                                    route('user.dashboard.index')) }}"
                                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
                             </li>

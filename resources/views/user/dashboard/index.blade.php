@@ -23,7 +23,6 @@
                         Status
                     </p>
                 </div>
-
                 <div class="text-xs 2xl:text-tiny mt-2 text-gray-600">
                     @foreach ($course->playlists as $index => $playlist)
                         <div class="mb-2">
