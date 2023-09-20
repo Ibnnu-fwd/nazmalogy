@@ -31,17 +31,20 @@
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
-                            <p class="text-xs 2xl:text-tiny text-gray-900 dark:text-white" role="none">
+                            <p class="text-xs 2xl:text-tiny text-gray-900 dark:text-white" role="none " >
                                 {{ auth()->user()->fullname }}
                             </p>
-                            <p class="text-xs 2xl:text-tiny font-medium text-gray-900 truncate dark:text-gray-300"
+                            <p class="text-xs 2xl:text-tiny font-bold text-gray-900 truncate dark:text-gray-300"
                                 role="none">
                                 {{ auth()->user()->role }}
                             </p>
                         </div>
                         <ul class="py-1 text-xs 2xl:text-sm sidebar" role="none">
                             <li>
-                                <a href="{{ auth()->user()->role == 'admin' ? route('admin.dashboard.index') : route('user.dashboard.index') }}"
+                                <a href="{{ 
+                                    auth()->user()->role == 'admin' ? route('admin.dashboard.index') : 
+                                    (auth()->user()->role == 'facilitator' ? route('facilitator.index') : 
+                                    route('user.dashboard.index')) }}"
                                     class="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
                             </li>

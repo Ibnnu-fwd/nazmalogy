@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => null]]" />
+    <x-breadcrumb :items="[['text' => 'Facilitator Dashboard', 'link' => null]]" />
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         @foreach ($courses as $course)
