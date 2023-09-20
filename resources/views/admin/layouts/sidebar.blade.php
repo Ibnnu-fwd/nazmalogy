@@ -36,6 +36,8 @@
                     route="{{ route('facilitator.transaction-member.index') }}" />
                 <x-sidebar-link label="Pengumpulan Tugas" icon="file-tray-full"
                     route="{{ route('facilitator.submission.index') }}" />
+                    <x-sidebar-link label="Riwayat Belajar" icon="time"
+                    route="{{ route('facilitator.history.index') }}" />
                 <x-sidebar-link label="Profil" icon="person-circle" route="{{ route('facilitator.profile.index') }}" />
             @endif
 

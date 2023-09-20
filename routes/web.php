@@ -334,7 +334,7 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     })->middleware('check-role:facilitator');
 
     //Member Learning History
-    Route::group(['prefix' => 'history-member', 'as' => 'facilitator.history.'], function () {
+    Route::group(['prefix' => 'history-member', 'as' => 'facilitator.history-member.'], function () {
         Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
     })->middleware('check-role:facilitator');
 });
