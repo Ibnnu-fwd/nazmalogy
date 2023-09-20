@@ -238,8 +238,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 
 // Facilitator
 Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () {
-    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('
-    ')->middleware('check-role:facilitator');
+    Route::get('/', [FacilitatorDashboardController::class, 'index'])->name('facilitator.index')->middleware('check-role:facilitator');
 
     // Course
     Route::resource('course', FacilitatorCourseController::class, ['as' => 'facilitator'])->middleware('check-role:facilitator');
