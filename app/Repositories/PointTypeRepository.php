@@ -38,7 +38,7 @@ class PointTypeRepository implements PointTypeInterface
         $point     = $this->point->where('point_type_id', $id)->update(['amount' => $data['amount']]);
 
         return $pointType;
-    }
+}
 
     public function destroy($id)
     {

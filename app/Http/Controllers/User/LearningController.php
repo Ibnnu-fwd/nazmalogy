@@ -55,6 +55,7 @@ class LearningController extends Controller
         $this->point->store($user_id, [
             'amount'        => $pointType['amount'],
             'point_type_id' => $pointType['id'],
+            'description'   => 'watch chapter: ' . $chapter_id,
         ]);
 
         $result                 = $this->learning->getByChapterId($chapter_id);
@@ -74,6 +75,7 @@ class LearningController extends Controller
             'user_id'       => $user->id,
             'point_type_id' => $pointType->id,
             'amount'        => $pointType->amount,
+            'description'   => 'finished course: ' . $result['course']['names'],
         ]);
 
 
