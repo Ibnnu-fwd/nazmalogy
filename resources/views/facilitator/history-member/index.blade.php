@@ -46,7 +46,9 @@
                                         </div>
                                 </th>
                                 <td class="px-4 py-3">
-                                    2
+                                    {{
+                                        $data->transactions->where('status', 'confirm')->count()
+                                    }}
                                 </td>
                                 <td scope="row" class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
