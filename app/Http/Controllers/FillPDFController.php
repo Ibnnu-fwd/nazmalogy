@@ -19,9 +19,7 @@ class FillPDFController extends Controller
     public function process($course_id, $user_id)
 {
     $course = $this->course->getById($course_id);
-    $prefix = 'C';  // Prefix for the unique ID format
-    $unique_code = uniqid();  // Generate a unique ID
-    $formatted_unique_code = $prefix . substr($unique_code, 0, 5);  
+$unique_code = uniqid();
     $certificate = Certificate::where([
         ['user_id', auth()->user()->id],
         ['course_id', $course_id]
@@ -33,7 +31,7 @@ class FillPDFController extends Controller
     $outputfile = public_path('sertif.pdf');
     $pdfTemplate = public_path('certificate/sertif.pdf'); // Use correct path here
 
-    $this->fillPDF($pdfTemplate, $outputfile, $name, $formatted_unique_code, $course_name);
+    $this->fillPDF($pdfTemplate, $outputfile, $name, $unique_code, $course_name);
 
     return response()->file($outputfile);
 }
