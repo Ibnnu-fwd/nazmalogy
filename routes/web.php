@@ -36,6 +36,7 @@ use App\Http\Controllers\User\LearningController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\TransactionController;
+use App\Http\Controllers\User\LearningHistoryController;
 use App\Http\Controllers\FillPDFController;
 use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
 use App\Http\Controllers\User\PointController as UserPointController;
@@ -226,6 +227,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     //Poin
     Route::group(['prefix' => 'point', 'as' => 'user.point.'], function () {
         Route::get('/', [UserPointController::class, 'index'])->name('index');
+    })->middleware('check-role:user');
+
+    //History
+    Route::group(['prefix' => 'history', 'as' => 'user.history.'], function () {
+        Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
     })->middleware('check-role:user');
 });
 
