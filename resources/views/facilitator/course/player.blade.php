@@ -179,7 +179,7 @@
                     videoId: '{{ $videoId }}',
                     host: 'https://www.youtube-nocookie.com',
                     playerVars: {
-                        controls: 0, // Hide all controls
+                        controls: 1, // Hide all controls
                         showinfo: 0, // Hide video title and player actions (deprecated but still works)
                         modestbranding: 1, // Show a smaller YouTube logo without the YouTube text
                         loop: 0, // Don't loop when complete

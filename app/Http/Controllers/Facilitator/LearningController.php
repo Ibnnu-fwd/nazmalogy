@@ -7,6 +7,7 @@ use App\Interfaces\CourseChapterReviewInterface;
 use App\Interfaces\LearningInterface;
 use App\Interfaces\PointInterface;
 use App\Interfaces\UserCourseChapterLogInterface;
+use App\Models\CourseChapter;
 use App\Models\Point;
 use App\Models\PointType;
 use Illuminate\Http\Request;
@@ -51,10 +52,13 @@ class LearningController extends Controller
         $user_id = auth()->user()->id;
         $this->userCourseChapterLog->store($user_id, $chapter_id, $finish_time);
 
+        $chapter   = CourseChapter::where('id', $chapter_id)->first()->title;
         $pointType = PointType::where('name', 'watch_course')->first();
-        $this->point->store($user_id, [
-            'amount'        => $pointType['amount'],
-            'point_type_id' => $pointType['id'],
+        Point::create([
+            'user_id'       => auth()->user()->id,
+            'amount'        => $pointType->amount,
+            'point_type_id' => $pointType->id,
+            'description'   => 'watch course: ' . $chapter,
         ]);
 
         $result                 = $this->learning->getByChapterId($chapter_id);
