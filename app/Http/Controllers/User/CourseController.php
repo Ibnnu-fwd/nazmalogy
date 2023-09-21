@@ -25,7 +25,7 @@ class CourseController extends Controller
     {
         return view('user.course.index', [
             'courseCategories' => $this->courseCategory->getAll(),
-            'courses'          => $this->course->getAll(),
+            'courses'          => $this->course->getAll()->where('publish_status', 1)
         ]);
     }
 

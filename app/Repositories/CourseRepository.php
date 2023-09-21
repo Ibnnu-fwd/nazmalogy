@@ -135,7 +135,7 @@ class CourseRepository implements CourseInterface
 
     public function destroy($id)
     {
-        return $this->course->where('id', $id)->update(['is_active' => false]);
+        return $this->course->where('id', $id)->update(['publish_status' => false]);
     }
 
     public function recover($id)

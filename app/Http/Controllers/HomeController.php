@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         return view('user.home', [
             'courseCategories'    => $this->courseCategory->getAll(),
-            'courses'             => $this->course->getAll(),
+            'courses'             => $this->course->getAll()->where('publish_status', 1),
             'generalTestimonials' => $this->generalTestimonial->getAll()
         ]);
     }
