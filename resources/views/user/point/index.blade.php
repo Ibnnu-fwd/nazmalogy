@@ -7,7 +7,7 @@
     <x-breadcrumb :items="[
         ['text' => 'Dashboard', 'link' => $dashboard],
         ['text' => 'Poin', 'link' => route('admin.point.index')],
-        ['text' => $points->first()->user->fullname, 'link' => null],
+        ['text' => auth()->user()->fullname, 'link' => null],
         ['text' => 'Riwayat', 'link' => null],
     ]" />
     <x-card>

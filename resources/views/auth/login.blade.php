@@ -12,17 +12,22 @@
             <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <input type="email" name="email" id="email"
-                    class="rounded-full w-full text-xs 2xl:text-sm bg-white border-none shadow-sm mt-16 h-14 p-4"
+                    class="rounded-full w-full text-xs 2xl:text-tiny bg-white border-none shadow-sm mt-16 h-14 p-4"
                     placeholder="Alamat Email">
                 <input type="password" name="password"
-                    class="w-full text-xs 2xl:text-sm mt-5 bg-white border-none shadow-sm rounded-full h-14 p-4"
+                    class="w-full text-xs 2xl:text-tiny mt-5 bg-white border-none shadow-sm rounded-full h-14 p-4"
                     placeholder="Kata Sandi">
-                <a href="#" class="text-[#8E8E8E] font-normal text-sm float-right mt-4">Lupa Sandi?</a>
-                <button type="submit" class="w-full h-14 bg-[#2C2F75] text-white rounded-full mt-9">Masuk
+                {{-- <a href="#" class="text-[#8E8E8E] font-normal text-tiny float-right mt-4">Lupa Sandi?</a> --}}
+                <button type="submit"
+                    class="w-full h-14 text-xs 2xl:text-sm bg-[#2C2F75] text-white rounded-full mt-9">Masuk
                     Sekarang</button>
+                <a href="{{ route('login.google.redirect') }}"
+                    class="w-full h-14 text-xs 2xl:text-sm bg-gray-200 text-gray-800 rounded-full mt-3 flex items-center justify-center gap-x-2">
+                    <ion-icon name="logo-google" class="text-xl"></ion-icon> Masuk dengan Google
+                </a>
             </form>
-            <p class="font-medium text-sm text-black text-center mt-7">Belum Punya Akun? <span
-                    class="font-bold text-sm text-[#ED7F22]"><a href="{{ route('register') }}">Daftar
+            <p class="font-medium text-tiny text-black text-center mt-7">Belum Punya Akun? <span
+                    class="font-medium text-tiny text-[#ED7F22]"><a href="{{ route('register') }}">Daftar
                         Sekarang</a></span></p>
         </div>
 

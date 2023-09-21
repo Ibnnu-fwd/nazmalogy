@@ -18,7 +18,8 @@
                 <input type="password" name="password"
                     class="w-full mt-5 bg-white border-none text-xs 2xl:text-sm shadow-sm rounded-3xl h-14 p-4"
                     placeholder="Kata Sandi">
-                <button class="w-full h-14 bg-[#2C2F75] text-white rounded-3xl mt-9">Daftar Sekarang</button>
+                <button class="w-full h-14 bg-[#2C2F75] text-white rounded-3xl mt-9 text-xs 2xl:text-sm">Daftar
+                    Sekarang</button>
                 <p class="font-medium text-sm text-black text-center mt-7">
                     Sudah Punya Akun?
                     <span class="font-bold text-sm text-[#ED7F22]">

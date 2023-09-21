@@ -41,6 +41,7 @@ use App\Http\Controllers\User\LearningHistoryController;
 use App\Http\Controllers\FillPDFController;
 use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
 use App\Http\Controllers\User\PointController as UserPointController;
+use App\Http\Controllers\User\SocialiteController;
 use App\Models\CourseCategory;
 
 /*
@@ -53,6 +54,11 @@ use App\Models\CourseCategory;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Socialite
+Route::get('login/google/redirect', [SocialiteController::class, 'redirect'])->name('login.google.redirect');
+Route::get('login/google/callback', [SocialiteController::class, 'callback'])->name('login.google.callback');
+// Route::post('logout', [SocialiteController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index']);
 

@@ -27,7 +27,8 @@ class User extends Authenticatable
         'avatar',
         'role',
         'last_login',
-        'is_active'
+        'is_active',
+        'google_id',
     ];
 
     /**
