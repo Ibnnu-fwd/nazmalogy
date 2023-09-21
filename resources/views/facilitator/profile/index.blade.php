@@ -31,7 +31,10 @@
                 </x-select>
                 <x-input label="No. telepon" name="phone" id="phone" :value="$user->phone" />
                 <x-input label="Tanggal lahir" name="birth" id="birth" type="date" :value="$user->birth" />
-
+                <p>
+                    <span class="text-gray-600">**</span> Kosongkan password jika tidak ingin mengubah password <span
+                        class="text-gray-600">**</span>
+                </p>
                 <x-input label="Password lama" name="old_password" id="old_password" type="password" />
                 <x-input label="Password baru" name="new_password" id="new_password" type="password" />
                 <x-input label="Konfirmasi password baru" name="confirm_password" id="confirm_password"
