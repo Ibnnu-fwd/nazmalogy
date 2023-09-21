@@ -45,6 +45,18 @@ class ProfileController extends Controller
             $user->avatar = $filenameAvatar;
         }
 
+        if (isset($request->old_password)) {
+            if (password_verify($request->old_password, $user->password)) {
+                if ($request->new_password == $request->confirm_password) {
+                    $user->password = password_hash($request->new_password, PASSWORD_DEFAULT);
+                } else {
+                    return redirect()->back()->with('error', 'Password baru tidak sesuai');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Password lama tidak sesuai');
+            }
+        }
+
         $user->fullname = $request->fullname;
         $user->email    = $request->email;
         $user->gender   = $request->gender;

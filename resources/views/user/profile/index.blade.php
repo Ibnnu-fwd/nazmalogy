@@ -32,6 +32,11 @@
                 <x-input label="No. telepon" name="phone" id="phone" :value="$user->phone" />
                 <x-input label="Tanggal lahir" name="birth" id="birth" type="date" :value="$user->birth" />
 
+                <x-input label="Password lama" name="old_password" id="old_password" type="password" />
+                <x-input label="Password baru" name="new_password" id="new_password" type="password" />
+                <x-input label="Konfirmasi password baru" name="confirm_password" id="confirm_password"
+                    type="password" />
+
                 <x-button text="Simpan perubahan" type="submit" />
             </form>
         </x-card>
