@@ -16,7 +16,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role)
     {
-        if ($request->user()->role !== $role) {
+        if ($request->user()->role !== $role && $request->user()->is_active == 1) {
             Auth::logout();
             return redirect('/login')->with('error', 'Anda tidak memiliki akses ke halaman tersebut');
         }

@@ -39,10 +39,11 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-            'fullname' => $request->fullname,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => 'user',
+            'fullname'  => $request->fullname,
+            'email'     => $request->email,
+            'password'  => Hash::make($request->password),
+            'role'      => 'user',
+            'is_active' => 0
         ]);
 
         Point::create([
@@ -51,22 +52,27 @@ class RegisteredUserController extends Controller
             'amount'        => 10,
         ]);
 
+        // send verification email
+        $user->sendEmailVerificationNotification();
+
         event(new Registered($user));
 
-        Auth::login($user);
+        return redirect()->route('login');
 
-        if ($user->role === 'admin') {
-            return redirect(RouteServiceProvider::HOME);
-        }
+        // Auth::login($user);
 
-        if ($user->role === 'user') {
-            return redirect(RouteServiceProvider::USER);
-        }
+        // if ($user->role === 'admin') {
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
 
-        if ($user->role == 'facilitator') {
-            return redirect(RouteServiceProvider::FACILITATOR);
-        }
+        // if ($user->role === 'user') {
+        //     return redirect(RouteServiceProvider::USER);
+        // }
 
-        Auth::logout();
+        // if ($user->role == 'facilitator') {
+        //     return redirect(RouteServiceProvider::FACILITATOR);
+        // }
+
+        // Auth::logout();
     }
 }

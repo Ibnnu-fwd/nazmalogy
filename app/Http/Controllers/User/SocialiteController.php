@@ -23,6 +23,13 @@ class SocialiteController extends Controller
 
         if ($userFromDatabase) {
             $pointType = PointType::where('name', 'login')->first();
+            $point = Point::where('user_id', $userFromDatabase->id)->where('point_type_id', $pointType->id)->first();
+
+            // check if user already login today
+            if ($point && $point->created_at->isToday()) {
+                auth()->login($userFromDatabase);
+                return redirect()->route('user.dashboard.index');
+            }
             Point::create([
                 'user_id'       => $userFromDatabase->id,
                 'point_type_id' => $pointType->id,

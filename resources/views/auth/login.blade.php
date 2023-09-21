@@ -26,9 +26,9 @@
                     <ion-icon name="logo-google" class="text-xl"></ion-icon> Masuk dengan Google
                 </a>
             </form>
-            <p class="font-medium text-tiny text-black text-center mt-7">Belum Punya Akun? <span
+            {{-- <p class="font-medium text-tiny text-black text-center mt-7">Belum Punya Akun? <span
                     class="font-medium text-tiny text-[#ED7F22]"><a href="{{ route('register') }}">Daftar
-                        Sekarang</a></span></p>
+                        Sekarang</a></span></p> --}}
         </div>
 
         {{-- Side image --}}
