@@ -230,4 +230,28 @@ class CourseRepository implements CourseInterface
     {
         return $this->course->where('author_id', $authorId)->get();
     }
+
+    public function getByCategories($categories)
+    {
+        return $this->course->whereIn('course_category_id', $categories)->get();
+    }
+
+    public function filter()
+    {
+        $courses = $this->course->query()
+            ->when(request()->filled('categories'), function ($query) {
+                $query->whereIn('course_category_id', request()->categories);
+            })
+            ->when(request()->filled('type'), function ($query) {
+                $query->where('price', request()->type == 'free' ? 0 : '>', 0);
+            })
+            ->when(request()->filled('range'), function ($query) {
+                // exp  = cheap -> expensive
+                // price = expensive -> cheap
+                $query->orderBy('price', request()->range == 'exp' ? 'desc' : 'asc'); // Corrected order
+            })
+            ->get(); // Use get() to execute the query and retrieve the results.
+
+        return $courses;
+    }
 }

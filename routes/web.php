@@ -60,6 +60,7 @@ Route::get('/login', [AuthenticatedSessionController::class, 'login'])->name('au
 
 Route::get('help', [HelpController::class, 'index'])->name('user.help.index');
 Route::get('course', [CourseController::class, 'index'])->name('course.index');
+Route::get('course/filter', [CourseController::class, 'filter'])->name('course.filter');
 Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show');
 Route::get('course-player', [CourseController::class, 'player'])->name('course.player');
 
@@ -337,7 +338,7 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     //Member Learning History
     Route::group(['prefix' => 'history-member', 'as' => 'facilitator.history-member.'], function () {
         Route::get('/', [FacilitatorLearningHistoryController::class, 'member'])->name('member');
-        Route::get('{id}/detail', [FacilitatorLearningHistoryController::class, 'detail'])->name('detail'); 
+        Route::get('{id}/detail', [FacilitatorLearningHistoryController::class, 'detail'])->name('detail');
     })->middleware('check-role:facilitator');
 });
 

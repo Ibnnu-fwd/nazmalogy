@@ -25,58 +25,33 @@
                 <h3 class="text-xs 2xl:text-sm font-semibold mb-4">
                     Kategori
                 </h3>
-                <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
-                        Bisnis
-                    </label>
-                </div>
-                <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
-                        E-Business
-                    </label>
-                </div>
-                <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
-                        Marketing
-                    </label>
-                </div>
-                <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
-                        Manajemen Proyek
-                    </label>
-                </div>
-                <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
-                        Entrepreneurship
-                    </label>
-                </div>
+                @foreach ($courseCategories as $category)
+                    <div class="flex items-center mb-3">
+                        <input id="category-{{ $category->id }}" type="checkbox" name="category[]"
+                            value="{{ $category->id }}"
+                            class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                        <label for="category-{{ $category->id }}" class="ml-2 text-sm font-normal text-gray-900">
+                            {{ $category->name }}
+                        </label>
+                    </div>
+                @endforeach
 
 
                 <h3 class="text-xs 2xl:text-sm font-semibold mb-4">
                     Jenis Kursus
                 </h3>
                 <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
+                    <input id="premium" type="radio" name="type" value="premium"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                    <label for="premium" class="ml-2 text-sm font-normal text-gray-900">
                         Premium
                     </label>
                 </div>
                 <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
-                        Gratis
+                    <input id="free" type="radio" name="type" value="free"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                    <label for="free" class="ml-2 text-sm font-normal text-gray-900">
+                        Free
                     </label>
                 </div>
 
@@ -84,84 +59,84 @@
                     Harga
                 </h3>
                 <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
+                    <input id="cheap" type="radio" name="range" value="cheap"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                    <label for="cheap" class="ml-2 text-sm font-normal text-gray-900">
                         Murah - Mahal
                     </label>
                 </div>
                 <div class="flex items-center mb-3">
-                    <input id="default-checkbox" type="checkbox" value=""
-                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="default-checkbox" class="ml-2 text-sm font-normal text-gray-900">
+                    <input id="exp" type="radio" name="range" value="exp"
+                        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                    <label for="exp" class="ml-2 text-sm font-normal text-gray-900">
                         Mahal - Murah
                     </label>
                 </div>
             </div>
             <div class="col-span-3">
-                <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3">
+                <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3" id="course-list">
                     @foreach ($courses as $course)
-                    <div class="max-w-sm bg-white rounded-xl border border-gray-100 h-fit">
-                        <a href="{{ route('course.show', $course->id) }}">
-                            <img class="rounded-t-xl h-52 object-center object-cover w-full"
-                                src="{{ $course->thumbnail ? asset('storage/courses/' . $course->thumbnail) : asset('assets/noimage.svg') }}"
-                                alt="" />
-                        </a>
-                        <div class="p-5">
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center gap-x-2">
-                                    <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                                    <span class="text-xs 2xl:text-sm font-medium">
-                                        {{ $course->courseCategory->name }}
-                                    </span>
-                                </div>
-                                <div class="flex items-center">
-                                    <ion-icon name="star"
-                                        class="text-[#F3AB1D] rounded mr-1 w-[12] h-[12]"></ion-icon>
-                                    <span class="text-xs 2xl:text-sm font-medium">
-                                        <!-- ini belum dihitung -->
-                                        (5.0)
-                                    </span>
-                                </div>
-                            </div>
+                        <div class="max-w-sm bg-white rounded-xl border border-gray-100 h-fit">
                             <a href="{{ route('course.show', $course->id) }}">
-                                <h5
-                                    class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
-                                    {{ ucwords($course->name) }}
-                                </h5>
+                                <img class="rounded-t-xl h-52 object-center object-cover w-full"
+                                    src="{{ $course->thumbnail ? asset('storage/courses/' . $course->thumbnail) : asset('assets/noimage.svg') }}"
+                                    alt="" />
                             </a>
-                            <div class="flex items-end justify-between mt-4">
-                                <div>
-                                    @if ($course->discount)
-                                        <p class="text-xs 2xl:text-sm line-through text-danger animate-pulse">
-                                            {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
-                                        </p>
-                                        <p class="text-xs 2xl:text-md font-semibold">
-                                            {{ 'Rp. ' . number_format($course->discount, 0, ',', '.') }}
-                                        </p>
-                                    @else
-                                        <p class="text-xs 2xl:text-md font-semibold">
-                                            {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
-                                        </p>
-                                    @endif
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-x-2">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+                                        <span class="text-xs 2xl:text-sm font-medium">
+                                            {{ $course->courseCategory->name }}
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <ion-icon name="star"
+                                            class="text-[#F3AB1D] rounded mr-1 w-[12] h-[12]"></ion-icon>
+                                        <span class="text-xs 2xl:text-sm font-medium">
+                                            <!-- ini belum dihitung -->
+                                            (5.0)
+                                        </span>
+                                    </div>
                                 </div>
-                                <p class="text-gray-400 text-xs 2xl:text-tiny">
-                                    {{ $course->transactions->count() }} peserta
-                                </p>
+                                <a href="{{ route('course.show', $course->id) }}">
+                                    <h5
+                                        class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
+                                        {{ ucwords($course->name) }}
+                                    </h5>
+                                </a>
+                                <div class="flex items-end justify-between mt-4">
+                                    <div>
+                                        @if ($course->discount)
+                                            <p class="text-xs 2xl:text-sm line-through text-danger animate-pulse">
+                                                {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
+                                            </p>
+                                            <p class="text-xs 2xl:text-md font-semibold">
+                                                {{ 'Rp. ' . number_format($course->discount, 0, ',', '.') }}
+                                            </p>
+                                        @else
+                                            <p class="text-xs 2xl:text-md font-semibold">
+                                                {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                    <p class="text-gray-400 text-xs 2xl:text-tiny">
+                                        {{ $course->transactions->count() }} peserta
+                                    </p>
+                                </div>
+                                @auth
+                                    @if ($course->is_bought)
+                                        <a
+                                            class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
+                                            Dibeli
+                                            <ion-icon name="checkmark-circle"
+                                                class="text-purple-500 text-xl ml-2"></ion-icon>
+                                        </a>
+                                    @endif
+                                @endauth
                             </div>
-                            @auth
-                                @if ($course->is_bought)
-                                    <a
-                                        class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
-                                        Dibeli
-                                        <ion-icon name="checkmark-circle"
-                                            class="text-purple-500 text-xl ml-2"></ion-icon>
-                                    </a>
-                                @endif
-                            @endauth
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -187,6 +162,73 @@
                 })
             })
 
+            $(function() {
+                let categories = [];
+                let type;
+                let range;
+
+                $('input[name="category[]"]').on('change', function() {
+                    // remove range checkbox
+                    $('input[name="range"]').prop('checked', false);
+                    if ($(this).is(':checked')) {
+                        categories.push($(this).val());
+                    } else {
+                        categories.splice(categories.indexOf($(this).val()), 1);
+                    }
+
+                    $.ajax({
+                        url: "{{ route('course.filter') }}",
+                        method: 'GET',
+                        data: {
+                            categories: categories,
+                            type: type,
+                            range: range
+                        },
+                        success: function(data) {
+                            $('#course-list').html(data);
+                        }
+                    })
+                })
+
+                $('input[name="type"]').on('change', function() {
+                    type = $(this).val();
+
+                    $.ajax({
+                        url: "{{ route('course.filter') }}",
+                        method: 'GET',
+                        data: {
+                            categories: categories,
+                            type: type,
+                            range: range
+                        },
+                        success: function(data) {
+                            $('#course-list').html(data);
+                        }
+                    })
+                })
+
+                $('input[name="range"]').on('change', function() {
+                    range = $(this).val();
+
+                    // remove checked in type
+                    $('input[name="type"]').prop('checked', false);
+
+                    $.ajax({
+                        url: "{{ route('course.filter') }}",
+                        method: 'GET',
+                        data: {
+                            categories: categories,
+                            type: type,
+                            range: range
+                        },
+                        success: function(data) {
+                            $('#course-list').html(data);
+                        }
+                    })
+                })
+
+
+            });
         </script>
     @endpush
 </x-guest-layout>

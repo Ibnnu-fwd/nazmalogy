@@ -16,16 +16,16 @@ class CourseController extends Controller
 
     public function __construct(CourseInterface $course, TransactionInterface $transaction, CourseCategoryInterface $courseCategory)
     {
-        $this->course      = $course;
+        $this->course         = $course;
         $this->courseCategory = $courseCategory;
-        $this->transaction = $transaction;
+        $this->transaction    = $transaction;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('user.course.index',[
-            'courseCategories'    => $this->courseCategory->getAll(),
-            'courses'             => $this->course->getAll(),
+        return view('user.course.index', [
+            'courseCategories' => $this->courseCategory->getAll(),
+            'courses'          => $this->course->getAll(),
         ]);
     }
 
@@ -40,5 +40,13 @@ class CourseController extends Controller
     public function player()
     {
         return view('user.course.player');
+    }
+
+    public function filter()
+    {
+        $courses = $this->course->filter();
+        return view('user.course.item', [
+            'courses' => $courses
+        ])->render();
     }
 }
