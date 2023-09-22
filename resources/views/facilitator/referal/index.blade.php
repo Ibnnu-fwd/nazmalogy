@@ -29,6 +29,7 @@
                         <tr>
                             <th scope="col" class="px-4 py-3">Kode</th>
                             <th scope="col" class="px-4 py-3">Tgl. Kadaluarsa</th>
+                            <th scope="col" class="px-4 py-3">Jumlah User</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Aksi</span>
                             </th>
@@ -56,6 +57,8 @@
                                                 fontSize="text-tiny" />
                                         @endif
                                     </div>
+                                </td>
+                                <td class="px-4 py-3">
                                 </td>
                             </tr>
                         @endforeach

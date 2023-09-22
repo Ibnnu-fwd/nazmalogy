@@ -1,7 +1,7 @@
 <x-app-layout>
 
     @php
-        $dashboard = route('facilitator.dashboard.index');
+        $dashboard = route('facilitator.index');
     @endphp
 
     <x-breadcrumb :items="[
