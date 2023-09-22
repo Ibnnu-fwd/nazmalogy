@@ -31,7 +31,7 @@
                         <tr>
                             <th scope="col" class="px-4 py-3">Kode</th>
                             <th scope="col" class="px-4 py-3">Tgl. Kadaluarsa</th>
-                            <th scope="col" class="px-4 py-3">Jumlah User</th>
+                            <th scope="col" class="px-4 py-3">Jumlah Pengguna</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Aksi</span>
                             </th>
@@ -49,6 +49,9 @@
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                                     {{ \Carbon\Carbon::parse($data->expire_at)->locale('id')->isoFormat('LL') }}
                                 </th>
+                                <td class="px-4 py-3">
+                                    {{ \App\Models\AttemptReferal::where('ref_code', $data->ref_code)->where('is_success', true)->count()}}
+                                </td>
                                 <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
                                         @if ($isExpired)
