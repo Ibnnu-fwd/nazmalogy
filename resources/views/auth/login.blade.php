@@ -17,7 +17,8 @@
                 <input type="password" name="password"
                     class="w-full text-xs 2xl:text-tiny mt-5 bg-white border-none shadow-sm rounded-full h-14 p-4"
                     placeholder="Kata Sandi">
-                {{-- <a href="#" class="text-[#8E8E8E] font-normal text-tiny float-right mt-4">Lupa Sandi?</a> --}}
+                <a href="{{ route('password.request') }}"
+                    class="text-[#8E8E8E] font-normal text-tiny float-right mt-4">Lupa Sandi?</a>
                 <button type="submit"
                     class="w-full h-14 text-xs 2xl:text-sm bg-[#2C2F75] text-white rounded-full mt-9">Masuk
                     Sekarang</button>

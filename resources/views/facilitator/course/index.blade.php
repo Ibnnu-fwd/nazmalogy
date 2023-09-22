@@ -74,7 +74,7 @@
                                 </td>
                                 <td scope="row" class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
-                                        @if ($data->is_active)
+                                        @if ($data->publish_status == 1)
                                             <x-button-edit id="edit-course-button-{{ $data->id }}"
                                                 modalTarget="create-course" onclick="edit({{ $data->id }})" />
                                             <x-button-delete id="delete-course-button-{{ $data->id }}"

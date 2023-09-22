@@ -140,7 +140,7 @@ class CourseRepository implements CourseInterface
 
     public function recover($id)
     {
-        return $this->course->where('id', $id)->update(['is_active' => true]);
+        return $this->course->where('id', $id)->update(['publish_status' => true]);
     }
 
     public function getUserProgress($courseId, $userId)

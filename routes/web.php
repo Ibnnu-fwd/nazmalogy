@@ -42,7 +42,6 @@ use App\Http\Controllers\FillPDFController;
 use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
 use App\Http\Controllers\User\PointController as UserPointController;
 use App\Http\Controllers\User\SocialiteController;
-use App\Models\CourseCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -269,7 +268,7 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
     Route::group(['prefix' => 'course-last-task', 'as' => 'facilitator.course-last-task.'], function () {
         Route::get('{course_id}', [FacilitatorCourseLastTaskController::class, 'index'])->name('index');
         Route::get('{id}/show', [FacilitatorCourseLastTaskController::class, 'show'])->name('show');
-        Route::post('{course_id}', [FacilitatorFacilitatorCourseLastTaskController::class, 'store'])->name('store');
+        Route::post('{course_id}', [FacilitatorCourseLastTaskController::class, 'store'])->name('store');
         Route::put('{id}', [FacilitatorCourseLastTaskController::class, 'update'])->name('update');
         Route::delete('{id}', [FacilitatorCourseLastTaskController::class, 'destroy'])->name('destroy');
         Route::post('{id}/restore', [FacilitatorCourseLastTaskController::class, 'restore'])->name('restore');
