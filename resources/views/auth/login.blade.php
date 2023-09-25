@@ -1,6 +1,6 @@
 <x-auth-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
 
 
     {{-- Login page --}}
@@ -56,6 +56,16 @@
                     text: '{{ Session::get('error') }}',
                 });
             @endif
+
+            @if (Session::has('status'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ Session::get('status') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+                @endif
         </script>
     @endpush
 </x-auth-layout>

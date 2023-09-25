@@ -55,10 +55,10 @@ class ReferalController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy()
     {
-        $this->referal->destroy($id);
-        return redirect()->back()->with('success', 'Kode referal berhasil dihapus');
+        $this->referal->destroy();
+        return redirect()->back()->with('success', 'Kode referal yang expired berhasil dihapus');
     }
 
     public function restore($id)

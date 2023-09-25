@@ -325,7 +325,7 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::get('{id}/show', [ReferalController::class, 'show'])->name('show');
         Route::post('/', [ReferalController::class, 'store'])->name('store');
         Route::put('{id}', [ReferalController::class, 'update'])->name('update');
-        Route::delete('{id}', [ReferalController::class, 'destroy'])->name('destroy');
+        Route::delete('/', [ReferalController::class, 'destroy'])->name('destroy');
         Route::post('{id}/restore', [ReferalController::class, 'restore'])->name('restore');
     })->middleware('check-role:facilitator');
 

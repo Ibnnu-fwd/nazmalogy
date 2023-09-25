@@ -21,6 +21,8 @@
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                     <x-button text="Tambah Referal" icon="add" backgroundColor="primary" hoverColor="primary"
                         fontSize="text-tiny" id="add-referal-button" onclick="add()" modalTarget="create-referal" />
+                    <x-button-delete-all text="Hapus Referal Kadaluarsa" icon="trash" backgroundColor="primary" hoverColor="danger"
+                        fontSize="text-tiny" id="delete-referal-button" onclick="destroy()" modalTarget="delete-modal" />
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -29,6 +31,7 @@
                         <tr>
                             <th scope="col" class="px-4 py-3">Kode</th>
                             <th scope="col" class="px-4 py-3">Tgl. Kadaluarsa</th>
+                            <th scope="col" class="px-4 py-3">Jumlah Pengguna</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Aksi</span>
                             </th>
@@ -36,6 +39,9 @@
                     </thead>
                     <tbody>
                         @foreach ($referals as $data)
+                            @php
+                                $isExpired = \Carbon\Carbon::now()->isAfter($data->expire_at);
+                            @endphp
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
                                 <td class="px-4 py-3">
                                     {{ $data->ref_code }}
@@ -44,12 +50,15 @@
                                     {{ \Carbon\Carbon::parse($data->expire_at)->locale('id')->isoFormat('LL') }}
                                 </th>
                                 <td class="px-4 py-3">
+                                    {{ \App\Models\AttemptReferal::where('ref_code', $data->ref_code)->where('is_success', true)->count()}}
+                                </td>
+                                <td class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
-                                        @if ($data->is_active)
+                                        @if ($isExpired)
+                                            <span class="text-gray-500">Kadaluarsa</span>
+                                        @elseif ($data->is_active)
                                             <x-button-edit id="edit-referal-button-{{ $data->id }}"
                                                 modalTarget="create-referal" onclick="edit({{ $data->id }})" />
-                                            <x-button-delete id="delete-referal-button-{{ $data->id }}"
-                                                modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
                                         @else
                                             <x-button text="Aktifkan" onclick="restore('{{ $data->id }}')"
                                                 icon="checkmark" backgroundColor="primary" hoverColor="primary"
@@ -57,8 +66,11 @@
                                         @endif
                                     </div>
                                 </td>
+                                <td class="px-4 py-3">
+                                </td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
