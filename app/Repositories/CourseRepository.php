@@ -238,7 +238,8 @@ class CourseRepository implements CourseInterface
 
     public function filter()
     {
-        $courses = $this->course->query()
+        $courses = $this->course
+        ->query()
             ->when(request()->filled('categories'), function ($query) {
                 $query->whereIn('course_category_id', request()->categories);
             })
@@ -250,7 +251,8 @@ class CourseRepository implements CourseInterface
                 // price = expensive -> cheap
                 $query->orderBy('price', request()->range == 'exp' ? 'desc' : 'asc'); // Corrected order
             })
-            ->get(); // Use get() to execute the query and retrieve the results.
+            ->where('publish_status', true)
+            ->get();
 
         return $courses;
     }
