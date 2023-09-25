@@ -1,13 +1,10 @@
 <x-app-layout>
 
     @php
-        $dashboard = route('facilitator.dashboard.index');
+        $dashboard = route('facilitator.index');
     @endphp
 
-    <x-breadcrumb :items="[
-        ['text' => 'Dashboard', 'link' => $dashboard],
-        ['text' => 'Riwayat Belajar', 'link' => null],
-    ]" />
+    <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Riwayat Belajar', 'link' => null]]" />
     <x-card>
         <!-- Start coding here -->
         <div class="bg-white relative sm:rounded-lg overflow-hidden">
