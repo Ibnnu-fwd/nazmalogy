@@ -11,6 +11,7 @@ use App\Interfaces\PointInterface;
 use App\Interfaces\UserCourseChapterLogInterface;
 use App\Models\CourseChapter;
 use App\Models\PointType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LearningController extends Controller
@@ -54,12 +55,29 @@ class LearningController extends Controller
 
         $chapter   = CourseChapter::where('id', $chapter_id)->first()->title;
         $pointType = PointType::where('name', 'watch_course')->first();
-        Point::create([
-            'user_id'       => auth()->user()->id,
-            'amount'        => $pointType->amount,
-            'point_type_id' => $pointType->id,
-            'description'   => 'watch course: ' . $chapter,
+        $point     = Point::where([
+            ['user_id', auth()->user()->id],
+            ['point_type_id', $pointType->id],
+            ['description', 'watch course: ' . $chapter],
         ]);
+
+        if (!$point) {
+            Point::create([
+                'user_id'       => auth()->user()->id,
+                'amount'        => $pointType->amount,
+                'point_type_id' => $pointType->id,
+                'description'   => 'watch course: ' . $chapter,
+            ]);
+        }
+
+        if (Carbon::parse($point->created_at)->diffInDays(Carbon::now()) > 0) {
+            Point::create([
+                'user_id'       => auth()->user()->id,
+                'amount'        => $pointType->amount,
+                'point_type_id' => $pointType->id,
+                'description'   => 'watch course: ' . $chapter,
+            ]);
+        }
 
         $result                 = $this->learning->getByChapterId($chapter_id);
         $result['next_chapter'] = $this->learning->getNextChapter($playlist_id, $chapter_id);
@@ -138,6 +156,22 @@ class LearningController extends Controller
         $nextPlaylist = $this->learning->getNextPlaylist($playlist_id);
 
         if ($nextPlaylist == null) {
+            $pointType = PointType::where('name', 'finished_course')->first();
+            $point     = Point::where([
+                ['user_id', auth()->user()->id],
+                ['point_type_id', $pointType->id],
+                ['description', 'finished course: ' . $result['course']['name']],
+            ])->first();
+
+            if (!$point) {
+                Point::create([
+                    'user_id'       => auth()->user()->id,
+                    'point_type_id' => $pointType->id,
+                    'amount'        => $pointType->amount,
+                    'description'   => 'finished course: ' . $result['course']['name'],
+                ]);
+            }
+
             return view('user.course.answer', [
                 'course'       => $result['course'],
                 'quiz'         => $result['quiz'],
@@ -184,6 +218,21 @@ class LearningController extends Controller
         // dd($nextPlaylist);
 
         if ($nextPlaylist == null) {
+            $pointType = PointType::where('name', 'finished_course')->first();
+            $point     = Point::where([
+                ['user_id', auth()->user()->id],
+                ['point_type_id', $pointType->id],
+                ['description', 'finished course: ' . $result['course']['name']],
+            ])->first();
+
+            if (!$point) {
+                Point::create([
+                    'user_id'       => auth()->user()->id,
+                    'point_type_id' => $pointType->id,
+                    'amount'        => $pointType->amount,
+                    'description'   => 'finished course: ' . $result['course']['name'],
+                ]);
+            }
             return view('user.course.answer', [
                 'course'       => $result['course'],
                 'quiz'         => $result['quiz'],

@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Interfaces\CourseLastTaskInterface;
 use App\Models\CourseLastTask;
+use App\Models\Point;
+use App\Models\PointType;
 use App\Models\Submission;
 use Illuminate\Support\Facades\Storage;
 
@@ -56,6 +58,21 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
     public function attempt($id, $data)
     {
         $submission = $this->submission->find($id);
+        $pointType  = PointType::where('name', 'submission')->first();
+        $point      = Point::where([
+            'user_id'       => auth()->user()->id,
+            'point_type_id' => $pointType->id,
+            'description'   => 'Submission ' . $submission->courseLastTask->name,
+        ])->first();
+
+        if (!$point) {
+            Point::create([
+                'user_id'       => auth()->user()->id,
+                'point_type_id' => $pointType->id,
+                'amount'        => $pointType->amount,
+                'description'   => 'Submission ' . $submission->courseLastTask->name,
+            ]);
+        }
 
         if ($submission) {
             if ($submission->attachment) {

@@ -45,11 +45,23 @@ class AuthenticatedSessionController extends Controller
                     'user_id'       => $user->id,
                     'point_type_id' => $pointType->id,
                     'amount'        => $pointType->amount,
+                    'description'   => 'Daily log in',
                 ]);
             }
 
             return redirect('/');
         } elseif ($role === 'facilitator') {
+            $pointType = PointType::where('name', 'login')->first();
+            $point     = Point::where('user_id', $user->id)->latest()->first();
+
+            if (!$point || $point->created_at->diffInHours(now()) >= 24) {
+                Point::create([
+                    'user_id'       => $user->id,
+                    'point_type_id' => $pointType->id,
+                    'amount'        => $pointType->amount,
+                    'description'   => 'Daily log in',
+                ]);
+            }
             return redirect()->route('facilitator.index');
         }
 

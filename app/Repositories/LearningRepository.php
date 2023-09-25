@@ -7,10 +7,13 @@ use App\Interfaces\QuestionInterface;
 use App\Models\Course;
 use App\Models\CourseChapter;
 use App\Models\Playlist;
+use App\Models\Point;
+use App\Models\PointType;
 use App\Models\Quiz;
 use App\Models\Transaction;
 use App\Models\UserCourseChapterLog;
 use App\Models\UserQuizLog;
+use Carbon\Carbon;
 
 class LearningRepository implements LearningInterface
 {
@@ -193,6 +196,31 @@ class LearningRepository implements LearningInterface
 
         // check if all answer is correct
         if ($correctAnswer == count($data)) {
+            $poinType = PointType::where('name', 'attempt_quiz')->first();
+            $point     = Point::where([
+                ['user_id', auth()->user()->id],
+                ['point_type_id', $poinType->id],
+                ['description', 'attempt quiz: ' . Quiz::find($quiz_id)->title],
+            ]);
+
+            if (!$point) {
+                Point::create([
+                    'user_id'        => auth()->user()->id,
+                    'point_type_id'  => $poinType->id,
+                    'amount'         => $poinType->amount,
+                    'description'    => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
+                ]);
+            }
+
+            if (Carbon::parse($point->created_at)->diffInDays(now()) > 0) {
+                Point::create([
+                    'user_id'        => auth()->user()->id,
+                    'point_type_id'  => $poinType->id,
+                    'amount'         => $poinType->amount,
+                    'description'    => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
+                ]);
+            }
+
             if ($userQuizLog) {
                 $userQuizLog->update([
                     'correct_answers' => $correctAnswer,
