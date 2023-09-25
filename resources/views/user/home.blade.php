@@ -4,7 +4,7 @@
         <section class="">
             <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-12">
                 <div class="mr-auto place-self-center lg:col-span-6">
-                    <p class="text-md text-primary font-medium mb-2">
+                    <p class="text-md text-orange-500 font-medium mb-2">
                         Pelajari Skill Baru
                     </p>
                     <h1 class="max-w-2xl mb-4 text-4xl font-bold tracking-tighter leading-snug md:text-5xl xl:text-6xl ">
@@ -97,7 +97,7 @@
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
             <div class="text-center">
-                <p class="text-primary font-medium text-xs 2xl:text-sm">
+                <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
                     Kembangkan skill yang anda inginkan
                 </p>
                 <p
@@ -217,7 +217,7 @@
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
             <div class="text-center">
-                <p class="text-primary font-medium text-xs 2xl:text-sm">
+                <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
                     Testimoni
                 </p>
                 <p
@@ -284,7 +284,7 @@
                                     class="block w-full px-4 py-2 text-xs 2xl:text-sm font-medium text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-full font-spline focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/50 disabled:opacity-50"
                                     placeholder="Alamat email" required="" autocomplete="off">
                                 <button type="button"
-                                    class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-600 focus:outline-none lg:w-auto focus-visible:outline-primary text-xs 2xl:text-sm">
+                                    class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-500 focus:outline-none lg:w-auto focus-visible:outline-primary text-xs 2xl:text-sm">
                                     <div style="position: relative"></div>
                                     Berlangganan
                                 </button>
