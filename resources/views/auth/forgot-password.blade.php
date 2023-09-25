@@ -14,7 +14,8 @@
                 <input type="email" name="email" id="email"
                     class="rounded-full w-full text-xs 2xl:text-sm bg-white border-none shadow-sm mt-16 h-14 p-4"
                     placeholder="Alamat Email">
-                <button type="submit" class="w-full h-14 bg-[#2C2F75] text-white rounded-full mt-9">Reset
+                <button type="submit"
+                    class="w-full h-14 bg-[#2C2F75] text-white text-xs 2xl:text-sm rounded-full mt-9">Reset
                     Password</button>
                 <p class="font-medium text-sm text-black text-center mt-7">Link Reset Password Akan Dikirim Ke Email
                     Anda.
