@@ -22,7 +22,7 @@
                     <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
                         data-aos-duration="1000">
                         <button type="button"
-                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
+                            class="flex items-center text-sm font-medium 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
                             data-accordion-target="#accordion-arrow-icon-body-1" aria-expanded="false"
                             aria-controls="accordion-arrow-icon-body">
                             <span>Apa Itu NaZMalogy?</span>
@@ -45,7 +45,7 @@
                     <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
                         data-aos-duration="1000">
                         <button type="button"
-                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
+                            class="flex items-center text-sm font-medium 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
                             data-accordion-target="#accordion-arrow-icon-body-2" aria-expanded="false"
                             aria-controls="accordion-arrow-icon-body-2">
                             <span>Apa yang saya dapatkan dari NaZMaLogy?</span>
@@ -67,7 +67,7 @@
                     <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
                         data-aos-duration="1000">
                         <button type="button"
-                            class="flex items-center text-sm font-medium text-xs 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
+                            class="flex items-center text-sm font-medium  2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
                             data-accordion-target="#accordion-arrow-icon-body-3" aria-expanded="false"
                             aria-controls="accordion-arrow-icon-body">
                             <span>Bagaimana cara mengakses kursus berbayar?</span>
