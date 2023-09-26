@@ -71,8 +71,8 @@
                     }
                 @endphp
 
-                <iframe width="100%" height="430" src="{{ $video_url }}?controls=0&rel=0&showinfo=0"
-                    frameborder="0" allowfullscreen class="rounded-2xl"></iframe>
+                <iframe src="{{ $video_url }}?controls=0&rel=0&showinfo=0"
+                    frameborder="0" allowfullscreen class="rounded-2xl w-full aspect-video"></iframe>
 
 
                 {{-- Course Detail --}}
