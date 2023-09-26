@@ -232,7 +232,13 @@ class CourseRepository implements CourseInterface
 
     public function getCourseByAuthorId($authorId)
     {
-        return $this->course->where('author_id', $authorId)->get();
+        $courses = $this->course->where('author_id', $authorId)->get();
+        $courses->map(function ($course) {
+            // course is verified when it has playlist, chapter and quiz
+            $course->is_verified = $course->playlists->count() > 0 && $course->playlists->flatMap(fn ($playlist) => $playlist->chapters)->count() > 0 && $course->playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count() > 0;
+        });
+        
+        return $courses;
     }
 
     public function getByCategories($categories)

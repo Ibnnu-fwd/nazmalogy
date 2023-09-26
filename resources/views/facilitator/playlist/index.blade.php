@@ -1,13 +1,14 @@
 <x-app-layout>
 
     @php
-        $dashboard = route('admin.dashboard.index');
-        $course = route('admin.course.index');
+        $dashboard = route('facilitator.index');
+        $courseUrl = route('facilitator.course.index');
     @endphp
 
     <x-breadcrumb :items="[
         ['text' => 'Dashboard', 'link' => $dashboard],
-        ['text' => 'Kursus', 'link' => $course],
+        ['text' => 'Kursus', 'link' => $courseUrl],
+        ['text' => $course->name, 'link' => null],
         ['text' => 'Playlist', 'link' => ''],
     ]" />
     <x-card>

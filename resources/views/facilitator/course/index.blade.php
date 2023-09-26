@@ -37,6 +37,7 @@
                             <th scope="col" class="px-4 py-3">Bahasa</th>
                             <th scope="col" class="px-4 py-3">Harga</th>
                             <th scope="col" class="px-4 py-3">Diskon</th>
+                            <th scope="col" class="px-4 py-3">Status Publikasi</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Aksi</span>
                             </th>
@@ -72,23 +73,32 @@
                                 <td class="px-4 py-3">
                                     {{ number_format($data->discount, 0, ',', '.') }}
                                 </td>
+                                <td class="px-4 py-3">
+                                    {{ $data->publish_status ? 'Publik' : 'Draft' }}
+                                </td>
                                 <td scope="row" class="px-4 py-3">
                                     <div class="flex items-center justify-end space-x-2">
-                                        @if ($data->publish_status == 1)
-                                            <x-button-edit id="edit-course-button-{{ $data->id }}"
-                                                modalTarget="create-course" onclick="edit({{ $data->id }})" />
-                                            <x-button-delete id="delete-course-button-{{ $data->id }}"
-                                                modalTarget="delete-modal" onclick="destroy({{ $data->id }})" />
-                                            <x-button text="Playlist"
+                                        @if (!$data->is_verified)
+                                            <x-button text="Lengkapi Data"
                                                 onclick="window.location.href='{{ route('facilitator.playlist.index', $data->id) }}'" />
-                                            <x-button text="Tugas Akhir"
-                                                onclick="window.location.href='{{ route('facilitator.course-last-task.index', $data->id) }}'" />
                                         @else
-                                            <form action="{{ route('facilitator.course.recover', $data->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                <x-button-restore type="submit" />
-                                            </form>
+                                            @if (!$data->publish_status)
+                                                <form action="{{ route('facilitator.course.recover', $data->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    <x-button-restore text="Publish" type="submit" />
+                                                </form>
+                                            @else
+                                                <x-button-edit id="edit-course-button-{{ $data->id }}"
+                                                    modalTarget="create-course" onclick="edit({{ $data->id }})" />
+                                                <x-button-delete id="delete-course-button-{{ $data->id }}"
+                                                    modalTarget="delete-modal" onclick="destroy({{ $data->id }})"
+                                                    text="Unpublish" />
+                                                <x-button text="Playlist"
+                                                    onclick="window.location.href='{{ route('facilitator.playlist.index', $data->id) }}'" />
+                                                <x-button text="Submission"
+                                                    onclick="window.location.href='{{ route('facilitator.course-last-task.index', $data->id) }}'" />
+                                            @endif
                                         @endif
                                     </div>
                                 </td>
