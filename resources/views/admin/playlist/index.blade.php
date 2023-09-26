@@ -2,12 +2,13 @@
 
     @php
         $dashboard = route('admin.dashboard.index');
-        $course = route('admin.course.index');
+        $courseUrl = route('admin.course.index');
     @endphp
 
     <x-breadcrumb :items="[
         ['text' => 'Dashboard', 'link' => $dashboard],
-        ['text' => 'Kursus', 'link' => $course],
+        ['text' => 'Kursus', 'link' => $courseUrl],
+        ['text' => $course->name, 'link' => null],
         ['text' => 'Playlist', 'link' => ''],
     ]" />
     <x-card>

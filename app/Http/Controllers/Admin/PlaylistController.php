@@ -3,23 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\CourseInterface;
 use App\Interfaces\PlaylistInterface;
 use Illuminate\Http\Request;
 
 class PlaylistController extends Controller
 {
     private $playlist;
+    private $course;
 
-    public function __construct(PlaylistInterface $playlist)
+    public function __construct(PlaylistInterface $playlist, CourseInterface $course)
     {
         $this->playlist = $playlist;
+        $this->course = $course;
     }
 
     public function index($course_id)
     {
         return view('admin.playlist.index', [
+            'course'    => $this->course->getById($course_id),
             'playlists' => $this->playlist->getByCourseId($course_id),
-            'courseId' => $course_id
+            'courseId'  => $course_id
         ]);
     }
 

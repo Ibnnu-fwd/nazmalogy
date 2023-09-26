@@ -4,6 +4,7 @@
     'onclick' => '',
     'modalTarget' => '',
     'type' => 'button',
+    'text' => 'Hapus',
 ])
 
 <button @if ($id) id="{{ $id }}" @endif
@@ -12,5 +13,5 @@
     @if ($modalTarget) data-modal-target="{{ $modalTarget }}" data-modal-toggle="{{ $modalTarget }}" @endif
     class="block items-center md:flex text-white bg-red-500 hover:bg-red-700 text-xs 2xl:text-tiny font-medium rounded-lg {{ $fontSize }} px-5 py-2.5 text-center"
     type="button">
-    Hapus
+    {{ $text }}
 </button>
