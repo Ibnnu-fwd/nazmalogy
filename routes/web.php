@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\GeneralTestimonialController;
+use App\Http\Controllers\Admin\UserController;  
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
@@ -184,6 +185,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::put('{id}', [GeneralTestimonialController::class, 'update'])->name('update');
         Route::delete('{id}', [GeneralTestimonialController::class, 'destroy'])->name('destroy');
     });
+
+    //Users
+    Route::group(['prefix' => 'users', 'as' => 'admin.users.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('{id}/show', [UserController::class, 'show'])->name('show');
+        Route::delete('{id}', [UserController::class, 'destroy'])->name('destroy');
+        Route::post('{id}/restore', [UserController::class, 'restore'])->name('restore');
+    });
+    
 });
 
 // User

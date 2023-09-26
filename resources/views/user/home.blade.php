@@ -18,10 +18,10 @@
                         class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                         Ayo Mulai
                     </a>
-                    <a href="{{ route('register') }}"
+                    {{-- <a href="{{ route('register') }}"
                         class="inline-flex items-center justify-center px-8 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-gray-500 rounded-full bg-slate-100 hover:bg-slate-200 focus:ring-4 focus:ring-slate-300">
                         Daftar Sekarang
-                    </a>
+                    </a> --}}
                 </div>
                 <div class="hidden lg:mt-0 lg:col-span-6 lg:flex">
                     <img src="{{ asset('assets/images/HERO-01.png') }}" alt="mockup" class="w-[700px] h-min">
@@ -42,7 +42,7 @@
                     Kami menyediakan layanan untuk mempermudah anda mempelajari skills yang anda inginkan
                 </p>
             </div>
-            <div class="grid w-full grid-cols-1 lg:grid-cols-3 col-span-2 gap-6">
+            <div class="grid w-full grid-cols-3 col-span-2 gap-6 sm:mt-5 lg:mt-0 mr-1">
                 <div class="max-w-md p-6 mx-auto bg-white rounded-xl">
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
@@ -267,8 +267,8 @@
     <section class="object-top overflow-hidden bg-cover">
         <div>
             <div class="px-4 py-12 mx-auto max-w-6xl">
-                <div class="px-6 py-6 rounded-3xl md:py-12 md:px-12 lg:px-16 xl:flex xl:items-center">
-                    <div class="xl:w-0 xl:flex-1">
+                <div class="px-6 py-6 rounded-3xl md:py-12 md:px-12 lg:px-16 md:items-center lg:items-center lg:flex xl:items-center">
+                    <div class="xl:w-0 xl:flex-1 ml-16 lg:ml-0">
 
                         <p class="text-4xl tracking-tighter font-bold text-black ">
                             Mari Tetap Terkoneksi
@@ -276,6 +276,7 @@
                         <p class="max-w-3xl text-xs 2xl:text-sm leading-6 text-gray-500">
                             Isi alamat email dibawah untuk mendapatkan informasi terbaru
                         </p>
+
                     </div>
                     <div class="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
                         <form class="flex flex-col items-center justify-center max-w-sm mx-auto" action="">

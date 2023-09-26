@@ -38,6 +38,12 @@
                                 role="none">
                                 {{ auth()->user()->role }}
                             </p>
+                            @if (auth()->user()->role != 'admin')
+                            <p class="text-xs 2xl:text-tiny font-bold flex items-center text-gray-900 truncate dark:text-gray-300"
+                            role="none">
+                            <ion-icon name="ribbon" class="w-4 h-4 mr-2 text-gray-400"></ion-icon> {{ auth()->user()->points->sum('amount') }} 
+                            </p> 
+                            @endif
                         </div>
                         <ul class="py-1 text-xs 2xl:text-sm sidebar" role="none">
                             <li>

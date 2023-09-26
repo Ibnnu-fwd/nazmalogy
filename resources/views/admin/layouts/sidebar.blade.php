@@ -15,6 +15,8 @@
                 <x-sidebar-link label="Testimoni" icon="people" route="{{ route('admin.testimonial.index') }}" />
                 <x-sidebar-link label="Fasilitator" icon="person-circle"
                     route="{{ route('admin.facilitator.index') }}" />
+                <x-sidebar-link label="Pengguna" icon="people"
+                    route="{{ route('admin.users.index') }}" />
             @endif
 
             @if (auth()->user()->role == 'user')
