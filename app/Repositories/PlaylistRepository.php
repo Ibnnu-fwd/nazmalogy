@@ -39,6 +39,15 @@ class PlaylistRepository implements PlaylistInterface
     public function destroy($id)
     {
         $playlist = $this->playlist->findOrFail($id);
+
+        // check if playlist is the last playlist in course, if true, set course publish_status to false
+        $course = $playlist->course;
+        if ($course->playlists()->count() == 1) {
+            $course->update([
+                'publish_status' => false
+            ]);
+        }
+
         $playlist->quiz()->delete();
         $playlist->chapters()->delete();
         $playlist->delete();

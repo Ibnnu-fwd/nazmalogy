@@ -35,7 +35,6 @@ class CourseRepository implements CourseInterface
     public function getAll()
     {
         $courses = $this->course->with('courseCategory')->get();
-        // check if user has bought the course
         if (auth()->check()) {
             $courses->map(function ($course) {
                 $course->is_bought = Transaction::query()
@@ -45,6 +44,11 @@ class CourseRepository implements CourseInterface
                     ->exists();
             });
         }
+
+        $courses->map(function ($course) {
+            // course is verified when it has playlist, chapter and quiz
+            $course->is_verified = $course->playlists->count() > 0 && $course->playlists->flatMap(fn ($playlist) => $playlist->chapters)->count() > 0 && $course->playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count() > 0;
+        });
 
         return $courses;
     }
@@ -239,7 +243,7 @@ class CourseRepository implements CourseInterface
     public function filter()
     {
         $courses = $this->course
-        ->query()
+            ->query()
             ->when(request()->filled('categories'), function ($query) {
                 $query->whereIn('course_category_id', request()->categories);
             })
