@@ -8,6 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- Icon --}}
+    <link rel="icon" href="{{ asset('logo.png') }}">
+
     {{-- <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet"> --}}
     <link href="https://fonts.cdnfonts.com/css/lexend-deca" rel="stylesheet">
 

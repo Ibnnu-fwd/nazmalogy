@@ -8,6 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- Icon --}}
+    <link rel="icon" href="{{ asset('logo.png') }}">
+
     <!-- Fonts -->
     {{-- <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet"> --}}
     {{-- <link href="https://fonts.cdnfonts.com/css/inter" rel="stylesheet"> --}}
@@ -21,7 +24,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef"/>
+    <meta name="theme-color" content="#6777ef" />
     <link rel="apple-touch-icon" href="{{ asset('/logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 </head>
@@ -54,11 +57,11 @@
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
         if (!navigator.serviceWorker.controller) {
-            navigator.serviceWorker.register("/sw.js").then(function (reg) {
+            navigator.serviceWorker.register("/sw.js").then(function(reg) {
                 console.log("Service worker has been registered for scope: " + reg.scope);
             });
         }
-    </script>    
+    </script>
 </body>
 
 </html>
