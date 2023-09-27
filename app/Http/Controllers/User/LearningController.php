@@ -59,7 +59,7 @@ class LearningController extends Controller
             ['user_id', auth()->user()->id],
             ['point_type_id', $pointType->id],
             ['description', 'watch course: ' . $chapter],
-        ]);
+        ])->first();
 
         if (!$point) {
             Point::create([
