@@ -161,7 +161,7 @@ class LearningRepository implements LearningInterface
         $point = Point::where([
             ['user_id', $user->id],
             ['point_type_id', $pointType->id],
-            ['description', 'finished course: ' . $this->courseChapter->find($chapter_id)->playlist->course->title],
+            ['description', 'finished course: ' . $this->courseChapter->find($chapter_id)->playlist->course->name],
         ])->first();
 
         if (!$point) {
@@ -169,7 +169,7 @@ class LearningRepository implements LearningInterface
                 'user_id'       => $user->id,
                 'point_type_id' => $pointType->id,
                 'amount'        => $pointType->amount,
-                'description'   => 'finished course: ' . $this->courseChapter->find($chapter_id)->playlist->course->title,
+                'description'   => 'finished course: ' . $this->courseChapter->find($chapter_id)->playlist->course->name,
             ]);
         }
 
