@@ -57,40 +57,33 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
 
     public function attempt($id, $data)
     {
-        // Find the submission record
-        $submission = $this->submission->with('course_last_task')->where('id', $id)->first();
+        // Find the submission record or create one if it doesn't exist
+        $submission = $this->submission->where('course_last_task_id', $id)->first();
 
-        // Get the point type for submissions
-        $pointType = PointType::where('name', 'submission')->first();
-
-        // Define the description for points
-        $description = 'Submission ' . $submission->course_last_task->name;
-
-        // Check if a point record exists, and create one if not
         if (!$submission) {
-            Point::updateOrCreate(
+            $courseLastTask = $this->courseLastTask->find($id);
+            $pointType = PointType::where('name', 'submission')->first();
+            Point::create(
                 [
                     'user_id'       => auth()->user()->id,
                     'point_type_id' => $pointType->id,
-                    'description'   => $description,
+                    'amount'        => $pointType->amount,
+                    'description'   => 'Submission for: ' . $courseLastTask->title,
                 ],
-                [
-                    'amount' => $pointType->amount,
-                ]
             );
         }
 
+        // Handle file upload and update submission details
+        $filename = uniqid() . '.' . $data['file']->extension();
+        $data['file']->storeAs('public/submissions', $filename);
+
         if ($submission) {
-            // Handle file upload and update submission details
+            // Update existing submission details
             if ($submission->attachment) {
                 // Delete the old attachment
                 Storage::delete('public/submissions/' . $submission->attachment);
             }
 
-            $filename = uniqid() . '.' . $data['file']->extension();
-            $data['file']->storeAs('public/submissions', $filename);
-
-            // Update submission details
             $submission->update([
                 'attachment'  => $filename,
                 'description' => $data['description'],
@@ -100,9 +93,6 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
             return $submission;
         } else {
             // Create a new submission
-            $filename = uniqid() . '.' . $data['file']->extension();
-            $data['file']->storeAs('public/submissions', $filename);
-
             try {
                 return $this->submission->create([
                     'course_last_task_id' => $id,
