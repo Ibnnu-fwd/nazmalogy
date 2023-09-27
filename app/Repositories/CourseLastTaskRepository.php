@@ -58,7 +58,7 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
     public function attempt($id, $data)
     {
         // Find the submission record
-        $submission = $this->submission->find($id);
+        $submission = $this->submission->with('courseLastTask')->where('course_last_task_id', $id)->first();
 
         // Get the point type for submissions
         $pointType = PointType::where('name', 'submission')->first();
