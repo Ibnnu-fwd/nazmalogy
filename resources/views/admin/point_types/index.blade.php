@@ -161,6 +161,7 @@
                     method: 'GET',
                     success: function(result) {
                         $('#create-point-type #name').val(result.name);
+                        $('#create-point-type #name').attr('readonly', true);
                         $('#create-point-type #amount').val(result.amount);
                     }
                 });
