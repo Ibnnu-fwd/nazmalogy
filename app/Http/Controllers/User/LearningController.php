@@ -91,6 +91,27 @@ class LearningController extends Controller
         $result                 = $this->learning->getByChapterId($chapter_id);
         $result['next_chapter'] = $this->learning->getNextChapter($playlist_id, $chapter_id);
 
+        if ($result['next_chapter'] == null) {
+            $pointType = PointType::where('name', 'finished_course')->first();
+            $point     = Point::where([
+                ['user_id', auth()->user()->id],
+                ['point_type_id', $pointType->id],
+                ['description', 'finished course: ' . $result['course']['name']],
+            ])->first();
+
+            if (isset($point)) {
+                Point::create([
+                    'user_id'       => auth()->user()->id,
+                    'point_type_id' => $pointType->id,
+                    'amount'        => $pointType->amount,
+                    'description'   => 'finished course: ' . $result['course']['name'],
+                ]);
+            }
+
+            // return complete
+            return redirect()->route('user.dashboard.index')->with('success', 'Selamat anda telah menyelesaikan course ini');
+        }
+
         if ($result['next_chapter']['type'] == 'chapter') {
             $playlist_id = $result['next_chapter']['playlist_id'];
             $chapter_id  = $result['next_chapter']['chapter_id'];
