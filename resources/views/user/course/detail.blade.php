@@ -71,8 +71,8 @@
                     }
                 @endphp
 
-                <iframe src="{{ $video_url }}?controls=0&rel=0&showinfo=0"
-                    frameborder="0" allowfullscreen class="rounded-2xl w-full aspect-video"></iframe>
+                <iframe src="{{ $video_url }}?controls=0&rel=0&showinfo=0" frameborder="0" allowfullscreen
+                    class="rounded-2xl w-full aspect-video"></iframe>
 
 
                 {{-- Course Detail --}}
@@ -122,7 +122,7 @@
                                                 </div>
                                                 <div>
                                                     <span>
-                                                        {{ Carbon\Carbon::parse($chapter->duration)->format('H:i') }}
+                                                        {{ \Carbon\CarbonInterval::seconds($chapter->duration)->cascade()->locale('id')->forHumans() }}
                                                     </span>
                                                 </div>
                                             </div>
