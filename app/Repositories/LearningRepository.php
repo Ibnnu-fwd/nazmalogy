@@ -196,30 +196,44 @@ class LearningRepository implements LearningInterface
 
         // check if all answer is correct
         if ($correctAnswer == count($data)) {
-            $poinType = PointType::where('name', 'attempt_quiz')->first();
-            $point    = Point::where([
-                ['user_id', auth()->user()->id],
-                ['point_type_id', $poinType->id],
-                ['description', 'attempt quiz: ' . Quiz::find($quiz_id)->title],
+            $pointType = PointType::where('name', 'attempt_quiz')->first();
+            $quiz = Quiz::find($quiz_id);
+            $user = auth()->user();
+
+            $description = 'attempt quiz: ' . $quiz->title;
+
+            // Find the existing point record
+            $point = Point::where([
+                ['user_id', $user->id],
+                ['point_type_id', $pointType->id],
+                ['description', $description],
             ])->first();
 
+            // Check if a point record exists
             if (!$point) {
+                // Create a new point record
                 Point::create([
-                    'user_id'       => auth()->user()->id,
-                    'point_type_id' => $poinType->id,
-                    'amount'        => $poinType->amount,
-                    'description'   => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
+                    'user_id'       => $user->id,
+                    'point_type_id' => $pointType->id,
+                    'amount'        => $pointType->amount,
+                    'description'   => $description,
                 ]);
+            } else {
+                // Check if the existing point record is older than one day
+                $createdDate = Carbon::parse($point->created_at);
+                $currentDate = now();
+
+                if ($createdDate->diffInDays($currentDate) > 0) {
+                    // Create a new point record if the existing one is older than one day
+                    Point::create([
+                        'user_id'       => $user->id,
+                        'point_type_id' => $pointType->id,
+                        'amount'        => $pointType->amount,
+                        'description'   => $description,
+                    ]);
+                }
             }
 
-            if (Carbon::parse($point->created_at)->diffInDays(now()) > 0) {
-                Point::create([
-                    'user_id'       => auth()->user()->id,
-                    'point_type_id' => $poinType->id,
-                    'amount'        => $poinType->amount,
-                    'description'   => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
-                ]);
-            }
 
             if ($userQuizLog) {
                 $userQuizLog->update([
