@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\GeneralTestimonialController;
-use App\Http\Controllers\Admin\UserController;  
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
@@ -67,7 +67,7 @@ Route::get('/login', [AuthenticatedSessionController::class, 'login'])->name('au
 Route::get('help', [HelpController::class, 'index'])->name('user.help.index');
 Route::get('course', [CourseController::class, 'index'])->name('course.index');
 Route::get('course/filter', [CourseController::class, 'filter'])->name('course.filter');
-Route::get('course/{id}', [CourseController::class, 'show'])->name('course.show');
+Route::get('course/{slug}', [CourseController::class, 'show'])->name('course.show');
 Route::get('course-player', [CourseController::class, 'player'])->name('course.player');
 
 Route::get('course/{id}/quiz', [QuizController::class, 'index'])->name('quiz.index');
@@ -193,7 +193,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::delete('{id}', [UserController::class, 'destroy'])->name('destroy');
         Route::post('{id}/restore', [UserController::class, 'restore'])->name('restore');
     });
-    
 });
 
 // User

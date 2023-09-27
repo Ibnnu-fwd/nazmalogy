@@ -147,7 +147,7 @@
 
                     @foreach ($courses as $course)
                         <div class="max-w-sm bg-white rounded-xl border border-gray-100 h-fit">
-                            <a href="{{ route('course.show', $course->id) }}">
+                            <a href="{{ route('course.show', $course->slug) }}">
                                 <img class="rounded-t-xl h-52 object-center object-cover w-full"
                                     src="{{ $course->thumbnail ? asset('storage/courses/' . $course->thumbnail) : asset('assets/noimage.svg') }}"
                                     alt="" />
@@ -267,7 +267,8 @@
     <section class="object-top overflow-hidden bg-cover">
         <div>
             <div class="px-4 py-12 mx-auto max-w-6xl">
-                <div class="px-6 py-6 rounded-3xl md:py-12 md:px-12 lg:px-16 md:items-center lg:items-center lg:flex xl:items-center">
+                <div
+                    class="px-6 py-6 rounded-3xl md:py-12 md:px-12 lg:px-16 md:items-center lg:items-center lg:flex xl:items-center">
                     <div class="xl:w-0 xl:flex-1 ml-16 lg:ml-0">
 
                         <p class="text-4xl tracking-tighter font-bold text-black ">

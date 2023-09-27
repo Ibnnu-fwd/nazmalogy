@@ -17,4 +17,5 @@ interface CourseInterface
     public function getCourseByAuthorId($authorId);
     public function getByCategories($categories);
     public function filter();
+    public function getBySlug($slug);
 }

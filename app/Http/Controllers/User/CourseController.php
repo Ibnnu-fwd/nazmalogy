@@ -29,11 +29,12 @@ class CourseController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($slug)
     {
+        $course = $this->course->getBySlug($slug);
         return view('user.course.detail', [
-            'course'   => $this->course->getById($id),
-            'isBought' => auth()->check() ? $this->transaction->getByUserId(auth()->user()->id)->pluck('course_id')->contains($id) : false,
+            'course'   => $course,
+            'isBought' => auth()->check() ? $this->transaction->getByUserId(auth()->user()->id)->pluck('course_id')->contains($course->id) : false,
         ]);
     }
 

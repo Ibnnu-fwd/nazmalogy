@@ -109,11 +109,44 @@ class CourseRepository implements CourseInterface
             }
 
             $data['author_id'] = auth()->user()->id;
+            $data['slug']      = $this->createSlug($data['name']);
             return $this->course->create($data);
         } catch (\Throwable $th) {
             Storage::delete('public/courses/' . $thumbnailFileName);
             throw $th;
         }
+    }
+
+    public function createSlug($name)
+    {
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
+        $slug = strtolower($slug);
+        $slug = ltrim($slug, '-');
+        $slug = rtrim($slug, '-');
+
+        $course = $this->course->where('slug', $slug)->first();
+        if ($course) {
+            $slug = $slug . '-' . $this->course->where('slug', 'like', $slug . '%')->count();
+        }
+
+        return $slug;
+    }
+
+    public function getBySlug($slug)
+    {
+        $course = $this->course
+            ->with(['courseCategory', 'playlists.chapters.reviews', 'playlists.quiz'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $course->lesson_count = $this->calculateLessonCount($course->playlists);
+        $course->review_count = $this->calculateReviewCount($course->playlists);
+        $course->quiz_count   = $this->calculateQuizCount($course->playlists);
+        $course->duration     = $this->calculateTotalDuration($course->playlists);
+        $course->reviews      = $this->getSortedReviews($course->playlists);
+        $course->total_rating = $course->reviews->avg('rating');
+
+        return $course;
     }
 
     public function update($id, $data)
@@ -128,6 +161,7 @@ class CourseRepository implements CourseInterface
             }
 
             $data['author_id'] = auth()->user()->id;
+            $data['slug']      = $this->createSlug($data['name']);
             $course->update($data);
 
             return $course;
@@ -237,7 +271,7 @@ class CourseRepository implements CourseInterface
             // course is verified when it has playlist, chapter and quiz
             $course->is_verified = $course->playlists->count() > 0 && $course->playlists->flatMap(fn ($playlist) => $playlist->chapters)->count() > 0 && $course->playlists->filter(fn ($playlist) => $playlist->quiz !== null)->count() > 0;
         });
-        
+
         return $courses;
     }
 
@@ -259,7 +293,7 @@ class CourseRepository implements CourseInterface
             ->when(request()->filled('range'), function ($query) {
                 // exp  = cheap -> expensive
                 // price = expensive -> cheap
-                $query->orderBy('price', request()->range == 'exp' ? 'desc' : 'asc'); // Corrected order
+                $query->orderBy('price', request()->range == 'exp' ? 'desc' : 'asc');  // Corrected order
             })
             ->where('publish_status', true)
             ->get();

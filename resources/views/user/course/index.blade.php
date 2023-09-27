@@ -77,7 +77,7 @@
                 <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-3" id="course-list">
                     @foreach ($courses as $course)
                         <div class="max-w-sm bg-white rounded-xl border border-gray-100 h-fit">
-                            <a href="{{ route('course.show', $course->id) }}">
+                            <a href="{{ route('course.show', $course->slug) }}">
                                 <img class="rounded-t-xl h-52 object-center object-cover w-full"
                                     src="{{ $course->thumbnail ? asset('storage/courses/' . $course->thumbnail) : asset('assets/noimage.svg') }}"
                                     alt="" />
@@ -99,7 +99,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <a href="{{ route('course.show', $course->id) }}">
+                                <a href="{{ route('course.show', $course->slug) }}">
                                     <h5
                                         class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
                                         {{ ucwords($course->name) }}
