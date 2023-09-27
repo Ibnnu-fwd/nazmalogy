@@ -234,7 +234,6 @@ class LearningRepository implements LearningInterface
                 }
             }
 
-
             if ($userQuizLog) {
                 $userQuizLog->update([
                     'correct_answers' => $correctAnswer,
@@ -260,6 +259,7 @@ class LearningRepository implements LearningInterface
 
     public function getNextPlaylist($playlist_id)
     {
+
         $nextPlaylist = $this->playlist->where([
             ['id', '>', $playlist_id],
             ['course_id', $this->playlist->find($playlist_id)->course_id]
