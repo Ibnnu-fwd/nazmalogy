@@ -48,7 +48,7 @@
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
                                 <th scope="row"
                                     class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img class="w-10 h-10 rounded-lg"
+                                    <img class="w-10 h-10 rounded-lg object-cover object-center"
                                         src="{{ $data->thumbnail ? asset('storage/courses/' . $data->thumbnail) : asset('assets/noimage.svg') }}"
                                         alt="$data->thumbnail">
                                     <div class="pl-3">
