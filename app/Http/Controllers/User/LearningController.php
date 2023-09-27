@@ -55,13 +55,14 @@ class LearningController extends Controller
 
         $chapter   = CourseChapter::where('id', $chapter_id)->first()->title;
         $pointType = PointType::where('name', 'watch_course')->first();
+
         $point     = Point::where([
             ['user_id', auth()->user()->id],
             ['point_type_id', $pointType->id],
             ['description', 'watch course: ' . $chapter],
         ])->first();
 
-        if ($point == null) {
+        if (isset($point)) {
             Point::create([
                 'user_id'       => auth()->user()->id,
                 'amount'        => $pointType->amount,
@@ -70,7 +71,7 @@ class LearningController extends Controller
             ]);
         }
 
-        if (Carbon::parse($point['created_at'])->diffInDays(Carbon::now()) > 0) {
+        if (Carbon::parse($point->created_at)->diffInDays(Carbon::now()) > 0) {
             Point::create([
                 'user_id'       => auth()->user()->id,
                 'amount'        => $pointType->amount,
@@ -163,7 +164,7 @@ class LearningController extends Controller
                 ['description', 'finished course: ' . $result['course']['name']],
             ])->first();
 
-            if ($point == null) {
+            if (isset($point)) {
                 Point::create([
                     'user_id'       => auth()->user()->id,
                     'point_type_id' => $pointType->id,
@@ -225,7 +226,7 @@ class LearningController extends Controller
                 ['description', 'finished course: ' . $result['course']['name']],
             ])->first();
 
-            if ($point == null) {
+            if (isset($point)) {
                 Point::create([
                     'user_id'       => auth()->user()->id,
                     'point_type_id' => $pointType->id,
