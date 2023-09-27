@@ -5,7 +5,7 @@
         <div class="col-span-1 hidden xl:block">
             <div id="course-material" class="w-100 h-fit bg-white  rounded-lg p-6">
                 <div class="text-base my-5 text-black text-left font-normal">
-                    <p class="font-bold text-base">Dasar-dasar Project Network Planning</p>
+                    <p class="font-bold text-base">{{ $course->name }}</p>
                     <p class="font-normal text-sm text-[#757575]">{{ $course->lesson_count }} Materi Siap Dipelajari</p>
                 </div>
                 <div class="text-sm mt-9 text-black">
