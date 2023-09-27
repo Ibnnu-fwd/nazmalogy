@@ -91,8 +91,10 @@ class LearningController extends Controller
         $result                 = $this->learning->getByChapterId($chapter_id);
         $result['next_chapter'] = $this->learning->getNextChapter($playlist_id, $chapter_id);
 
-        if ($result['next_chapter'] == null) {
-            return redirect()->route('user.learn.chapter', [$playlist_id, $result['next_chapter']['id']]);
+        if ($result['next_chapter']['type'] == 'chapter') {
+            $playlist_id = $result['next_chapter']['playlist_id'];
+            $chapter_id  = $result['next_chapter']['chapter_id'];
+            return redirect()->route('user.learn.chapter', [$playlist_id, $chapter_id]);
         }
 
         if ($result['next_chapter']['type'] == 'quiz') {
