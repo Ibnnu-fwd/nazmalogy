@@ -126,7 +126,7 @@
                                                 </div>
                                             </div>
 
-                                            @if ($playlist->quiz->count() > 0)
+                                            @if (isset($playlist->quiz))
                                                 <div class="flex justify-between items-center text-xs 2xl:text-sm">
                                                     <div class="flex items-center space-x-2">
                                                         <ion-icon name="play-circle"
