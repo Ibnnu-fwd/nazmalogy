@@ -197,27 +197,27 @@ class LearningRepository implements LearningInterface
         // check if all answer is correct
         if ($correctAnswer == count($data)) {
             $poinType = PointType::where('name', 'attempt_quiz')->first();
-            $point     = Point::where([
+            $point    = Point::where([
                 ['user_id', auth()->user()->id],
                 ['point_type_id', $poinType->id],
                 ['description', 'attempt quiz: ' . Quiz::find($quiz_id)->title],
-            ]);
+            ])->first();
 
             if (!$point) {
                 Point::create([
-                    'user_id'        => auth()->user()->id,
-                    'point_type_id'  => $poinType->id,
-                    'amount'         => $poinType->amount,
-                    'description'    => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
+                    'user_id'       => auth()->user()->id,
+                    'point_type_id' => $poinType->id,
+                    'amount'        => $poinType->amount,
+                    'description'   => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
                 ]);
             }
 
             if (Carbon::parse($point->created_at)->diffInDays(now()) > 0) {
                 Point::create([
-                    'user_id'        => auth()->user()->id,
-                    'point_type_id'  => $poinType->id,
-                    'amount'         => $poinType->amount,
-                    'description'    => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
+                    'user_id'       => auth()->user()->id,
+                    'point_type_id' => $poinType->id,
+                    'amount'        => $poinType->amount,
+                    'description'   => 'attempt quiz: ' . Quiz::find($quiz_id)->title,
                 ]);
             }
 
@@ -278,8 +278,8 @@ class LearningRepository implements LearningInterface
         return [
             'correct_answer'   => $result ? $result->correct_answers : 0,
             'incorrect_answer' => $result ? $result->quiz->questions->count() - $result->correct_answers : 0,
-            'total_question'    => $result ? $result->quiz->questions->count() : 0,
-            'is_passed'         => true
+            'total_question'   => $result ? $result->quiz->questions->count() : 0,
+            'is_passed'        => true
         ];
     }
 }
