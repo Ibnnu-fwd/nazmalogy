@@ -56,28 +56,36 @@ class LearningController extends Controller
         $chapter   = CourseChapter::where('id', $chapter_id)->first()->title;
         $pointType = PointType::where('name', 'watch_course')->first();
 
-        $point     = Point::where([
+        // Find the existing point record
+        $point = Point::where([
             ['user_id', auth()->user()->id],
             ['point_type_id', $pointType->id],
             ['description', 'watch course: ' . $chapter],
         ])->first();
 
-        if (isset($point)) {
+        // Check if a point record exists
+        if (!$point) {
+            // Create a new point record
             Point::create([
                 'user_id'       => auth()->user()->id,
                 'amount'        => $pointType->amount,
                 'point_type_id' => $pointType->id,
                 'description'   => 'watch course: ' . $chapter,
             ]);
-        }
+        } else {
+            // Check if the existing point record is older than one day
+            $createdDate = Carbon::parse($point->created_at);
+            $currentDate = Carbon::now();
 
-        if (Carbon::parse($point->created_at)->diffInDays(Carbon::now()) > 0) {
-            Point::create([
-                'user_id'       => auth()->user()->id,
-                'amount'        => $pointType->amount,
-                'point_type_id' => $pointType->id,
-                'description'   => 'watch course: ' . $chapter,
-            ]);
+            if ($createdDate->diffInDays($currentDate) > 0) {
+                // Create a new point record if the existing one is older than one day
+                Point::create([
+                    'user_id'       => auth()->user()->id,
+                    'amount'        => $pointType->amount,
+                    'point_type_id' => $pointType->id,
+                    'description'   => 'watch course: ' . $chapter,
+                ]);
+            }
         }
 
         $result                 = $this->learning->getByChapterId($chapter_id);
@@ -92,9 +100,9 @@ class LearningController extends Controller
         // $user = Auth::user();
 
         // $pointType = PointType::where('name', 'finished_course')->first();
-        // $point     = Point::where('user_id', $user->id)->latest()->first();
+        // $point     = Point::where('user_id', auth()->user()->id)->latest()->first();
         // Point::create([
-        //     'user_id'       => $user->id,
+        //     'user_id'       => auth()->user()->id,
         //     'point_type_id' => $pointType->id,
         //     'amount'        => $pointType->amount,
         //     'description'   => 'finished course: ' . $result['course']['names'],
