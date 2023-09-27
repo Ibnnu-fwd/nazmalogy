@@ -38,12 +38,12 @@ class SubmissionRepository implements SubmissionInterface
                 [
                     'user_id'       => $submission->user_id,
                     'point_type_id' => $pointType->id,
-                    'description'   => 'Submission approved: ' . $this->course->find($submission->course_id)->title,
+                    'description'   => 'Submission approved: ' . $this->course->find($submission->course_id)->name,
                 ],
                 [
                     'amount' => $pointType->amount,
                 ]
-            );
+            );  
         }
 
         $submission->update($data);
