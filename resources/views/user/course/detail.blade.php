@@ -125,24 +125,23 @@
                                                     </span>
                                                 </div>
                                             </div>
-
-                                            @if (isset($playlist->quiz))
-                                                <div class="flex justify-between items-center text-xs 2xl:text-sm">
-                                                    <div class="flex items-center space-x-2">
-                                                        <ion-icon name="play-circle"
-                                                            class="text-gray-500 w-5 h-5"></ion-icon>
-                                                        <span class="text-sm">
-                                                            {{ ucwords($playlist->quiz->title) }}
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span>
-                                                            {{ $playlist->quiz->questions->count() }} Soal
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            @endif
                                         @endforeach
+                                        @if (isset($playlist->quiz))
+                                            <div class="flex justify-between items-center text-xs 2xl:text-sm">
+                                                <div class="flex items-center space-x-2">
+                                                    <ion-icon name="play-circle"
+                                                        class="text-gray-500 w-5 h-5"></ion-icon>
+                                                    <span class="text-sm">
+                                                        {{ ucwords($playlist->quiz->title) }}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        {{ $playlist->quiz->questions->count() }} Soal
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
