@@ -57,47 +57,58 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
 
     public function attempt($id, $data)
     {
+        // Find the submission record
         $submission = $this->submission->find($id);
-        $pointType  = PointType::where('name', 'submission')->first();
-        $point      = Point::where([
-            'user_id'       => auth()->user()->id,
-            'point_type_id' => $pointType->id,
-            'description'   => 'Submission ' . $submission->courseLastTask->name,
-        ])->first();
 
-        if (!$point) {
-            Point::create([
-                'user_id'       => auth()->user()->id,
-                'point_type_id' => $pointType->id,
-                'amount'        => $pointType->amount,
-                'description'   => 'Submission ' . $submission->courseLastTask->name,
-            ]);
+        // Get the point type for submissions
+        $pointType = PointType::where('name', 'submission')->first();
+
+        // Define the description for points
+        $description = 'Submission ' . $submission->courseLastTask->name;
+
+        // Check if a point record exists, and create one if not
+        if (!$submission) {
+            Point::updateOrCreate(
+                [
+                    'user_id'       => auth()->user()->id,
+                    'point_type_id' => $pointType->id,
+                    'description'   => $description,
+                ],
+                [
+                    'amount' => $pointType->amount,
+                ]
+            );
         }
 
         if ($submission) {
+            // Handle file upload and update submission details
             if ($submission->attachment) {
+                // Delete the old attachment
                 Storage::delete('public/submissions/' . $submission->attachment);
-                $filename = uniqid() . '.' . $data['file']->extension();
-                $data['file']->storeAs('public/submissions', $filename);
-                $data['file'] = $filename;
             }
 
-            return $submission->update([
-                'attachment'  => $data['file'],
+            $filename = uniqid() . '.' . $data['file']->extension();
+            $data['file']->storeAs('public/submissions', $filename);
+
+            // Update submission details
+            $submission->update([
+                'attachment'  => $filename,
                 'description' => $data['description'],
                 'status'      => Submission::PENDING_STATUS,
             ]);
+
+            return $submission;
         } else {
+            // Create a new submission
             $filename = uniqid() . '.' . $data['file']->extension();
             $data['file']->storeAs('public/submissions', $filename);
-            $data['file'] = $filename;
 
             try {
                 return $this->submission->create([
                     'course_last_task_id' => $id,
                     'user_id'             => auth()->user()->id,
                     'course_id'           => $this->courseLastTask->find($id)->course_id,
-                    'attachment'          => $data['file'],
+                    'attachment'          => $filename,
                     'description'         => $data['description'],
                     'status'              => Submission::PENDING_STATUS,
                 ]);
