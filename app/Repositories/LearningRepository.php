@@ -156,6 +156,23 @@ class LearningRepository implements LearningInterface
             }
         }
 
+        $pointType = PointType::where('name', 'finished_course')->first();
+        $user = auth()->user();
+        $point = Point::where([
+            ['user_id', $user->id],
+            ['point_type_id', $pointType->id],
+            ['description', 'finished course: ' . $playlist->course->title],
+        ])->first();
+
+        if (!$point) {
+            Point::create([
+                'user_id'       => $user->id,
+                'point_type_id' => $pointType->id,
+                'amount'        => $pointType->amount,
+                'description'   => 'finished course: ' . $playlist->course->title,
+            ]);
+        }
+
         return null;
     }
 
