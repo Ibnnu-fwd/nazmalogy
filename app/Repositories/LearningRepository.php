@@ -138,6 +138,24 @@ class LearningRepository implements LearningInterface
             ];
         }
 
+        // check if there is a next playlist
+        $nextPlaylist = $this->playlist->where([
+            ['id', '>', $playlist_id],
+            ['course_id', $playlist->course_id]
+        ])->first();
+
+        if ($nextPlaylist) {
+            $nextChapter = $nextPlaylist->chapters->first();
+
+            if ($nextChapter) {
+                return [
+                    'type'        => 'chapter',
+                    'chapter_id'  => $nextChapter->id,
+                    'playlist_id' => $nextPlaylist->id,
+                ];
+            }
+        }
+
         return null;
     }
 
