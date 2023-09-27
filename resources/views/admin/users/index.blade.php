@@ -115,21 +115,6 @@
 
     @push('js-internal')
         <script>
-            function edit(id) {
-                $('#create-users form').trigger('reset');
-                let url = "{{ route('admin.users.update', ':id') }}";
-                url = url.replace(':id', id);
-                $('#create-users form').attr('action', url);
-                $('#create-users form').append('<input type="hidden" name="_method" value="PUT">');
-                $.ajax({
-                    url: "{{ route('admin.users.show', ':id') }}".replace(':id', id),
-                    method: 'GET',
-                    success: function(result) {
-                        $('#create-users #fullname').val(result.fullname);
-                        $('#create-users #email').val(result.email);
-                    }
-                });
-            }
 
             function destroy(id) {
                 console.log(id);
