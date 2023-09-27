@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->longText('unique_code', 255)->unique();
+            $table->longText('unique_code', 255);
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
