@@ -1,9 +1,9 @@
 {
-    "name": "NaZMaLogy",
-    "short_name": "LPT",
-    "start_url": "/index.php",
+    "name": "NaZMalogy",
+    "short_name": "NaZMalogy",
+    "start_url": "/",
     "background_color": "#6777ef",
-    "description": "LMS NaZMaLogy",
+    "description": "LMS NaZMalogy",
     "display": "fullscreen",
     "theme_color": "#6777ef",
     "icons": [
