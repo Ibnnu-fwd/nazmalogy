@@ -33,6 +33,7 @@ class CourseLastTaskController extends Controller
             $this->courseLastTask->attempt($id, $request->all());
             return redirect()->back()->with('success', 'Tugas berhasil diunggah');
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return redirect()->back()->with('error', 'Tugas gagal diunggah');
         }
     }
