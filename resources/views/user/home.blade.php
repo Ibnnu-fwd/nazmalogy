@@ -169,7 +169,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <a href="{{ route('course.show', $course->id) }}">
+                                <a href="{{ route('course.show', $course->slug) }}">
                                     <h5
                                         class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
                                         {{ ucwords($course->name) }}
