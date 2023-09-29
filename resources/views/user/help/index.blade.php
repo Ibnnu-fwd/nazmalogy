@@ -1,6 +1,4 @@
 <x-guest-layout>
-
-
     {{-- Question --}}
     <section class="pt-12 pb-24">
         <div class="flex flex-col justify-center flex-1 px-4 mx-auto mt-28 lg:flex-none max-w-7x">
@@ -103,5 +101,4 @@
 
 
     </section>
-
 </x-guest-layout>

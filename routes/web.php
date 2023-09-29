@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\GeneralTestimonialController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\SubmissionController as AdminSubmissionController; 
+use App\Http\Controllers\Admin\SubmissionController as AdminSubmissionController;
 use App\Http\Controllers\User\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HelpController;
@@ -41,6 +41,7 @@ use App\Http\Controllers\User\QuizController;
 use App\Http\Controllers\User\TransactionController;
 use App\Http\Controllers\User\LearningHistoryController;
 use App\Http\Controllers\FillPDFController;
+use App\Http\Controllers\User\CarierController;
 use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
 use App\Http\Controllers\User\PointController as UserPointController;
 use App\Http\Controllers\User\SocialiteController;
@@ -77,6 +78,8 @@ Route::get('course/{id}/quiz/last-question', [QuizController::class, 'lastQuesti
 Route::get('course/{id}/quiz/result', [QuizController::class, 'result'])->name('quiz.result');
 
 Route::get('/generatePDF/{course_id}/{user_id}', [FillPDFController::class, 'process'])->name('generatePDF');
+
+Route::get('carier', [CarierController::class, 'index'])->name('carier.index');
 
 // Admin
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
@@ -200,7 +203,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
     Route::get('submission', [AdminSubmissionController::class, 'index'])->name('admin.submission.index');
     Route::get('submission/{id}/show', [AdminSubmissionController::class, 'show'])->name('admin.submission.show');
     Route::post('submission/{id}/change-status', [AdminSubmissionController::class, 'changeStatus'])->name('admin.submission.change-status');
-
 });
 
 // User

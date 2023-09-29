@@ -118,6 +118,12 @@
                         Bantuan
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('carier.index') }}"
+                        class="block py-2 pl-3 pr-4 text-gray-500 hover:bg-gray-50 rounded md:bg-transparent md:p-0 {{ request()->routeIs('carier.index') ? 'md:text-primary' : 'md:text-gray-900' }}">
+                        Karir
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
