@@ -107,7 +107,7 @@
                             <p class="hidden group-hover:block mt-3 text-xs 2xl:text-sm text-gray-500">
                                 Setelah Anda membeli kursus, Anda dapat mengaksesnya dengan masuk ke akun Anda.
                                 Kursus dan progress kursus yang Anda beli akan tersedia di halaman dashboard Anda,
-                                dan Anda dapat memulai belajar dengan cara mengeklik tombol mulai./p>
+                                dan Anda dapat memulai belajar dengan cara mengeklik tombol mulai.</p>
                         </div>
                         <div class="pt-1">
                             <span class="hidden group-hover:block">
