@@ -239,9 +239,9 @@
                         aria-labelledby="accordion-arrow-icon-heading">
                         <div class="p-5 bg-white rounded-xl">
                             <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. A molestias quasi iusto
-                                voluptas, repellat voluptates at quaerat ea error doloribus libero hic earum eum ullam
-                                harum unde architecto accusantium explicabo!
+                                Melalui
+                                NaZMalogy, anda dapat mengembangkan skill anda sesuai dengan yang ingin anda pelajari,
+                                melalui kursus kursus yang tersedia, baik yang gratis ataupun berbayar.
                             </p>
                         </div>
                     </div>
@@ -261,9 +261,9 @@
                         aria-labelledby="accordion-arrow-icon-heading">
                         <div class="p-5 bg-white rounded-xl">
                             <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam quaerat commodi
-                                consequatur nesciunt ut vel officia quidem laboriosam eius odit, earum voluptatibus quo
-                                tenetur dicta, architecto aut, ab voluptas a.
+                                Anda dapat
+                                membeli kursus tersebut dan mentransfer ke rekening yang tersedia, dan mengunggah bukti
+                                transfer ditempat yang telah disediakan.
                             </p>
                         </div>
                     </div>

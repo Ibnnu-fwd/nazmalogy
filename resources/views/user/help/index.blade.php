@@ -1,104 +1,162 @@
 <x-guest-layout>
-    {{-- Question --}}
-    <section class="pt-12 pb-24">
-        <div class="flex flex-col justify-center flex-1 px-4 mx-auto mt-28 lg:flex-none max-w-7x">
-            <div class="text-center">
-
-                <p class="text-orange-500 font-medium text-sm 2xl:text-sm mb-0">
-                    Bantuan
-                </p>
-                <h1 class="font-bold text-2xl md:text-3xl xl:text-4xl tracking-tighter leading-snug max-w-md mx-auto ">
-                    Pertanyaan Umum
-                </h1>
-            </div>
-        </div>
-
-        <div class="mt-11 mx-auto max-w-4xl">
-            <div class="">
-                <div id="accordion-arrow-icon" data-accordion="open" class="mx-4 md:mx-0">
-
-                    <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
-                        data-aos-duration="1000">
-                        <button type="button"
-                            class="flex items-center text-sm font-medium 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
-                            data-accordion-target="#accordion-arrow-icon-body-1" aria-expanded="false"
-                            aria-controls="accordion-arrow-icon-body">
-                            <span>Apa Itu NaZMalogy?</span>
-                            <ion-icon name="chevron-down-circle-outline" data-accordion-icon
-                                class="shrink-0 -mr-0.5 w-6 h-6"></ion-icon>
-                        </button>
-                    </h2>
-                    <div id="accordion-arrow-icon-body-1" class="hidden mb-4"
-                        aria-labelledby="accordion-arrow-icon-heading">
-                        <div class="p-5 bg-white rounded-full">
-                            <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
+    <section class="relative py-20 overflow-hidden bg-gray-50">
+        <img class="absolute top-0 left-0 mt-44" src="saturn-assets/images/faq/light-blue-left.png" alt="">
+        <img class="absolute top-0 right-0 mt-10" src="saturn-assets/images/faq/star-right.svg" alt="">
+        <div class="relative container px-4 mx-auto">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-24">
+                    <span class="inline-block px-3 mb-2 text-xs 2xl:text-sm font-semibold text-orange-500 rounded-full">
+                        Sering ditanyakan
+                    </span>
+                    <h1 class="font-heading text-5xl xs:text-6xl md:text-4xl font-bold text-gray-900">
+                        <span>Pertanyaan umum</span>
+                    </h1>
+                </div>
+                <div class="pt-12 sm:pt-12 px-8 sm:px-20 pb-18 rounded-4xl">
+                    <button
+                        class="flex mb-8 pb-6 group w-full items-start justify-between border-b border-gray-100 text-left">
+                        <div class="max-w-xl pr-5">
+                            <h3 class="text-xs 2xl:text-sm font-normal text-black group-hover:text-orange-900">Apa itu
+                                NaZMalogy?</h3>
+                            <p class="hidden group-hover:block mt-3 text-xs 2xl:text-sm text-gray-500">Pretium ac auctor
                                 NaZMaLogy adalah Learning Management System (LMS) yang dibangun oleh NaZMa Office yang
                                 memudahkan pengguna dalam pembelajaran jarak jauh. Dengan platform media pembelajaran
                                 berbasis website yang menyediakan video yang inovatif dan interaktif diharapkan
-                                memudahkan pengguna mewujudkan impiannya.
-                            </p>
+                                memudahkan pengguna mewujudkan impiannya.</p>
                         </div>
-                    </div>
-
-                    <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
-                        data-aos-duration="1000">
-                        <button type="button"
-                            class="flex items-center text-sm font-medium 2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
-                            data-accordion-target="#accordion-arrow-icon-body-2" aria-expanded="false"
-                            aria-controls="accordion-arrow-icon-body-2">
-                            <span>Apa yang saya dapatkan dari NaZMaLogy?</span>
-                            <ion-icon name="chevron-down-circle-outline" data-accordion-icon
-                                class="shrink-0 -mr-0.5 w-6 h-6"></ion-icon>
-                        </button>
-                    </h2>
-                    <div id="accordion-arrow-icon-body-2" class="hidden mb-4"
-                        aria-labelledby="accordion-arrow-icon-heading">
-                        <div class="p-5 bg-white rounded-full">
-                            <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. A molestias quasi iusto
-                                voluptas, repellat voluptates at quaerat ea error doloribus libero hic earum eum ullam
-                                harum unde architecto accusantium explicabo!
-                            </p>
+                        <div class="pt-1">
+                            <span class="hidden group-hover:block">
+                                <svg width="17" height="3" viewBox="0 0 17 3" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 0.045166H1.46194C1.19673 0.045166 0.942374 0.150523 0.754838 0.338059C0.567302 0.525596 0.461945 0.77995 0.461945 1.04517C0.461945 1.31038 0.567302 1.56474 0.754838 1.75227C0.942374 1.93981 1.19673 2.04517 1.46194 2.04517H15.4619C15.7272 2.04517 15.9815 1.93981 16.1691 1.75227C16.3566 1.56474 16.4619 1.31038 16.4619 1.04517C16.4619 0.77995 16.3566 0.525596 16.1691 0.338059C15.9815 0.150523 15.7272 0.045166 15.4619 0.045166Z"
+                                        fill="#FF460C"></path>
+                                </svg>
+                            </span>
+                            <span class="block group-hover:hidden">
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 7H9.46194V1C9.46194 0.734784 9.35659 0.48043 9.16905 0.292893C8.98151 0.105357 8.72716 0 8.46194 0C8.19673 0 7.94237 0.105357 7.75484 0.292893C7.5673 0.48043 7.46194 0.734784 7.46194 1V7H1.46194C1.19673 7 0.942374 7.10536 0.754838 7.29289C0.567302 7.48043 0.461945 7.73478 0.461945 8C0.461945 8.26522 0.567302 8.51957 0.754838 8.70711C0.942374 8.89464 1.19673 9 1.46194 9H7.46194V15C7.46194 15.2652 7.5673 15.5196 7.75484 15.7071C7.94237 15.8946 8.19673 16 8.46194 16C8.72716 16 8.98151 15.8946 9.16905 15.7071C9.35659 15.5196 9.46194 15.2652 9.46194 15V9H15.4619C15.7272 9 15.9815 8.89464 16.1691 8.70711C16.3566 8.51957 16.4619 8.26522 16.4619 8C16.4619 7.73478 16.3566 7.48043 16.1691 7.29289C15.9815 7.10536 15.7272 7 15.4619 7Z"
+                                        fill="black"></path>
+                                </svg>
+                            </span>
                         </div>
-                    </div>
-
-                    <h2 id="accordion-arrow-icon-heading" class="rounded-full mb-3 bg-white" data-aos="fade-up"
-                        data-aos-duration="1000">
-                        <button type="button"
-                            class="flex items-center text-sm font-medium  2xl:text-sm justify-between w-full p-5 text-left rounded-full text-black focus:ring-4 focus:ring-gray-200"
-                            data-accordion-target="#accordion-arrow-icon-body-3" aria-expanded="false"
-                            aria-controls="accordion-arrow-icon-body">
-                            <span>Bagaimana cara mengakses kursus berbayar?</span>
-                            <ion-icon name="chevron-down-circle-outline" data-accordion-icon
-                                class="shrink-0 -mr-0.5 w-6 h-6"></ion-icon>
-                        </button>
-                    </h2>
-                    <div id="accordion-arrow-icon-body-3" class="hidden mb-4"
-                        aria-labelledby="accordion-arrow-icon-heading">
-                        <div class="p-5 bg-white rounded-full">
-                            <p class="text-[#464646] text-xs 2xl:text-sm leading-6">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam quaerat commodi
-                                consequatur nesciunt ut vel officia quidem laboriosam eius odit, earum voluptatibus quo
-                                tenetur dicta, architecto aut, ab voluptas a.
-                            </p>
+                    </button>
+                    <button
+                        class="flex mb-8 pb-6 group w-full items-start justify-between border-b border-gray-100 text-left">
+                        <div class="max-w-xl pr-5">
+                            <h3 class="text-xs 2xl:text-sm font-normal text-black group-hover:text-orange-900">Apa yang
+                                saya dapatkan di NaZMalogy?</h3>
+                            <p class="hidden group-hover:block mt-3 text-xs 2xl:text-sm text-gray-500">Melalui
+                                NaZMalogy, anda dapat mengembangkan skill anda sesuai dengan yang ingin anda pelajari,
+                                melalui kursus kursus yang tersedia, baik yang gratis ataupun berbayar.</p>
                         </div>
-                    </div>
-
+                        <div class="pt-1">
+                            <span class="hidden group-hover:block">
+                                <svg width="17" height="3" viewBox="0 0 17 3" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 0.045166H1.46194C1.19673 0.045166 0.942374 0.150523 0.754838 0.338059C0.567302 0.525596 0.461945 0.77995 0.461945 1.04517C0.461945 1.31038 0.567302 1.56474 0.754838 1.75227C0.942374 1.93981 1.19673 2.04517 1.46194 2.04517H15.4619C15.7272 2.04517 15.9815 1.93981 16.1691 1.75227C16.3566 1.56474 16.4619 1.31038 16.4619 1.04517C16.4619 0.77995 16.3566 0.525596 16.1691 0.338059C15.9815 0.150523 15.7272 0.045166 15.4619 0.045166Z"
+                                        fill="#FF460C"></path>
+                                </svg>
+                            </span>
+                            <span class="block group-hover:hidden">
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 7H9.46194V1C9.46194 0.734784 9.35659 0.48043 9.16905 0.292893C8.98151 0.105357 8.72716 0 8.46194 0C8.19673 0 7.94237 0.105357 7.75484 0.292893C7.5673 0.48043 7.46194 0.734784 7.46194 1V7H1.46194C1.19673 7 0.942374 7.10536 0.754838 7.29289C0.567302 7.48043 0.461945 7.73478 0.461945 8C0.461945 8.26522 0.567302 8.51957 0.754838 8.70711C0.942374 8.89464 1.19673 9 1.46194 9H7.46194V15C7.46194 15.2652 7.5673 15.5196 7.75484 15.7071C7.94237 15.8946 8.19673 16 8.46194 16C8.72716 16 8.98151 15.8946 9.16905 15.7071C9.35659 15.5196 9.46194 15.2652 9.46194 15V9H15.4619C15.7272 9 15.9815 8.89464 16.1691 8.70711C16.3566 8.51957 16.4619 8.26522 16.4619 8C16.4619 7.73478 16.3566 7.48043 16.1691 7.29289C15.9815 7.10536 15.7272 7 15.4619 7Z"
+                                        fill="black"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
+                    <button
+                        class="flex mb-8 pb-6 group w-full items-start justify-between border-b border-gray-100 text-left">
+                        <div class="max-w-xl pr-5">
+                            <h3 class="text-xs 2xl:text-sm font-normal text-black group-hover:text-orange-900">
+                                Bagaimanma cara mengakses kursus berbayar?</h3>
+                            <p class="hidden group-hover:block mt-3 text-xs 2xl:text-sm text-gray-500">Anda dapat
+                                membeli kursus tersebut dan mentransfer ke rekening yang tersedia, dan mengunggah bukti
+                                transfer ditempat yang telah disediakan.</p>
+                        </div>
+                        <div class="pt-1">
+                            <span class="hidden group-hover:block">
+                                <svg width="17" height="3" viewBox="0 0 17 3" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 0.045166H1.46194C1.19673 0.045166 0.942374 0.150523 0.754838 0.338059C0.567302 0.525596 0.461945 0.77995 0.461945 1.04517C0.461945 1.31038 0.567302 1.56474 0.754838 1.75227C0.942374 1.93981 1.19673 2.04517 1.46194 2.04517H15.4619C15.7272 2.04517 15.9815 1.93981 16.1691 1.75227C16.3566 1.56474 16.4619 1.31038 16.4619 1.04517C16.4619 0.77995 16.3566 0.525596 16.1691 0.338059C15.9815 0.150523 15.7272 0.045166 15.4619 0.045166Z"
+                                        fill="#FF460C"></path>
+                                </svg>
+                            </span>
+                            <span class="block group-hover:hidden">
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 7H9.46194V1C9.46194 0.734784 9.35659 0.48043 9.16905 0.292893C8.98151 0.105357 8.72716 0 8.46194 0C8.19673 0 7.94237 0.105357 7.75484 0.292893C7.5673 0.48043 7.46194 0.734784 7.46194 1V7H1.46194C1.19673 7 0.942374 7.10536 0.754838 7.29289C0.567302 7.48043 0.461945 7.73478 0.461945 8C0.461945 8.26522 0.567302 8.51957 0.754838 8.70711C0.942374 8.89464 1.19673 9 1.46194 9H7.46194V15C7.46194 15.2652 7.5673 15.5196 7.75484 15.7071C7.94237 15.8946 8.19673 16 8.46194 16C8.72716 16 8.98151 15.8946 9.16905 15.7071C9.35659 15.5196 9.46194 15.2652 9.46194 15V9H15.4619C15.7272 9 15.9815 8.89464 16.1691 8.70711C16.3566 8.51957 16.4619 8.26522 16.4619 8C16.4619 7.73478 16.3566 7.48043 16.1691 7.29289C15.9815 7.10536 15.7272 7 15.4619 7Z"
+                                        fill="black"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
+                    <button
+                        class="flex mb-8 pb-6 group w-full items-start justify-between border-b border-gray-100 text-left">
+                        <div class="max-w-xl pr-5">
+                            <h3 class="text-xs 2xl:text-sm font-normal text-black group-hover:text-orange-900">Bagaimana
+                                saya bisa mengakses kursus yang telah saya beli?</h3>
+                            <p class="hidden group-hover:block mt-3 text-xs 2xl:text-sm text-gray-500">
+                                Setelah Anda membeli kursus, Anda dapat mengaksesnya dengan masuk ke akun Anda.
+                                Kursus dan progress kursus yang Anda beli akan tersedia di halaman dashboard Anda,
+                                dan Anda dapat memulai belajar dengan cara mengeklik tombol mulai./p>
+                        </div>
+                        <div class="pt-1">
+                            <span class="hidden group-hover:block">
+                                <svg width="17" height="3" viewBox="0 0 17 3" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 0.045166H1.46194C1.19673 0.045166 0.942374 0.150523 0.754838 0.338059C0.567302 0.525596 0.461945 0.77995 0.461945 1.04517C0.461945 1.31038 0.567302 1.56474 0.754838 1.75227C0.942374 1.93981 1.19673 2.04517 1.46194 2.04517H15.4619C15.7272 2.04517 15.9815 1.93981 16.1691 1.75227C16.3566 1.56474 16.4619 1.31038 16.4619 1.04517C16.4619 0.77995 16.3566 0.525596 16.1691 0.338059C15.9815 0.150523 15.7272 0.045166 15.4619 0.045166Z"
+                                        fill="#FF460C"></path>
+                                </svg>
+                            </span>
+                            <span class="block group-hover:hidden">
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 7H9.46194V1C9.46194 0.734784 9.35659 0.48043 9.16905 0.292893C8.98151 0.105357 8.72716 0 8.46194 0C8.19673 0 7.94237 0.105357 7.75484 0.292893C7.5673 0.48043 7.46194 0.734784 7.46194 1V7H1.46194C1.19673 7 0.942374 7.10536 0.754838 7.29289C0.567302 7.48043 0.461945 7.73478 0.461945 8C0.461945 8.26522 0.567302 8.51957 0.754838 8.70711C0.942374 8.89464 1.19673 9 1.46194 9H7.46194V15C7.46194 15.2652 7.5673 15.5196 7.75484 15.7071C7.94237 15.8946 8.19673 16 8.46194 16C8.72716 16 8.98151 15.8946 9.16905 15.7071C9.35659 15.5196 9.46194 15.2652 9.46194 15V9H15.4619C15.7272 9 15.9815 8.89464 16.1691 8.70711C16.3566 8.51957 16.4619 8.26522 16.4619 8C16.4619 7.73478 16.3566 7.48043 16.1691 7.29289C15.9815 7.10536 15.7272 7 15.4619 7Z"
+                                        fill="black"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
+                    <button class="flex group w-full items-start justify-between text-left">
+                        <div class="max-w-xl pr-5">
+                            <h3 class="text-xs 2xl:text-sm font-normal text-black group-hover:text-orange-900">Apakah
+                                kursus di NaZMalogy memiliki sertifikat?</h3>
+                            <p class="hidden group-hover:block mt-3 text-xs 2xl:text-sm text-gray-500">Ya,Semua kursus
+                                di NaZMalogy memiliki sertifikat yang anda dapat gunakan untuk mengembangkan portofolio
+                                anda.</p>
+                        </div>
+                        <div class="pt-1">
+                            <span class="hidden group-hover:block">
+                                <svg width="17" height="3" viewBox="0 0 17 3" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 0.045166H1.46194C1.19673 0.045166 0.942374 0.150523 0.754838 0.338059C0.567302 0.525596 0.461945 0.77995 0.461945 1.04517C0.461945 1.31038 0.567302 1.56474 0.754838 1.75227C0.942374 1.93981 1.19673 2.04517 1.46194 2.04517H15.4619C15.7272 2.04517 15.9815 1.93981 16.1691 1.75227C16.3566 1.56474 16.4619 1.31038 16.4619 1.04517C16.4619 0.77995 16.3566 0.525596 16.1691 0.338059C15.9815 0.150523 15.7272 0.045166 15.4619 0.045166Z"
+                                        fill="#FF460C"></path>
+                                </svg>
+                            </span>
+                            <span class="block group-hover:hidden">
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.4619 7H9.46194V1C9.46194 0.734784 9.35659 0.48043 9.16905 0.292893C8.98151 0.105357 8.72716 0 8.46194 0C8.19673 0 7.94237 0.105357 7.75484 0.292893C7.5673 0.48043 7.46194 0.734784 7.46194 1V7H1.46194C1.19673 7 0.942374 7.10536 0.754838 7.29289C0.567302 7.48043 0.461945 7.73478 0.461945 8C0.461945 8.26522 0.567302 8.51957 0.754838 8.70711C0.942374 8.89464 1.19673 9 1.46194 9H7.46194V15C7.46194 15.2652 7.5673 15.5196 7.75484 15.7071C7.94237 15.8946 8.19673 16 8.46194 16C8.72716 16 8.98151 15.8946 9.16905 15.7071C9.35659 15.5196 9.46194 15.2652 9.46194 15V9H15.4619C15.7272 9 15.9815 8.89464 16.1691 8.70711C16.3566 8.51957 16.4619 8.26522 16.4619 8C16.4619 7.73478 16.3566 7.48043 16.1691 7.29289C15.9815 7.10536 15.7272 7 15.4619 7Z"
+                                        fill="black"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
-        {{-- <div class="text-center my-24">
-            <h1
-                class="font-bold text-2xl mt-20 md:text-3xl xl:text-4xl tracking-tighter leading-snug max-w-md mx-auto ">
-                Masih Ada Pertanyaan?
-            </h1>
-            <button type="button"
-                class="text-white bg-[#ED7F22] hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium w-48 rounded-full text-sm 2xl:text-sm px-4 py-3 text-center mt-4 mr-3 md:mr-0">Kontak
-                Kami
-            </button>
-        </div> --}}
-
-
-
     </section>
 </x-guest-layout>
