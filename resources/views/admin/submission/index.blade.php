@@ -41,7 +41,7 @@
                                     {{ $data->course_last_task->title }}
                                 </th>
                                 <td class="px-4 py-3">
-                                    {{ $data->user->fullname }}
+                                    {{ $data->submission->user->fullname }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <a href="{{ asset('storage/submissions/' . $data->attachment) }}" target="_blank"
