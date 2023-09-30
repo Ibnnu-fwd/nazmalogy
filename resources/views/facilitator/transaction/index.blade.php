@@ -38,7 +38,7 @@
                     <tbody>
                         @foreach ($transactions as $data)
                             <tr class="{{ $loop->last ? '' : 'border-b border-gray-200' }}">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
+                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap w-1/3">
                                     {{ $data->user->fullname }}
                                 </th>
                                 <td class="px-4 py-3">
