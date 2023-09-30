@@ -261,7 +261,7 @@ class CourseRepository implements CourseInterface
         $totalFinished = $totalFinishedChapter + $totalFinishedQuiz;
         $total         = $totalChapter + $totalQuiz;
 
-        return $totalFinished / $total * 100;
+        return round($totalFinished / $total * 100, 2);
     }
 
     public function getCourseByAuthorId($authorId)
