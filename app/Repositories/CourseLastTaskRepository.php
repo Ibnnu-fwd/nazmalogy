@@ -52,7 +52,10 @@ class CourseLastTaskRepository implements CourseLastTaskInterface
 
     public function getSubmissionByLastTaskId($id)
     {
-        return $this->submission->where('course_last_task_id', $id)->first();
+        return $this->submission->where([
+            ['course_last_task_id', $id],
+            ['user_id', auth()->user()->id]
+        ])->first();
     }
 
     public function attempt($id, $data)
