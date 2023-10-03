@@ -24,7 +24,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         return view('user.course.index', [
-            'courseCategories' => $this->courseCategory->getAll(),
+            'courseCategories' => $this->courseCategory->getAll()->where('is_active', 1),
             'courses'          => $this->course->getAll()->where('publish_status', 1)
         ]);
     }
