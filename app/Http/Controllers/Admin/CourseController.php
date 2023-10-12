@@ -36,6 +36,7 @@ class CourseController extends Controller
             'course_category_id' => ['required', 'exists:course_categories,id'],
             'name'               => ['required', 'max:255'],
             'thumbnail'          => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'certificate' => ['nullable', 'mimes:pdf', 'max:1024'],
             'price'              => ['nullable'],
             'description'        => ['required'],
             'language'           => ['required'],
@@ -67,6 +68,7 @@ class CourseController extends Controller
         $request->validate([
             'name'        => ['required', 'max:255'],
             'thumbnail'   => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'certificate' => ['nullable', 'mimes:pdf', 'max:1024'],
             'price'       => ['nullable'],
             'description' => ['required'],
             'language'    => ['required'],

@@ -142,6 +142,8 @@
                         </x-select>
                         <x-file-upload label="Thumbnail" id="file_input" name="thumbnail" type="file"
                             help="PNG, JPG (MAX. 1MB)" />
+                        <x-file-upload label="Sertifikat" id="file_input" name="certificate" type="file"
+                            help="PDF (MAX. 1MB)" />
                         <x-input label="Harga" id="price" name="price" type="number" required
                             value="" />
                         <x-textarea label="Deskripsi" id="description" name="description" row="4"

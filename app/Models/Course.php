@@ -16,6 +16,7 @@ class Course extends Model
         'name',
         'slug', // Add this line
         'thumbnail',
+        'certificate',
         'price',
         'description',
         'language',

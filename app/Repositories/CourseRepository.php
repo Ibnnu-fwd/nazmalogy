@@ -108,11 +108,20 @@ class CourseRepository implements CourseInterface
                 chmod(storage_path('app/public/courses/' . $thumbnailFileName), 0755);
             }
 
+            if (isset($data['certificate'])) {
+                $certificateFileName = uniqid() . '.' . $data['certificate']->extension();
+                $data['certificate']->storeAs('public/courses/certificate', $certificateFileName);
+                $data['certificate'] = $certificateFileName;
+
+                chmod(storage_path('app/public/courses/certificate/' . $certificateFileName), 0755);
+            }
+
             $data['author_id'] = auth()->user()->id;
             $data['slug']      = $this->createSlug($data['name']);
             return $this->course->create($data);
         } catch (\Throwable $th) {
             Storage::delete('public/courses/' . $thumbnailFileName);
+            Storage::delete('public/courses/certificate/' . $certificateFileName);
             throw $th;
         }
     }
@@ -160,6 +169,14 @@ class CourseRepository implements CourseInterface
                 $data['thumbnail'] = $thumbnailFileName;
             }
 
+            if (isset($data['certificate'])) {
+                $certificateFileName = uniqid() . '.' . $data['certificate']->extension();
+                $data['certificate']->storeAs('public/courses/certificate', $certificateFileName);
+                $data['certificate'] = $certificateFileName;
+
+                chmod(storage_path('app/public/courses/certificate/' . $certificateFileName), 0755);
+            }
+
             $data['author_id'] = auth()->user()->id;
             $data['slug']      = $this->createSlug($data['name']);
             $course->update($data);
@@ -167,6 +184,7 @@ class CourseRepository implements CourseInterface
             return $course;
         } catch (\Throwable $th) {
             Storage::delete('public/courses/' . $thumbnailFileName);
+            Storage::delete('public/courses/certificate/' . $certificateFileName);
             throw $th;
         }
     }
