@@ -28,6 +28,7 @@ use App\Http\Controllers\Facilitator\TransactionController as FacilitatorTransac
 use App\Http\Controllers\Facilitator\PlaylistController as FacilitatorPlaylistController;
 use App\Http\Controllers\Facilitator\CourseLastTaskController as FacilitatorCourseLastTaskController;
 use App\Http\Controllers\Facilitator\EnrollPaymentController;
+use App\Http\Controllers\Facilitator\HelpController as FacilitatorHelpController;
 use App\Http\Controllers\Facilitator\LearningController as FacilitatorLearningController;
 use App\Http\Controllers\Facilitator\ProfileController as FacilitatorProfileController;
 use App\Http\Controllers\Facilitator\ReferalController;
@@ -367,6 +368,9 @@ Route::group(['prefix' => 'facilitator', 'middleware' => ['auth']], function () 
         Route::get('/', [FacilitatorLearningHistoryController::class, 'member'])->name('member');
         Route::get('{id}/detail', [FacilitatorLearningHistoryController::class, 'detail'])->name('detail');
     })->middleware('check-role:facilitator');
+
+    // Help
+    Route::get('help', [FacilitatorHelpController::class, 'index'])->name('facilitator.help.index');
 });
 
 

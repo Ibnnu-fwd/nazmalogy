@@ -45,6 +45,7 @@
                 <x-sidebar-link label="Riwayat Belajar Member" icon="time"
                     route="{{ route('facilitator.history-member.member') }}" />
                 <x-sidebar-link label="Profil" icon="person-circle" route="{{ route('facilitator.profile.index') }}" />
+                <x-sidebar-link label="Panduan" icon="help" route="{{ route('facilitator.help.index') }}" />
             @endif
 
             {{-- logout --}}
