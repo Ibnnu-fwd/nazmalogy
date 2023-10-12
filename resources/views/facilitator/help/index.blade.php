@@ -53,7 +53,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -76,7 +77,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -126,7 +127,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -149,7 +151,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -199,7 +201,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -222,7 +225,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -272,7 +275,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -295,7 +299,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -347,7 +351,8 @@
                                                             </svg>
                                                         </div>
                                                     </div><span
-                                                        class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                        class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                        Office</span>
                                                 </div>
                                                 <div class="">
                                                     <div class="flex flex-col mx-6">
@@ -371,7 +376,7 @@
                                                                     </li>
                                                                     <li
                                                                         class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                        <span>Aldyo Putra</span>
+                                                                        <span>NaZMa Office</span>
                                                                     </li>
                                                                 </div>
                                                             </ul>
@@ -423,7 +428,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -446,7 +452,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -496,7 +502,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -519,7 +526,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -569,7 +576,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -592,7 +600,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -642,7 +650,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -665,7 +674,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
@@ -714,7 +723,8 @@
                                                         </svg>
                                                     </div>
                                                 </div><span
-                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">Nazmaoffice</span>
+                                                    class="mx-3 truncate text-ellipsis font-sans text-xs capitalize text-slate-500">NaZMa
+                                                    Office</span>
                                             </div>
                                             <div class="">
                                                 <div class="flex flex-col mx-6">
@@ -737,7 +747,7 @@
                                                                     data-testid="doc-age"><span>9 days ago</span></li>
                                                                 <li
                                                                     class="truncate text-ellipsis ml-2 border-l border-slate-200 pl-2">
-                                                                    <span>Aldyo Putra</span>
+                                                                    <span>NaZMa Office</span>
                                                                 </li>
                                                             </div>
                                                         </ul>
