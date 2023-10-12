@@ -13,12 +13,12 @@
                 <x-sidebar-link label="Poin" icon="podium" route="{{ route('admin.point.index') }}" />
                 <x-sidebar-link label="Transaksi" icon="wallet" route="{{ route('admin.transaction.index') }}" />
                 <x-sidebar-link label="Pengumpulan Tugas" icon="file-tray-full"
-                route="{{ route('admin.submission.index') }}" />
+                    route="{{ route('admin.submission.index') }}" />
                 <x-sidebar-link label="Testimoni" icon="people" route="{{ route('admin.testimonial.index') }}" />
                 <x-sidebar-link label="Fasilitator" icon="person-circle"
                     route="{{ route('admin.facilitator.index') }}" />
-                <x-sidebar-link label="Pengguna" icon="people"
-                    route="{{ route('admin.users.index') }}" />
+                <x-sidebar-link label="Pengguna" icon="people" route="{{ route('admin.users.index') }}" />
+                <x-sidebar-link label="Panduan" icon="help" route="{{ route('admin.help.index') }}" />
             @endif
 
             @if (auth()->user()->role == 'user')

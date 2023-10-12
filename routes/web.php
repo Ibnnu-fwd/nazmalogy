@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController as AdminQuizController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\GeneralTestimonialController;
+use App\Http\Controllers\Admin\HelpController as AdminHelpController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SubmissionController as AdminSubmissionController;
 use App\Http\Controllers\User\CourseController;
@@ -198,11 +199,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function () {
         Route::post('{id}/restore', [UserController::class, 'restore'])->name('restore');
     });
 
-
     //Submission
     Route::get('submission', [AdminSubmissionController::class, 'index'])->name('admin.submission.index');
     Route::get('submission/{id}/show', [AdminSubmissionController::class, 'show'])->name('admin.submission.show');
     Route::post('submission/{id}/change-status', [AdminSubmissionController::class, 'changeStatus'])->name('admin.submission.change-status');
+
+    // Help
+    Route::get('help', [AdminHelpController::class, 'index'])->name('admin.help.index');
 });
 
 // User
