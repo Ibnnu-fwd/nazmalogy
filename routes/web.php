@@ -47,6 +47,7 @@ use App\Http\Controllers\User\CarierController;
 use App\Http\Controllers\User\CourseLastTaskController as UserCourseLastTaskController;
 use App\Http\Controllers\User\PointController as UserPointController;
 use App\Http\Controllers\User\SocialiteController;
+use App\Http\Controllers\User\GuideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -263,6 +264,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::group(['prefix' => 'history', 'as' => 'user.history.'], function () {
         Route::get('/', [LearningHistoryController::class, 'index'])->name('index');
     })->middleware('check-role:user');
+
+
+    //Guide
+    Route::get('guide', [GuideController::class, 'index'])->name('user.guide.index');
+
 });
 
 // Facilitator
