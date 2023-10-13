@@ -3,7 +3,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         @foreach ($courses as $course)
-            <div class="w-96 rounded-xl shadow-md p-5 border border-gray-50 bg-white h-fit">
+            <div class="w-96 rounded-xl shadow-md p-5 border border-gray-50 bg-white h-fit mb-6">
                 <p class="text-gray-700 text-xs 2xl:text-sm font-bold">
                     {{ $course->name }}
                 </p>
