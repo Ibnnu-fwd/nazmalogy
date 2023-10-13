@@ -128,7 +128,7 @@
                                     @if ($course->is_bought)
                                         <a
                                             class="bg-gray-100 text-gray-800 text-tiny font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 flex items-center w-fit mt-6">
-                                            Dibeli
+                                            Diikuti
                                             <ion-icon name="checkmark-circle"
                                                 class="text-purple-500 text-xl ml-2"></ion-icon>
                                         </a>
