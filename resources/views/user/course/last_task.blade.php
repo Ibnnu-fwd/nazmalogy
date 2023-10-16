@@ -96,8 +96,8 @@
                     </div>
 
                     <div class="flex justify-center mt-10">
-                        <img src="{{ asset('assets/images/wait-kitten.gif') }}" class="w-full h-56 object-contain"
-                            alt="">
+                        <img src="{{ asset('assets/ilustration_big/waiting_approval.png') }}"
+                            class="w-full h-56 object-contain" alt="">
                     </div>
                 @else
                     <div class="grid grid-cols-1 lg:grid-cols-3 mt-6">
@@ -155,6 +155,10 @@
                             </div>
                         </div>
                     @elseif ($submission->status == 'approved')
+                        <div class="flex justify-center mt-10">
+                            <img src="{{ asset('assets/ilustration_big/approved.png') }}"
+                                class="w-full h-56 object-contain" alt="">
+                        </div>
                         <div class="mt-12">
                             <x-button text="Kembali" backgroundColor="black" hoverColor="black"
                                 onclick="window.location.href='{{ route('user.dashboard.index') }}'" />

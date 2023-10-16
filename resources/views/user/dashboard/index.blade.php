@@ -1,6 +1,8 @@
 <x-app-layout>
     <x-breadcrumb :items="[['text' => 'User Dashboard', 'link' => null]]" />
 
+    @if ($courses->count() > 0)
+        
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         @foreach ($courses as $course)
             <div class="w-96 rounded-xl shadow-md p-5 border border-gray-50 bg-white h-fit mb-6">
@@ -108,6 +110,17 @@
             </div>
         @endforeach
     </div>
+
+    @else
+    <div class="flex justify-center items-center">
+        <img src="{{ asset('assets/ilustration_big/course_not_found.png')}}" class="w-1/3 h-1/3 mt-14" alt="">
+    </div>
+    <h1 class="mx-auto text-2xl font-bold text-dark mt-5 text-center">Anda Belum Memiliki Kursus</h1>
+
+    <a href="{{ route('user.course.index')}}" class="block items-center mt-4 mx-auto w-fit md:flex text-white bg-primary hover:bg-purple-800 text-xs 2xl:text-tiny font-medium rounded-lg text-base px-5 py-2.5 text-center hover:shadow-md"
+    type="button">Lihat Kursus</a>
+    @endif
+
 
     @push('js-internal')
         <script>

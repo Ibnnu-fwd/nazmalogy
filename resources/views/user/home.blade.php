@@ -47,7 +47,7 @@
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
                             <div class="flex items-center justify-center h-9 w-9 rounded-full text-black bg-purple-100">
-                                <img src="{{ asset('assets/ilustration_icon/video_learning.png')}}" alt="">
+                                <img src="{{ asset('assets/ilustration_icon/video_learning.png') }}" alt="">
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -63,7 +63,7 @@
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
                             <div class="flex items-center justify-center h-9 w-9 rounded-full text-black bg-orange-50">
-                                <img src="{{ asset('assets/ilustration_icon/akses_selamanya.png')}}" alt="">
+                                <img src="{{ asset('assets/ilustration_icon/akses_selamanya.png') }}" alt="">
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -78,7 +78,7 @@
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
                             <div class="flex items-center justify-center h-9 w-9 rounded-full text-black bg-green-50">
-                                <img src="{{ asset('assets/ilustration_icon/mentor_profesional.png')}}" alt="">
+                                <img src="{{ asset('assets/ilustration_icon/mentor_profesional.png') }}" alt="">
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -111,8 +111,10 @@
                     @forelse ($courseCategories as $courseCategory)
                         <div class="rounded-lg bg-white py-3 px-4 hover:ring-purple-800 hover:ring-2">
                             <div class="flex items-center gap-2">
-                                <ion-icon name="{{ $courseCategory->icon }}" class=" w-7 h-7 mr-2"
-                                    style="color: {{ $courseCategory->icon_color }}"></ion-icon>
+                                <div class="w-14 h-w-14">
+                                    <ion-icon name="{{ $courseCategory->icon }}" class=" w-7 h-7 mr-2"
+                                        style="color: {{ $courseCategory->icon_color }}"></ion-icon>
+                                </div>
                                 <p class="text-xs 2xl:text-sm font-medium text-black">
                                     {{ $courseCategory->name }}
                                 </p>
@@ -267,31 +269,35 @@
     <section class="object-top overflow-hidden bg-cover">
         <div>
             <div class="px-4 py-12 mx-auto max-w-6xl">
-                <div
-                    class="px-6 py-6 rounded-3xl md:py-12 md:px-12 lg:px-16 md:items-center lg:items-center lg:flex xl:items-center">
-                    <div class="xl:w-0 xl:flex-1 ml-16 lg:ml-0">
-
-                        <p class="text-4xl tracking-tighter font-bold text-black ">
-                            Mari Tetap Terkoneksi
-                        </p>
-                        <p class="max-w-3xl text-xs 2xl:text-sm leading-6 text-gray-500">
-                            Isi alamat email dibawah untuk mendapatkan informasi terbaru
-                        </p>
+                <div class="px-6 py-6 rounded-3xl md:py-12 md:px-12 lg:px-16 grid grid-cols-2">
+                    <div class="flex justify-center max-h-80">
+                        <img src="{{ asset('assets/ilustration_big/email_subscribtion.png') }}"
+                            alt="embilsubscription" class="object-cover h-full">
 
                     </div>
-                    <div class="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
-                        <form class="flex flex-col items-center justify-center max-w-sm mx-auto" action="">
-                            <div class="flex flex-col w-full gap-2 mt-3 sm:flex-row">
-                                <input name="email" type="email"
-                                    class="block w-full px-4 py-2 text-xs 2xl:text-sm font-medium text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-full font-spline focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/50 disabled:opacity-50"
-                                    placeholder="Alamat email" required="" autocomplete="off">
-                                <button type="button"
-                                    class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-500 focus:outline-none lg:w-auto focus-visible:outline-primary text-xs 2xl:text-sm">
-                                    <div style="position: relative"></div>
-                                    Berlangganan
-                                </button>
-                            </div>
-                        </form>
+                    <div class="sm:w-full sm:max-w-md xl:mt-0 flex items-center">
+                        <div>
+                            <p class="text-4xl tracking-tighter font-bold text-black ">
+                                Mari Tetap Terkoneksi
+                            </p>
+                            <p class="max-w-3xl text-xs 2xl:text-sm leading-6 text-gray-500">
+                                Isi alamat email dibawah untuk mendapatkan informasi terbaru
+                            </p>
+                            <form class="flex flex-col items-center justify-center max-w-sm" action="">
+                                <div class="flex flex-col w-full gap-2 mt-3 sm:flex-row">
+                                    <input name="email" type="email"
+                                        class="block w-full px-4 py-2 text-xs 2xl:text-sm font-medium text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-full font-spline focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/50 disabled:opacity-50"
+                                        placeholder="Alamat email" required="" autocomplete="off">
+                                    <button type="button"
+                                        class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-500 focus:outline-none lg:w-auto focus-visible:outline-primary text-xs 2xl:text-sm">
+                                        <div style="position: relative"></div>
+                                        Berlangganan
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
