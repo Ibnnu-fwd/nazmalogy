@@ -23,7 +23,7 @@
                         Daftar Sekarang
                     </a> --}}
                 </div>
-                <div class="hidden lg:mt-0 lg:col-span-6 lg:flex">
+                <div class="hidden xl:mt-0 xl:col-span-6 xl:flex">
                     <img src="{{ asset('assets/images/HERO-01.png') }}" alt="mockup" class="w-[700px] h-min">
                 </div>
             </div>
@@ -46,8 +46,8 @@
                 <div class="max-w-md p-6 mx-auto bg-white rounded-xl">
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
-                            <div class="flex items-center justify-center h-8 w-8 rounded-full text-black bg-purple-100">
-                                <ion-icon name="play-circle-outline" class="text-primary w-7 h-7"></ion-icon>
+                            <div class="flex items-center justify-center h-9 w-9 rounded-full text-black bg-purple-100">
+                                <img src="{{ asset('assets/ilustration_icon/video_learning.png')}}" alt="">
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -62,8 +62,8 @@
                 <div class="max-w-md p-6 mx-auto bg-white rounded-xl">
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
-                            <div class="flex items-center justify-center h-8 w-8 rounded-full text-black bg-orange-50">
-                                <ion-icon name="infinite-outline" class="text-primary w-7 h-7"></ion-icon>
+                            <div class="flex items-center justify-center h-9 w-9 rounded-full text-black bg-orange-50">
+                                <img src="{{ asset('assets/ilustration_icon/akses_selamanya.png')}}" alt="">
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -77,8 +77,8 @@
                 <div class="max-w-md p-6 mx-auto bg-white rounded-xl">
                     <div class="gap-3 lg:inline-flex lg:items-center">
                         <div>
-                            <div class="flex items-center justify-center h-8 w-8 rounded-full text-black bg-green-50">
-                                <ion-icon name="person-circle-outline" class="text-green-800 w-7 h-7"></ion-icon>
+                            <div class="flex items-center justify-center h-9 w-9 rounded-full text-black bg-green-50">
+                                <img src="{{ asset('assets/ilustration_icon/mentor_profesional.png')}}" alt="">
                             </div>
                         </div>
                         <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
@@ -246,7 +246,7 @@
                                 </div>
                             </figcaption>
                             <blockquote class="relative">
-                                <p class="text-xs 2xl:text-sm text-black">
+                                <p class="text-xs 2xl:text-sm text-black line-clamp-3 hover:line-clamp-none">
                                     {{ $generalTestimonial->content }}
                                 </p>
                             </blockquote>
