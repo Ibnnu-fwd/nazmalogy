@@ -23,7 +23,7 @@
                         Daftar Sekarang
                     </a> --}}
                 </div>
-                <div class="hidden xl:mt-0 xl:col-span-6 xl:flex">
+                <div class="hidden lg:mt-0 lg:col-span-6 lg:flex">
                     <img src="{{ asset('assets/images/HERO-01.png') }}" alt="mockup" class="w-[700px] h-min">
                 </div>
             </div>
