@@ -4,10 +4,7 @@
         $dashboard = route('user.dashboard.index');
     @endphp
 
-    <x-breadcrumb :items="[
-        ['text' => 'Dashboard', 'link' => $dashboard],
-        ['text' => 'Riwayat Belajar', 'link' => null],
-    ]" />   
+    <x-breadcrumb :items="[['text' => 'Dashboard', 'link' => $dashboard], ['text' => 'Riwayat Belajar', 'link' => null]]" />
     <x-card>
         <!-- Start coding here -->
         <div class="bg-white relative sm:rounded-lg overflow-hidden">
@@ -58,4 +55,14 @@
         </div>
     </x-card>
 
+    @push('js-internal')
+        <script>
+            $('#search').on('keyup', function() {
+                let value = $(this).val().toLowerCase();
+                $('tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        </script>
+    @endpush
 </x-app-layout>
