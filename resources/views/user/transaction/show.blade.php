@@ -79,9 +79,9 @@
             </div>
 
             {{-- Action --}}
-            <div class="flex justify-center mt-6">
+            {{-- <div class="flex justify-center mt-6">
                 <x-button text="Cetak" fullWidth color="primary" />
-            </div>
+            </div> --}}
         </x-card>
     </div>
 </x-app-layout>
