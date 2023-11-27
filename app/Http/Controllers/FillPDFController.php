@@ -28,13 +28,13 @@ $unique_code = uniqid();
 
     $course_name = $course->name;
 
-    $outputfile = public_path('sertif.pdf');
-    $pdfTemplate = public_path('certificate/sertif.pdf'); // Use correct path here
+    $outputfile = public_path('certificate.pdf');
+    $pdfTemplate = public_path('certificate/certificate.pdf'); // Use correct path here
 
     $this->fillPDF($pdfTemplate, $outputfile, $name, $unique_code, $course_name);
 
     return response()->file($outputfile);
-}
+    }
 
     
 
@@ -47,43 +47,40 @@ $unique_code = uniqid();
         $size = $fpdi->getTemplateSize($template);
         $fpdi->AddPage($size['orientation'], array($size['width'], $size['height']));
         $fpdi->useTemplate($template);
-        
+
         // Position for "name" text
-        $nameX = 140;  // X coordinate
-        $nameY = 97;   // Y coordinate
-    
+        $nameX = 30;  // X coordinate
+        $nameY = 110;   // Y coordinate
+
         // Position for "unique" text
-        $uniqX = 11;  // X coordinate
-        $uniqY = 150;  // Y coordinate (adjusted position)
-    
+        $uniqX = 30;  // X coordinate
+        $uniqY = 65;  // Y coordinate (adjusted position)
+
         // Position for "course_name" text
-        $courseNameX = 11;  // X coordinate
-        $courseNameY = 120;  // Y coordinate (adjusted position)
-    
-        $fpdi->SetFont('Helvetica', 'B', '17');
-        $fpdi->SetTextColor(25, 25, 25);
+        $courseNameX = 30;  // X coordinate
+        $courseNameY = 130;  // Y coordinate (adjusted position)
+
+        $fpdi->AddFont('Nunito', '', 'Nunito-Bold.php'); // Add Nunito font
         
+        $fpdi->SetFont('Nunito', '', 32); // Set name font size to 32
+        $fpdi->SetTextColor(43, 49, 118);
+
         // Add "name" text
         $fpdi->Text($nameX, $nameY, $nama);
-        
-        // Set the position for "unique" text
-        $fpdi->SetXY($uniqX, $uniqY);
-        
-        // Add "unique" text
-        $fpdi->SetFont('Helvetica', 'B', 18);  // Adjust font and size if needed
-        $fpdi->SetTextColor(0, 0, 0);  // Adjust text color if needed
-        $fpdi->Cell(0, 0, 'UNIQUE: ' . $uniq, 0, 1, 'C');
-    
-        // Set the position for "course_name" text
-        $fpdi->SetXY($courseNameX, $courseNameY);
-    
-        // Add "course_name" text
-        $fpdi->SetFont('Helvetica', 'B', 18);  // Adjust font and size if needed
-        $fpdi->SetTextColor(0, 0, 0);  // Adjust text color if needed
-        $fpdi->Cell(0, 0, 'COURSE: ' . $course_name, 0, 1, 'C');
-    
+
+        // Set the position and font size for "unique" text
+        $fpdi->SetTextColor(96, 96, 96); // Set text color to grey
+        $fpdi->SetFont('Nunito', '', 15); // Set uniq font size to 15
+        $fpdi->Text($uniqX, $uniqY, $uniq);
+
+        $fpdi->SetTextColor(43, 49, 118); // Reset text color to default
+
+        $fpdi->SetFont('Nunito', '', 18); // Set course name font size to 18
+        $fpdi->Text($courseNameX, $courseNameY, $course_name);
+
         return $fpdi->Output($outputfile, 'F');
     }
-    
+
+
     
 }
