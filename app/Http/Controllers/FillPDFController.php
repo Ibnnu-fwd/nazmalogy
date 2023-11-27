@@ -60,6 +60,11 @@ $unique_code = uniqid();
         $courseNameX = 30;  // X coordinate
         $courseNameY = 130;  // Y coordinate (adjusted position)
 
+        $dateX = 200;  // X coordinate
+        $dateY = 148;  // Y coordinate (adjusted position)
+
+        //set date to now
+
         $fpdi->AddFont('Nunito', '', 'Nunito-Bold.php'); // Add Nunito font
         
         $fpdi->SetFont('Nunito', '', 32); // Set name font size to 32
@@ -77,6 +82,11 @@ $unique_code = uniqid();
 
         $fpdi->SetFont('Nunito', '', 18); // Set course name font size to 18
         $fpdi->Text($courseNameX, $courseNameY, $course_name);
+
+        $fpdi->SetFont('Nunito', '', 15); // Set course name font size to 18
+        $fpdi->SetTextColor(96, 96, 96); // Set text color to grey
+        $fpdi->Text($dateX, $dateY, date('d F Y'));
+
 
         return $fpdi->Output($outputfile, 'F');
     }
