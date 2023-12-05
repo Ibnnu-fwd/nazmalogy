@@ -11,15 +11,15 @@
                         Pelajari Skills Baru
                         Sesuai Dengan Minatmu
                     </h1>
-                    <p class="max-w-2xl mb-6 font-normal text-gray-500 lg:mb-8 text-xs 2xl:text-sm">
+                    <p class="max-w-2xl mb-6 font-normal text-gray-500 lg:mb-8 text-sm">
                         Membantu Anda belajar lebih mudah dengan efektif
                     </p>
                     <a href="#course"
-                        class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
+                        class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                         Ayo Mulai
                     </a>
                     {{-- <a href="{{ route('register') }}"
-                        class="inline-flex items-center justify-center px-8 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-gray-500 rounded-full bg-slate-100 hover:bg-slate-200 focus:ring-4 focus:ring-slate-300">
+                        class="inline-flex items-center justify-center px-8 py-3.5 mr-3 text-sm font-medium text-center text-gray-500 rounded-full bg-slate-100 hover:bg-slate-200 focus:ring-4 focus:ring-slate-300">
                         Daftar Sekarang
                     </a> --}}
                 </div>
@@ -38,7 +38,7 @@
                     3 Cara Mudah <br>
                     Memulai Pembelajaran
                 </h1>
-                <p class="text-gray-400 text-xs 2xl:text-sm mt-2">
+                <p class="text-gray-400 text-sm mt-2">
                     Kami menyediakan layanan untuk mempermudah anda mempelajari skills yang anda inginkan
                 </p>
             </div>
@@ -50,12 +50,12 @@
                                 <img src="{{ asset('assets/ilustration_icon/video_learning.png') }}" alt="">
                             </div>
                         </div>
-                        <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
+                        <p class="mt-4 text-sm font-medium leading-6 text-black lg:mt-0">
                             Video
                             Learning
                         </p>
                     </div>
-                    <p class="mt-3 text-xs 2xl:text-sm text-gray-500">
+                    <p class="mt-3 text-sm text-gray-500">
                         Pembelajaran interaktif melalui layar
                     </p>
                 </div>
@@ -66,11 +66,11 @@
                                 <img src="{{ asset('assets/ilustration_icon/akses_selamanya.png') }}" alt="">
                             </div>
                         </div>
-                        <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
+                        <p class="mt-4 text-sm font-medium leading-6 text-black lg:mt-0">
                             Akses Selamanya
                         </p>
                     </div>
-                    <p class="mt-3 text-xs 2xl:text-sm text-gray-500">
+                    <p class="mt-3 text-sm text-gray-500">
                         Bebas akses kapan saja dan dimanapun
                     </p>
                 </div>
@@ -81,11 +81,11 @@
                                 <img src="{{ asset('assets/ilustration_icon/mentor_profesional.png') }}" alt="">
                             </div>
                         </div>
-                        <p class="mt-4 text-xs 2xl:text-sm font-medium leading-6 text-black lg:mt-0">
+                        <p class="mt-4 text-sm font-medium leading-6 text-black lg:mt-0">
                             Mentor Profesional
                         </p>
                     </div>
-                    <p class="mt-3 text-xs 2xl:text-sm text-gray-500">
+                    <p class="mt-3 text-sm text-gray-500">
                         Dibimbing mentor berpengalaman
                     </p>
                 </div>
@@ -97,7 +97,7 @@
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
             <div class="text-center">
-                <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
+                <p class="text-orange-500 font-medium text-sm">
                     Kembangkan skill yang anda inginkan
                 </p>
                 <p
@@ -115,7 +115,7 @@
                                     <ion-icon name="{{ $courseCategory->icon }}" class=" w-7 h-7 mr-2"
                                         style="color: {{ $courseCategory->icon_color }}"></ion-icon>
                                 </div>
-                                <p class="text-xs 2xl:text-sm font-medium text-black">
+                                <p class="text-sm font-medium text-black">
                                     {{ $courseCategory->name }}
                                 </p>
                             </div>
@@ -136,7 +136,7 @@
             </div>
             <div>
                 <a href="{{ route('course.index') }}"
-                    class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-xs 2xl:text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
+                    class="inline-flex items-center justify-center px-11 py-3.5 mr-3 text-sm font-medium text-center text-white rounded-full bg-primary hover:bg-purple-800 focus:ring-4 focus:ring-orange-300">
                     Lihat Semua
                 </a>
             </div>
@@ -158,14 +158,14 @@
                                 <div class="flex items-center justify-between mb-3">
                                     <div class="flex items-center gap-x-2">
                                         <div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-                                        <span class="text-xs 2xl:text-sm font-medium">
+                                        <span class="text-sm font-medium">
                                             {{ $course->courseCategory->name }}
                                         </span>
                                     </div>
                                     <div class="flex items-center">
                                         <ion-icon name="star"
                                             class="text-[#F3AB1D] rounded mr-1 w-[12] h-[12]"></ion-icon>
-                                        <span class="text-xs 2xl:text-sm font-medium">
+                                        <span class="text-sm font-medium">
                                             <!-- ini belum dihitung -->
                                             (5.0)
                                         </span>
@@ -173,26 +173,26 @@
                                 </div>
                                 <a href="{{ route('course.show', $course->slug) }}">
                                     <h5
-                                        class="mb-2 text-xs 2xl:text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
+                                        class="mb-2 text-md font-bold tracking-tight text-gray-900 line-clamp-2 hover:line-clamp-none">
                                         {{ ucwords($course->name) }}
                                     </h5>
                                 </a>
                                 <div class="flex items-end justify-between mt-4">
                                     <div>
                                         @if ($course->discount)
-                                            <p class="text-xs 2xl:text-sm line-through text-danger animate-pulse">
+                                            <p class="text-sm line-through text-danger animate-pulse">
                                                 {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
                                             </p>
-                                            <p class="text-xs 2xl:text-md font-semibold">
+                                            <p class="text-md font-semibold">
                                                 {{ 'Rp. ' . number_format($course->discount, 0, ',', '.') }}
                                             </p>
                                         @else
-                                            <p class="text-xs 2xl:text-md font-semibold">
+                                            <p class="text-md font-semibold">
                                                 {{ 'Rp. ' . number_format($course->price, 0, ',', '.') }}
                                             </p>
                                         @endif
                                     </div>
-                                    <p class="text-gray-400 text-xs 2xl:text-tiny">
+                                    <p class="text-gray-400 text-tiny">
                                         {{ $course->transactions->count() }} peserta
                                     </p>
                                 </div>
@@ -219,7 +219,7 @@
     <section>
         <div class="flex flex-col justify-center flex-1 px-4 py-8 mx-auto lg:py-24 lg:flex-none max-w-7xl">
             <div class="text-center">
-                <p class="text-orange-500 font-medium text-xs 2xl:text-sm">
+                <p class="text-orange-500 font-medium text-sm">
                     Testimoni
                 </p>
                 <p
@@ -239,16 +239,16 @@
                                     decoding="async" data-nimg="future" class="object-cover h-14 w-14 rounded-full"
                                     loading="lazy" style="color: transparent" />
                                 <div>
-                                    <div class="text-xs 2xl:text-sm font-semibold text-black">
+                                    <div class="text-sm font-semibold text-black">
                                         {{ $generalTestimonial->user->fullname }}
                                     </div>
-                                    <div class="text-xs 2xl:text-sm text-gray-500">
+                                    <div class="text-sm text-gray-500">
                                         {{ $generalTestimonial->user->email }}
                                     </div>
                                 </div>
                             </figcaption>
                             <blockquote class="relative">
-                                <p class="text-xs 2xl:text-sm text-black line-clamp-3 hover:line-clamp-none">
+                                <p class="text-sm text-black line-clamp-3 hover:line-clamp-none">
                                     {{ $generalTestimonial->content }}
                                 </p>
                             </blockquote>
@@ -280,16 +280,16 @@
                             <p class="text-4xl tracking-tighter font-bold text-black ">
                                 Mari Tetap Terkoneksi
                             </p>
-                            <p class="max-w-3xl text-xs 2xl:text-sm leading-6 text-gray-500">
+                            <p class="max-w-3xl text-sm leading-6 text-gray-500">
                                 Isi alamat email dibawah untuk mendapatkan informasi terbaru
                             </p>
                             <form class="flex flex-col items-center justify-center max-w-sm" action="">
                                 <div class="flex flex-col w-full gap-2 mt-3 sm:flex-row">
                                     <input name="email" type="email"
-                                        class="block w-full px-4 py-2 text-xs 2xl:text-sm font-medium text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-full font-spline focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/50 disabled:opacity-50"
+                                        class="block w-full px-4 py-2 text-sm font-medium text-gray-800 placeholder-gray-400 bg-white border border-gray-300 rounded-full font-spline focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/50 disabled:opacity-50"
                                         placeholder="Alamat email" required="" autocomplete="off">
                                     <button type="button"
-                                        class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-500 focus:outline-none lg:w-auto focus-visible:outline-primary text-xs 2xl:text-sm">
+                                        class="items-center inline-flex  justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-primary font-medium rounded-full nline-flex hover:bg-orange-500 focus:outline-none lg:w-auto focus-visible:outline-primary text-sm">
                                         <div style="position: relative"></div>
                                         Berlangganan
                                     </button>
